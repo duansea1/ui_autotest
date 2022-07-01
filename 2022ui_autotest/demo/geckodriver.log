@@ -1,0 +1,39 @@
+1656595277534	geckodriver	INFO	Listening on 127.0.0.1:55617
+1656595280606	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\段海洋\\AppData\\Local\\Temp\\rust_mozprofileM2qSSy"
+1656595280906	Marionette	INFO	Marionette enabled
+1656595280911	Marionette	INFO	Listening on port 55629
+Read port: 55629
+1656595281012	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\\u6BB5\u6D77\u6D0B\\AppData\\Local\\Temp\\rust_mozprofileM2qSSy\\search.json.mozlz4", (void 0)))
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 767))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+1656595295325	Marionette	INFO	Stopped listening on port 55629
+1656596399717	geckodriver	INFO	Listening on 127.0.0.1:56006
+1656596402802	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\段海洋\\AppData\\Local\\Temp\\rust_mozprofilebiAEh3"
+1656596403096	Marionette	INFO	Marionette enabled
+1656596403100	Marionette	INFO	Listening on port 56018
+Read port: 56018
+1656596403198	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\\u6BB5\u6D77\u6D0B\\AppData\\Local\\Temp\\rust_mozprofilebiAEh3\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.sogou.com"
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 767))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 419))
+1656596415683	Marionette	INFO	Stopped listening on port 56018
+1656596986760	geckodriver	INFO	Listening on 127.0.0.1:56282
+1656596989809	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\段海洋\\AppData\\Local\\Temp\\rust_mozprofile23omCh"
+1656596990284	Marionette	INFO	Marionette enabled
+1656596990288	Marionette	INFO	Listening on port 56295
+Read port: 56295
+1656596990416	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\\u6BB5\u6D77\u6D0B\\AppData\\Local\\Temp\\rust_mozprofile23omCh\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.sogou.com"
+1656596998590	Marionette	INFO	Stopped listening on port 56295
+1656597003812	geckodriver	INFO	Listening on 127.0.0.1:56366
+1656597006895	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\段海洋\\AppData\\Local\\Temp\\rust_mozprofile6d9nnC"
+1656597007185	Marionette	INFO	Marionette enabled
+1656597007190	Marionette	INFO	Listening on port 56378
+Read port: 56378
+1656597007288	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\\u6BB5\u6D77\u6D0B\\AppData\\Local\\Temp\\rust_mozprofile6d9nnC\\search.json.mozlz4", (void 0)))
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "https://www.sogou.com"
+1656597015992	Marionette	INFO	Stopped listening on port 56378
