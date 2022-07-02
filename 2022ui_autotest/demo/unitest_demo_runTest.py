@@ -1,5 +1,3 @@
-
-
 #encoding = utf - 8
 
 import unittest
@@ -10,6 +8,9 @@ class TestSequenceFunctions(unittest.TestCase):
     def setUp(self):
         # 初始化一个递增序列
         self.seq = range(10)
+
+    def tearDown(self):
+        pass
 
     def runTest(self):
         # 从序列seq中随机选取一个元素
