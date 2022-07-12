@@ -77,10 +77,23 @@ def decorator_with_parm(name):
         return warp5
     return run_time5     # 有传参时，不能加（）
 
+def run_time6(func):  # func 为要修饰的对象
+    """修饰器，若多个参数，需要参数化 *args\**kwargs  return 出方法"""
+    def warp5(*args, **kwargs):
+        print('--------多个参数---------------：')
+        temp = func(*args, **kwargs)
+        return temp
+    return warp5
+
 @decorator_with_parm(name='foo5')
 def foo5(a, b, c):
     print('打印foo5')
     return (a, b, c)
 
-f5 = foo5(2, 3, 'qqqqq')
+@run_time6
+def foo6(a, b, c):
+    print('打印foo5')
+    return (a, b, c)
+
+f5 = foo6(2, 3, 'qqqqq')
 print(f5)
