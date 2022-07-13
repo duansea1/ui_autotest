@@ -68,7 +68,7 @@ class SuiteTestPow(unittest.TestCase):
 
     def test_Pow(self):
         print("pow")
-        self.assertEqual(self.b.add(2, 3, 4), 19, "pow求和结果错误")
+        self.assertEqual(self.b.add(2, 3, 4), 9, "pow求和结果错误")
 
 
 if __name__ == "__main__":
@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
     # unittest.TextTestRunner(verbosity=2).run(suite)
     filename = r"C:\Users\段海洋\Documents\test.html"
-    print(filename)
+    print("===============filename==============", filename)
     with open(filename, "wb") as fb:
         runner = HTMLTestRunner(stream=fb, title="测试报告-unittest", description="加减乘除的测试")
         runner.run(suite)
