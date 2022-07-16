@@ -97,3 +97,5 @@ def foo6(a, b, c):
 
 f5 = foo6(2, 3, 'qqqqq')
 print(f5)
+
+getattr()

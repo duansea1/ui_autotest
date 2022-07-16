@@ -1,0 +1,27 @@
+
+# idea
+.idea
+
+
+*/*__pycache__
+
+*/.pydevproject
+.pytest_cache
+
+.pytest_cache
+.pydevproject
+*/.pytest_cache
+*/.pydevproject
+.cache
+*.gem
+*.rbc
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws

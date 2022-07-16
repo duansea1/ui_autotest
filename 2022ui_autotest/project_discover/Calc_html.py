@@ -72,12 +72,12 @@ class SuiteTestPow(unittest.TestCase):
 
 
 if __name__ == "__main__":
+
     suite1 = unittest.TestLoader().loadTestsFromTestCase(SuiteTestCalc)
     suite2 = unittest.TestLoader().loadTestsFromTestCase(SuiteTestPow)
     suite = unittest.TestSuite([suite1, suite2])
-
     # unittest.TextTestRunner(verbosity=2).run(suite)
-    filename = r"C:\Users\段海洋\Documents\test.html"
+    filename = r"C:\Users\Public\Documents\test.html"
     print("===============filename==============", filename)
     with open(filename, "wb") as fb:
         runner = HTMLTestRunner(stream=fb, title="测试报告-unittest", description="加减乘除的测试")
