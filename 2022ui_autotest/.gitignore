@@ -4,9 +4,18 @@
 
 
 */*__pycache__
+*/pytest_cache
+**/__pycache__
+web/*/__pycache__
+
+/web/test_case/.allure_results
+*/.allure_results/
+2022ui_autotest/**/.allure_results
+*.pyc
 
 */.pydevproject
 .pytest_cache
+
 
 .pytest_cache
 .pydevproject
@@ -25,3 +34,5 @@
 .idea/
 *.iml
 *.iws
+
+*/logs

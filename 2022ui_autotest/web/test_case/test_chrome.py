@@ -4,6 +4,8 @@ from selenium import webdriver
 from time import sleep
 import pytest
 from selenium.webdriver import ActionChains
+
+from web.data.data import *
 # from web.basecore.senium_driver import Driver
 from selenium.webdriver.support.ui import Select
 VisitUrl = r'http://sougou.com'
@@ -149,6 +151,12 @@ class VisitSouGouByChrome(object):
             print(option.get_attribute('value'))
         print("done")
 
+    @pytest.mark.excel
+    @pytest.mark.parametrize("name,mobile,prince,city,county,adress,alisa,is_default,msg,res",
+                             read_excel(filename="ddt_test_new_adress.xlsx"))
+    def test_print_excel(self, name, mobile, prince, city, county, address, alisa, is_default, msg):
+        print("excel文件：", name, mobile, prince, city, county, address, alisa, is_default, msg)
+
 
 if __name__ == '__main__':
-    pytest.main(["-vrA", "-s"])
+    pytest.main( ["-vrA", "-s", "-m=excel"] )

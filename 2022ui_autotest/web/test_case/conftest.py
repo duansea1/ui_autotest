@@ -4,11 +4,11 @@
 # @file : .py
 # @desp : 全局夹具；不需要导入调用该默认文件
 import logging
-
+import time
 from selenium import webdriver
 from time import sleep
 import pytest
-
+import allure
 
 @pytest.fixture(scope="module")
 def driver():
@@ -43,18 +43,19 @@ logger = logging.getLogger(__name__)
 
 
 def pytest_runtest_setup(item):
-    logger.info(f"开始执行：{item.nodeid}".center(60, "-"))
+    logger.info(f"开始执行用例：{item.nodeid}".center(60, "-"))
 
 
 def pytest_runtest_teardown(item):
-    logger.info(f"执行结束：{item.nodeid}".center(60, "-"))
+    logger.info(f"执行结束用例执行：{item.nodeid}".center(60, "^"))
 
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):
     "钩子函数：框架执行过程中，根据执行结果执行"
     outcome = yield
-    report = outcome.get_result
+    report = outcome.get_result()
+    path = f"images/{time.time()}.png"
 
     if report.when == "call":
 
@@ -69,8 +70,9 @@ def pytest_runtest_makereport(item, call):
             logger.info(s)
         if "driver" in item.fixturenames:
             driver = item.funcargs["driver"]
-            driver.get_screenshot_as_file(path)
-            logger.info(f"页面截图：{path}")
+            # logger.info(f"页面截图：{path}")
+            # driver.get_screenshot_as_file(path)
+            allure.attach(driver.get_screenshot_as_file(path))
 
 
 
