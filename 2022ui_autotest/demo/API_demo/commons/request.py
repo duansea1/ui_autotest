@@ -2,7 +2,7 @@
 # @time :
 # @author : xxxx
 # @file : .py
-# @desp : xxxx
+# @desp : 统一封装、统计用例数、日志监控、发送请求的代码很相似
 
 import requests
 
