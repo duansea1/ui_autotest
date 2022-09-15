@@ -107,26 +107,20 @@ def keyia_login(mobile, password, *args):
 
 if __name__ == "__main__":
 
-	# i = 0
-	# while i < 1:
-	# 	goodsName = "{0}{1}".format("第{0}个商品".format(i), str(time.time())[-4:])
-	# 	result = add_product(goodsName)
-	# 	if result["code"] != 0:
-	# 		print("新增商品失败code码：", result["code"])
-	# 		break
-	# 	else:
-	# 		i = i + 1
-	# 		print("新增商品成功，第{0}个".format(i))
+	i = 0
+	while i < 1:
+		goodsName = "{0}{1}".format("第{0}个商品".format(i), str(time.time())[-4:])
+		result = add_product(goodsName)
+		if result["code"] != 0:
+			print("新增商品失败code码：", result["code"])
+			break
+		else:
+			i = i + 1
+			print("新增商品成功，第{0}个".format(i))
 
 	# res = keyia_login("13166210872", "duan2324")
 	# if res['code'] != 0:
 	# 	raise "登录接口报错"
 	# else:
 	# 	token = res['data']['token']
-
-	res = keyia_login("13166210872", "duan2324")
-	if res['code'] != 0:
-		raise "登录接口报错"
-	else:
-		token = res['data']['token']
 

@@ -1,0 +1,29 @@
+-
+  title: 验证正确的用户账号登录
+  request:
+    method: post
+    url: http://api-test.shop.keyid.cn/platform/auth/login
+    params:
+      mobile: 13166210872
+      password: duan2324
+    headers:
+      Accept: application/json, text/plain, */*
+      Content-Type: application/json
+      Connection: keep-alive
+  validate: null
+-
+  title: 验证错误的用户账号登录
+  request:
+    method: post
+    url: http://api-test.shop.keyid.cn/platform/auth/login
+    params:
+      mobile: 13100000088
+      password: duan2324
+    headers:
+      Accept: application/json, text/plain, */*
+      Content-Type: application/json
+      Connection: keep-alive
+  validate: null
+
+
+

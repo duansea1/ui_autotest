@@ -75,3 +75,11 @@ pip install pymysql
 pip install pillow
 pip install tensorflow
 pip install beautifulsoup4
+
+pytest_ini文件
+;addopts = -vs -m "smoke"
+;testpaths = ./API/test_cases1
+;python_files = test_*.py
+;python_classes = Test*
+;python_functions = test_*
+;

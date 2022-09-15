@@ -8,8 +8,8 @@ from selenium.webdriver import ActionChains
 from web.data.data import *
 # from web.basecore.senium_driver import Driver
 from selenium.webdriver.support.ui import Select
-VisitUrl = r'http://sougou.com'
-url_baidu = r'http://www.baidu.com'
+VisitUrl = r'https://home-test.shop.keyid.cn/'
+url_baidu = r'https://home-test.shop.keyid.cn/'
 
 
 def test_openchrome(user_driver, clear_favor):
@@ -159,4 +159,4 @@ class VisitSouGouByChrome(object):
 
 
 if __name__ == '__main__':
-    pytest.main( ["-vrA", "-s", "-m=excel"] )
+    pytest.main( ["-vrA", "-s", "-m excel"] )

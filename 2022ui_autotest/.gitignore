@@ -10,6 +10,7 @@ web/*/__pycache__
 
 /web/test_case/.allure_results
 */.allure_results/
+*/.allure_results/reports_new
 2022ui_autotest/**/.allure_results
 *.pyc
 
