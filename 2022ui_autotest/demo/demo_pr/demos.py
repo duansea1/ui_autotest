@@ -23,3 +23,7 @@ def quare(x):
     return x*2
 list = list(map(quare, [1,2,3,4]))
 print("list:", list)
+
+import os
+l = [d for d in os.listdir(".")]
+print(l)

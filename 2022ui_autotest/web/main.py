@@ -14,4 +14,4 @@ pytest.main(["-vrA", "-s", "-m excel"])
 #===手动执行
 # os.system("allure serve .allure_results")
 ## 自动探测
-os.system("allure generate ./allure_results -o ./reports_new --clean")
+os.system("allure generate ./.allure_results -o ./reports_new --clean")

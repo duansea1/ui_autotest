@@ -233,5 +233,7 @@ def query_mysql3(host,user,password,port,database,sql):
         return rsp_data   
 
 if __name__ == '__main__':
-    sql="UPDATE t_shopping_cart SET check_status = 0 WHERE spu_code !=  '8353YCH20014'"
-    query_mysql("10.6.168.14","b2btest","b5zUoR4JbcK3emhhUxdL",3306,'yihaoyaocheng',sql)
+    # sql="UPDATE t_shopping_cart SET check_status = 0 WHERE spu_code !=  '8353YCH20014'"
+    # query_mysql("10.6.168.14","b2btest","b5zUoR4JbcK3emhhUxdL",3306,'yihaoyaocheng',sql)
+    res = query_mysql('localhost','root','root',3306,'mydjango','select * from auth_group')
+    print(res)

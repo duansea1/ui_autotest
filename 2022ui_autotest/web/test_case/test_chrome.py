@@ -23,7 +23,8 @@ def test_openchrome(user_driver, clear_favor):
     print("当前窗口的句柄：", now_handle)
 
 
-def _test_visitsougou(driver):
+pytest.mark.excel
+def test_visitsougou(driver):
     # 访问搜狗首页
     # driver = webdriver.Chrome()
     driver.get(VisitUrl)

@@ -12,11 +12,13 @@ web/*/__pycache__
 */.allure_results/
 */.allure_results/reports_new
 2022ui_autotest/**/.allure_results
+
+*/allure_results/
+*/reports_new/
+
+
 *.pyc
-
 */.pydevproject
-.pytest_cache
-
 
 .pytest_cache
 .pydevproject

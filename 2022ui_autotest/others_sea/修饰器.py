@@ -29,5 +29,6 @@ class me():
 
 if __name__ == "__main__":
     M = me()
+    from timeit import Timer
     print(M.eye())
     # print(me.finter())
