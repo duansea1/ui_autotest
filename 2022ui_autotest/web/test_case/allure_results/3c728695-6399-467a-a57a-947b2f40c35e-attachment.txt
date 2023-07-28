@@ -1,0 +1,1 @@
+INFO     web.test_case.conftest:conftest.py:50 执行结束用例执行：test_case/test_demo_case.py::test_print_excel[name0-mobile0-prince0-city0-county0-adress0-alisa0-is_default0-msg0]

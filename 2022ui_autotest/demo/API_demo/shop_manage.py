@@ -6,7 +6,10 @@
 import json
 import time
 import requests
+<<<<<<< HEAD
 import random
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 
 
 def add_product(token, goodsname, skustock, skuprice, shopid=19):
@@ -103,6 +106,7 @@ def keyia_login(mobile, password, *args):
 	return res.json()
 
 
+<<<<<<< HEAD
 def save_new_products(self, numberbase=2027):
 	"""新增商品到指定店铺"""
 	url = "https://api.shop.keyid.cn/tenant/goods/save"
@@ -290,6 +294,8 @@ def add_catebage(self, num, index):
 
 
 
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 
 #======================新增商品====================
 
@@ -318,6 +324,7 @@ if __name__ == "__main__":
 	else:
 		token = res['data']['token']
 
+<<<<<<< HEAD
 	# 新增分类
 	"""n = 20
 	index = 24
@@ -326,3 +333,5 @@ if __name__ == "__main__":
 		n = n + 1
 		index += 1"""
 
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c

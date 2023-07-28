@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # ---
+<<<<<<< HEAD
 # datetime模块
 # @Author: duansea
 # @Time: 2022年12月月28日 14:25
@@ -34,3 +35,9 @@ print(time.strftime('%Y-%M-%D %H:%M:%S %a %p'), time.localtime())
 # mytime = input('请输入时间：')
 
 
+=======
+# @Software: PyCharm
+# @Author: duansea
+# @Time: 2022年12月月28日 14:25
+# ---
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c

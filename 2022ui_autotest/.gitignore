@@ -1,0 +1,41 @@
+
+# idea
+.idea
+
+
+*/*__pycache__
+*/pytest_cache
+**/__pycache__
+web/*/__pycache__
+
+/web/test_case/.allure_results
+*/.allure_results/
+*/.allure_results/reports_new
+2022ui_autotest/**/.allure_results
+
+*/allure_results/
+*/reports_new/
+
+
+*.pyc
+*/.pydevproject
+
+.pytest_cache
+.pydevproject
+*/.pytest_cache
+*/.pydevproject
+.cache
+*.gem
+*.rbc
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+*/logs

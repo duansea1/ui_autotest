@@ -4,7 +4,10 @@
 # @Author: 段海洋
 # @Time: 2022年8月月30日 19:09
 # ---
+<<<<<<< HEAD
 import random
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 
 """查商品数据库、找到匹配商品、调加车商品接口加购功能"""
 
@@ -74,6 +77,7 @@ class kyidaShopcart:
                 self.add_product_toUser(skuid=skuid, goodsid=goodsid, token=token)
 
 
+<<<<<<< HEAD
     def number(self, numbase=2025):
         increment = numbase + 1
         return increment
@@ -125,6 +129,11 @@ if __name__ == "__main__":
 
 
 
+=======
+if __name__ == "__main__":
+    cart = kyidaShopcart()
+    cart.run_add_products()
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 
 
 

@@ -7,6 +7,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+<<<<<<< HEAD
 from django.db import models
 from django.core.mail import send_mail
 from django.http import HttpResponse
@@ -26,6 +27,8 @@ class Dreamreal(models.Model):
 
 
 
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 
 def hello(request):
     text = """<h1>welcom to my first djangoweb!<h1>"""

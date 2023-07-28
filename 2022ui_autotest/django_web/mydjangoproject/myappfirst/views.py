@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import datetime
 
 from django.shortcuts import render
@@ -53,3 +54,16 @@ def showdatetime(request):
 
 
 
+=======
+from django.shortcuts import render
+
+# Create your views here.
+from django.http import HttpResponse
+from django.shortcuts import render
+
+
+def hello_web(request):
+    """´´½¨ÊÓÍ¼"""
+    text = """<h1>welcom to my first djangoweb!<h1>"""
+    return HttpResponse(text)
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
