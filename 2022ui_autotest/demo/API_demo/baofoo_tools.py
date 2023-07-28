@@ -271,7 +271,7 @@ class ConvenientScript(object):
         for sql in sqls:
             n = n + 1
             result = self.query_sql(DB=SCRM_DB, SQL=sql)
-            print('执行结果第', ['第'+str(n)+'次', result, sql])
+            print('执行结果:', ['第'+str(n)+'次', result, sql])
 
 
 if __name__ == '__main__':

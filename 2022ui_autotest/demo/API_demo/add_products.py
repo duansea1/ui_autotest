@@ -80,8 +80,6 @@ class kyidaShopcart:
                 self.add_product_toUser(skuid=skuid, goodsid=goodsid, token=token)
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     def number(self, numbase=2025):
         increment = numbase + 1
         return increment
