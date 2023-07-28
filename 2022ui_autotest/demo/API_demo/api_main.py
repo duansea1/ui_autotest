@@ -7,7 +7,7 @@
 from shop_manage import *
 
 def add_products():
-    """新增商品-商城"""
+    """新增商品-客易达商城"""
     res = keyia_login("13166210872", "duan2324")
     if res['code'] != 0:
         raise "登录接口报错"
