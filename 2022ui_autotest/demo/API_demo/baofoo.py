@@ -4,8 +4,6 @@
 # @Author: duansea
 # @Time: 2023年3月月08日 19:20
 # ---
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 from datetime import datetime, date
 
@@ -42,7 +40,4 @@ print(time_sub.seconds/60)
 print(time_sub.total_seconds()/60)
 
 
-=======
->>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
-=======
->>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
+

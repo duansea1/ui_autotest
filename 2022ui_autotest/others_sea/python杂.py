@@ -4,9 +4,6 @@
 # @Author: duansea
 # @Time: 2023年1月月09日 18:59
 # ---
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 from collections import Counter
 
 
@@ -152,7 +149,3 @@ if __name__ == '__main__':
     # 计算列表中的两束之和
     res_num = nums_add([1, 2, 3, 4, 5])
     print('列表中的数之和:{0}'.format(res_num))
-=======
->>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
-=======
->>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c

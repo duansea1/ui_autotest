@@ -11,22 +11,16 @@
 
 class Solution:
     def runningSum(self, nums):
-<<<<<<< HEAD
-<<<<<<< HEAD
         """"""
         n = len(nums)
         for i in range(1, n):  # 列表第一位不变，故从第2位开始计算
             nums[i] = nums[i-1] + nums[i]   # 计算列表的动态之后
-=======
         n = len(nums)
         for i in range(1, n):
             nums[i] = nums[i] + nums[i-1]
->>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
-=======
         n = len(nums)
         for i in range(1, n):
             nums[i] = nums[i] + nums[i-1]
->>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
         return nums
 
 

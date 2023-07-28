@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 # ---
-<<<<<<< HEAD
-<<<<<<< HEAD
 # 掌握 随机数模块（random 随机数）
 # @Author: duansea
 # @Time: 2022年12月月25日 16:47
@@ -54,14 +52,3 @@ randomseed()
 
 re= strpinjie(l=[ '12', 'dhk', '中国'])
 print(re)
-=======
-=======
->>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
-# @Software: PyCharm
-# @Author: duansea
-# @Time: 2022年12月月25日 16:47
-# ---
-<<<<<<< HEAD
->>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
-=======
->>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
