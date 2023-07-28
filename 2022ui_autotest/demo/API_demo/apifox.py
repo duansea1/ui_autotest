@@ -9,7 +9,7 @@ def add_nums(args=[331, 2]):
     n = 0
     for num in args:
         n += num
-    print('打印：',n)
+    print('请打印：',n)
 
 
 add_nums()
