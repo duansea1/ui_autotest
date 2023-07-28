@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Test Report</title>
+    <style>body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	min-width: 1200px;
+	color: #999;
+}
+
+h1 {
+	font-size: 24px;
+	color: black;
+}
+
+h2 {
+	font-size: 16px;
+	color: black;
+}
+
+p {
+    color: black;
+}
+
+a {
+	color: #999;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+
+#environment td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+}
+
+#environment tr:nth-child(odd) {
+	background-color: #f6f6f6;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed, .passed .col-result {
+	color: green;
+}
+span.skipped, span.xfailed, span.rerun, .skipped .col-result, .xfailed .col-result, .rerun .col-result {
+	color: orange;
+}
+span.error, span.failed, span.xpassed, .error .col-result, .failed .col-result, .xpassed .col-result  {
+	color: red;
+}
+
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+
+#results-table {
+	border: 1px solid #e6e6e6;
+	color: #999;
+	font-size: 12px;
+	width: 100%
+}
+
+#results-table th, #results-table td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+	text-align: left
+}
+#results-table th {
+	font-weight: bold
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+
+.log:only-child {
+	height: inherit
+}
+.log {
+	background-color: #e6e6e6;
+	border: 1px solid #e6e6e6;
+	color: black;
+	display: block;
+	font-family: "Courier New", Courier, monospace;
+	height: 230px;
+	overflow-y: scroll;
+	padding: 5px;
+	white-space: pre-wrap
+}
+div.image {
+	border: 1px solid #e6e6e6;
+	float: right;
+	height: 240px;
+	margin-left: 5px;
+	overflow: hidden;
+	width: 320px
+}
+div.image img {
+	width: 320px
+}
+.collapsed {
+	display: none;
+}
+.expander::after {
+	content: " (show details)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+.collapser::after {
+	content: " (hide details)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+	cursor: pointer;
+}
+
+.sort-icon {
+	font-size: 0px;
+	float: left;
+	margin-right: 5px;
+	margin-top: 5px;
+	/*triangle*/
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+}
+
+.inactive .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #E6E6E6;
+}
+
+.asc.active .sort-icon {
+	/*finish triangle*/
+	border-bottom: 8px solid #999;
+}
+
+.desc.active .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #999;
+}
+</style></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    toggle_sort_states(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+    var multiplier = reversed ? -1 : 1;
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+        return multiplier * (key_a >= key_b ? 1 : -1);
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>skip_b2ch5_1-129.html</h1>
+    <p>Report generated on 19-Jun-2019 at 20:47:27 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v1.20.0</p>
+    <h2>Environment</h2>
+    <table id="environment">
+      <tr>
+        <td>Base URL</td>
+        <td></td></tr>
+      <tr>
+        <td>Capabilities</td>
+        <td>{}</td></tr>
+      <tr>
+        <td>Driver</td>
+        <td>Chrome</td></tr>
+      <tr>
+        <td>JAVA_HOME</td>
+        <td>C:\Program Files\Java\jdk1.8.0_191</td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{&apos;pytest&apos;: &apos;4.4.1&apos;, &apos;py&apos;: &apos;1.8.0&apos;, &apos;pluggy&apos;: &apos;0.9.0&apos;}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.10586-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{&apos;variables&apos;: &apos;1.7.1&apos;, &apos;selenium&apos;: &apos;1.16.0&apos;, &apos;metadata&apos;: &apos;1.8.0&apos;, &apos;html&apos;: &apos;1.20.0&apos;, &apos;base-url&apos;: &apos;1.4.1&apos;}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.6.0</td></tr></table>
+    <h2>Summary</h2>
+    <p>1 tests ran in 34.34 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">0 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">1 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <h2>Results</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">Result</th>
+          <th class="sortable" col="name">Test</th>
+          <th class="sortable numeric" col="duration">Duration</th>
+          <th>Links</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_h5_CouponCode.py::test_52from_coupon_to_search_list_add_cart</td>
+          <td class="col-duration">25.88</td>
+          <td class="col-links"><a class="text" href="data:text/plain;charset=utf-8;base64,WzE1NjA5NDg0MTQuMDc2XVtJTkZPXTogU3RhcnRpbmcgQ2hyb21lRHJpdmVyIDc0LjAuMzcyOS42ICgyNTU3NThlY2NmM2QyNDQ0OTFiOGExMzE3YWE3NmUxY2UxMGQ1N2U5LXJlZnMvYnJhbmNoLWhlYWRzLzM3MjlAeyMyOX0pClsxNTYwOTQ4NDE0LjA3N11bSU5GT106IFBsZWFzZSBwcm90ZWN0IHBvcnRzIHVzZWQgYnkgQ2hyb21lRHJpdmVyIGFuZCByZWxhdGVkIHRlc3QgZnJhbWV3b3JrcyB0byBwcmV2ZW50IGFjY2VzcyBieSBtYWxpY2lvdXMgY29kZS4KWzE1NjA5NDg0MTQuNTExXVtJTkZPXTogWzIzYzc5ZDFkMDNhNDYyYzU4YmE4ZmEzNWUyMGYyZjU4XSBDT01NQU5EIEluaXRTZXNzaW9uIHsKICAgImNhcGFiaWxpdGllcyI6IHsKICAgICAgImFsd2F5c01hdGNoIjogewogICAgICAgICAiYnJvd3Nlck5hbWUiOiAiY2hyb21lIiwKICAgICAgICAgInBsYXRmb3JtTmFtZSI6ICJhbnkiCiAgICAgIH0sCiAgICAgICJmaXJzdE1hdGNoIjogWyB7CgogICAgICB9IF0KICAgfSwKICAgImRlc2lyZWRDYXBhYmlsaXRpZXMiOiB7CiAgICAgICJicm93c2VyTmFtZSI6ICJjaHJvbWUiLAogICAgICAiY2hyb21lT3B0aW9ucyI6IHsKICAgICAgICAgImFyZ3MiOiBbICItLXN0YXJ0LW1heGltaXplZCIgXSwKICAgICAgICAgImV4dGVuc2lvbnMiOiBbICBdLAogICAgICAgICAibW9iaWxlRW11bGF0aW9uIjogewogICAgICAgICAgICAiZGV2aWNlTmFtZSI6ICJpUGhvbmUgNiIKICAgICAgICAgfSwKICAgICAgICAgInByZWZzIjogewogICAgICAgICAgICAiY3JlZGVudGlhbHNfZW5hYmxlX3NlcnZpY2UiOiBmYWxzZSwKICAgICAgICAgICAgInByb2ZpbGUuY29udGVudF9zZXR0aW5ncy5leGNlcHRpb25zLnBsdWdpbnMuKiwqLnBlcl9yZXNvdXJjZS5hZG9iZS1mbGFzaC1wbGF5ZXIiOiAxLAogICAgICAgICAgICAicHJvZmlsZS5jb250ZW50X3NldHRpbmdzLnBsdWdpbl93aGl0ZWxpc3QuYWRvYmUtZmxhc2gtcGxheWVyIjogMSwKICAgICAgICAgICAgInByb2ZpbGUubWFuYWdlZF9kZWZhdWx0X2NvbnRlbnRfc2V0dGluZ3MuaW1hZ2VzIjogMSwKICAgICAgICAgICAgInByb2ZpbGUucGFzc3dvcmRfbWFuYWdlcl9lbmFibGVkIjogZmFsc2UKICAgICAgICAgfQogICAgICB9LAogICAgICAicGxhdGZvcm0iOiAiQU5ZIiwKICAgICAgInZlcnNpb24iOiAiIgogICB9Cn0KWzE1NjA5NDg0MTQuNTIyXVtJTkZPXTogUG9wdWxhdGluZyBQcmVmZXJlbmNlcyBmaWxlOiB7CiAgICJhbHRlcm5hdGVfZXJyb3JfcGFnZXMiOiB7CiAgICAgICJlbmFibGVkIjogZmFsc2UKICAgfSwKICAgImF1dG9maWxsIjogewogICAgICAiZW5hYmxlZCI6IGZhbHNlCiAgIH0sCiAgICJicm93c2VyIjogewogICAgICAiY2hlY2tfZGVmYXVsdF9icm93c2VyIjogZmFsc2UKICAgfSwKICAgImNyZWRlbnRpYWxzX2VuYWJsZV9zZXJ2aWNlIjogZmFsc2UsCiAgICJkaXN0cmlidXRpb24iOiB7CiAgICAgICJpbXBvcnRfYm9va21hcmtzIjogZmFsc2UsCiAgICAgICJpbXBvcnRfaGlzdG9yeSI6IGZhbHNlLAogICAgICAiaW1wb3J0X3NlYXJjaF9lbmdpbmUiOiBmYWxzZSwKICAgICAgIm1ha2VfY2hyb21lX2RlZmF1bHRfZm9yX3VzZXIiOiBmYWxzZSwKICAgICAgInNraXBfZmlyc3RfcnVuX3VpIjogdHJ1ZQogICB9LAogICAiZG5zX3ByZWZldGNoaW5nIjogewogICAgICAiZW5hYmxlZCI6IGZhbHNlCiAgIH0sCiAgICJwcm9maWxlIjogewogICAgICAiY29udGVudF9zZXR0aW5ncyI6IHsKICAgICAgICAgImV4Y2VwdGlvbnMiOiB7CiAgICAgICAgICAgICJwbHVnaW5zIjogewogICAgICAgICAgICAgICAiKiwqIjogewogICAgICAgICAgICAgICAgICAicGVyX3Jlc291cmNlIjogewogICAgICAgICAgICAgICAgICAgICAiYWRvYmUtZmxhc2gtcGxheWVyIjogMQogICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgICB9LAogICAgICAgICAicGF0dGVybl9wYWlycyI6IHsKICAgICAgICAgICAgImh0dHBzOi8vKiwqIjogewogICAgICAgICAgICAgICAibWVkaWEtc3RyZWFtIjogewogICAgICAgICAgICAgICAgICAiYXVkaW8iOiAiRGVmYXVsdCIsCiAgICAgICAgICAgICAgICAgICJ2aWRlbyI6ICJEZWZhdWx0IgogICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICAgfSwKICAgICAgICAgInBsdWdpbl93aGl0ZWxpc3QiOiB7CiAgICAgICAgICAgICJhZG9iZS1mbGFzaC1wbGF5ZXIiOiAxCiAgICAgICAgIH0KICAgICAgfSwKICAgICAgImRlZmF1bHRfY29udGVudF9zZXR0aW5nX3ZhbHVlcyI6IHsKICAgICAgICAgImdlb2xvY2F0aW9uIjogMQogICAgICB9LAogICAgICAiZGVmYXVsdF9jb250ZW50X3NldHRpbmdzIjogewogICAgICAgICAiZ2VvbG9jYXRpb24iOiAxLAogICAgICAgICAibW91c2Vsb2NrIjogMSwKICAgICAgICAgIm5vdGlmaWNhdGlvbnMiOiAxLAogICAgICAgICAicG9wdXBzIjogMSwKICAgICAgICAgInBwYXBpLWJyb2tlciI6IDEKICAgICAgfSwKICAgICAgIm1hbmFnZWRfZGVmYXVsdF9jb250ZW50X3NldHRpbmdzIjogewogICAgICAgICAiaW1hZ2VzIjogMQogICAgICB9LAogICAgICAicGFzc3dvcmRfbWFuYWdlcl9lbmFibGVkIjogZmFsc2UKICAgfSwKICAgInNhZmVicm93c2luZyI6IHsKICAgICAgImVuYWJsZWQiOiBmYWxzZQogICB9LAogICAic2VhcmNoIjogewogICAgICAic3VnZ2VzdF9lbmFibGVkIjogZmFsc2UKICAgfSwKICAgInRyYW5zbGF0ZSI6IHsKICAgICAgImVuYWJsZWQiOiBmYWxzZQogICB9Cn0KWzE1NjA5NDg0MTQuNTQwXVtJTkZPXTogUG9wdWxhdGluZyBMb2NhbCBTdGF0ZSBmaWxlOiB7CiAgICJiYWNrZ3JvdW5kX21vZGUiOiB7CiAgICAgICJlbmFibGVkIjogZmFsc2UKICAgfSwKICAgInNzbCI6IHsKICAgICAgInJldl9jaGVja2luZyI6IHsKICAgICAgICAgImVuYWJsZWQiOiBmYWxzZQogICAgICB9CiAgIH0KfQpbMTU2MDk0ODQxNC41ODBdW0lORk9dOiBMYXVuY2hpbmcgY2hyb21lOiAiQzpcVXNlcnNcbGl1emhlbnpob3VcQXBwRGF0YVxMb2NhbFxHb29nbGVcQ2hyb21lXEFwcGxpY2F0aW9uXGNocm9tZS5leGUiIC0tZGlzYWJsZS1iYWNrZ3JvdW5kLW5ldHdvcmtpbmcgLS1kaXNhYmxlLWNsaWVudC1zaWRlLXBoaXNoaW5nLWRldGVjdGlvbiAtLWRpc2FibGUtZGVmYXVsdC1hcHBzIC0tZGlzYWJsZS1oYW5nLW1vbml0b3IgLS1kaXNhYmxlLXBvcHVwLWJsb2NraW5nIC0tZGlzYWJsZS1wcm9tcHQtb24tcmVwb3N0IC0tZGlzYWJsZS1zeW5jIC0tZGlzYWJsZS13ZWItcmVzb3VyY2VzIC0tZW5hYmxlLWF1dG9tYXRpb24gLS1lbmFibGUtYmxpbmstZmVhdHVyZXM9U2hhZG93RE9NVjAgLS1lbmFibGUtbG9nZ2luZyAtLWZvcmNlLWZpZWxkdHJpYWxzPVNpdGVJc29sYXRpb25FeHRlbnNpb25zL0NvbnRyb2wgLS1pZ25vcmUtY2VydGlmaWNhdGUtZXJyb3JzIC0tbG9hZC1leHRlbnNpb249IkM6XFVzZXJzXExJVVpIRX4xXEFwcERhdGFcTG9jYWxcVGVtcFxzY29wZWRfZGlyMjQ3NDhfMTI3MTFcaW50ZXJuYWwiIC0tbG9nLWxldmVsPTAgLS1uby1maXJzdC1ydW4gLS1wYXNzd29yZC1zdG9yZT1iYXNpYyAtLXJlbW90ZS1kZWJ1Z2dpbmctcG9ydD0wIC0tc3RhcnQtbWF4aW1pemVkIC0tdGVzdC10eXBlPXdlYmRyaXZlciAtLXVzZS1tb2NrLWtleWNoYWluIC0tdXNlci1hZ2VudD0iTW96aWxsYS81LjAgKGlQaG9uZTsgQ1BVIGlQaG9uZSBPUyAxMV8wIGxpa2UgTWFjIE9TIFgpIEFwcGxlV2ViS2l0LzYwNC4xLjM4IChLSFRNTCwgbGlrZSBHZWNrbykgVmVyc2lvbi8xMS4wIE1vYmlsZS8xNUEzNzIgU2FmYXJpLzYwNC4xIiAtLXVzZXItZGF0YS1kaXI9IkM6XFVzZXJzXExJVVpIRX4xXEFwcERhdGFcTG9jYWxcVGVtcFxzY29wZWRfZGlyMjQ3NDhfMTQ2NDciIGRhdGE6LApbMTU2MDk0ODQxNi4wMjBdW0lORk9dOiByZXNvbHZlZCBsb2NhbGhvc3QgdG8gWyI6OjEiLCIxMjcuMC4wLjEiXQpbMTU2MDk0ODQxNy4wNzldW0lORk9dOiBbMjNjNzlkMWQwM2E0NjJjNThiYThmYTM1ZTIwZjJmNThdIFJFU1BPTlNFIEluaXRTZXNzaW9uIHsKICAgImFjY2VwdEluc2VjdXJlQ2VydHMiOiBmYWxzZSwKICAgImFjY2VwdFNzbENlcnRzIjogZmFsc2UsCiAgICJhcHBsaWNhdGlvbkNhY2hlRW5hYmxlZCI6IGZhbHNlLAogICAiYnJvd3NlckNvbm5lY3Rpb25FbmFibGVkIjogZmFsc2UsCiAgICJicm93c2VyTmFtZSI6ICJjaHJvbWUiLAogICAiY2hyb21lIjogewogICAgICAiY2hyb21lZHJpdmVyVmVyc2lvbiI6ICI3NC4wLjM3MjkuNiAoMjU1NzU4ZWNjZjNkMjQ0NDkxYjhhMTMxN2FhNzZlMWNlMTBkNTdlOS1yZWZzL2JyYW5jaC1oZWFkcy8zNzI5QHsjMjl9KSIsCiAgICAgICJ1c2VyRGF0YURpciI6ICJDOlxcVXNlcnNcXExJVVpIRX4xXFxBcHBEYXRhXFxMb2NhbFxcVGVtcFxcc2NvcGVkX2RpcjI0NzQ4XzE0NjQ3IgogICB9LAogICAiY3NzU2VsZWN0b3JzRW5hYmxlZCI6IHRydWUsCiAgICJkYXRhYmFzZUVuYWJsZWQiOiBmYWxzZSwKICAgImdvb2c6Y2hyb21lT3B0aW9ucyI6IHsKICAgICAgImRlYnVnZ2VyQWRkcmVzcyI6ICJsb2NhbGhvc3Q6NjIyMzciCiAgIH0sCiAgICJoYW5kbGVzQWxlcnRzIjogdHJ1ZSwKICAgImhhc1RvdWNoU2NyZWVuIjogdHJ1ZSwKICAgImphdmFzY3JpcHRFbmFibGVkIjogdHJ1ZSwKICAgImxvY2F0aW9uQ29udGV4dEVuYWJsZWQiOiB0cnVlLAogICAibW9iaWxlRW11bGF0aW9uRW5hYmxlZCI6IHRydWUsCiAgICJuYXRpdmVFdmVudHMiOiB0cnVlLAogICAibmV0d29ya0Nvbm5lY3Rpb25FbmFibGVkIjogZmFsc2UsCiAgICJwYWdlTG9hZFN0cmF0ZWd5IjogIm5vcm1hbCIsCiAgICJwbGF0Zm9ybSI6ICJXaW5kb3dzIE5UIiwKICAgInByb3h5IjogewoKICAgfSwKICAgIn5+fiI6ICIuLi4iCn0KWzE1NjA5NDg0MTcuMDgyXVtJTkZPXTogWzIzYzc5ZDFkMDNhNDYyYzU4YmE4ZmEzNWUyMGYyZjU4XSBDT01NQU5EIFNldEltcGxpY2l0V2FpdCB7CiAgICJtcyI6IDMwMDAwLjAsCiAgICJzZXNzaW9uSWQiOiAiMjNjNzlkMWQwM2E0NjJjNThiYThmYTM1ZTIwZjJmNTgiCn0KWzE1NjA5NDg0MTcuMDgyXVtJTkZPXTogWzIzYzc5ZDFkMDNhNDYyYzU4YmE4ZmEzNWUyMGYyZjU4XSBSRVNQT05TRSBTZXRJbXBsaWNpdFdhaXQKWzE1NjA5NDg0MTcuMDg1XVtJTkZPXTogWzIzYzc5ZDFkMDNhNDYyYzU4YmE4ZmEzNWUyMGYyZjU4XSBDT01NQU5EIE1heGltaXplV2luZG93IHsKICAgInNlc3Npb25JZCI6ICIyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OCIsCiAgICJ3aW5kb3dIYW5kbGUiOiAiY3VycmVudCIKfQpbMTU2MDk0ODQxNy4wODVdW0lORk9dOiBXYWl0aW5nIGZvciBwZW5kaW5nIG5hdmlnYXRpb25zLi4uClsxNTYwOTQ4NDE3LjEwMl1bSU5GT106IERvbmUgd2FpdGluZyBmb3IgcGVuZGluZyBuYXZpZ2F0aW9ucy4gU3RhdHVzOiBvawpbMTU2MDk0ODQxNy4xMDVdW0lORk9dOiByZXNvbHZlZCBsb2NhbGhvc3QgdG8gWyI6OjEiLCIxMjcuMC4wLjEiXQpbMTU2MDk0ODQxOC4xMTFdW0lORk9dOiBXYWl0aW5nIGZvciBwZW5kaW5nIG5hdmlnYXRpb25zLi4uClsxNTYwOTQ4NDE4LjExMl1bSU5GT106IERvbmUgd2FpdGluZyBmb3IgcGVuZGluZyBuYXZpZ2F0aW9ucy4gU3RhdHVzOiBvawpbMTU2MDk0ODQxOC4xMTJdW0lORk9dOiBbMjNjNzlkMWQwM2E0NjJjNThiYThmYTM1ZTIwZjJmNThdIFJFU1BPTlNFIE1heGltaXplV2luZG93IHsKICAgImhlaWdodCI6IDEwNjYsCiAgICJ3aWR0aCI6IDE5MzYsCiAgICJ4IjogLTgsCiAgICJ5IjogLTgKfQpbMTU2MDk0ODQxOC4xMTRdW0lORk9dOiBbMjNjNzlkMWQwM2E0NjJjNThiYThmYTM1ZTIwZjJmNThdIENPTU1BTkQgU2V0SW1wbGljaXRXYWl0IHsKICAgIm1zIjogNjAwMDAuMCwKICAgInNlc3Npb25JZCI6ICIyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OCIKfQpbMTU2MDk0ODQxOC4xMTRdW0lORk9dOiBbMjNjNzlkMWQwM2E0NjJjNThiYThmYTM1ZTIwZjJmNThdIFJFU1BPTlNFIFNldEltcGxpY2l0V2FpdApbMTU2MDk0ODQxOC4xMTddW0lORk9dOiBbMjNjNzlkMWQwM2E0NjJjNThiYThmYTM1ZTIwZjJmNThdIENPTU1BTkQgU2V0V2luZG93U2l6ZSB7CiAgICJoZWlnaHQiOiAzMDAwMCwKICAgInNlc3Npb25JZCI6ICIyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OCIsCiAgICJ3aWR0aCI6IDM3NSwKICAgIndpbmRvd0hhbmRsZSI6ICJjdXJyZW50Igp9ClsxNTYwOTQ4NDE4LjM0Ml1bSU5GT106IFsyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OF0gUkVTUE9OU0UgU2V0V2luZG93U2l6ZQpbMTU2MDk0ODQxOC4zNDNdW0lORk9dOiBbMjNjNzlkMWQwM2E0NjJjNThiYThmYTM1ZTIwZjJmNThdIENPTU1BTkQgTmF2aWdhdGUgewogICAic2Vzc2lvbklkIjogIjIzYzc5ZDFkMDNhNDYyYzU4YmE4ZmEzNWUyMGYyZjU4IiwKICAgInVybCI6ICJodHRwOi8vbS4xMTEuY29tLmNuL3l5dy93YXAvc2VhcmNoTGlzdC9pbmRleC5odG1sIy9zZWFyY2hMaXN0P2NvdXBvbkJhdGNoQ29kZT1CWUJKJmNvdXBvblR4dD0lRTQlQkIlQTUlRTQlQjglOEIlRTUlOTUlODYlRTUlOTMlODElRTUlOEYlQUYlRTQlQkQlQkYlRTclOTQlQTglRTYlQkIlQTExOSVFNSU4NyU4RjAuMyVFNyU5QSU4NCVFNCVCQyU5OC4uLiIKfQpbMTU2MDk0ODQxOC4zNDNdW0lORk9dOiBXYWl0aW5nIGZvciBwZW5kaW5nIG5hdmlnYXRpb25zLi4uClsxNTYwOTQ4NDE4LjM0NF1bSU5GT106IERvbmUgd2FpdGluZyBmb3IgcGVuZGluZyBuYXZpZ2F0aW9ucy4gU3RhdHVzOiBvawpbMTU2MDk0ODQxOC44NTVdW0lORk9dOiBXYWl0aW5nIGZvciBwZW5kaW5nIG5hdmlnYXRpb25zLi4uClsxNTYwOTQ4NDE5Ljc3NF1bSU5GT106IERvbmUgd2FpdGluZyBmb3IgcGVuZGluZyBuYXZpZ2F0aW9ucy4gU3RhdHVzOiBvawpbMTU2MDk0ODQxOS43NzVdW0lORk9dOiBbMjNjNzlkMWQwM2E0NjJjNThiYThmYTM1ZTIwZjJmNThdIFJFU1BPTlNFIE5hdmlnYXRlClsxNTYwOTQ4NDE5Ljc3N11bSU5GT106IFsyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OF0gQ09NTUFORCBGaW5kRWxlbWVudCB7CiAgICJzZXNzaW9uSWQiOiAiMjNjNzlkMWQwM2E0NjJjNThiYThmYTM1ZTIwZjJmNTgiLAogICAidXNpbmciOiAiY2xhc3MgbmFtZSIsCiAgICJ2YWx1ZSI6ICJsb2FkaW5nLWxheWVyIgp9ClsxNTYwOTQ4NDE5Ljc3N11bSU5GT106IFdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuLi4KWzE1NjA5NDg0MTkuNzc5XVtJTkZPXTogRG9uZSB3YWl0aW5nIGZvciBwZW5kaW5nIG5hdmlnYXRpb25zLiBTdGF0dXM6IG9rClsxNTYwOTQ4NDE5Ljc5N11bSU5GT106IFdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuLi4KWzE1NjA5NDg0MTkuNzk5XVtJTkZPXTogRG9uZSB3YWl0aW5nIGZvciBwZW5kaW5nIG5hdmlnYXRpb25zLiBTdGF0dXM6IG9rClsxNTYwOTQ4NDE5Ljc5OV1bSU5GT106IFsyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OF0gUkVTUE9OU0UgRmluZEVsZW1lbnQgewogICAiRUxFTUVOVCI6ICIwLjgzNDU5MjgwMTQ5MjU3NTItMSIKfQpbMTU2MDk0ODQxOS44MDJdW0lORk9dOiBbMjNjNzlkMWQwM2E0NjJjNThiYThmYTM1ZTIwZjJmNThdIENPTU1BTkQgTW91c2VNb3ZlIHsKICAgImVsZW1lbnQiOiAiMC44MzQ1OTI4MDE0OTI1NzUyLTEiLAogICAic2Vzc2lvbklkIjogIjIzYzc5ZDFkMDNhNDYyYzU4YmE4ZmEzNWUyMGYyZjU4Igp9ClsxNTYwOTQ4NDE5LjgwMl1bSU5GT106IFdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuLi4KWzE1NjA5NDg0MTkuODAzXVtJTkZPXTogRG9uZSB3YWl0aW5nIGZvciBwZW5kaW5nIG5hdmlnYXRpb25zLiBTdGF0dXM6IG9rClsxNTYwOTQ4NDIwLjAyM11bSU5GT106IFdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuLi4KWzE1NjA5NDg0MjAuNDkzXVtJTkZPXTogRG9uZSB3YWl0aW5nIGZvciBwZW5kaW5nIG5hdmlnYXRpb25zLiBTdGF0dXM6IG9rClsxNTYwOTQ4NDIwLjQ5M11bSU5GT106IFsyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OF0gUkVTUE9OU0UgTW91c2VNb3ZlClsxNTYwOTQ4NDIwLjQ5NV1bSU5GT106IFsyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OF0gQ09NTUFORCBNb3VzZURvd24gewogICAic2Vzc2lvbklkIjogIjIzYzc5ZDFkMDNhNDYyYzU4YmE4ZmEzNWUyMGYyZjU4Igp9ClsxNTYwOTQ4NDIwLjQ5Nl1bSU5GT106IFdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuLi4KWzE1NjA5NDg0MjAuNDk3XVtJTkZPXTogRG9uZSB3YWl0aW5nIGZvciBwZW5kaW5nIG5hdmlnYXRpb25zLiBTdGF0dXM6IG9rClsxNTYwOTQ4NDIwLjU0Ml1bSU5GT106IFdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuLi4KWzE1NjA5NDg0MjAuNTQzXVtJTkZPXTogRG9uZSB3YWl0aW5nIGZvciBwZW5kaW5nIG5hdmlnYXRpb25zLiBTdGF0dXM6IG9rClsxNTYwOTQ4NDIwLjU0M11bSU5GT106IFsyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OF0gUkVTUE9OU0UgTW91c2VEb3duClsxNTYwOTQ4NDIwLjU0NF1bSU5GT106IFsyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OF0gQ09NTUFORCBNb3VzZU1vdmUgewogICAic2Vzc2lvbklkIjogIjIzYzc5ZDFkMDNhNDYyYzU4YmE4ZmEzNWUyMGYyZjU4IiwKICAgInhvZmZzZXQiOiA0MDAsCiAgICJ5b2Zmc2V0IjogMjAwCn0KWzE1NjA5NDg0MjAuNTQ0XVtJTkZPXTogV2FpdGluZyBmb3IgcGVuZGluZyBuYXZpZ2F0aW9ucy4uLgpbMTU2MDk0ODQyMC41NDZdW0lORk9dOiBEb25lIHdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuIFN0YXR1czogb2sKWzE1NjA5NDg0MjAuNjY1XVtJTkZPXTogV2FpdGluZyBmb3IgcGVuZGluZyBuYXZpZ2F0aW9ucy4uLgpbMTU2MDk0ODQyMC42ODVdW0lORk9dOiBEb25lIHdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuIFN0YXR1czogb2sKWzE1NjA5NDg0MjAuNjg1XVtJTkZPXTogWzIzYzc5ZDFkMDNhNDYyYzU4YmE4ZmEzNWUyMGYyZjU4XSBSRVNQT05TRSBNb3VzZU1vdmUKWzE1NjA5NDg0MjAuNjg4XVtJTkZPXTogWzIzYzc5ZDFkMDNhNDYyYzU4YmE4ZmEzNWUyMGYyZjU4XSBDT01NQU5EIE1vdXNlVXAgewogICAic2Vzc2lvbklkIjogIjIzYzc5ZDFkMDNhNDYyYzU4YmE4ZmEzNWUyMGYyZjU4Igp9ClsxNTYwOTQ4NDIwLjY4OF1bSU5GT106IFdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuLi4KWzE1NjA5NDg0MjAuNjg5XVtJTkZPXTogRG9uZSB3YWl0aW5nIGZvciBwZW5kaW5nIG5hdmlnYXRpb25zLiBTdGF0dXM6IG9rClsxNTYwOTQ4NDIwLjczM11bSU5GT106IFdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuLi4KWzE1NjA5NDg0MjAuNzM0XVtJTkZPXTogRG9uZSB3YWl0aW5nIGZvciBwZW5kaW5nIG5hdmlnYXRpb25zLiBTdGF0dXM6IG9rClsxNTYwOTQ4NDIwLjczNF1bSU5GT106IFsyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OF0gUkVTUE9OU0UgTW91c2VVcApbMTU2MDk0ODQ0MC43MzhdW0lORk9dOiBbMjNjNzlkMWQwM2E0NjJjNThiYThmYTM1ZTIwZjJmNThdIENPTU1BTkQgRmluZEVsZW1lbnRzIHsKICAgInNlc3Npb25JZCI6ICIyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OCIsCiAgICJ1c2luZyI6ICJjc3Mgc2VsZWN0b3IiLAogICAidmFsdWUiOiAiLnNlYXJjaF9yZXN1bHRfbGlzdF91bml0IC5pY29uX3Nob3BjYXIiCn0KWzE1NjA5NDg0NDAuNzM5XVtJTkZPXTogV2FpdGluZyBmb3IgcGVuZGluZyBuYXZpZ2F0aW9ucy4uLgpbMTU2MDk0ODQ0MC43NDRdW0lORk9dOiBEb25lIHdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuIFN0YXR1czogb2sKWzE1NjA5NDg0NDMuOTA5XVtJTkZPXTogV2FpdGluZyBmb3IgcGVuZGluZyBuYXZpZ2F0aW9ucy4uLgpbMTU2MDk0ODQ0My45MTBdW0lORk9dOiBEb25lIHdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuIFN0YXR1czogZGlzY29ubmVjdGVkOiBub3QgY29ubmVjdGVkIHRvIERldlRvb2xzClsxNTYwOTQ4NDQzLjk5Ml1bSU5GT106IFsyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OF0gUkVTUE9OU0UgRmluZEVsZW1lbnRzClsxNTYwOTQ4NDQzLjk5Nl1bSU5GT106IFsyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OF0gQ09NTUFORCBFeGVjdXRlU2NyaXB0IHsKICAgImFyZ3MiOiBbICBdLAogICAic2NyaXB0IjogIndpbmRvdy5zY3JvbGxCeSgwLDEwMCkiLAogICAic2Vzc2lvbklkIjogIjIzYzc5ZDFkMDNhNDYyYzU4YmE4ZmEzNWUyMGYyZjU4Igp9ClsxNTYwOTQ4NDQzLjk5Nl1bSU5GT106IFsyM2M3OWQxZDAzYTQ2MmM1OGJhOGZhMzVlMjBmMmY1OF0gUkVTUE9OU0UgRXhlY3V0ZVNjcmlwdCBFUlJPUiBubyBzdWNoIHdpbmRvdzogdGFyZ2V0IHdpbmRvdyBhbHJlYWR5IGNsb3NlZApmcm9tIHVua25vd24gZXJyb3I6IHdlYiB2aWV3IG5vdCBmb3VuZAogIChTZXNzaW9uIGluZm86IGNocm9tZT03NC4wLjM3MjkuMTU3KQo=" target="_blank">Driver Log</a> <a class="text" href="data:text/plain;charset=utf-8;base64,MjAxOS0wNi0xOSAxMjo0Njo1OS40MzUwMDAgU0VWRVJFIC0gaHR0cDovL20uMTExLmNvbS5jbi95eXcvd2FwL3NlYXJjaExpc3Qvc3RhdGljL2pzL3ZlbmRvci43YzMyYjgzMDgzOWQwNTA4NTFkYi5qcyA1OjE0MTQ1MCAiW3Z1ZXhdIGFscmVhZHkgaW5zdGFsbGVkLiBWdWUudXNlKFZ1ZXgpIHNob3VsZCBiZSBjYWxsZWQgb25seSBvbmNlLiIKMjAxOS0wNi0xOSAxMjo0Njo1OS44MzkwMDAgU0VWRVJFIC0gaHR0cDovL20uMTExLmNvbS5jbi9mYXZpY29uLmljbyAtIEZhaWxlZCB0byBsb2FkIHJlc291cmNlOiB0aGUgc2VydmVyIHJlc3BvbmRlZCB3aXRoIGEgc3RhdHVzIG9mIDQwNCAoTm90IEZvdW5kKQoyMDE5LTA2LTE5IDEyOjQ3OjAwLjAyMzAwMCBTRVZFUkUgLSBodHRwczovL25lc3QuMTExLmNvbS5jbi8/dXVpZD0wRDc2Y0I3LWNCRGMtNDZBOS05QUU2LWFkZUJCQWFDZkQ2QSZvc192ZXJzaW9uPWlQaG9uZTslMjBDUFUlMjBpUGhvbmUlMjBPUyUyMDExXzAlMjBsaWtlJTIwTWFjJTIwT1MlMjBYJmFjdGlvbj1yZXBvcnQmc2l0ZT1iMmMmb3BlcmF0b3I9bnVsbCZhdXR1bW49d2FwJnZlcnNpb249Jm9zPXdhcCZicm93ZXI9TW96aWxsYSUyNTJGNS4wJTI1MjAoaVBob25lJTI1M0IlMjUyMENQVSUyNTIwaVBob25lJTI1MjBPUyUyNTIwMTFfMCUyNTIwbGlrZSUyNTIwTWFjJTI1MjBPUyUyNTIwWCklMjUyMEFwcGxlV2ViS2l0JTI1MkY2MDQuMS4zOCUyNTIwKEtIVE1MJTI1MkMlMjUyMGxpa2UlMjUyMEdlY2tvKSUyNTIwVmVyc2lvbiUyNTJGMTEuMCUyNTIwTW9iaWxlJTI1MkYxNUEzNzIlMjUyMFNhZmFyaSUyNTJGNjA0LjEmdG9rZW49JnByb3ZpbmNlSWQ9bnVsbCZwcm92aW5jZU5hbWU9bnVsbCZsb2NhdGVQcm92aW5jZUlkPTEmbG9jYXRlUHJvdmluY2VOYW1lPSVFNCVCOCU4QSVFNiVCNSVCNyZsb2NhdGVDaXR5TmFtZT0lRTQlQjglOEElRTYlQjUlQjcmc2VuZFRvQWRkcmVzcz0mdXNlcmlkPW51bGwmcmVmZXI9JlJlZmVyUGFnZUNvZGU9JmN1cnVybD1odHRwJTNBJTJGJTJGbS4xMTEuY29tLmNuJTJGeXl3JTJGd2FwJTJGc2VhcmNoTGlzdCUyRmluZGV4Lmh0bWwlMjMlMkZzZWFyY2hMaXN0JTNGY291cG9uQmF0Y2hDb2RlJTNEQllCSiUyNmNvdXBvblR4dCUzRCUyNUU0JTI1QkIlMjVBNSUyNUU0JTI1QjglMjU4QiUyNUU1JTI1OTUlMjU4NiUyNUU1JTI1OTMlMjU4MSUyNUU1JTI1OEYlMjVBRiUyNUU0JTI1QkQlMjVCRiUyNUU3JTI1OTQlMjVBOCUyNUU2JTI1QkIlMjVBMTE5JTI1RTUlMjU4NyUyNThGMC4zJTI1RTclMjU5QSUyNTg0JTI1RTQlMjVCQyUyNTk4JTI1RTYlMjU4MyUyNUEwJTI1RTUlMjU4OCUyNUI4JnRyYWNrZXJfdT1udWxsJnZpc2l0aWQ9bnVsbCZwYWdlY29kZT1saXN0Jml0ZW1JZD1wYWdlUGVyZm9ybWFuY2UmcGFnZUNyZWF0ZVRpbWU9MTE5MCZwYWdlQXBpVGltZT00NDUmcGFnZUxvYWRUb3RhbFRpbWU9MTM5NyZwYWdldmFsdWU9JmFwcF90cmFja2VyX3U9JnRpbWU9MTU2MDk0ODQxOTc2OCZmbG9vcklkPSZjYWxsYmFjaz1KU09OUF8xNTYwOTQ4NDE5NzkwIC0gRmFpbGVkIHRvIGxvYWQgcmVzb3VyY2U6IHRoZSBzZXJ2ZXIgcmVzcG9uZGVkIHdpdGggYSBzdGF0dXMgb2YgNTAyIChCYWQgR2F0ZXdheSkKMjAxOS0wNi0xOSAxMjo0NzowMC4wMjMwMDAgU0VWRVJFIC0gaHR0cHM6Ly9uZXN0LjExMS5jb20uY24vP3V1aWQ9MEQ3NmNCNy1jQkRjLTQ2QTktOUFFNi1hZGVCQkFhQ2ZENkEmb3NfdmVyc2lvbj1pUGhvbmU7JTIwQ1BVJTIwaVBob25lJTIwT1MlMjAxMV8wJTIwbGlrZSUyME1hYyUyME9TJTIwWCZhY3Rpb249bm9uZSZzaXRlPWIyYyZvcGVyYXRvcj1udWxsJmF1dHVtbj13YXAmdmVyc2lvbj0mb3M9d2FwJmJyb3dlcj1Nb3ppbGxhJTI1MkY1LjAlMjUyMChpUGhvbmUlMjUzQiUyNTIwQ1BVJTI1MjBpUGhvbmUlMjUyME9TJTI1MjAxMV8wJTI1MjBsaWtlJTI1MjBNYWMlMjUyME9TJTI1MjBYKSUyNTIwQXBwbGVXZWJLaXQlMjUyRjYwNC4xLjM4JTI1MjAoS0hUTUwlMjUyQyUyNTIwbGlrZSUyNTIwR2Vja28pJTI1MjBWZXJzaW9uJTI1MkYxMS4wJTI1MjBNb2JpbGUlMjUyRjE1QTM3MiUyNTIwU2FmYXJpJTI1MkY2MDQuMSZ0b2tlbj0mcG9zPW1pcyZwcm92aW5jZUlkPW51bGwmcHJvdmluY2VOYW1lPW51bGwmbG9jYXRlUHJvdmluY2VJZD0xJmxvY2F0ZVByb3ZpbmNlTmFtZT0lRTQlQjglOEElRTYlQjUlQjcmbG9jYXRlQ2l0eU5hbWU9JUU0JUI4JThBJUU2JUI1JUI3JnNlbmRUb0FkZHJlc3M9JnVzZXJpZD1udWxsJnJlZmVyPSZSZWZlclBhZ2VDb2RlPSZSZWZlclBhZ2VWYWx1ZT0mY3VydXJsPWh0dHAlM0ElMkYlMkZtLjExMS5jb20uY24lMkZ5eXclMkZ3YXAlMkZzZWFyY2hMaXN0JTJGaW5kZXguaHRtbCUyMyUyRnNlYXJjaExpc3QlM0Zjb3Vwb25CYXRjaENvZGUlM0RCWUJKJTI2Y291cG9uVHh0JTNEJTI1RTQlMjVCQiUyNUE1JTI1RTQlMjVCOCUyNThCJTI1RTUlMjU5NSUyNTg2JTI1RTUlMjU5MyUyNTgxJTI1RTUlMjU4RiUyNUFGJTI1RTQlMjVCRCUyNUJGJTI1RTclMjU5NCUyNUE4JTI1RTYlMjVCQiUyNUExMTklMjVFNSUyNTg3JTI1OEYwLjMlMjVFNyUyNTlBJTI1ODQlMjVFNCUyNUJDJTI1OTglMjVFNiUyNTgzJTI1QTAlMjVFNSUyNTg4JTI1QjgmRVhQX0hPTUVQQUdFXzE9JkVYUF9JTV8xPSZ0cmFja2VyX3U9bnVsbCZ2aXNpdGlkPW51bGwmcGFnZWNvZGU9bGlzdCZwYWdldmFsdWU9JmJpel9tb2RlbD0mcHJjcG5faWQ9JnByb2R1Y3RfdHlwZT0mbmV3dXNlcmZyb209JmFwcF90cmFja2VyX3U9JnRpbWU9MTU2MDk0ODQxOTkwNiZmbG9vcklkPSZjYWxsYmFjaz1KU09OUF8xNTYwOTQ4NDIwNzM4IC0gRmFpbGVkIHRvIGxvYWQgcmVzb3VyY2U6IHRoZSBzZXJ2ZXIgcmVzcG9uZGVkIHdpdGggYSBzdGF0dXMgb2YgNTAyIChCYWQgR2F0ZXdheSkKMjAxOS0wNi0xOSAxMjo0NzowMC42NjYwMDAgU0VWRVJFIC0gaHR0cDovL20uMTExLmNvbS5jbi95eXcvd2FwL3NlYXJjaExpc3Qvc3RhdGljL2pzL3ZlbmRvci43YzMyYjgzMDgzOWQwNTA4NTFkYi5qcyA1IElnbm9yZWQgYXR0ZW1wdCB0byBjYW5jZWwgYSB0b3VjaG1vdmUgZXZlbnQgd2l0aCBjYW5jZWxhYmxlPWZhbHNlLCBmb3IgZXhhbXBsZSBiZWNhdXNlIHNjcm9sbGluZyBpcyBpbiBwcm9ncmVzcyBhbmQgY2Fubm90IGJlIGludGVycnVwdGVkLg==" target="_blank">Browser Log</a> <a class="text" href="data:text/plain;charset=utf-8;base64,MjAxOS0wNi0xOSAxMjo0NzoyNC43NTcwMDAgV0FSTklORyAtIFVuYWJsZSB0byBldmFsdWF0ZSBzY3JpcHQ6IG5vIHN1Y2ggd2luZG93OiB0YXJnZXQgd2luZG93IGFscmVhZHkgY2xvc2VkCmZyb20gdW5rbm93biBlcnJvcjogd2ViIHZpZXcgbm90IGZvdW5kCjIwMTktMDYtMTkgMTI6NDc6MjQuNzU5MDAwIFdBUk5JTkcgLSBVbmFibGUgdG8gZXZhbHVhdGUgc2NyaXB0OiBubyBzdWNoIHdpbmRvdzogdGFyZ2V0IHdpbmRvdyBhbHJlYWR5IGNsb3NlZApmcm9tIHVua25vd24gZXJyb3I6IHdlYiB2aWV3IG5vdCBmb3VuZA==" target="_blank">Driver Log</a> </td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">selenium = &lt;selenium.webdriver.chrome.webdriver.WebDriver (session=&quot;23c79d1d03a462c58ba8fa35e20f2f58&quot;)&gt;<br/><br/>    @pytest.mark.skip_b2ch5_1<br/>    @pytest.mark.test_b2ch5_cart<br/>    def test_52from_coupon_to_search_list_add_cart(selenium):<br/>        &#x27;&#x27;&#x27;商详页领取优惠券成功，点击立即使用跳转到可用优惠券搜索列表&#x27;&#x27;&#x27;<br/>    <br/>    #     u = UserCenter (selenium)<br/>    #     u.go_to_user_page ()            #进入个人中心<br/>    #     u.close_guide ()                #如果有引导消除引导<br/>    #     u.login_via_account (&#x27;17900000007&#x27;, &#x27;yyw111111&#x27;)  # 登录账号<br/>    #     c = CartPage(selenium)<br/>    #     c.go_cartpage() #跳转到购物车<br/>    #     sleep(3)<br/>    #     c.detele_all(tab=0) #清空购物车<br/>    #<br/>    #     p = ProductPage(selenium)<br/>    #     p.go_to_product_detail(&#x27;50069396&#x27;) #进入可领取优惠券的 商品的详情页<br/>    #     selenium.find_element_by_class_name(&#x27;promotionContainer&#x27;).click() #点击商详页领券入口<br/>    #     sleep(2)<br/>    #     coupon_got=selenium.find_elements_by_css_selector(&#x27;.coupon_container&gt;div:nth-child(2)&#x27;)<br/>    #     if len(coupon_got) != 0:<br/>    #         #判断是否已有领取到优惠券<br/>    #         selenium.find_element_by_css_selector(&#x27;.title&gt;.tips&#x27;)  #已有优惠券提示<br/>    #         use_now=selenium.find_element_by_css_selector(&#x27;.coupon_container&gt;div:nth-child(2) .bottom&#x27;).text.strip()<br/>    #         print(&quot;已领取优惠券显示：&quot;,use_now)<br/>    #         p.del_user_couponcode(&#x27;20180829180111_P06ZP241B9&#x27;, &#x27;BYBJ&#x27;) #删除已领取的优惠券记录<br/>    #         p.del_user_couponcode(&#x27;20180829180111_P06ZP241B9&#x27;, &#x27;BOEB&#x27;) #删除已领取的优惠券记录<br/>    #         selenium.refresh() #刷新页面<br/>    #         selenium.find_element_by_class_name(&#x27;promotionContainer&#x27;).click() #点击商详页领券入口<br/>    #         sleep(2)<br/>    #<br/>    #     sign = selenium.find_elements_by_css_selector(&#x27;.con-container .c_price&#x27;)<br/>    #     for index in range(len(sign)):<br/>    #         print(&#x27;商详页优惠券标识：&#x27;,sign[index].text)<br/>    #         if sign[index].text==&#x27;满19元可使用&#x27;:<br/>    #             print(&#x27;标识优惠券标识：&#x27;,sign[index].text)<br/>    #             break<br/>    #     print(&#x27;第几个优惠券：&#x27;,index+1)<br/>    #     index+=1<br/>    #<br/>    #<br/>    #     get_code = selenium.find_element_by_css_selector(&#x27;.con-container&gt;div&gt;div:nth-child(&#x27;+str(index)+&#x27;) .bottom&#x27;) #立即领取<br/>    #<br/>    #     get_code.click()<br/>    #<br/>    #     print(&quot; 点击立即领取-即满 19 减 0.3 券，BYBJ&quot;)<br/>    #     sleep(0.3)<br/>    #     tips=selenium.find_element_by_class_name(&#x27;ypc-toast-box&#x27;).text.strip()  #弹出框文本<br/>    #     print(&quot;点击领券后,弹出提示:&quot;,tips)<br/>    #     #print(selenium.page_source)<br/>    #     assert &#x27;领取成功&#x27; in selenium.page_source,&#x27;领取时间内的优惠券领取没有提示成功&#x27;<br/>    #<br/>    #     selenium.refresh() #刷新页面<br/>    #     sleep(1)<br/>    #     selenium.find_element_by_class_name(&#x27;promotionContainer&#x27;).click() #点击商详页领券入口<br/>    #     sleep(2)<br/>    #     selenium.find_element_by_css_selector(&#x27;.coupon_container&gt;div:nth-child(2) .bottom&#x27;).click() #点击领取成功的的立即使用<br/>    #     sleep(2)<br/>    <br/>        selenium.set_window_size(375,30000)<br/>        selenium.get(&#x27;http://m.111.com.cn/yyw/wap/searchList/index.html#/searchList?couponBatchCode=BYBJ&amp;couponTxt=%E4%BB%A5%E4%B8%8B%E5%95%86%E5%93%81%E5%8F%AF%E4%BD%BF%E7%94%A8%E6%BB%A119%E5%87%8F0.3%E7%9A%84%E4%BC%98%E6%83%A0%E5%88%B8&#x27;)<br/>        dragger=selenium.find_element_by_class_name(&#x27;loading-layer&#x27;)<br/>        ActionChains(selenium).drag_and_drop_by_offset(dragger, 400, 200).perform()<br/>    <br/>        print(&#x27;向下划动100&#x27;)<br/>        sleep(20)<br/>        addcart=selenium.find_elements_by_css_selector(&#x27;.search_result_list_unit .icon_shopcar&#x27;) #加车入口<br/>        if len(addcart)==0:<br/>            print(&#x27;没有可加车商品&#x27;)<br/>&gt;           selenium.execute_script(&quot;window.scrollBy(0,100)&quot;) #向上划动 100像素<br/><br/>test_h5_CouponCode.py:2175: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/>D:\Python36\lib\site-packages\selenium\webdriver\remote\webdriver.py:543: in execute_script<br/>    &#x27;args&#x27;: converted_args})[&#x27;value&#x27;]<br/>D:\Python36\lib\site-packages\selenium\webdriver\remote\webdriver.py:308: in execute<br/>    self.error_handler.check_response(response)<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;selenium.webdriver.remote.errorhandler.ErrorHandler object at 0x0000019415F4F828&gt;<br/>response = {&#x27;sessionId&#x27;: &#x27;23c79d1d03a462c58ba8fa35e20f2f58&#x27;, &#x27;status&#x27;: 23, &#x27;value&#x27;: {&#x27;message&#x27;: &#x27;no such window: target window al...729.6 (255758eccf3d244491b8a1317aa76e1ce10d57e9-refs/branch-heads/3729@{#29}),platform=Windows NT 10.0.10586 x86_64)&#x27;}}<br/><br/>    def check_response(self, response):<br/>        &quot;&quot;&quot;<br/>        Checks that a JSON response from the WebDriver does not have an error.<br/>    <br/>        :Args:<br/>         - response - The JSON response from the WebDriver server as a dictionary<br/>           object.<br/>    <br/>        :Raises: If the response contains an error message.<br/>        &quot;&quot;&quot;<br/>        status = response.get(&#x27;status&#x27;, None)<br/>        if status is None or status == ErrorCode.SUCCESS:<br/>            return<br/>        value = None<br/>        message = response.get(&quot;message&quot;, &quot;&quot;)<br/>        screen = response.get(&quot;screen&quot;, &quot;&quot;)<br/>        stacktrace = None<br/>        if isinstance(status, int):<br/>            value_json = response.get(&#x27;value&#x27;, None)<br/>            if value_json and isinstance(value_json, basestring):<br/>                import json<br/>                try:<br/>                    value = json.loads(value_json)<br/>                    if len(value.keys()) == 1:<br/>                        value = value[&#x27;value&#x27;]<br/>                    status = value.get(&#x27;error&#x27;, None)<br/>                    if status is None:<br/>                        status = value[&quot;status&quot;]<br/>                        message = value[&quot;value&quot;]<br/>                        if not isinstance(message, basestring):<br/>                            value = message<br/>                            message = message.get(&#x27;message&#x27;)<br/>                    else:<br/>                        message = value.get(&#x27;message&#x27;, None)<br/>                except ValueError:<br/>                    pass<br/>    <br/>        exception_class = ErrorInResponseException<br/>        if status in ErrorCode.NO_SUCH_ELEMENT:<br/>            exception_class = NoSuchElementException<br/>        elif status in ErrorCode.NO_SUCH_FRAME:<br/>            exception_class = NoSuchFrameException<br/>        elif status in ErrorCode.NO_SUCH_WINDOW:<br/>            exception_class = NoSuchWindowException<br/>        elif status in ErrorCode.STALE_ELEMENT_REFERENCE:<br/>            exception_class = StaleElementReferenceException<br/>        elif status in ErrorCode.ELEMENT_NOT_VISIBLE:<br/>            exception_class = ElementNotVisibleException<br/>        elif status in ErrorCode.INVALID_ELEMENT_STATE:<br/>            exception_class = InvalidElementStateException<br/>        elif status in ErrorCode.INVALID_SELECTOR \<br/>                or status in ErrorCode.INVALID_XPATH_SELECTOR \<br/>                or status in ErrorCode.INVALID_XPATH_SELECTOR_RETURN_TYPER:<br/>            exception_class = InvalidSelectorException<br/>        elif status in ErrorCode.ELEMENT_IS_NOT_SELECTABLE:<br/>            exception_class = ElementNotSelectableException<br/>        elif status in ErrorCode.ELEMENT_NOT_INTERACTABLE:<br/>            exception_class = ElementNotInteractableException<br/>        elif status in ErrorCode.INVALID_COOKIE_DOMAIN:<br/>            exception_class = WebDriverException<br/>        elif status in ErrorCode.UNABLE_TO_SET_COOKIE:<br/>            exception_class = WebDriverException<br/>        elif status in ErrorCode.TIMEOUT:<br/>            exception_class = TimeoutException<br/>        elif status in ErrorCode.SCRIPT_TIMEOUT:<br/>            exception_class = TimeoutException<br/>        elif status in ErrorCode.UNKNOWN_ERROR:<br/>            exception_class = WebDriverException<br/>        elif status in ErrorCode.UNEXPECTED_ALERT_OPEN:<br/>            exception_class = UnexpectedAlertPresentException<br/>        elif status in ErrorCode.NO_ALERT_OPEN:<br/>            exception_class = NoAlertPresentException<br/>        elif status in ErrorCode.IME_NOT_AVAILABLE:<br/>            exception_class = ImeNotAvailableException<br/>        elif status in ErrorCode.IME_ENGINE_ACTIVATION_FAILED:<br/>            exception_class = ImeActivationFailedException<br/>        elif status in ErrorCode.MOVE_TARGET_OUT_OF_BOUNDS:<br/>            exception_class = MoveTargetOutOfBoundsException<br/>        else:<br/>            exception_class = WebDriverException<br/>        if value == &#x27;&#x27; or value is None:<br/>            value = response[&#x27;value&#x27;]<br/>        if isinstance(value, basestring):<br/>            if exception_class == ErrorInResponseException:<br/>                raise exception_class(response, value)<br/>            raise exception_class(value)<br/>        if message == &quot;&quot; and &#x27;message&#x27; in value:<br/>            message = value[&#x27;message&#x27;]<br/>    <br/>        screen = None<br/>        if &#x27;screen&#x27; in value:<br/>            screen = value[&#x27;screen&#x27;]<br/>    <br/>        stacktrace = None<br/>        if &#x27;stackTrace&#x27; in value and value[&#x27;stackTrace&#x27;]:<br/>            stacktrace = []<br/>            try:<br/>                for frame in value[&#x27;stackTrace&#x27;]:<br/>                    line = self._value_or_default(frame, &#x27;lineNumber&#x27;, &#x27;&#x27;)<br/>                    file = self._value_or_default(frame, &#x27;fileName&#x27;, &#x27;&lt;anonymous&gt;&#x27;)<br/>                    if line:<br/>                        file = &quot;%s:%s&quot; % (file, line)<br/>                    meth = self._value_or_default(frame, &#x27;methodName&#x27;, &#x27;&lt;anonymous&gt;&#x27;)<br/>                    if &#x27;className&#x27; in frame:<br/>                        meth = &quot;%s.%s&quot; % (frame[&#x27;className&#x27;], meth)<br/>                    msg = &quot;    at %s (%s)&quot;<br/>                    msg = msg % (meth, file)<br/>                    stacktrace.append(msg)<br/>            except TypeError:<br/>                pass<br/>        if exception_class == ErrorInResponseException:<br/>            raise exception_class(response, message)<br/>        elif exception_class == UnexpectedAlertPresentException and &#x27;alert&#x27; in value:<br/>            raise exception_class(message, screen, stacktrace, value[&#x27;alert&#x27;].get(&#x27;text&#x27;))<br/>&gt;       raise exception_class(message, screen, stacktrace)<br/><span class="error">E       selenium.common.exceptions.NoSuchWindowException: Message: no such window: target window already closed</span><br/><span class="error">E       from unknown error: web view not found</span><br/><span class="error">E         (Session info: chrome=74.0.3729.157)</span><br/><span class="error">E         (Driver info: chromedriver=74.0.3729.6 (255758eccf3d244491b8a1317aa76e1ce10d57e9-refs/branch-heads/3729@{#29}),platform=Windows NT 10.0.10586 x86_64)</span><br/><br/>D:\Python36\lib\site-packages\selenium\webdriver\remote\errorhandler.py:194: NoSuchWindowException<br/>---------------------------- Captured stdout setup -----------------------------<br/>脚本运行的浏览器： chrome
+----------------------------- Captured stdout call -----------------------------<br/>向下划动100
+没有可加车商品
+------------------------------- pytest-selenium --------------------------------<br/>Driver log: C:\Users\liuzhenzhou\AppData\Local\Temp\pytest-of-liuzhenzhou\pytest-331\test_52from_coupon_to_search_l0\driver.log
+WARNING: Failed to gather URL: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=74.0.3729.157)
+  (Driver info: chromedriver=74.0.3729.6 (255758eccf3d244491b8a1317aa76e1ce10d57e9-refs/branch-heads/3729@{#29}),platform=Windows NT 10.0.10586 x86_64)
+
+WARNING: Failed to gather screenshot: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=74.0.3729.157)
+  (Driver info: chromedriver=74.0.3729.6 (255758eccf3d244491b8a1317aa76e1ce10d57e9-refs/branch-heads/3729@{#29}),platform=Windows NT 10.0.10586 x86_64)
+
+WARNING: Failed to gather HTML: Message: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=74.0.3729.157)
+  (Driver info: chromedriver=74.0.3729.6 (255758eccf3d244491b8a1317aa76e1ce10d57e9-refs/branch-heads/3729@{#29}),platform=Windows NT 10.0.10586 x86_64)
+</div></td></tr></tbody></table></body></html>

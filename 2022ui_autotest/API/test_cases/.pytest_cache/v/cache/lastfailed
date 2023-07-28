@@ -1,0 +1,5 @@
+{
+  "test_pr.py::Testall::test_opt[sea-29]": true,
+  "test_shop_login.py::TestApis::test_read": true,
+  "test_shop_login.py::Testapis::test_keyia_login": true
+}

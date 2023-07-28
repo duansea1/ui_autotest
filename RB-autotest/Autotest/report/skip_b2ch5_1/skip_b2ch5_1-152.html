@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Test Report</title>
+    <style>body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	min-width: 1200px;
+	color: #999;
+}
+
+h1 {
+	font-size: 24px;
+	color: black;
+}
+
+h2 {
+	font-size: 16px;
+	color: black;
+}
+
+p {
+    color: black;
+}
+
+a {
+	color: #999;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+
+#environment td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+}
+
+#environment tr:nth-child(odd) {
+	background-color: #f6f6f6;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed, .passed .col-result {
+	color: green;
+}
+span.skipped, span.xfailed, span.rerun, .skipped .col-result, .xfailed .col-result, .rerun .col-result {
+	color: orange;
+}
+span.error, span.failed, span.xpassed, .error .col-result, .failed .col-result, .xpassed .col-result  {
+	color: red;
+}
+
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+
+#results-table {
+	border: 1px solid #e6e6e6;
+	color: #999;
+	font-size: 12px;
+	width: 100%
+}
+
+#results-table th, #results-table td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+	text-align: left
+}
+#results-table th {
+	font-weight: bold
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+
+.log:only-child {
+	height: inherit
+}
+.log {
+	background-color: #e6e6e6;
+	border: 1px solid #e6e6e6;
+	color: black;
+	display: block;
+	font-family: "Courier New", Courier, monospace;
+	height: 230px;
+	overflow-y: scroll;
+	padding: 5px;
+	white-space: pre-wrap
+}
+div.image {
+	border: 1px solid #e6e6e6;
+	float: right;
+	height: 240px;
+	margin-left: 5px;
+	overflow: hidden;
+	width: 320px
+}
+div.image img {
+	width: 320px
+}
+.collapsed {
+	display: none;
+}
+.expander::after {
+	content: " (show details)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+.collapser::after {
+	content: " (hide details)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+	cursor: pointer;
+}
+
+.sort-icon {
+	font-size: 0px;
+	float: left;
+	margin-right: 5px;
+	margin-top: 5px;
+	/*triangle*/
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+}
+
+.inactive .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #E6E6E6;
+}
+
+.asc.active .sort-icon {
+	/*finish triangle*/
+	border-bottom: 8px solid #999;
+}
+
+.desc.active .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #999;
+}
+</style></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    toggle_sort_states(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+    var multiplier = reversed ? -1 : 1;
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+        return multiplier * (key_a >= key_b ? 1 : -1);
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>skip_b2ch5_1-152.html</h1>
+    <p>Report generated on 20-Jun-2019 at 19:05:05 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v1.20.0</p>
+    <h2>Environment</h2>
+    <table id="environment">
+      <tr>
+        <td>Base URL</td>
+        <td></td></tr>
+      <tr>
+        <td>Capabilities</td>
+        <td>{}</td></tr>
+      <tr>
+        <td>Driver</td>
+        <td>Chrome</td></tr>
+      <tr>
+        <td>JAVA_HOME</td>
+        <td>C:\Program Files\Java\jdk1.8.0_191</td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{&apos;pytest&apos;: &apos;4.4.1&apos;, &apos;py&apos;: &apos;1.8.0&apos;, &apos;pluggy&apos;: &apos;0.9.0&apos;}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.10586-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{&apos;variables&apos;: &apos;1.7.1&apos;, &apos;selenium&apos;: &apos;1.16.0&apos;, &apos;metadata&apos;: &apos;1.8.0&apos;, &apos;html&apos;: &apos;1.20.0&apos;, &apos;base-url&apos;: &apos;1.4.1&apos;}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.6.0</td></tr></table>
+    <h2>Summary</h2>
+    <p>1 tests ran in 174.43 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">1 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <h2>Results</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">Result</th>
+          <th class="sortable" col="name">Test</th>
+          <th class="sortable numeric" col="duration">Duration</th>
+          <th>Links</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">test_h5_CouponCode.py::test_53coupon_view_inprod</td>
+          <td class="col-duration">168.04</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">---------------------------- Captured stdout setup -----------------------------<br/>脚本运行的浏览器： chrome
+----------------------------- Captured stdout call -----------------------------<br/>点击：登录/注册 按钮
+页头标题： 免密码登录
+切换到：账号密码登录
+无图片验证码
+点击登录按钮
+登录后页面： 1药网_网上药店_全国正规合法线上药房_在线购买药品送药到家
+进入商详页
+当前链接： https://m.111.com.cn/yyw/wap/item/index.html#/item/50160422
+商详页优惠券标识： 满1元可使用
+商详页优惠券标识： 满19元可使用
+商详页优惠券标识： 满1999元可使用
+标识优惠券标识： 满1999元可使用
+第几个优惠券： 3
+ 点击立即领取可多次领取的券-即满 1999 减 0.5 券，BOEB
+点击领券后,弹出提示: 领取成功
+立即领取 :第一次领取券领取后按钮
+再次领取可多次领取的券-即满 1999 减 0.5 券，BOEB
+第 2   次点击领券后,弹出提示: 领取成功
+再次领取可多次领取的券-即满 1999 减 0.5 券，BOEB
+第 3   次点击领券后,弹出提示: 领取成功
+再次领取可多次领取的券-即满 1999 减 0.5 券，BOEB
+第 4   次点击领券后,弹出提示: 领取成功
+领取4次后按钮： 立即领取
+已领券显示： 立即使用
+已领券限制金额： 满1999元可使用
+已领券限制金额： 满1999元可使用
+已领券限制金额： 满1999元可使用
+已领券限制金额： 满1999元可使用
+所有已领券限制金额： [&#x27;满1999元可使用&#x27;, &#x27;满1999元可使用&#x27;, &#x27;满1999元可使用&#x27;, &#x27;满1999元可使用&#x27;]
+{&#x27;status&#x27;: &#x27;1&#x27;, &#x27;coupon&#x27;: {&#x27;activadate&#x27;: &#x27;2019-06-20 19:05:20&#x27;, &#x27;activecode&#x27;: &#x27;&#x27;, &#x27;batchCodeList&#x27;: None, &#x27;batchId&#x27;: 4082, &#x27;batchcode&#x27;: &#x27;BYBJ&#x27;, &#x27;begindate&#x27;: &#x27;2019-05-23 00:00:00&#x27;, &#x27;bianhao&#x27;: &#x27;&#x27;, &#x27;bigcatalogid&#x27;: None, &#x27;brandid&#x27;: None, &#x27;catalogid&#x27;: None, &#x27;code&#x27;: &#x27;BYBJ00000140&#x27;, &#x27;codes&#x27;: &#x27;&#x27;, &#x27;costdeptid&#x27;: 10, &#x27;costdeptname&#x27;: &#x27;&#x27;, &#x27;count&#x27;: None, &#x27;couponH5Url&#x27;: &#x27;&#x27;, &#x27;couponList&#x27;: None, &#x27;couponPcUrl&#x27;: &#x27;&#x27;, &#x27;couponType&#x27;: &#x27;&#x27;, &#x27;couponid&#x27;: None, &#x27;coupontouserid&#x27;: None, &#x27;current&#x27;: &#x27;&#x27;, &#x27;currentTime&#x27;: None, &#x27;days&#x27;: 0, &#x27;denomination&#x27;: 0.3, &#x27;effectivedays&#x27;: 0, &#x27;effectivetype&#x27;: 2, &#x27;endPos&#x27;: 0, &#x27;enddate&#x27;: &#x27;2020-05-28 23:59:59&#x27;, &#x27;erpsplitorderid&#x27;: &#x27;&#x27;, &#x27;guoqistatuslist&#x27;: None, &#x27;id&#x27;: None, &#x27;iid&#x27;: None, &#x27;isCompatibleFreeship&#x27;: 0, &#x27;isHaitao&#x27;: None, &#x27;isPhoneValidate&#x27;: 0, &#x27;isautorefund&#x27;: None, &#x27;isespecitem&#x27;: 0, &#x27;isexpire&#x27;: None, &#x27;islimituse&#x27;: 0, &#x27;islimituseinfo&#x27;: &#x27;&#x27;, &#x27;islimitusetext&#x27;: &#x27;&#x27;, &#x27;ismainrefund&#x27;: None, &#x27;issplitrefund&#x27;: None, &#x27;isuse&#x27;: None, &#x27;itemid&#x27;: &#x27;&#x27;, &#x27;jediscode&#x27;: 140, &#x27;limitprice&#x27;: 19.0, &#x27;logs&#x27;: &#x27;&#x27;, &#x27;name&#x27;: &#x27;&#x27;, &#x27;noSatifyReasons&#x27;: None, &#x27;onlyMobile&#x27;: 0, &#x27;ordLimitprice&#x27;: None, &#x27;page&#x27;: 0, &#x27;pageNo&#x27;: None, &#x27;pageSize&#x27;: None, &#x27;paginated&#x27;: False, &#x27;perdayAmount&#x27;: None, &#x27;pitemid&#x27;: &#x27;&#x27;, &#x27;price&#x27;: None, &#x27;redeemlog&#x27;: &#x27;&#x27;, &#x27;redeemstatus&#x27;: None, &#x27;redeemstatuslist&#x27;: None, &#x27;refundEDate&#x27;: None, &#x27;refundSDate&#x27;: None, &#x27;refunddate&#x27;: None, &#x27;refundorderno&#x27;: &#x27;&#x27;, &#x27;remark&#x27;: &#x27;&#x27;, &#x27;repeatAmount&#x27;: 1, &#x27;sellType&#x27;: &#x27;&#x27;, &#x27;senddate&#x27;: &#x27;2019-06-20 19:05:20&#x27;, &#x27;sendorderno&#x27;: &#x27;&#x27;, &#x27;sendtype&#x27;: 1, &#x27;sortname&#x27;: &#x27;&#x27;, &#x27;sortorder&#x27;: &#x27;&#x27;, &#x27;splitisrefund&#x27;: None, &#x27;splitnewnumber&#x27;: &#x27;&#x27;, &#x27;splitredeemprice&#x27;: None, &#x27;splitrefunddate&#x27;: None, &#x27;startPos&#x27;: None, &#x27;status&#x27;: 3, &#x27;storeAddressH5&#x27;: &#x27;&#x27;, &#x27;storeAddressPC&#x27;: &#x27;&#x27;, &#x27;storeName&#x27;: &#x27;&#x27;, &#x27;termstatus&#x27;: None, &#x27;type&#x27;: 0, &#x27;usedate&#x27;: None, &#x27;uselimitsay&#x27;: &#x27;&#x27;, &#x27;useorderno&#x27;: &#x27;&#x27;, &#x27;username&#x27;: &#x27;20180829180111_P06ZP241B9&#x27;, &#x27;venderid&#x27;: &#x27;&#x27;}, &#x27;info&#x27;: &#x27;领取优惠券成功&#x27;}
+{&#x27;status&#x27;: &#x27;1&#x27;, &#x27;coupon&#x27;: {&#x27;activadate&#x27;: &#x27;2019-06-20 19:05:20&#x27;, &#x27;activecode&#x27;: &#x27;&#x27;, &#x27;batchCodeList&#x27;: None, &#x27;batchId&#x27;: 4082, &#x27;batchcode&#x27;: &#x27;BYBJ&#x27;, &#x27;begindate&#x27;: &#x27;2019-05-23 00:00:00&#x27;, &#x27;bianhao&#x27;: &#x27;&#x27;, &#x27;bigcatalogid&#x27;: None, &#x27;brandid&#x27;: None, &#x27;catalogid&#x27;: None, &#x27;code&#x27;: &#x27;BYBJ00000140&#x27;, &#x27;codes&#x27;: &#x27;&#x27;, &#x27;costdeptid&#x27;: 10, &#x27;costdeptname&#x27;: &#x27;&#x27;, &#x27;count&#x27;: None, &#x27;couponH5Url&#x27;: &#x27;&#x27;, &#x27;couponList&#x27;: None, &#x27;couponPcUrl&#x27;: &#x27;&#x27;, &#x27;couponType&#x27;: &#x27;&#x27;, &#x27;couponid&#x27;: None, &#x27;coupontouserid&#x27;: None, &#x27;current&#x27;: &#x27;&#x27;, &#x27;currentTime&#x27;: None, &#x27;days&#x27;: 0, &#x27;denomination&#x27;: 0.3, &#x27;effectivedays&#x27;: 0, &#x27;effectivetype&#x27;: 2, &#x27;endPos&#x27;: 0, &#x27;enddate&#x27;: &#x27;2020-05-28 23:59:59&#x27;, &#x27;erpsplitorderid&#x27;: &#x27;&#x27;, &#x27;guoqistatuslist&#x27;: None, &#x27;id&#x27;: None, &#x27;iid&#x27;: None, &#x27;isCompatibleFreeship&#x27;: 0, &#x27;isHaitao&#x27;: None, &#x27;isPhoneValidate&#x27;: 0, &#x27;isautorefund&#x27;: None, &#x27;isespecitem&#x27;: 0, &#x27;isexpire&#x27;: None, &#x27;islimituse&#x27;: 0, &#x27;islimituseinfo&#x27;: &#x27;&#x27;, &#x27;islimitusetext&#x27;: &#x27;&#x27;, &#x27;ismainrefund&#x27;: None, &#x27;issplitrefund&#x27;: None, &#x27;isuse&#x27;: None, &#x27;itemid&#x27;: &#x27;&#x27;, &#x27;jediscode&#x27;: 140, &#x27;limitprice&#x27;: 19.0, &#x27;logs&#x27;: &#x27;&#x27;, &#x27;name&#x27;: &#x27;&#x27;, &#x27;noSatifyReasons&#x27;: None, &#x27;onlyMobile&#x27;: 0, &#x27;ordLimitprice&#x27;: None, &#x27;page&#x27;: 0, &#x27;pageNo&#x27;: None, &#x27;pageSize&#x27;: None, &#x27;paginated&#x27;: False, &#x27;perdayAmount&#x27;: None, &#x27;pitemid&#x27;: &#x27;&#x27;, &#x27;price&#x27;: None, &#x27;redeemlog&#x27;: &#x27;&#x27;, &#x27;redeemstatus&#x27;: None, &#x27;redeemstatuslist&#x27;: None, &#x27;refundEDate&#x27;: None, &#x27;refundSDate&#x27;: None, &#x27;refunddate&#x27;: None, &#x27;refundorderno&#x27;: &#x27;&#x27;, &#x27;remark&#x27;: &#x27;&#x27;, &#x27;repeatAmount&#x27;: 1, &#x27;sellType&#x27;: &#x27;&#x27;, &#x27;senddate&#x27;: &#x27;2019-06-20 19:05:20&#x27;, &#x27;sendorderno&#x27;: &#x27;&#x27;, &#x27;sendtype&#x27;: 1, &#x27;sortname&#x27;: &#x27;&#x27;, &#x27;sortorder&#x27;: &#x27;&#x27;, &#x27;splitisrefund&#x27;: None, &#x27;splitnewnumber&#x27;: &#x27;&#x27;, &#x27;splitredeemprice&#x27;: None, &#x27;splitrefunddate&#x27;: None, &#x27;startPos&#x27;: None, &#x27;status&#x27;: 3, &#x27;storeAddressH5&#x27;: &#x27;&#x27;, &#x27;storeAddressPC&#x27;: &#x27;&#x27;, &#x27;storeName&#x27;: &#x27;&#x27;, &#x27;termstatus&#x27;: None, &#x27;type&#x27;: 0, &#x27;usedate&#x27;: None, &#x27;uselimitsay&#x27;: &#x27;&#x27;, &#x27;useorderno&#x27;: &#x27;&#x27;, &#x27;username&#x27;: &#x27;20180829180111_P06ZP241B9&#x27;, &#x27;venderid&#x27;: &#x27;&#x27;}, &#x27;info&#x27;: &#x27;领取优惠券成功&#x27;}
+已领券限制金额： 满19元可使用
+已领券限制金额： 满1999元可使用
+已领券限制金额： 满1999元可使用
+已领券限制金额： 满1999元可使用
+已领券限制金额： 满1999元可使用
+所有已领券限制金额： [&#x27;满19元可使用&#x27;, &#x27;满1999元可使用&#x27;, &#x27;满1999元可使用&#x27;, &#x27;满1999元可使用&#x27;, &#x27;满1999元可使用&#x27;]
+[&#x27;满19元可使用&#x27;, &#x27;满1999元可使用&#x27;, &#x27;满1999元可使用&#x27;, &#x27;满1999元可使用&#x27;, &#x27;满1999元可使用&#x27;]
+</div></td></tr></tbody></table></body></html>

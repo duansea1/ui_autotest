@@ -1,0 +1,85 @@
+===================================
+***********************************
+》》》》》》》注意《《《《《《《《
+***********************************
+===================================
+1. 自动化服务器上正在线上环境运行此自动化脚本，不熟悉代码的同学，请不要随意更改代码上传
+2. 想要试运行的同学，可以在本地搭建好环境，新建个文件夹（本地玩玩，不要上传），做些私人的练习。
+3. 登录模块里，账号登录目前只支持线上的白名单账号。
+4. 如果想要在本地运行测试用例，请先看看自动化服务器上有没有正在运行的测试用例。请错开时间运行。
+
+***********************************************************************
+【环境要求】
+1. windows7/windows10/mac，部分已测试通过
+2. python3.6+，请使用64位，配置好环境变量
+3. 浏览器：推荐使用chrome
+4. 编译器：推荐使用eclipse
+
+【driver】
+请查看浏览器及其对应的版本对应关系，下载正确的driver，放到python安装目录下即可
+2019年已更新的[Chrome版本与chromedriver]版本对应关系：https://blog.csdn.net/yoyocat915/article/details/80580066
+下载chromedriver：http://npm.taobao.org/mirrors/chromedriver
+
+【UI自动化工具包】
+pip install selenium
+【框架——pytest】
+按照最新版即可，某些低版本的框架本身存在bug，较高版本的兼容性更好。
+
+【pytest测试框架】
+pip install pytest
+pip install pytest-selenium
+（会自动安装：pytest-html、pytest-variables、pytest-metadata）
+pip install pytest-rerunfailures
+
+***********************************************************************
+【其他第三方包】
+
+pip install requests	# 请求HTTP接口
+pip install xlrd	# 读excel文件
+pip install pymysql	# 连接操作mysql数据库
+pip install pillow	#PIL，图像处理
+pip install beautifulsoup4
+
+【机器学习的框架】
+pip install tensorflow		# AI智能
+(pip3 install tensorflow-1.6.0-cp36-cp36m-win_amd64.whl  然后自动会下载安装tensorflow必须的其他模块，比如 wheel, six, protobuf, termcolor, gast, astor, grpcio, numpy, html5lib, bleach, werkzeug, markdown, tensorboard, absl-py, tensorflow等等。*某个依赖包可能会安装失败，多试几次*)
+--- 安装记录for 1.14.0
+Installing collected packages: wrapt, termcolor, numpy, h5py, keras-applications
+, tensorflow-estimator, protobuf, grpcio, wheel, absl-py, gast, keras-preprocess
+ing, astor, werkzeug, markdown, tensorboard, tensorflow
+  Running setup.py install for wrapt ... done
+  Running setup.py install for termcolor ... done
+  Running setup.py install for absl-py ... done
+  Running setup.py install for gast ... done
+Successfully installed absl-py-0.7.1 astor-0.8.0 gast-0.2.2 grpcio-1.22.0 h5py-2
+.9.0 keras-applications-1.0.8 keras-preprocessing-1.1.0 markdown-3.1.1 numpy-1.1
+6.4 protobuf-3.9.0 tensorboard-1.14.0 tensorflow-1.14.0 tensorflow-estimator-1.1
+4.0 termcolor-1.1.0 werkzeug-0.15.5 wheel-0.33.4 wrapt-1.11.2
+----
+
+【图片识别】opencv版本需匹配，按顺序安装
+pip install opencv-python==3.4.2.16 	#cv2
+pip install opencv-contrib-python==3.4.2.16
+
+***********************************************************************
+【更新第三方包】
+pip install --upgrade pytest
+pip install --upgrade pytest-selenium
+pip install --upgrade pytest-html
+pip install --upgrade pytest-variables
+pip install --upgrade pytest-metadata
+
+pip install requests
+pip install xlrd
+pip install pymysql
+pip install pillow
+pip install tensorflow
+pip install beautifulsoup4
+
+pytest_ini文件
+;addopts = -vs -m "smoke"
+;testpaths = ./API/test_cases1
+;python_files = test_*.py
+;python_classes = Test*
+;python_functions = test_*
+;

@@ -1,0 +1,14 @@
+INSTUPlocalplugins.collect_tests
+D:\workspace\RB-autotest\Autotest\localplugins\collect_tests.py
+INFOS:&&3|1|2|0|3|17|1&&2|4|2|0|3|20|5&&2|5|2|0|3|28|5&&2|6|2|0|3|88|5&&2|7|2|0|3|132|5&&2|8|2|0|3|145|5&&2|9|2|0|3|243|5&&2|10|2|0|3|282|5&&2|11|2|0|3|320|5
+D:\workspace\RB-autotest\Autotest\localplugins\collect_tests.py=3
+get_moudles=6
+store_all_testcase_to_db=10
+test_update_testcases=11
+get_funcs=4
+localplugins.collect_tests=2
+get_packages=5
+import_source=7
+get_module_testcase=8
+current_time=1
+get_pyfiles_in_packages=9

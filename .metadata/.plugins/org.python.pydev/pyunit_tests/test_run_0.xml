@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pydev-testrun version="1.0"?><pydev-testsuite>
+    <summary errors="1" failures="0" finished="true" name="Test Run: 0" tests="0" total_time="Finished in: 0.00 secs."/>
+    <test location="C:\Users\&amp;#27573;&amp;#28023;&amp;#27915;\myfiles\auto_files\ui_autotest\2022ui_autotest\API\test_cases\test_pr.py" status="error" test="test_pr" time="0">
+        <stdout/>
+        <stderr><![CDATA[Traceback (most recent call last):
+  File "C:\exe\eclipse\dropins\org.python.pydev.core_9.3.0.202203051235\pysrc\_pydev_runfiles\pydev_runfiles.py", line 468, in __get_module_from_str
+    mod = __import__(modname)
+  File "C:\Users/&#27573;&#28023;&#27915;/myfiles/auto_files/ui_autotest/2022ui_autotest/API/test_cases\test_pr.py", line 7, in <module>
+    import pytest
+  File "C:\Users\&#27573;&#28023;&#27915;\AppData\Local\Programs\Python\Python310\lib\site-packages\pytest\__init__.py", line 5, in <module>
+    from _pytest.assertion import register_assert_rewrite
+  File "C:\Users\&#27573;&#28023;&#27915;\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\assertion\__init__.py", line 9, in <module>
+    from _pytest.assertion import rewrite
+  File "C:\Users\&#27573;&#28023;&#27915;\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\assertion\rewrite.py", line 34, in <module>
+    from _pytest.assertion import util
+  File "C:\Users\&#27573;&#28023;&#27915;\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\assertion\util.py", line 13, in <module>
+    import _pytest._code
+  File "C:\Users\&#27573;&#28023;&#27915;\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\_code\__init__.py", line 2, in <module>
+    from .code import Code
+  File "C:\Users\&#27573;&#28023;&#27915;\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\_code\code.py", line 54, in <module>
+    class Code:
+  File "C:\Users\&#27573;&#28023;&#27915;\AppData\Local\Programs\Python\Python310\lib\site-packages\_pytest\_code\code.py", line 81, in Code
+    def path(self) -> Union[py.path.local, str]:
+AttributeError: module 'py' has no attribute 'path'
+ERROR: Module: test_pr could not be imported (file: C:\Users\&#27573;&#28023;&#27915;\myfiles\auto_files\ui_autotest\2022ui_autotest\API\test_cases\test_pr.py).
+]]></stderr>
+    </test>
+    <launch mode="run">
+        <launch_memento><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration local="true" path="2022ui_autotest test_pr.py (1)"/>
+]]></launch_memento>
+    </launch>
+</pydev-testsuite>

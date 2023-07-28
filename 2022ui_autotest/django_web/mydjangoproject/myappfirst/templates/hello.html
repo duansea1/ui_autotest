@@ -1,0 +1,29 @@
+<html>
+ <head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8">
+   <title>seahtml </title>
+   <meta name="robots" content="NONE,NOARCHIVE">
+   </style>
+ </head>
+     <body>
+         <h2>Welcome to sea .</h2>
+         <p>This is my first Django App-day:{{today.year}}</p>
+         <p>django-BianLiang:{{today}}</p>
+         <p>django-BianLiang:{{today.day}}</p>
+            We are
+           {% if today.year == 2023 %}
+           the first day of month.
+           {% elif today.day == 24 %}
+            ----sea write here.
+           {% elif today == 30 %}
+           the last day of month.
+           {% else %}
+           I don't know.
+           {%endif%}
+         <p>
+            {% for day in days_of_week %}
+             {{day}}
+             {%endfor%}
+         </p>
+     <body>
+ </html>

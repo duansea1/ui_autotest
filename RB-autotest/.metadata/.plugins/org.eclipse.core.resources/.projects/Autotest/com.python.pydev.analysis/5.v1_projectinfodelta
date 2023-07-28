@@ -1,0 +1,13 @@
+INSTUPlocalplugins.mysql_opr
+D:\workspace\RB-autotest\Autotest\localplugins\mysql_opr.py
+INFOS:&&2|1|2|0|3|9|5&&2|4|2|0|3|74|5&&2|5|2|0|3|126|5&&2|6|2|0|3|185|5&&3|7|2|0|3|253|5&&3|8|2|0|3|256|5&&3|9|2|0|3|257|5&&3|10|2|0|3|258|5
+sql3=9
+D:\workspace\RB-autotest\Autotest\localplugins\mysql_opr.py=3
+sql2=8
+query_mysql_transaction=5
+r=10
+localplugins.mysql_opr=2
+sql1=7
+query_pymysql=1
+query_many_pymysql=4
+query_mysql=6

@@ -1,0 +1,9 @@
+[
+  "run_test.py::test_error",
+  "run_test.py::test_fail",
+  "run_test.py::test_skip",
+  "run_test.py::test_xfail",
+  "run_test.py::test_xpass",
+  "test_chrome.py::test_openchrome",
+  "test_chrome.py::test_visitsougou"
+]

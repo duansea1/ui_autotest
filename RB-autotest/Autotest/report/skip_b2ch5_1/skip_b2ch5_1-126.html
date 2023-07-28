@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Test Report</title>
+    <style>body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	min-width: 1200px;
+	color: #999;
+}
+
+h1 {
+	font-size: 24px;
+	color: black;
+}
+
+h2 {
+	font-size: 16px;
+	color: black;
+}
+
+p {
+    color: black;
+}
+
+a {
+	color: #999;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/******************************
+ * SUMMARY INFORMATION
+ ******************************/
+
+#environment td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+}
+
+#environment tr:nth-child(odd) {
+	background-color: #f6f6f6;
+}
+
+/******************************
+ * TEST RESULT COLORS
+ ******************************/
+span.passed, .passed .col-result {
+	color: green;
+}
+span.skipped, span.xfailed, span.rerun, .skipped .col-result, .xfailed .col-result, .rerun .col-result {
+	color: orange;
+}
+span.error, span.failed, span.xpassed, .error .col-result, .failed .col-result, .xpassed .col-result  {
+	color: red;
+}
+
+
+/******************************
+ * RESULTS TABLE
+ *
+ * 1. Table Layout
+ * 2. Extra
+ * 3. Sorting items
+ *
+ ******************************/
+
+/*------------------
+ * 1. Table Layout
+ *------------------*/
+
+#results-table {
+	border: 1px solid #e6e6e6;
+	color: #999;
+	font-size: 12px;
+	width: 100%
+}
+
+#results-table th, #results-table td {
+	padding: 5px;
+	border: 1px solid #E6E6E6;
+	text-align: left
+}
+#results-table th {
+	font-weight: bold
+}
+
+/*------------------
+ * 2. Extra
+ *------------------*/
+
+.log:only-child {
+	height: inherit
+}
+.log {
+	background-color: #e6e6e6;
+	border: 1px solid #e6e6e6;
+	color: black;
+	display: block;
+	font-family: "Courier New", Courier, monospace;
+	height: 230px;
+	overflow-y: scroll;
+	padding: 5px;
+	white-space: pre-wrap
+}
+div.image {
+	border: 1px solid #e6e6e6;
+	float: right;
+	height: 240px;
+	margin-left: 5px;
+	overflow: hidden;
+	width: 320px
+}
+div.image img {
+	width: 320px
+}
+.collapsed {
+	display: none;
+}
+.expander::after {
+	content: " (show details)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+.collapser::after {
+	content: " (hide details)";
+	color: #BBB;
+	font-style: italic;
+	cursor: pointer;
+}
+
+/*------------------
+ * 3. Sorting items
+ *------------------*/
+.sortable {
+	cursor: pointer;
+}
+
+.sort-icon {
+	font-size: 0px;
+	float: left;
+	margin-right: 5px;
+	margin-top: 5px;
+	/*triangle*/
+	width: 0;
+	height: 0;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+}
+
+.inactive .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #E6E6E6;
+}
+
+.asc.active .sort-icon {
+	/*finish triangle*/
+	border-bottom: 8px solid #999;
+}
+
+.desc.active .sort-icon {
+	/*finish triangle*/
+	border-top: 8px solid #999;
+}
+</style></head>
+  <body onLoad="init()">
+    <script>/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+ * You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+
+function toArray(iter) {
+    if (iter === null) {
+        return null;
+    }
+    return Array.prototype.slice.call(iter);
+}
+
+function find(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return elem.querySelector(selector);
+}
+
+function find_all(selector, elem) {
+    if (!elem) {
+        elem = document;
+    }
+    return toArray(elem.querySelectorAll(selector));
+}
+
+function sort_column(elem) {
+    toggle_sort_states(elem);
+    var colIndex = toArray(elem.parentNode.childNodes).indexOf(elem);
+    var key;
+    if (elem.classList.contains('numeric')) {
+        key = key_num;
+    } else if (elem.classList.contains('result')) {
+        key = key_result;
+    } else {
+        key = key_alpha;
+    }
+    sort_table(elem, key(colIndex));
+}
+
+function show_all_extras() {
+    find_all('.col-result').forEach(show_extras);
+}
+
+function hide_all_extras() {
+    find_all('.col-result').forEach(hide_extras);
+}
+
+function show_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.remove("collapsed");
+    expandcollapse.classList.remove("expander");
+    expandcollapse.classList.add("collapser");
+}
+
+function hide_extras(colresult_elem) {
+    var extras = colresult_elem.parentNode.nextElementSibling;
+    var expandcollapse = colresult_elem.firstElementChild;
+    extras.classList.add("collapsed");
+    expandcollapse.classList.remove("collapser");
+    expandcollapse.classList.add("expander");
+}
+
+function show_filters() {
+    var filter_items = document.getElementsByClassName('filter');
+    for (var i = 0; i < filter_items.length; i++)
+        filter_items[i].hidden = false;
+}
+
+function add_collapse() {
+    // Add links for show/hide all
+    var resulttable = find('table#results-table');
+    var showhideall = document.createElement("p");
+    showhideall.innerHTML = '<a href="javascript:show_all_extras()">Show all details</a> / ' +
+                            '<a href="javascript:hide_all_extras()">Hide all details</a>';
+    resulttable.parentElement.insertBefore(showhideall, resulttable);
+
+    // Add show/hide link to each result
+    find_all('.col-result').forEach(function(elem) {
+        var collapsed = get_query_parameter('collapsed') || 'Passed';
+        var extras = elem.parentNode.nextElementSibling;
+        var expandcollapse = document.createElement("span");
+        if (collapsed.includes(elem.innerHTML)) {
+            extras.classList.add("collapsed");
+            expandcollapse.classList.add("expander");
+        } else {
+            expandcollapse.classList.add("collapser");
+        }
+        elem.appendChild(expandcollapse);
+
+        elem.addEventListener("click", function(event) {
+            if (event.currentTarget.parentNode.nextElementSibling.classList.contains("collapsed")) {
+                show_extras(event.currentTarget);
+            } else {
+                hide_extras(event.currentTarget);
+            }
+        });
+    })
+}
+
+function get_query_parameter(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function init () {
+    reset_sort_headers();
+
+    add_collapse();
+
+    show_filters();
+
+    toggle_sort_states(find('.initial-sort'));
+
+    find_all('.sortable').forEach(function(elem) {
+        elem.addEventListener("click",
+                              function(event) {
+                                  sort_column(elem);
+                              }, false)
+    });
+
+};
+
+function sort_table(clicked, key_func) {
+    var rows = find_all('.results-table-row');
+    var reversed = !clicked.classList.contains('asc');
+    var sorted_rows = sort(rows, key_func, reversed);
+    /* Whole table is removed here because browsers acts much slower
+     * when appending existing elements.
+     */
+    var thead = document.getElementById("results-table-head");
+    document.getElementById('results-table').remove();
+    var parent = document.createElement("table");
+    parent.id = "results-table";
+    parent.appendChild(thead);
+    sorted_rows.forEach(function(elem) {
+        parent.appendChild(elem);
+    });
+    document.getElementsByTagName("BODY")[0].appendChild(parent);
+}
+
+function sort(items, key_func, reversed) {
+    var sort_array = items.map(function(item, i) {
+        return [key_func(item), i];
+    });
+    var multiplier = reversed ? -1 : 1;
+
+    sort_array.sort(function(a, b) {
+        var key_a = a[0];
+        var key_b = b[0];
+        return multiplier * (key_a >= key_b ? 1 : -1);
+    });
+
+    return sort_array.map(function(item) {
+        var index = item[1];
+        return items[index];
+    });
+}
+
+function key_alpha(col_index) {
+    return function(elem) {
+        return elem.childNodes[1].childNodes[col_index].firstChild.data.toLowerCase();
+    };
+}
+
+function key_num(col_index) {
+    return function(elem) {
+        return parseFloat(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function key_result(col_index) {
+    return function(elem) {
+        var strings = ['Error', 'Failed', 'Rerun', 'XFailed', 'XPassed',
+                       'Skipped', 'Passed'];
+        return strings.indexOf(elem.childNodes[1].childNodes[col_index].firstChild.data);
+    };
+}
+
+function reset_sort_headers() {
+    find_all('.sort-icon').forEach(function(elem) {
+        elem.parentNode.removeChild(elem);
+    });
+    find_all('.sortable').forEach(function(elem) {
+        var icon = document.createElement("div");
+        icon.className = "sort-icon";
+        icon.textContent = "vvv";
+        elem.insertBefore(icon, elem.firstChild);
+        elem.classList.remove("desc", "active");
+        elem.classList.add("asc", "inactive");
+    });
+}
+
+function toggle_sort_states(elem) {
+    //if active, toggle between asc and desc
+    if (elem.classList.contains('active')) {
+        elem.classList.toggle('asc');
+        elem.classList.toggle('desc');
+    }
+
+    //if inactive, reset all other functions and add ascending active
+    if (elem.classList.contains('inactive')) {
+        reset_sort_headers();
+        elem.classList.remove('inactive');
+        elem.classList.add('active');
+    }
+}
+
+function is_all_rows_hidden(value) {
+  return value.hidden == false;
+}
+
+function filter_table(elem) {
+    var outcome_att = "data-test-result";
+    var outcome = elem.getAttribute(outcome_att);
+    class_outcome = outcome + " results-table-row";
+    var outcome_rows = document.getElementsByClassName(class_outcome);
+
+    for(var i = 0; i < outcome_rows.length; i++){
+        outcome_rows[i].hidden = !elem.checked;
+    }
+
+    var rows = find_all('.results-table-row').filter(is_all_rows_hidden);
+    var all_rows_hidden = rows.length == 0 ? true : false;
+    var not_found_message = document.getElementById("not-found-message");
+    not_found_message.hidden = !all_rows_hidden;
+}
+</script>
+    <h1>skip_b2ch5_1-126.html</h1>
+    <p>Report generated on 19-Jun-2019 at 18:01:59 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v1.20.0</p>
+    <h2>Environment</h2>
+    <table id="environment">
+      <tr>
+        <td>Base URL</td>
+        <td></td></tr>
+      <tr>
+        <td>Capabilities</td>
+        <td>{}</td></tr>
+      <tr>
+        <td>Driver</td>
+        <td>Chrome</td></tr>
+      <tr>
+        <td>JAVA_HOME</td>
+        <td>C:\Program Files\Java\jdk1.8.0_191</td></tr>
+      <tr>
+        <td>Packages</td>
+        <td>{&apos;pytest&apos;: &apos;4.4.1&apos;, &apos;py&apos;: &apos;1.8.0&apos;, &apos;pluggy&apos;: &apos;0.9.0&apos;}</td></tr>
+      <tr>
+        <td>Platform</td>
+        <td>Windows-10-10.0.10586-SP0</td></tr>
+      <tr>
+        <td>Plugins</td>
+        <td>{&apos;variables&apos;: &apos;1.7.1&apos;, &apos;selenium&apos;: &apos;1.16.0&apos;, &apos;metadata&apos;: &apos;1.8.0&apos;, &apos;html&apos;: &apos;1.20.0&apos;, &apos;base-url&apos;: &apos;1.4.1&apos;}</td></tr>
+      <tr>
+        <td>Python</td>
+        <td>3.6.0</td></tr></table>
+    <h2>Summary</h2>
+    <p>1 tests ran in 8.97 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="passed">0 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="failed">1 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filter_table(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <h2>Results</h2>
+    <table id="results-table">
+      <thead id="results-table-head">
+        <tr>
+          <th class="sortable result initial-sort" col="result">Result</th>
+          <th class="sortable" col="name">Test</th>
+          <th class="sortable numeric" col="duration">Duration</th>
+          <th>Links</th></tr>
+        <tr hidden="true" id="not-found-message">
+          <th colspan="4">No results found. Try to check the filters</th></tr></thead>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test_h5_CouponCode.py::test_51coupon_of_huiyuan</td>
+          <td class="col-duration">0.04</td>
+          <td class="col-links"><a class="text" href="data:text/plain;charset=utf-8;base64,WzE1NjA5Mzg1MTEuMDA1XVtJTkZPXTogU3RhcnRpbmcgQ2hyb21lRHJpdmVyIDc0LjAuMzcyOS42ICgyNTU3NThlY2NmM2QyNDQ0OTFiOGExMzE3YWE3NmUxY2UxMGQ1N2U5LXJlZnMvYnJhbmNoLWhlYWRzLzM3MjlAeyMyOX0pClsxNTYwOTM4NTExLjAwNl1bSU5GT106IFBsZWFzZSBwcm90ZWN0IHBvcnRzIHVzZWQgYnkgQ2hyb21lRHJpdmVyIGFuZCByZWxhdGVkIHRlc3QgZnJhbWV3b3JrcyB0byBwcmV2ZW50IGFjY2VzcyBieSBtYWxpY2lvdXMgY29kZS4KWzE1NjA5Mzg1MTEuNDIwXVtJTkZPXTogWzhhYjg5YjZiMzY0MmZmZWU4ZGRlMzllYzhmNTRkOGMxXSBDT01NQU5EIEluaXRTZXNzaW9uIHsKICAgImNhcGFiaWxpdGllcyI6IHsKICAgICAgImFsd2F5c01hdGNoIjogewogICAgICAgICAiYnJvd3Nlck5hbWUiOiAiY2hyb21lIiwKICAgICAgICAgInBsYXRmb3JtTmFtZSI6ICJhbnkiCiAgICAgIH0sCiAgICAgICJmaXJzdE1hdGNoIjogWyB7CgogICAgICB9IF0KICAgfSwKICAgImRlc2lyZWRDYXBhYmlsaXRpZXMiOiB7CiAgICAgICJicm93c2VyTmFtZSI6ICJjaHJvbWUiLAogICAgICAiY2hyb21lT3B0aW9ucyI6IHsKICAgICAgICAgImFyZ3MiOiBbICItLXN0YXJ0LW1heGltaXplZCIgXSwKICAgICAgICAgImV4dGVuc2lvbnMiOiBbICBdLAogICAgICAgICAibW9iaWxlRW11bGF0aW9uIjogewogICAgICAgICAgICAiZGV2aWNlTmFtZSI6ICJpUGhvbmUgNiIKICAgICAgICAgfSwKICAgICAgICAgInByZWZzIjogewogICAgICAgICAgICAiY3JlZGVudGlhbHNfZW5hYmxlX3NlcnZpY2UiOiBmYWxzZSwKICAgICAgICAgICAgInByb2ZpbGUuY29udGVudF9zZXR0aW5ncy5leGNlcHRpb25zLnBsdWdpbnMuKiwqLnBlcl9yZXNvdXJjZS5hZG9iZS1mbGFzaC1wbGF5ZXIiOiAxLAogICAgICAgICAgICAicHJvZmlsZS5jb250ZW50X3NldHRpbmdzLnBsdWdpbl93aGl0ZWxpc3QuYWRvYmUtZmxhc2gtcGxheWVyIjogMSwKICAgICAgICAgICAgInByb2ZpbGUubWFuYWdlZF9kZWZhdWx0X2NvbnRlbnRfc2V0dGluZ3MuaW1hZ2VzIjogMSwKICAgICAgICAgICAgInByb2ZpbGUucGFzc3dvcmRfbWFuYWdlcl9lbmFibGVkIjogZmFsc2UKICAgICAgICAgfQogICAgICB9LAogICAgICAicGxhdGZvcm0iOiAiQU5ZIiwKICAgICAgInZlcnNpb24iOiAiIgogICB9Cn0KWzE1NjA5Mzg1MTEuNDMwXVtJTkZPXTogUG9wdWxhdGluZyBQcmVmZXJlbmNlcyBmaWxlOiB7CiAgICJhbHRlcm5hdGVfZXJyb3JfcGFnZXMiOiB7CiAgICAgICJlbmFibGVkIjogZmFsc2UKICAgfSwKICAgImF1dG9maWxsIjogewogICAgICAiZW5hYmxlZCI6IGZhbHNlCiAgIH0sCiAgICJicm93c2VyIjogewogICAgICAiY2hlY2tfZGVmYXVsdF9icm93c2VyIjogZmFsc2UKICAgfSwKICAgImNyZWRlbnRpYWxzX2VuYWJsZV9zZXJ2aWNlIjogZmFsc2UsCiAgICJkaXN0cmlidXRpb24iOiB7CiAgICAgICJpbXBvcnRfYm9va21hcmtzIjogZmFsc2UsCiAgICAgICJpbXBvcnRfaGlzdG9yeSI6IGZhbHNlLAogICAgICAiaW1wb3J0X3NlYXJjaF9lbmdpbmUiOiBmYWxzZSwKICAgICAgIm1ha2VfY2hyb21lX2RlZmF1bHRfZm9yX3VzZXIiOiBmYWxzZSwKICAgICAgInNraXBfZmlyc3RfcnVuX3VpIjogdHJ1ZQogICB9LAogICAiZG5zX3ByZWZldGNoaW5nIjogewogICAgICAiZW5hYmxlZCI6IGZhbHNlCiAgIH0sCiAgICJwcm9maWxlIjogewogICAgICAiY29udGVudF9zZXR0aW5ncyI6IHsKICAgICAgICAgImV4Y2VwdGlvbnMiOiB7CiAgICAgICAgICAgICJwbHVnaW5zIjogewogICAgICAgICAgICAgICAiKiwqIjogewogICAgICAgICAgICAgICAgICAicGVyX3Jlc291cmNlIjogewogICAgICAgICAgICAgICAgICAgICAiYWRvYmUtZmxhc2gtcGxheWVyIjogMQogICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgfQogICAgICAgICB9LAogICAgICAgICAicGF0dGVybl9wYWlycyI6IHsKICAgICAgICAgICAgImh0dHBzOi8vKiwqIjogewogICAgICAgICAgICAgICAibWVkaWEtc3RyZWFtIjogewogICAgICAgICAgICAgICAgICAiYXVkaW8iOiAiRGVmYXVsdCIsCiAgICAgICAgICAgICAgICAgICJ2aWRlbyI6ICJEZWZhdWx0IgogICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICAgfSwKICAgICAgICAgInBsdWdpbl93aGl0ZWxpc3QiOiB7CiAgICAgICAgICAgICJhZG9iZS1mbGFzaC1wbGF5ZXIiOiAxCiAgICAgICAgIH0KICAgICAgfSwKICAgICAgImRlZmF1bHRfY29udGVudF9zZXR0aW5nX3ZhbHVlcyI6IHsKICAgICAgICAgImdlb2xvY2F0aW9uIjogMQogICAgICB9LAogICAgICAiZGVmYXVsdF9jb250ZW50X3NldHRpbmdzIjogewogICAgICAgICAiZ2VvbG9jYXRpb24iOiAxLAogICAgICAgICAibW91c2Vsb2NrIjogMSwKICAgICAgICAgIm5vdGlmaWNhdGlvbnMiOiAxLAogICAgICAgICAicG9wdXBzIjogMSwKICAgICAgICAgInBwYXBpLWJyb2tlciI6IDEKICAgICAgfSwKICAgICAgIm1hbmFnZWRfZGVmYXVsdF9jb250ZW50X3NldHRpbmdzIjogewogICAgICAgICAiaW1hZ2VzIjogMQogICAgICB9LAogICAgICAicGFzc3dvcmRfbWFuYWdlcl9lbmFibGVkIjogZmFsc2UKICAgfSwKICAgInNhZmVicm93c2luZyI6IHsKICAgICAgImVuYWJsZWQiOiBmYWxzZQogICB9LAogICAic2VhcmNoIjogewogICAgICAic3VnZ2VzdF9lbmFibGVkIjogZmFsc2UKICAgfSwKICAgInRyYW5zbGF0ZSI6IHsKICAgICAgImVuYWJsZWQiOiBmYWxzZQogICB9Cn0KWzE1NjA5Mzg1MTEuNDQyXVtJTkZPXTogUG9wdWxhdGluZyBMb2NhbCBTdGF0ZSBmaWxlOiB7CiAgICJiYWNrZ3JvdW5kX21vZGUiOiB7CiAgICAgICJlbmFibGVkIjogZmFsc2UKICAgfSwKICAgInNzbCI6IHsKICAgICAgInJldl9jaGVja2luZyI6IHsKICAgICAgICAgImVuYWJsZWQiOiBmYWxzZQogICAgICB9CiAgIH0KfQpbMTU2MDkzODUxMS40ODddW0lORk9dOiBMYXVuY2hpbmcgY2hyb21lOiAiQzpcVXNlcnNcbGl1emhlbnpob3VcQXBwRGF0YVxMb2NhbFxHb29nbGVcQ2hyb21lXEFwcGxpY2F0aW9uXGNocm9tZS5leGUiIC0tZGlzYWJsZS1iYWNrZ3JvdW5kLW5ldHdvcmtpbmcgLS1kaXNhYmxlLWNsaWVudC1zaWRlLXBoaXNoaW5nLWRldGVjdGlvbiAtLWRpc2FibGUtZGVmYXVsdC1hcHBzIC0tZGlzYWJsZS1oYW5nLW1vbml0b3IgLS1kaXNhYmxlLXBvcHVwLWJsb2NraW5nIC0tZGlzYWJsZS1wcm9tcHQtb24tcmVwb3N0IC0tZGlzYWJsZS1zeW5jIC0tZGlzYWJsZS13ZWItcmVzb3VyY2VzIC0tZW5hYmxlLWF1dG9tYXRpb24gLS1lbmFibGUtYmxpbmstZmVhdHVyZXM9U2hhZG93RE9NVjAgLS1lbmFibGUtbG9nZ2luZyAtLWZvcmNlLWZpZWxkdHJpYWxzPVNpdGVJc29sYXRpb25FeHRlbnNpb25zL0NvbnRyb2wgLS1pZ25vcmUtY2VydGlmaWNhdGUtZXJyb3JzIC0tbG9hZC1leHRlbnNpb249IkM6XFVzZXJzXExJVVpIRX4xXEFwcERhdGFcTG9jYWxcVGVtcFxzY29wZWRfZGlyMzIyNDBfOTEyMlxpbnRlcm5hbCIgLS1sb2ctbGV2ZWw9MCAtLW5vLWZpcnN0LXJ1biAtLXBhc3N3b3JkLXN0b3JlPWJhc2ljIC0tcmVtb3RlLWRlYnVnZ2luZy1wb3J0PTAgLS1zdGFydC1tYXhpbWl6ZWQgLS10ZXN0LXR5cGU9d2ViZHJpdmVyIC0tdXNlLW1vY2sta2V5Y2hhaW4gLS11c2VyLWFnZW50PSJNb3ppbGxhLzUuMCAoaVBob25lOyBDUFUgaVBob25lIE9TIDExXzAgbGlrZSBNYWMgT1MgWCkgQXBwbGVXZWJLaXQvNjA0LjEuMzggKEtIVE1MLCBsaWtlIEdlY2tvKSBWZXJzaW9uLzExLjAgTW9iaWxlLzE1QTM3MiBTYWZhcmkvNjA0LjEiIC0tdXNlci1kYXRhLWRpcj0iQzpcVXNlcnNcTElVWkhFfjFcQXBwRGF0YVxMb2NhbFxUZW1wXHNjb3BlZF9kaXIzMjI0MF8yNzQiIGRhdGE6LApbMTU2MDkzODUxMy4yNzldW0lORk9dOiByZXNvbHZlZCBsb2NhbGhvc3QgdG8gWyI6OjEiLCIxMjcuMC4wLjEiXQpbMTU2MDkzODUxNC41MTddW0lORk9dOiBbOGFiODliNmIzNjQyZmZlZThkZGUzOWVjOGY1NGQ4YzFdIFJFU1BPTlNFIEluaXRTZXNzaW9uIHsKICAgImFjY2VwdEluc2VjdXJlQ2VydHMiOiBmYWxzZSwKICAgImFjY2VwdFNzbENlcnRzIjogZmFsc2UsCiAgICJhcHBsaWNhdGlvbkNhY2hlRW5hYmxlZCI6IGZhbHNlLAogICAiYnJvd3NlckNvbm5lY3Rpb25FbmFibGVkIjogZmFsc2UsCiAgICJicm93c2VyTmFtZSI6ICJjaHJvbWUiLAogICAiY2hyb21lIjogewogICAgICAiY2hyb21lZHJpdmVyVmVyc2lvbiI6ICI3NC4wLjM3MjkuNiAoMjU1NzU4ZWNjZjNkMjQ0NDkxYjhhMTMxN2FhNzZlMWNlMTBkNTdlOS1yZWZzL2JyYW5jaC1oZWFkcy8zNzI5QHsjMjl9KSIsCiAgICAgICJ1c2VyRGF0YURpciI6ICJDOlxcVXNlcnNcXExJVVpIRX4xXFxBcHBEYXRhXFxMb2NhbFxcVGVtcFxcc2NvcGVkX2RpcjMyMjQwXzI3NCIKICAgfSwKICAgImNzc1NlbGVjdG9yc0VuYWJsZWQiOiB0cnVlLAogICAiZGF0YWJhc2VFbmFibGVkIjogZmFsc2UsCiAgICJnb29nOmNocm9tZU9wdGlvbnMiOiB7CiAgICAgICJkZWJ1Z2dlckFkZHJlc3MiOiAibG9jYWxob3N0OjUwOTM2IgogICB9LAogICAiaGFuZGxlc0FsZXJ0cyI6IHRydWUsCiAgICJoYXNUb3VjaFNjcmVlbiI6IHRydWUsCiAgICJqYXZhc2NyaXB0RW5hYmxlZCI6IHRydWUsCiAgICJsb2NhdGlvbkNvbnRleHRFbmFibGVkIjogdHJ1ZSwKICAgIm1vYmlsZUVtdWxhdGlvbkVuYWJsZWQiOiB0cnVlLAogICAibmF0aXZlRXZlbnRzIjogdHJ1ZSwKICAgIm5ldHdvcmtDb25uZWN0aW9uRW5hYmxlZCI6IGZhbHNlLAogICAicGFnZUxvYWRTdHJhdGVneSI6ICJub3JtYWwiLAogICAicGxhdGZvcm0iOiAiV2luZG93cyBOVCIsCiAgICJwcm94eSI6IHsKCiAgIH0sCiAgICJ+fn4iOiAiLi4uIgp9ClsxNTYwOTM4NTE0LjUyMF1bSU5GT106IFs4YWI4OWI2YjM2NDJmZmVlOGRkZTM5ZWM4ZjU0ZDhjMV0gQ09NTUFORCBTZXRJbXBsaWNpdFdhaXQgewogICAibXMiOiAzMDAwMC4wLAogICAic2Vzc2lvbklkIjogIjhhYjg5YjZiMzY0MmZmZWU4ZGRlMzllYzhmNTRkOGMxIgp9ClsxNTYwOTM4NTE0LjUyMF1bSU5GT106IFs4YWI4OWI2YjM2NDJmZmVlOGRkZTM5ZWM4ZjU0ZDhjMV0gUkVTUE9OU0UgU2V0SW1wbGljaXRXYWl0ClsxNTYwOTM4NTE0LjUyM11bSU5GT106IFs4YWI4OWI2YjM2NDJmZmVlOGRkZTM5ZWM4ZjU0ZDhjMV0gQ09NTUFORCBNYXhpbWl6ZVdpbmRvdyB7CiAgICJzZXNzaW9uSWQiOiAiOGFiODliNmIzNjQyZmZlZThkZGUzOWVjOGY1NGQ4YzEiLAogICAid2luZG93SGFuZGxlIjogImN1cnJlbnQiCn0KWzE1NjA5Mzg1MTQuNTIzXVtJTkZPXTogV2FpdGluZyBmb3IgcGVuZGluZyBuYXZpZ2F0aW9ucy4uLgpbMTU2MDkzODUxNC41MjRdW0lORk9dOiBEb25lIHdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuIFN0YXR1czogb2sKWzE1NjA5Mzg1MTQuNTI3XVtJTkZPXTogcmVzb2x2ZWQgbG9jYWxob3N0IHRvIFsiOjoxIiwiMTI3LjAuMC4xIl0KWzE1NjA5Mzg1MTUuNTMyXVtJTkZPXTogV2FpdGluZyBmb3IgcGVuZGluZyBuYXZpZ2F0aW9ucy4uLgpbMTU2MDkzODUxNS41MzRdW0lORk9dOiBEb25lIHdhaXRpbmcgZm9yIHBlbmRpbmcgbmF2aWdhdGlvbnMuIFN0YXR1czogb2sKWzE1NjA5Mzg1MTUuNTM0XVtJTkZPXTogWzhhYjg5YjZiMzY0MmZmZWU4ZGRlMzllYzhmNTRkOGMxXSBSRVNQT05TRSBNYXhpbWl6ZVdpbmRvdyB7CiAgICJoZWlnaHQiOiAxMDY2LAogICAid2lkdGgiOiAxOTM2LAogICAieCI6IC04LAogICAieSI6IC04Cn0KWzE1NjA5Mzg1MTUuNTM1XVtJTkZPXTogWzhhYjg5YjZiMzY0MmZmZWU4ZGRlMzllYzhmNTRkOGMxXSBDT01NQU5EIFNldEltcGxpY2l0V2FpdCB7CiAgICJtcyI6IDYwMDAwLjAsCiAgICJzZXNzaW9uSWQiOiAiOGFiODliNmIzNjQyZmZlZThkZGUzOWVjOGY1NGQ4YzEiCn0KWzE1NjA5Mzg1MTUuNTM1XVtJTkZPXTogWzhhYjg5YjZiMzY0MmZmZWU4ZGRlMzllYzhmNTRkOGMxXSBSRVNQT05TRSBTZXRJbXBsaWNpdFdhaXQK" target="_blank">Driver Log</a> <a class="url" href="data:," target="_blank">URL</a> <a class="text" href="data:text/plain;charset=utf-8;base64,PGh0bWw+PGhlYWQ+PC9oZWFkPjxib2R5PjwvYm9keT48L2h0bWw+" target="_blank">HTML</a> <a class="text" href="data:text/plain;charset=utf-8;base64," target="_blank">Browser Log</a> <a class="text" href="data:text/plain;charset=utf-8;base64," target="_blank">Driver Log</a> </td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="image"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAu4AAAU2CAYAAADK1zMGAAAAAXNSR0IArs4c6QAAGtRJREFUeJzt1sENwCAQwLDS/Xc+RuAJkewJ8syamfkAAICn/bcDAACAM+MOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAgw7gAAEGDcAQAgwLgDAECAcQcAgADjDgAAAcYdAAACjDsAAAQYdwAACDDuAAAQYNwBACDAuAMAQIBxBwCAAOMOAAABxh0AAAKMOwAABBh3AAAIMO4AABBg3AEAIMC4AwBAgHEHAIAA4w4AAAHGHQAAAow7AAAEGHcAAAjYfkoOaFjnmWUAAAAASUVORK5CYII="/></div>
+            <div class="log">selenium = &lt;selenium.webdriver.chrome.webdriver.WebDriver (session=&quot;8ab89b6b3642ffee8dde39ec8f54d8c1&quot;)&gt;<br/><br/>    @pytest.mark.skip_b2ch5_1<br/>    @pytest.mark.test_b2ch5_cart<br/>    def test_51coupon_of_huiyuan(selenium):<br/>        &#x27;&#x27;&#x27;成为会员后自动获取会员赠券&#x27;&#x27;&#x27;<br/>    #     selenium.get(&#x27;http://manage.111.com.cn/&#x27;)<br/>    #     user_input=selenium.find_element_by_css_selector(&#x27;input[name=&quot;username&quot;]&#x27;) #manage后台用户名<br/>    #     user_input.click()<br/>    #     user_input.clear()<br/>    #     user_input.send_keys(&#x27;liuzhenzhou&#x27;)<br/>    #     password=selenium.find_element_by_css_selector(&#x27;input[name=&quot;password&quot;]&#x27;) #密码<br/>    #     password.click()<br/>    #     password.clear()<br/>    #     password.send_keys(&#x27;Qqq,,111&#x27;)<br/>    #     selenium.find_element_by_class_name(&#x27;login_btn&#x27;).click() #点击登录<br/>    #     sleep(2)<br/>    #<br/>    #     selenium.find_element_by_css_selector(&#x27;.submit_btn&gt;button&#x27;).click()  #点击确定<br/>    #     print(&#x27;进入会员页面&#x27;)<br/>    #     selenium.find_element_by_css_selector(&#x27;#my_system_app &gt; li:nth-child(4)&gt;a&#x27;).click()  #会员管理菜单点击<br/>    #     #selenium.get(&#x27;http://test.vipmanage.111.com.cn/admin/role/login.do&#x27;)  #打开会员管理系统<br/>    #     sleep(3)<br/>    #     find_huiyuan=selenium.find_element_by_css_selector(&#x27;li[&quot;treedataindex=&quot;7&quot;] span&#x27;) #会员信息查询<br/>    #     #print(&#x27;会员查询菜单名称：&#x27;,find_huiyuan.text)<br/>    #     find_huiyuan.click()<br/>    #     usr=selenium.find_element_by_css_selector(&#x27;input[id=&quot;userName&quot;]&#x27;) #输入查查询的用户名<br/>    #     usr.click()<br/>    #     usr.clear()<br/>    #     usr.send_keys(&#x27;13444444444&#x27;)<br/>    #     selenium.find_element_by_id(&#x27;querylist&#x27;).click() #点击查询<br/>        u = UserCenter (selenium)<br/>&gt;       u.manage_login(manage_usr=&#x27;liuzhenzhou&#x27;, manage_pass=&#x27;Qqq,,111&#x27;)<br/><br/>test_h5_CouponCode.py:2102: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/>..\..\business\b2c_h5\user_center.py:813: in manage_login<br/>    print(&#x27;登录状态&#x27;,req.json())<br/>D:\Python36\lib\site-packages\requests\models.py:892: in json<br/>    return complexjson.loads(self.text, **kwargs)<br/>D:\Python36\lib\json\__init__.py:354: in loads<br/>    return _default_decoder.decode(s)<br/>D:\Python36\lib\json\decoder.py:339: in decode<br/>    obj, end = self.raw_decode(s, idx=_w(s, 0).end())<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>self = &lt;json.decoder.JSONDecoder object at 0x0000022F6ADFFA90&gt;<br/>s = &#x27;&lt;!DOCTYPE HTML PUBLIC &quot;-//IETF//DTD HTML 2.0//EN&quot;&gt;\r\n&lt;html&gt;\r\n&lt;head&gt;&lt;title&gt;400 Bad Request&lt;/title&gt;&lt;/head&gt;\r\n&lt;body ...Date:&lt;/td&gt;\r\n&lt;td&gt;2019/06/19 18:01:48&lt;/td&gt;\r\n&lt;/tr&gt;\r\n&lt;/table&gt;\r\n&lt;hr/&gt;Powered by Tengine/2.1.2&lt;/body&gt;\r\n&lt;/html&gt;\r\n&#x27;<br/>idx = 0<br/><br/>    def raw_decode(self, s, idx=0):<br/>        &quot;&quot;&quot;Decode a JSON document from ``s`` (a ``str`` beginning with<br/>        a JSON document) and return a 2-tuple of the Python<br/>        representation and the index in ``s`` where the document ended.<br/>    <br/>        This can be used to decode a JSON document from a string that may<br/>        have extraneous data at the end.<br/>    <br/>        &quot;&quot;&quot;<br/>        try:<br/>            obj, end = self.scan_once(s, idx)<br/>        except StopIteration as err:<br/>&gt;           raise JSONDecodeError(&quot;Expecting value&quot;, s, err.value) from None<br/><span class="error">E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)</span><br/><br/>D:\Python36\lib\json\decoder.py:357: JSONDecodeError<br/>---------------------------- Captured stdout setup -----------------------------<br/>脚本运行的浏览器： chrome
+------------------------------- pytest-selenium --------------------------------<br/>Driver log: C:\Users\liuzhenzhou\AppData\Local\Temp\pytest-of-liuzhenzhou\pytest-320\test_51coupon_of_huiyuan0\driver.log
+URL: data:,</div></td></tr></tbody></table></body></html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/django_web" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/django_web/mydjangoproject" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CoderPaCong" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
+    </content>
+    <content url="file://$MODULE_DIR$/../RB-autotest/Autotest">
+      <sourceFolder url="file://$MODULE_DIR$/../RB-autotest/Autotest" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.10" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="test-autotest" />
+    <orderEntry type="module" module-name="web" />
+  </component>
+  <component name="PackageRequirementsSettings">
+    <option name="requirementsPath" value="" />
+  </component>
+  <component name="TestRunnerService">
+    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
+  </component>
+</module>
