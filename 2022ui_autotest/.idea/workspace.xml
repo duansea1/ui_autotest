@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7c03138-4549-4366-91f5-ac1d6f5ee065" name="Changes" comment="新增 抖店多线路-清除订单的所有数据（订单、用户、商品、订单与用户、店铺、线路的关系）">
-      <change afterPath="$PROJECT_DIR$/demo/demo_pr/get_demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/API_demo/commons/request" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo/API_demo/commons/request.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/API_demo/commons/request.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../../AAA_auto_UI/test-autotest/AutoTest/testenv_case/demo/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../AAA_auto_UI/test-autotest/AutoTest/public/mysql_opr.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../AAA_auto_UI/test-autotest/AutoTest/public/mysql_opr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../AAA_auto_UI/test-autotest/SupplyChain/public/oracle_operate.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../AAA_auto_UI/test-autotest/SupplyChain/public/oracle_operate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo/API_demo/baofoo_tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo/API_demo/baofoo_tools.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
