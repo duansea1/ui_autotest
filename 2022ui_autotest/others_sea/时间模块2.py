@@ -5,6 +5,7 @@
 # @Time: 2023年3月月13日 20:02
 # ---
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 from datetime import datetime
 now_time = datetime.now()
@@ -21,5 +22,7 @@ print(timeT)
 print(timeT.year)
 print(type(timeT.month))
 
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 =======
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c

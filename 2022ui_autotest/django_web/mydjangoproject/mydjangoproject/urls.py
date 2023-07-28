@@ -16,12 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 <<<<<<< HEAD
+<<<<<<< HEAD
 from myappfirst import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello_web/', views.showdatetime),
     path('hello_web/hell', views.hell, name='hell'),
     path('viewArticles/<int:year>/<month>', views.viewArticles)
+=======
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 =======
 
 urlpatterns = [

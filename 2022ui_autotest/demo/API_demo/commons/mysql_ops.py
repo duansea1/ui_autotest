@@ -7,17 +7,23 @@ import pymysql as ms
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 def query_mysql(host, user, password, port, database, sql):
     '''执行mysql语句，执行完会关闭连接'''
     rsp_data = {}
     try:
         conn = ms.connect(
 =======
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 def query_mysql(host,user,password,port,database,sql):
     '''执行mysql语句，执行完会关闭连接'''
     rsp_data={}
     try:
         conn=ms.connect(
+<<<<<<< HEAD
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
+=======
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
             host=host,
             user=user,
@@ -26,6 +32,7 @@ def query_mysql(host,user,password,port,database,sql):
             database=database
         )
     except Exception as e:
+<<<<<<< HEAD
 <<<<<<< HEAD
         msg = ("获取数据库连接失败：%s" % e)
         rsp_data["code"] = 1
@@ -63,6 +70,8 @@ def query_mysql(host,user,password,port,database,sql):
         # return rsp_data
 
 =======
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
         msg=("获取数据库连接失败：%s" % e)
         rsp_data["code"]=1
         rsp_data["msg"]=msg
@@ -98,11 +107,15 @@ def query_mysql(host,user,password,port,database,sql):
         rsp_data["rows"]=0
         #return rsp_data 
               
+<<<<<<< HEAD
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
+=======
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
     finally:
         print("关闭连接")
         conn.close()
         print(rsp_data)
+<<<<<<< HEAD
 <<<<<<< HEAD
         return rsp_data
 
@@ -123,6 +136,8 @@ def get_connection(serverip, port, db_name, account, password):
     return conn
 
 =======
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
         return rsp_data   
     
 def get_connection(serverip, port, db_name, account, password):
@@ -139,11 +154,15 @@ def get_connection(serverip, port, db_name, account, password):
         cursorclass=ms.cursors.DictCursor)       
     
     return conn 
+<<<<<<< HEAD
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
+=======
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 
 def get_connection_qadb(db_name):
     """yyw-qa 的数据库"""
     from public import files
+<<<<<<< HEAD
 <<<<<<< HEAD
     datainfo = files.read_json('yyw-0345', 'mysql')
     # print("datainfo: ",datainfo)
@@ -202,6 +221,8 @@ def select_from_mysql(conn, sql, total=0, close=False):
 
 def query_mysql2(conn, sql, total=100, close=False):
 =======
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
     datainfo=files.read_json('yyw-0345', 'mysql')
     #print("datainfo: ",datainfo)
     conn=ms.connect(
@@ -256,11 +277,15 @@ def select_from_mysql(conn,sql,total=0,close=False):
         return rsp_data    
 
 def query_mysql2(conn,sql,total=100,close=False):
+<<<<<<< HEAD
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
+=======
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
     """
     @param total: 0：全部, 1：返回一条, >1:返回指定的多少条
     @return: rsp_data{code,msg,data}, code：0-正常，1-异常；
     """
+<<<<<<< HEAD
 <<<<<<< HEAD
     rsp_data = {}
     try:
@@ -311,6 +336,8 @@ def query_mysql3(host, user, password, port, database, sql):
     try:
         conn = ms.connect(
 =======
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
     rsp_data={}
     try:
         cursor=conn.cursor()
@@ -358,12 +385,16 @@ def query_mysql3(host,user,password,port,database,sql):
     rsp_data={}
     try:
         conn=ms.connect(
+<<<<<<< HEAD
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
+=======
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
             host=host,
             user=user,
             port=port,
             passwd=password,
             database=database,
+<<<<<<< HEAD
 <<<<<<< HEAD
             charset="utf8mb4",
             cursorclass=ms.cursors.DictCursor
@@ -405,6 +436,8 @@ def query_mysql3(host,user,password,port,database,sql):
         # return rsp_data
 
 =======
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
             charset = "utf8mb4",
             cursorclass=ms.cursors.DictCursor
         )
@@ -444,14 +477,21 @@ def query_mysql3(host,user,password,port,database,sql):
         rsp_data["rows"]=0
         #return rsp_data 
               
+<<<<<<< HEAD
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
+=======
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
     finally:
         print("关闭连接")
         conn.close()
         print(rsp_data)
 <<<<<<< HEAD
+<<<<<<< HEAD
         return rsp_data
 
+=======
+        return rsp_data   
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 =======
         return rsp_data   
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
@@ -460,8 +500,13 @@ if __name__ == '__main__':
     # sql="UPDATE t_shopping_cart SET check_status = 0 WHERE spu_code !=  '8353YCH20014'"
     # query_mysql("10.6.168.14","b2btest","b5zUoR4JbcK3emhhUxdL",3306,'yihaoyaocheng',sql)
 <<<<<<< HEAD
+<<<<<<< HEAD
     res = query_mysql('localhost', 'root', 'root', 3306, 'mydjango', 'select * from auth_group')
     print(res)
+=======
+    res = query_mysql('localhost','root','root',3306,'mydjango','select * from auth_group')
+    print(res)
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 =======
     res = query_mysql('localhost','root','root',3306,'mydjango','select * from auth_group')
     print(res)

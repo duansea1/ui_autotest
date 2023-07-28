@@ -1,2 +1,0 @@
-model_checkpoint_path: "crack_captcha.model"
-all_model_checkpoint_paths: "crack_captcha.model"

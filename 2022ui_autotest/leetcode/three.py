@@ -5,6 +5,7 @@
 # @Time: 2023年3月月02日 19:18
 # ---
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 def removeElement1(nums, val):
     a = 0
@@ -109,5 +110,7 @@ if __name__ == "__main__":
     print(res2)
     res3 = shift_swapcase(str='This is a sentence !')
     print(res3)
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 =======
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c

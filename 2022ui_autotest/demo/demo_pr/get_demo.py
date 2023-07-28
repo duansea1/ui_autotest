@@ -5,6 +5,7 @@
 # @desp : xxxx
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # getattr()
 import sys
 
@@ -38,6 +39,9 @@ show('小米', '21', '女')
 
 
 
+=======
+getattr()
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 =======
 getattr()
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c

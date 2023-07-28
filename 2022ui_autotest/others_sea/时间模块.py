@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # ---
 <<<<<<< HEAD
+<<<<<<< HEAD
 # datetime模块
 # @Author: duansea
 # @Time: 2022年12月月28日 14:25
@@ -36,8 +37,13 @@ print(time.strftime('%Y-%M-%D %H:%M:%S %a %p'), time.localtime())
 
 
 =======
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 # @Software: PyCharm
 # @Author: duansea
 # @Time: 2022年12月月28日 14:25
 # ---
+<<<<<<< HEAD
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
+=======
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c

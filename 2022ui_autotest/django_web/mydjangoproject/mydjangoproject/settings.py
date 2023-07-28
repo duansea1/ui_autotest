@@ -12,7 +12,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 <<<<<<< HEAD
+<<<<<<< HEAD
 import django.core.mail
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 =======
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 

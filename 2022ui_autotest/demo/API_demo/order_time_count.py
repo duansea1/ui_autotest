@@ -5,6 +5,7 @@
 # @Time: 2023年3月月09日 12:10
 # ---
 <<<<<<< HEAD
+<<<<<<< HEAD
 from datetime import datetime, date
 import math
 from commons.mysql_ops import *
@@ -82,5 +83,7 @@ if __name__ == "__main__":
     # 查询符合条件的订单创建时间
     ordertimes = Ordert.query_order()
     Ordert.sum_time(datetimes=ordertimes)
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 =======
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c

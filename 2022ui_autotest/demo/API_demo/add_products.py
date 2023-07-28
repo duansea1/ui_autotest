@@ -5,7 +5,10 @@
 # @Time: 2022年8月月30日 19:09
 # ---
 <<<<<<< HEAD
+<<<<<<< HEAD
 import random
+=======
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 =======
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 
@@ -78,6 +81,7 @@ class kyidaShopcart:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def number(self, numbase=2025):
         increment = numbase + 1
         return increment
@@ -129,6 +133,11 @@ if __name__ == "__main__":
 
 
 
+=======
+if __name__ == "__main__":
+    cart = kyidaShopcart()
+    cart.run_add_products()
+>>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
 =======
 if __name__ == "__main__":
     cart = kyidaShopcart()
