@@ -12,7 +12,7 @@ con = []
 for i in content:
     for word in words:
         print('ii', i, word)
-        if (word in i or len(i)>15):
+        if word in i or len(i) > 15:
             con.append(i)
             # content.remove(i)
             # continue

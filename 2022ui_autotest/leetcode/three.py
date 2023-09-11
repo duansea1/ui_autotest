@@ -95,9 +95,6 @@ def shift_swapcase(str):
     return str.swapcase()
 
 
-
-
-
 if __name__ == "__main__":
     res = removeElement4(nums=[2, 1, 1, 2, 1], val=1)
     print('删除：',res)

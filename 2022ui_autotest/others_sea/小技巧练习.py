@@ -70,11 +70,22 @@ def check_start(str=None, checkstr=None):
     return str.startswith(checkstr)
 
 
+def shif_list():
+    """转换列表为逗号分隔符格式"""
+    items = ['fool', 'bar', 'xyz']
+    print(','.join(items))
+    numbers = [1, 2, 3, 4]
+    print(','.join(map(str, numbers)))
+    """liist of mix data"""
+    data = [2, 'fun', 3, 1.23]
+    print(','.join(map(str, data)))
+    return True
+
 if __name__ == '__main__':
     # find_maxOrmin_num()
     print(send_args(my_list))
-    str = "['q',1,2],[1,2]"
-    print(shift_str_to_list(str))
+    str1 = "['q',1,2],[1,2]"
+    print(shift_str_to_list(str1))
     print(Status.IN_PROGRESS.value == 1)
     print(stored_two_str('Here','ereH'))
     lianjie()  # 把两个字典合并成一个
@@ -97,5 +108,7 @@ if __name__ == '__main__':
     print(id(my_set))
     my_set.add("hhhh")
     print(id(my_set))
+    print('------------------------分割线---------------')
+    print(shif_list())
 
 
