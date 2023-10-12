@@ -8,21 +8,37 @@ from redis import Redis
 import time
 from commons.mysql_ops import *
 from baofu_method.scrm_methods import Scrm_Lingshou
+from commons.time_tools import TimeTool
 
 DBs = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "crm", "password": "JWW4zud0",
        "port": 3306, "data": "zw_shop"}
 SCRM_lingshou = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "scrm", "password": "scrm@135qwe",
                    "port": 3306, "data": "lingshou"}
+SCRM_USER = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "scrm", "password": "scrm@135qwe",
+                   "port": 3306, "data": "ucenter"}
+SCRM_scrm = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "scrm", "password": "scrm@135qwe",
+                   "port": 3306, "data": "scrm"}
 
 class KydRedis():
     """操作客易达redis"""
     # 连接redis服务器 password:vhEA1jf4
-    redis_connect = Redis(host='47.103.9.199', port=6379, db=8, password='vhEA1jf4', decode_responses=True)
+    redis_connect = Redis(host='47.103.9.199', port=6379, db=3, password='vhEA1jf4', decode_responses=True)
 
     def get_Skey(self, key=None, type=None):
         '''获取指定key的value，对齐执行操作'''
         time.sleep(1)
         return self.redis_connect.get(key)
+
+    def get_pipline(self, key):
+        pipe = self.redis_connect.keys(pattern=key)
+        del_res = self.redis_connect.delete()
+        return pipe
+
+    def del_pipline_keys(self, *args, **kwargs ):
+        pipe = self.redis_connect
+        re = pipe.zrem(*args, **kwargs)
+        print(pipe.zrange('MEMBER_ORDER_TIME:237_320_472840800674680833', 0, 300))
+        return re
 
     def delete_redis_key(self, key):
         """redis删除对应的key
@@ -75,33 +91,34 @@ class ConvenientScript(object):
         sqls = []
         # #  1\zw_bht_account_bind_record--宝付企业个人个体账户绑定关系表
         # SELECT * from  zw_bht_account_bind_record WHERE login_no = '4II9Zah0GeD1sWJhdKOB';
-        record_sql = "update zw_bht_account_bind_record set is_deleted =" + isd + " WHERE login_no ='" \
-                     + login_no + "'"
+        record_sql = ("update zw_bht_account_bind_record set is_deleted ="
+                      + isd + " WHERE login_no ='" + login_no + "'")
         sqls.append(record_sql)
         # #  2|2\ '用户实名认证表'--zw_bht_pay_user_autonym
-        user_autonym_sql = "update zw_bht_pay_user_autonym set is_deleted =" + isd + " WHERE login_no ='" \
-                           + login_no + "'"
+        user_autonym_sql = ("update zw_bht_pay_user_autonym set is_deleted ="
+                            + isd + " WHERE login_no ='" + login_no + "'")
         sqls.append(user_autonym_sql)
         # 3、对公企业开户：zw_bht_corporation_account_open--删除对应表的数据
-        zw_bht_corporation_account_open_sql = "update zw_bht_corporation_account_open set is_delete =" + isd + " " \
-                                                                                                               "WHERE login_no ='" + login_no + "'"
+        zw_bht_corporation_account_open_sql = ("update zw_bht_corporation_account_open set is_delete ="
+                                               + isd + " "  "WHERE login_no ='" + login_no + "'")
         sqls.append(zw_bht_corporation_account_open_sql)
         # 4、 宝户通账户绑定表-zw_bht_account_bind_record
-        zw_bht_account_bind_record_sql = "update zw_bht_account_bind_record set is_deleted =" + isd + " WHERE " \
-                                                                                                      "bind_login_no ='" + login_no + "'"
+        zw_bht_account_bind_record_sql = ("update zw_bht_account_bind_record set is_deleted ="
+                                          + isd + " WHERE bind_login_no ='" + login_no + "'")
         sqls.append(zw_bht_account_bind_record_sql)
         # 5\个人 zw_bht_user_bank_account--用户绑定银行卡表
         # SELECT * from zw_bht_user_bank_account where is_delete =2 and  login_no='dnxjwqe90m2DpXyCMWVd';
         # seleCT * from zw_user_bank_account where is_delete =2 and login_no='dnxjwqe90m2DpXyCMWVd';
-        zw_bht_user_bank_account_sql = "update zw_bht_user_bank_account set is_delete =" + isd + " WHERE login_no ='" \
-                                       + login_no + "'"
-        zw_user_bank_account_sql = "update zw_user_bank_account set is_delete =" + isd + " WHERE login_no ='" \
-                                   + login_no + "'"
+        zw_bht_user_bank_account_sql = ("update zw_bht_user_bank_account set is_delete ="
+                                        + isd + " WHERE login_no ='" + login_no + "'")
+        zw_user_bank_account_sql = ("update zw_user_bank_account set is_delete ="
+                                    + isd + " WHERE login_no ='" + login_no + "'")
         sqls.append(zw_bht_user_bank_account_sql)
         sqls.append(zw_user_bank_account_sql)
         # 6\个人实名认证表
         zw_autonym_sql1 = "update zw_autonym set is_deleted =" + isd + " WHERE login_no ='" + login_no + "'"
-        user_autonym_sql2 = "update zw_bht_pay_user_autonym set is_deleted =" + isd + " WHERE login_no ='" + login_no + "'"
+        user_autonym_sql2 = ("update zw_bht_pay_user_autonym set is_deleted ="
+                             + isd + " WHERE login_no ='" + login_no + "'")
         sqls.append(zw_autonym_sql1)
         sqls.append(user_autonym_sql2)
         # 7\ 用户绑定银行卡表select * from `zw_user_bank_account`where login_no = 'dnxjwqe90m2DpXyCMWVd' and  is_delete =2;
@@ -117,26 +134,30 @@ class ConvenientScript(object):
         #  https://sp.baofoo.com/support-admin/mer/follow/del/logino?logino=FMmOR7VB0RCrYe66at71&usertype=PERSON
 
     def update_lingshou_user_order(self, r_userid, external_order_id, external_user_id, line='1c8aa0614e8f195b'):
-        '''零售电商，修改用户和订单关联的线路用户id'''
+        """零售电商，修改用户和订单关联的线路用户id
+        """
         sqls = []
         # 零售电商-零售用户外部用户关系表-zw_retail_external_user_rela--更换线路id
         # @parm::line-线路id(b748d239e773f12d-线路3)
         # @parm:r_userid-渠道用户id
-        user_sql = "update zw_retail_external_user_rela set third_app_id ='" + line + "' WHERE retail_user_id ='" \
-                   + r_userid + "'"
+        user_sql = ("update zw_retail_external_user_rela set third_app_id ='"
+                    + line + "' WHERE retail_user_id ='" + r_userid + "'")
         sqls.append(user_sql)
         # 用户+订单+线路-zw_retail_external_user_order_rela::
         # @parm:e_userid-外部用户id
-        user_order_sql = "update zw_retail_external_user_order_rela set third_app_id ='" + line + "' WHERE external_order_id ='" \
-                         + external_order_id + "'" + "and external_user_id='" + external_user_id + "'"
+        user_order_sql = ("update zw_retail_external_user_order_rela set third_app_id ='"
+                          + line + "' WHERE external_order_id ='"
+                          + external_order_id + "'" + "and external_user_id='" + external_user_id + "'")
         sqls.append(user_order_sql)
         # 订单湖+线路-zw_retail_order_lake
-        order_lake_sql = "update zw_retail_order_lake set third_app_id ='" + line + "' WHERE external_order_id ='" \
-                         + external_order_id + "'" + "and external_user_id='" + external_user_id + "'"
+        order_lake_sql = ("update zw_retail_order_lake set third_app_id ='"
+                          + line + "' WHERE external_order_id ='"
+                          + external_order_id + "'" + "and external_user_id='" + external_user_id + "'")
         sqls.append(order_lake_sql)
         # 订单日志+线路-zw_retail_order_lake_log
-        order_lakelog_sql = "update zw_retail_order_lake_log set third_app_id ='" + line + "' WHERE external_order_id ='" \
-                            + external_order_id + "'" + "and external_user_id='" + external_user_id + "'"
+        order_lakelog_sql = ("update zw_retail_order_lake_log set third_app_id ='"
+                             + line + "' WHERE external_order_id ='" + external_order_id + "'"
+                             + "and external_user_id='" + external_user_id + "'")
         sqls.append(order_lakelog_sql)
         SCRM_DB = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "scrm", "password": "scrm@135qwe",
                    "port": 3306, "data": "lingshou"}
@@ -151,21 +172,21 @@ class ConvenientScript(object):
         # 零售电商-零售用户外部用户关系表-zw_retail_external_user_rela--更换线路id
         # @parm::line-线路id(b748d239e773f12d-线路3)
         # @parm:r_userid-渠道用户id
-        user_sql = "update zw_retail_external_user_rela set third_app_id ='" + line + "' WHERE third_app_id !='" \
-                   + old_line + "'"
+        user_sql = ("update zw_retail_external_user_rela set third_app_id ='"
+                    + line + "' WHERE third_app_id !='" + old_line + "'")
         sqls.append(user_sql)
         # 用户+订单+线路-zw_retail_external_user_order_rela::
         # @parm:e_userid-外部用户id
-        user_order_sql = "update zw_retail_external_user_order_rela set third_app_id ='" + line + "' WHERE third_app_id !='" \
-                         + old_line + "'"
+        user_order_sql = ("update zw_retail_external_user_order_rela set third_app_id ='"
+                          + line + "' WHERE third_app_id !='" + old_line + "'")
         sqls.append(user_order_sql)
         # 订单湖+线路-zw_retail_order_lake
-        order_lake_sql = "update zw_retail_order_lake set third_app_id ='" + line + "' WHERE third_app_id !='" \
-                         + old_line + "'"
+        order_lake_sql = ("update zw_retail_order_lake set third_app_id ='"
+                          + line + "' WHERE third_app_id !='" + old_line + "'")
         sqls.append(order_lake_sql)
         # 订单日志+线路-zw_retail_order_lake_log
-        # order_lakelog_sql = "update zw_retail_order_lake_log set third_app_id ='"+line+"' WHERE external_order_id ='" \
-        #                      + external_order_id + "'" + "and external_user_id='" + external_user_id + "'"
+        # order_lakelog_sql = "update zw_retail_order_lake_log set third_app_id ='"+line+"'
+        # WHERE external_order_id ='" + external_order_id + "'" + "and external_user_id='" + external_user_id + "'"
         # sqls.append(order_lakelog_sql)
 
         SCRM_DB = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "scrm", "password": "scrm@135qwe",
@@ -175,8 +196,16 @@ class ConvenientScript(object):
             result = self.query_sql(DB=SCRM_DB, SQL=sql)
             print('执行结果：', [result, sql])
 
-    def delete_lingshou_data(self, retail_userid, orderid, goodsid, chanel=2):
-
+    @TimeTool().snap_time
+    def delete_lingshou_data(self, retail_userid, orderid, goodsid='', chanel=2):
+        """"
+        正式功能：删除指定用户(含统计的销售数据)、指定的订单、指定的商品数据
+        不支持批量删除用户、商品、订单和行为
+        @retail_userid----零售用户id
+        @orderid ----订单id
+        @:goodsid -商品id
+        @chanel --渠道：2-有赞  7-
+        """
         sqls = []
         SL = Scrm_Lingshou()
         # 删除用户相关的数据
@@ -196,6 +225,33 @@ class ConvenientScript(object):
             n = n + 1
             result = self.query_sql(DB=SCRM_lingshou, SQL=sql)
             print('执行结果:', ['第' + str(n) + '次', result, sql])
+
+    @TimeTool().snap_time
+    def delete_lingshou_shop_data(self, external_shop_id, retail_shop_id):
+        """"
+        正式功能：shop删除店铺维度的数据（商品、用户、行为、订单）
+        @external_shop_id----外部店铺id
+        @retail_shop_id ----零售店铺id--scrm系统的店铺id
+        """
+        sqls = []
+        SL = Scrm_Lingshou()
+        # 删除用户相关的数据
+        usersql = SL.delete_lingshou_user_shop(external_shop_id, retail_shop_id)
+        sqls.extend(usersql)
+        # 删除订单相关的数据
+        ordersql = SL.delete_lingshou_order_shop(external_shop_id, retail_shop_id)
+        sqls.extend(ordersql)
+        # 删除商品相关的数据
+        productsql = SL.delete_lingshou_product_shop(external_shop_id, retail_shop_id)
+        sqls.extend(productsql)
+        # todo 删除客户相关的数据：收件人信息 consignee表
+
+        # print('打印scrmsql:', sqls)
+        n = 0
+        for sql in sqls:
+            n = n + 1
+            result = self.query_sql(DB=SCRM_lingshou, SQL=sql)
+            print('删除店铺维度的数据执行结果:', ['第' + str(n) + '次', result, sql])
 
     def delete_DouDian_user_orderinfo(self, retail_userid, external_user_id='', orderid='',  goodsid='',
                                       del_product=False, chanel='99'):
@@ -242,8 +298,8 @@ class ConvenientScript(object):
         sql12 = "delete from zw_retail_sub_order where external_order_id='" + orderid + "'"
         sqls.append(sql12)
         # 13、用户行为表-zw_retail_user_behaviour
-        sql13 = "delete from zw_retail_user_behaviour where external_order_id='" + orderid + "'" + \
-                "or retail_user_id='" + retail_userid + "'"
+        sql13 = ("delete from zw_retail_user_behaviour where external_order_id='"
+                 + orderid + "'" + "or retail_user_id='" + retail_userid + "'")
         sqls.append(sql13)
         # # 14、订单关联商品表-zw_retail_user_behaviour_goods
         # sql14 = "delete from zw_retail_user_behaviour_goods where external_order_id='" + orderid + "'"
@@ -307,6 +363,85 @@ class ConvenientScript(object):
             result = self.query_sql(DB=SCRM_DB, SQL=sql)
             print('执行结果:', ['第'+str(n)+'次', result, sql])
 
+    def del_bind_member_data(self, external_user_id, member_no="sea", is_del_redis=False):
+        """
+        正式功能：删除会员绑定的渠道用户的订单数据
+        :return:
+        """
+        SL = Scrm_Lingshou()
+        exce_sqls = SL.unbinding_retail_data(external_user_id)
+        n = 0
+        for sql in exce_sqls:
+            n += 1
+            result = self.query_sql(DB=SCRM_USER, SQL=sql)
+            print('删除会员绑定的渠道用户的订单数据:', ['第{}次'.format(n), result, sql])
+
+        # rdis = KydRedis()
+        keyword = "MEMBER_ORDER_TIME:237_320_" + member_no
+
+        # result1 = rdis.del_pipline_keys('MEMBER_ORDER_TIME:237_320_472840800674680833', 'E20230404112909059800037')
+        # # result2 = rdis.del_pipline_keys('MEMBER_ORDER_TIME', keyword)
+        # print('redis返回结果：', result1)
+
+    def del_member_redis_data(self, external_user_id):
+        """
+        正式功能：删除渠道用户-订单赠送积分成长值的数据
+        @:param channel_order_sn---外部订单id
+        :return:
+        """
+
+        # 删除数据库-订单订单赠送积分记录-zw_retail_order_rule_snapshot
+        del_order_snapshot = ("delete from zw_retail_order_rule_snapshot where channel_order_sn in ("
+                              + "select external_order_id from zw_retail_order where external_user_id='"
+                              + external_user_id + "')")
+        self.query_sql(DB=SCRM_scrm, SQL=del_order_snapshot)
+
+        print("开始执行删除redis数据")
+        get_user_order = ("select external_order_id from zw_retail_order where state in (4, 5) and external_user_id='"
+                          + external_user_id + "'")
+        orderids = self.query_sql(DB=SCRM_scrm, SQL=get_user_order)
+        print(orderids,get_user_order)
+        keys = []
+        if orderids['data']:
+            # print('查询执行结果:', ['返回结果：', orderids['data'], get_user_order])
+            for orderid in orderids['data']:
+                # print(orderid[0])
+                keys.append("member_order_bonus_points_237_320_dd_" + orderid[0])
+        else:
+            print("slect没有查询到订单")
+            return {'mag': "slect没有查询到订单"}
+        # redis -订单送积分和成长值的缓存
+        # 列子：member_order_bonus_points_237_320_dd_5040769236360353387
+        # key_order = "member_order_bonus_points_237_320_dd_" + external_order_id
+        if len(keys) == 0:
+            print("slect没有查询到订单2")
+            return {'mag':"没有查询到订单"}
+        rds = KydRedis()
+        # rds.delete_redis_key(keys)
+        for key in keys:
+            rds.delete_redis_key(key)
+        return {'mag': "执行成功"}
+
+    @TimeTool().snap_time
+    def delete_demo_data(self, external_shop_id, retail_shop_id):
+        """"
+        demo：shop删除店铺维度的数据（商品、用户、行为、订单）
+        @external_shop_id----外部店铺id
+        @retail_shop_id ----零售店铺id--scrm系统的店铺id
+        """
+        SL = Scrm_Lingshou()
+        # 删除用户相关的数据
+        usersql = SL.delete_demo(external_shop_id, retail_shop_id)
+        n = 0
+        for sql in usersql:
+            print('usersql:', usersql)
+            n = n + 1
+            result = self.query_sql(DB=SCRM_lingshou, SQL=sql)
+            if result['code'] != 0:
+                raise Exception('excue sqls is fail')
+            print('demo-删除店铺维度的数据执行结果:', ['第' + str(n) + '次', result, sql])
+
+
 
 if __name__ == '__main__':
     pass
@@ -344,16 +479,38 @@ if __name__ == '__main__':
     # excue.delete_DouDian_user_orderinfo(orderid='6920397821379024382', retail_userid='r6L4R5SBFSwyye9RSL8Kt', goodsid='3629814263113221043' , del_product=False)
 
     """有赞多线路--删除订单、用户"""
-    """
-    零售用户id：rwuqCMrbrRT5uwUsb0Kfr ---- 外部userid：UwFln6wj647483955892744192
-    1、WrZyEgpLfswq7FrVAQqgV-对应sea用户
-    2、a9kvHz4tBQZzUwNtq9pHs--17366001986
-    3、次原色-WcyE7wwRzfuurnHwaUKjN---17366001986
-    """
     # excue.delete_DouDian_user_orderinfo(retail_userid='rwuqCMrbrRT5uwUsb0Kfr',
     #                                     external_user_id='UwFln6wj647483955892744192', del_product=False, chanel=2)
-    excue.delete_lingshou_data(retail_userid='xnX8v8CafNcjfv7EugHkv', orderid='E20230830171150026106195', goodsid='',
-                               chanel=2)
+    # excue.delete_lingshou_data(retail_userid='Tep6XSuNvXKQJpRdFBwGW', orderid='E20230915151433094506179')
     """ 查询用户的sql"""
     # res = excue.delete_lingshou_user(retail_userid='mera0hW6b6pdm7kCntwTK')
     # print(res)
+
+    """ ****删除店铺维度的数据--delete_lingshou_shop_data"""
+    # excue.delete_lingshou_shop_data(external_shop_id='@112834142', retail_shop_id='@64dd89a15559e')
+
+    # ###################### 解绑会员上的用户 ##########################
+    # 会员id：472840800674680833
+    # 抖店订单 5040769236360353387 -1@#v4yq65O+I7LyqeZ8vIn1+Ze9Oeu0TFVQ+q18aHbjC+cv3F77EeUstWZIQcno++YfdzWamgPDzA==
+    # 有赞-E20230509111252059806179 账号：k3pJaQ2G1025769697422868480
+    """
+    测试数据：龙雨-有赞：1@#v4yq65O+I7LyqeZ8vIn1+Ze9Oeu0TFVQ+q18aHbjC+cv3F77EeUstWZIQcno++YfdzWamgPDzA==
+    会员13166210872-客易达：订单-202305121336515520902277992449
+    """
+    dd_acount = "1@#v4yq65O+I7LyqeZ8vIn1+Ze9Oeu0TFVQ+q18aHbjC+cv3F77EeUstWZIQcno++YfdzWamgPDzA=="  # 抖店账号
+    ddsea = '1@#KXjeB9V/2OlWvZ5mvHOfxSWTt03AUTCRwoZv2z2ObMVdSmYgL9OYDfQPf9+jdOULJvOs'  # 抖店
+    kyd_acount = "OKIDEj9Z9UjyU3dyAWd7iNto49Q1U7mn"  # 客易达账号
+    youzan_acount = "kLeEvABE1144742564428046336"  # 有赞账号
+    youzan2_acount = 'Ragnc6he646331639273639936'
+    tb_acount = 'AAH59TdrAOHupynQxEEtvIXq'  # 淘宝
+    video_account = 'olycp5Ntybjon5-cijrYhR4zKZbU'  # 视频号小店
+    self_acount = 'user2183'  # 自营店铺
+    ks_acount = 'f181cab22dec9dd214bf57240b007c79'  # 快手小店
+    # excue.del_bind_member_data(external_user_id='AAHZ9TdrAOHupynQxEEPzRzA', member_no="47284080067468083311", is_del_redis=True)
+
+    # ##########################删除赠送积分的缓存和快照数据 ############################
+    """说明：员工绑定订单后，若没有赠送积分和成长值，需要执行此操作，删除订单赠送成长值快照"""
+    # excue.del_member_redis_data(external_user_id='1@#v4yq65O+I7LyqeZ8vIn1+Ze9Oeu0TFVQ+q18aHbjC+cv3F77EeUstWZIQcno++YfdzWamgPDzA==')
+
+    # demo -yield 测试验证
+    excue.delete_demo_data(external_shop_id='S12', retail_shop_id="M12")
