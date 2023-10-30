@@ -6,6 +6,9 @@
       <sourceFolder url="file://$MODULE_DIR$/django_web" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/django_web/mydjangoproject" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CoderPaCong" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2023sea_project" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2023sea_project/python_davance_programs/day2" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/demo/API_demo/commons" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <content url="file://$MODULE_DIR$/../RB-autotest/Autotest">
@@ -20,6 +23,6 @@
     <option name="requirementsPath" value="" />
   </component>
   <component name="TestRunnerService">
-    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
+    <option name="PROJECT_TEST_RUNNER" value="py.test" />
   </component>
 </module>

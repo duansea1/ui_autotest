@@ -7,8 +7,9 @@
 from redis import Redis
 import time
 from commons.mysql_ops import *
-from baofu_method.scrm_methods import Scrm_Lingshou
+from baofu_method.scrm_methods import Scrm_Lingshou, delete_payhub_data
 from commons.time_tools import TimeTool
+
 
 DBs = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "crm", "password": "JWW4zud0",
        "port": 3306, "data": "zw_shop"}
@@ -18,6 +19,9 @@ SCRM_USER = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "sc
                    "port": 3306, "data": "ucenter"}
 SCRM_scrm = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "scrm", "password": "scrm@135qwe",
                    "port": 3306, "data": "scrm"}
+
+SCRM_payhub = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "scrm", "password": "scrm@135qwe",
+                   "port": 3306, "data": "payhub"}
 
 class KydRedis():
     """操作客易达redis"""
@@ -441,6 +445,22 @@ class ConvenientScript(object):
                 raise Exception('excue sqls is fail')
             print('demo-删除店铺维度的数据执行结果:', ['第' + str(n) + '次', result, sql])
 
+    @TimeTool().snap_time
+    def delete_payhub_data(self, corp_unified_social_credit_code):
+        """"
+        正式：删除草稿中的商户资料
+        @corp_unified_social_credit_code：统一社会代码
+        """
+        # 删除商户相关的数据
+        usersql = delete_payhub_data(corp_unified_social_credit_code)
+        n = 0
+        for sql in usersql:
+            print('usersql:', usersql)
+            n = n + 1
+            result = self.query_sql(DB=SCRM_payhub, SQL=sql)
+            if result['code'] != 0:
+                raise Exception('excue sqls is fail')
+            print('数据执行结果:', ['第' + str(n) + '次', result, sql])
 
 
 if __name__ == '__main__':
@@ -513,4 +533,7 @@ if __name__ == '__main__':
     # excue.del_member_redis_data(external_user_id='1@#v4yq65O+I7LyqeZ8vIn1+Ze9Oeu0TFVQ+q18aHbjC+cv3F77EeUstWZIQcno++YfdzWamgPDzA==')
 
     # demo -yield 测试验证
-    excue.delete_demo_data(external_shop_id='S12', retail_shop_id="M12")
+    # excue.delete_demo_data(external_shop_id='S12', retail_shop_id="M12")
+
+    # -------------- 聚合开户----------
+    excue.delete_payhub_data('913101180625739120')

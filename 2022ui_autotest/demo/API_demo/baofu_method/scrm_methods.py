@@ -11,7 +11,8 @@ DBs = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "crm", "p
 SCRM_lingshou = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com",
                  "user": "scrm", "password": "scrm@135qwe", "port": 3306, "data": "lingshou"}
 SCRM_scrm = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "scrm", "password": "scrm@135qwe",
-                   "port": 3306, "data": "scrm"}
+             "port": 3306, "data": "scrm"}
+
 
 class Scrm_Lingshou(object):
     """零售电商-删除用户、订单、商品数据"""
@@ -332,8 +333,6 @@ class Scrm_Lingshou(object):
 
         return sqls
 
-
-
     def get_external_order_ids(self, external_user_id):
         """
         获取该渠道用户的所有订单
@@ -364,3 +363,30 @@ class Scrm_Lingshou(object):
         # 5、商品湖表-zw_retail_goods_lake
         sql_product5 = "delete from zw_retail_goods_lake where external_shop_id='" + external_shop_id + "'"
         yield sql_product5
+
+
+def delete_payhub_data(corp_unified_social_credit_code):
+    """
+    @corp_unified_social_credit_code-统一社会代码
+    """
+    # 1、删除快照表的数据
+    sql_sapshot = ("delete from zw_merchant_info_snapshot where open_no in ("
+                   + "select open_no from zw_merchant_info where corp_unified_social_credit_code='"
+                   + corp_unified_social_credit_code + "')")
+    yield sql_sapshot
+
+    # 2、删除zw_merchant_isp
+    sql_isp = ("delete from zw_merchant_isp where open_no in ("
+               + "select open_no from zw_merchant_info where corp_unified_social_credit_code='"
+               + corp_unified_social_credit_code + "')")
+    yield sql_isp
+    # 4、 删除 zw_merchant_info_draft
+    sql_draft = ("delete from zw_merchant_info_draft where corp_unified_social_credit_code='"
+                + corp_unified_social_credit_code + "'")
+    yield sql_draft
+
+    # # 5、删除企业开户信息表的数据
+    sql_info = ("delete from zw_merchant_info where corp_unified_social_credit_code='"
+                + corp_unified_social_credit_code + "'")
+    yield sql_info
+

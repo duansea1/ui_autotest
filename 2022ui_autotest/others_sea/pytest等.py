@@ -7,4 +7,3 @@
 from pytest import approx
 
 0.1 + 0.3 == approx(0.4)
-import m

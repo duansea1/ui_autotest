@@ -83,3 +83,5 @@ pytest_ini文件
 ;python_classes = Test*
 ;python_functions = test_*
 ;
+
+安装包：pip install  requests -i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com

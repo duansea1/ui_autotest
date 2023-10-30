@@ -8,7 +8,6 @@ import time
 from functools import wraps
 class TimeTool:
 
-# def snaptime(,timevalue):
     def snap_time(self, func):  # 如果装饰器带参数，则需要多一层方法嵌套
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -20,6 +19,11 @@ class TimeTool:
             end = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
             print(func.__name__ + '==========执行完成时间：' + str(end) + '==============')
         return wrapper
+
+    def current_time(self):
+        """获取当前执行时间"""
+        current_Time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
+        return current_Time
 
     def strftime_time(self, shift_value):
         """将时间戳转为日期格式
@@ -88,5 +92,5 @@ def page1():
 def page2():
     return 'this is page2'
 
-print (router.call('/page1'))
-print (router.call('/page2'))
+# print(router.call('/page1'))
+# print(router.call('/page2'))

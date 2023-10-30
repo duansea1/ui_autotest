@@ -7,7 +7,7 @@
 
 class A:
     def __init__(self):
-        self.__age = 20   #实例属性
+        self.__age = 20   # 实例属性
 
     @property
     def age(self):  # 被修饰的方法
@@ -31,8 +31,9 @@ class B:
 
 
 a = A()
-a.age = 200
-print(a.age1)
+# a.age = 200
+print(a.age)
 
 # b = B()
 # print(b.__name)
+

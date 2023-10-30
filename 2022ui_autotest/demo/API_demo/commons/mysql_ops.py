@@ -56,7 +56,7 @@ def query_mysql(host, user, password, port, database, sql):
     finally:
         print("关闭连接")
         conn.close()
-        print(rsp_data)
+        # print(rsp_data)
         return rsp_data
 
 
