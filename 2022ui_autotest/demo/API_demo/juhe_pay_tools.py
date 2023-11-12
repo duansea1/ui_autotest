@@ -3,6 +3,7 @@
 # @Author: duansea
 # @Time: 2023-10-24 17:59
 # ---
+import logging
 
 from redis import Redis
 import time
@@ -23,7 +24,9 @@ def delete_payhub_data_tool(corp_unified_social_credit_code):
     openNo = query_openNo(corp_unified_social_credit_code)
     T = TimeTool()
     with open('聚合开户删除数据记录表.txt', "a") as f:
-        f.write("\n" + str(T.current_time()) + str(openNo) + ":对应的统一社会代码 " + str(corp_unified_social_credit_code) + "\t")
+        f.write("\n" + str(T.current_time()) + str(openNo) + ":对应的统一社会代码 "
+                + str(corp_unified_social_credit_code) + "\t")
+    # logger = logging.basicConfig(filename='')
     if openNo:
         res = request_bf_del_account(loginNo=openNo, usertype='MERCHANT')
         if res:
@@ -52,5 +55,5 @@ def query_openNo(corp_unified_social_credit_code):
 if __name__ == '__main__':
     pass
     # 删除宝付账户和数据库的数据
-    delete_payhub_data_tool('91310115312597774R')
+    delete_payhub_data_tool('913101180625739120')
     # query_openNo('1')

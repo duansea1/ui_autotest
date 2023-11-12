@@ -2,19 +2,19 @@
 # ---
 # @Software: PyCharm
 # @Author: duansea
-# @Time: 2023年9月月27日 20:14
+# @Time: 2023年9月27日 20:14
 # ---
 import time
 from functools import wraps
 class TimeTool:
 
     def snap_time(self, func):  # 如果装饰器带参数，则需要多一层方法嵌套
-        @wraps(func)
+        # @wraps(func)
         def wrapper(*args, **kwargs):
             now = time.time()
             timearray = time.localtime(now)
-            otherstyleTime = time.strftime("%Y-%m-%d %H:%M:%S",timearray)
-            print(func.__name__ + '==========开始执行时间为：' + str(otherstyleTime) + '==============')
+            otherstyleTime = time.strftime("%Y-%m-%d %H:%M:%S", timearray)
+            print(func.__name__ + '==========开始执行时间：' + str(otherstyleTime) + '==============')
             func(*args, **kwargs)
             end = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(time.time()))
             print(func.__name__ + '==========执行完成时间：' + str(end) + '==============')

@@ -10,7 +10,7 @@ class Aggregatd_Payment():
         """
         @corp_unified_social_credit_code-统一社会代码
         """
-        # 1、删除快照表的数据
+        # 1、删除快照表的数据-zw_merchant_info_snapshot
         sql_sapshot = ("delete from zw_merchant_info_snapshot where open_no in ("
                        + "select open_no from zw_merchant_info where corp_unified_social_credit_code='"
                        + corp_unified_social_credit_code + "')")
@@ -26,7 +26,7 @@ class Aggregatd_Payment():
                      + corp_unified_social_credit_code + "'")
         yield sql_draft
 
-        # # 5、删除企业开户信息表的数据
+        # 5、删除企业开户信息表的数据-zw_merchant_info
         sql_info = ("delete from zw_merchant_info where corp_unified_social_credit_code='"
                     + corp_unified_social_credit_code + "'")
         yield sql_info

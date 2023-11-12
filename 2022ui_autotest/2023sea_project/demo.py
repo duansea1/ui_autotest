@@ -15,5 +15,23 @@ def age():
             break
         x -= 1
         y -= 1
+
+def sums(num):
+    sum = 0
+    if num > 0:
+        for i in range(num):
+            sum += i
+        return sum
+    return sum
+
+def digui_sums(num):
+    sum =0
+    if num > 0:
+        return sum + digui_sums(num-1)
+    return 0
+
 if __name__ == '__main__':
-    age()
+    # age()
+    pass
+    print(sums(200))
+    print(digui_sums(200))
