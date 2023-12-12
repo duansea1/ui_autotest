@@ -30,8 +30,14 @@ def digui_sums(num):
         return sum + digui_sums(num-1)
     return 0
 
+t = {'你好':123 , 2023:1, '结束':3}
+def add(a, b,c):
+    """ 数组使用*传参"""
+    return str(a) + str(b)
+
 if __name__ == '__main__':
     # age()
     pass
     print(sums(200))
     print(digui_sums(200))
+    print(add(*(t.values())))

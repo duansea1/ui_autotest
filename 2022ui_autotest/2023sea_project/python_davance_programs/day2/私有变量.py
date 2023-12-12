@@ -16,6 +16,7 @@ _y = 20
 class A():
     def __init__(self):
         self.__z = 2  # 私有
+
     def __some_method(self):
         print(self)
 

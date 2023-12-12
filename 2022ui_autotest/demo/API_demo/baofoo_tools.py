@@ -369,7 +369,7 @@ class ConvenientScript(object):
 
     def del_bind_member_data(self, external_user_id, member_no="sea", is_del_redis=False):
         """
-        正式功能：删除会员绑定的渠道用户的订单数据
+        正式功能：删除会员绑定的渠道用户的订单数据（解绑会员绑定的订单数据）
         :return:
         """
         SL = Scrm_Lingshou()
@@ -462,6 +462,62 @@ class ConvenientScript(object):
                 raise Exception('excue sqls is fail')
             print('数据执行结果:', ['第' + str(n) + '次', result, sql])
 
+    def cust_sqls(self, id):
+        """新增客户数据相关的sql"""
+        sql_cust = (
+                    "INSERT INTO `scrm`.`zw_cust`(`id`, `tenant_id`, `zw_corp_id`, `name`, `corp_name`, `short_name`,"
+                                                           " `nickname`, `mobile`, `type`, `assist_ids`, `cust_seas_id`, `stage_id`, `protected_id`, "
+                                                           "`source_id`, "
+                                                           "`channel`, `platform`, `wx_app_type`, `import_id`, `is_external`, `wx_external_userid`, "
+                                                           "`wx_external_userid_new`,"
+                                                           " `openid`, `is_distribution`, `distribution_time`, `distribution_work_userid`, "
+                                                           "`old_work_user_id`, "
+                                                           "`is_openapi_import`, "
+                                                           "`is_lost`, `add_way`, `createtime`, `add_friend_time`, `flow_type`, `lost_time`, `login_time`, "
+                                                           "`last_edit_time`, "
+                                                           "`last_edit_uid`, `weiworkclient_auth_token`, `is_delete`, `created_at`, `created_uid`,"
+                                                           " `updated_at`, `updated_uid`, "
+                                                           "`deleted_at`, `deleted_uid`) VALUES ("+str(id)+", 237, 320, 'AutoTest测试', '', '', '', '" + str(
+                                18000000000 + id) + "', "
+                                                    "1, NULL, 51, 1136, 0, 1661, 1, 1, 0, 0, 0, NULL, '', 'oHIuujluZHrJ8MEv_rhlRmeMLlNM84', 0, NULL, "
+                                                    "0, 0, 0, 0, 0, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 0, '2023-11-21 16:46:42', "
+                                                    "0, '2023-11-21 16:46:42', NULL, NULL, NULL)")
+        yield sql_cust
+
+        sql_cust_tag_relation = ("INSERT INTO `scrm`.`zw_cust_tag_relation`(`tenant_id`, `zw_corp_id`, `cust_id`,"
+                                 " `tag_id`, `external_follow_tag_id`, `work_user_id`, `cust_tag_chat_id`, "
+                                 "`cust_tag_rule_id`, `hit_keyword`, `is_delete`, `created_at`, `created_uid`, "
+                                 "`updated_at`, `updated_uid`, `deleted_at`, `deleted_uid`, `cust_resource_id`)"
+                                 " VALUES (237, 320, " + str(id) + ", 8380, 0, NULL, NULL, NULL, NULL, 0, '2023-11-21 16:46:43',"
+                                                              " 0, NULL, NULL, NULL, NULL, NULL)")
+        yield sql_cust_tag_relation
+
+        sql_cust_attribute = ("INSERT INTO `scrm`.`zw_cust_attribute`(`tenant_id`, `zw_corp_id`, "
+                              "`cust_id`, `attr_id`, `attr_name`, `attr_val`, `is_delete`, `created_at`,"
+                              " `updated_at`, `deleted_at`) VALUES ( 237, 320," + str(id) + ", 2408, '姓名', "
+                                                                                       "'AutoTest测试', 0, '2023-11-21 16:46:43', NULL, NULL)")
+        yield sql_cust_attribute
+
+        sql_cust_baseinfo = ("INSERT INTO `scrm`.`zw_cust_baseinfo`( `tenant_id`, `zw_corp_id`, `cust_id`,"
+                             " `name`, `avatar`, `sex`, `remark`, `description`, `email`, `nickname`, `company`,"
+                             " `birthday`, `age`, `education`, `qq_number`, `wx_number`, `region`, `idcard`, `hobby`,"
+                             " `industry`, `income`, `remark_mobile`, `address`, `province_code`, `province_name`,"
+                             " `city_code`, `city_name`, `area_code`, `area_name`, `updated_at`, `created_at`)"
+                             " VALUES (237, 320," + str(id) + ", 'AutoTest测试', '', 0, '', NULL, '', '', '',"
+                                                         " '0000-00-00', 0, '', '', '', '', '', '', '', '', '', '', 0, '', 0, '', 0,"
+                                                         " '', '2023-11-21 16:46:42', '2023-11-21 16:46:42')")
+        yield sql_cust_baseinfo
+
+    def insert_many_cust_data(self, begin, max):
+
+        while begin <= max:
+            for sql in self.cust_sqls(begin):
+                # print('开始执行sql')
+                # print(sql)
+                self.query_sql(DB=SCRM_payhub, SQL=sql)
+            print(f'新增第{begin - 19064}')
+            begin += 1
+
 
 if __name__ == '__main__':
     pass
@@ -536,4 +592,9 @@ if __name__ == '__main__':
     # excue.delete_demo_data(external_shop_id='S12', retail_shop_id="M12")
 
     # -------------- 聚合开户----------
-    excue.delete_payhub_data('913101180625739120')
+    # excue.delete_payhub_data('913101180625739120')
+
+    # -----------批量增加客户列表的数据-------2023.12.6日新增
+    excue.insert_many_cust_data(begin=24836, max=99067)
+
+    # -----------批量增加客户列表的数据-------2023.12.6日-----

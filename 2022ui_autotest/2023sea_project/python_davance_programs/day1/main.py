@@ -54,6 +54,6 @@ def f1(s: str):
     return s.lower()
 
 
-if __name__ =="__main__":
+if __name__ == "__main__":
     main()
 

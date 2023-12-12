@@ -20,3 +20,6 @@ class Person(object):
         if cls.obj is None:
             cls.obj = super(Person).__new__(cls)  # 分配内存
         return cls.obj
+
+if __name__ == '__main__':
+    print(Person.obj)
