@@ -17,7 +17,7 @@ def filter_nums2(list1: list, mark: int):
 
     return [num for num in list1 if num > mark]
 
-print(filter_nums2(list1=[10, 11, 3, 1], mark=5))
+print(filter_nums2([5.6,4,5,33],5))
 
 def filter_nums(nums, mark):
     """
@@ -25,6 +25,8 @@ def filter_nums(nums, mark):
     :param mark: 判断数字大小的给定值
     :return: 大于mark的list
     """
-    return list(filter(lambda x: x > mark, nums))
+    return list(filter(lambda x: x <= 2, nums))
+    # return list(filter(lambda x: x > mark, nums))
 
-print(filter_nums(nums=[44,1,2],mark=5))
+
+print(filter_nums(nums=[44, 1, 2], mark=5))

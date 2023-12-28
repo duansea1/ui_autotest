@@ -5,5 +5,8 @@
 # ---
 
 # 可迭代对象 list tuple str dict
-
 print(hasattr(list, "__iter__"))
+
+print(hasattr(tuple, "__iter__"))
+print(hasattr(dict, "__iter__"))
+print(hasattr(int, "__iter__"))

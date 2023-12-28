@@ -16,14 +16,15 @@ def index():
     return "index"
 
 @app.router('/ucenter')
-def index():
+def ucenter():
     return "ucenter"
 
 def run():
     url = input("请输入url：")
     try:
-        print(app.url_map[url]())
+        print(app.url_map[url]())  # 获取url对应的func名称加（）是为了执行函数
     except Exception as e:
         print(e)
+
 if __name__ == "__main__":
     run()

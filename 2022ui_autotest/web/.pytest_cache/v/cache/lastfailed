@@ -1,5 +1,6 @@
 {
   "driver_start.py::VisitSouGouByChrome::test_operateWindowHandle": true,
   "test_case/test_demo_case.py::test_assume": true,
-  "test_case/test_demo_case.py::test_fail": true
+  "test_case/test_demo_case.py::test_fail": true,
+  "test_case/test_search.py::TestSerch::test_testSerch": true
 }

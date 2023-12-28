@@ -17,9 +17,10 @@ def hello():
     print("hello")
 def home():
     print("home")
+
 url_map = {
-    "http://localhost/hello": hello,
-    "http://localhost/home": home
+    "/hello": hello,
+    "/home": home
 }
 
 while True:
@@ -29,6 +30,6 @@ while True:
     try:
         url_map[url]()  # url_map[url] 返回的是func_name
     except KeyError as e:
-        print(404)
+        print('404:未找到对应路径')
 
 

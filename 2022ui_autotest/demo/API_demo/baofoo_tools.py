@@ -11,6 +11,13 @@ from baofu_method.scrm_methods import Scrm_Lingshou, delete_payhub_data
 from commons.time_tools import TimeTool
 
 
+"""
+工具集合：
+
+
+"""
+
+
 DBs = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "crm", "password": "JWW4zud0",
        "port": 3306, "data": "zw_shop"}
 SCRM_lingshou = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "scrm", "password": "scrm@135qwe",
@@ -518,6 +525,21 @@ class ConvenientScript(object):
             print(f'新增第{begin - 19064}')
             begin += 1
 
+    def insert_many_check_rewards(self, n=1):
+
+        sql = ("INSERT INTO `ucenter`.`zw_kyd_member_check_in_reward`( `tenant_id`, `corp_id`, `member_no`,"
+               " `check_date`, `type`, `prog_day`, `reward`, `send_type`, `send_time`,"
+               " `send_state`, `attempt`, `reason`, `is_deleted`, `created_at`, `updated_at`, `deleted_at`) "
+               "VALUES (237, 320, '540133129594068993', '2023-12-20', 2, 21, 21, 1, "
+               "'2023-12-20 15:47:36', 2, 0, '', 2, '2023-12-20 15:47:36', '2023-12-20 15:47:36', NULL)")
+        while n < 20000:
+            print(f'第{n}次执行')
+            self.query_sql(DB=SCRM_scrm, SQL=sql)
+            n += 1
+
+
+
+
 
 if __name__ == '__main__':
     pass
@@ -595,6 +617,10 @@ if __name__ == '__main__':
     # excue.delete_payhub_data('913101180625739120')
 
     # -----------批量增加客户列表的数据-------2023.12.6日新增
-    excue.insert_many_cust_data(begin=24836, max=99067)
+    # excue.insert_many_cust_data(begin=24836, max=99067)
 
     # -----------批量增加客户列表的数据-------2023.12.6日-----
+
+
+    # ----------------新增签到数据-------------------
+    excue.insert_many_check_rewards(n=1)

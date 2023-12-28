@@ -26,4 +26,4 @@ def sum(num):
     return s
 
 if __name__ == "__main__":
-    print(sum(1000))
+    print(sum(100))

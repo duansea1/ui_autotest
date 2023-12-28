@@ -31,10 +31,12 @@ def print_all_file2(file_path):
             print_all_file2(item.path)
 
 def recoder(n: int):  # n必须大于0
+    # 过深的递归会导致栈溢出
     if n == 1:
-        return
+        return True
     else:
         n -= 1  # 每递归一次，层数减1
+        print(n)
         recoder(n)
 def recoder2():
     recoder2()
@@ -42,6 +44,8 @@ def recoder2():
 
 if __name__ == "__main__":
     p = ("C:/Users/段海洋/myfiles/auto_files/ui_autotest/2022ui_autotest"
-         "/2023sea_project/python_davance_programs")
-    print_all_file2(p)
-    recoder(5)
+         "/2023sea_project/python_davance_programs/day3")
+    # print_all_file2(p)
+    # 注意，os.walk('.') 会遍历当前目录及其所有子目录
+    print_all_files('.')
+    recoder(995)

@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/2023sea_project" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/2023sea_project/python_davance_programs/day2" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/demo/API_demo/commons" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2023sea_project/python_davance_programs/day9" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <content url="file://$MODULE_DIR$/../RB-autotest/Autotest">

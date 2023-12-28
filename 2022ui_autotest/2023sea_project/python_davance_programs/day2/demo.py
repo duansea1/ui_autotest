@@ -27,3 +27,10 @@ print(getattr(A, 'age', 'not find age!!'))
 # 如果Instance 对象中有属性age则打印self.age的值，否则打印'not find'
 
 print(getattr(A(), 'method', 'default'))
+res = getattr(A(), 'method1', 'default')
+if res != 'default':
+    print('找到了method')
+else:
+    print('没找到')
+
+

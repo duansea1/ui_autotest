@@ -6,9 +6,11 @@
 # ---
 import pickle
 
+# 修改2023-12.18
+
 l = [1,2,4]
 # 写入数据
-pickle.dump(l, open('xuliehua.txt', 'wb'))
+pickle.dump(l, open('xuliehua.txt', 'wb11111111111'))
 
 # 读取序列化的数据
 data = pickle.load(open("xuliehua.txt", "rb"))

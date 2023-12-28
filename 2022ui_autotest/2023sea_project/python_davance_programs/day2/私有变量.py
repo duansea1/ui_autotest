@@ -9,11 +9,11 @@ def stest_private_and_protected_public():
     # private 私有的
     # protected 受保护的 不被其他文件导入
     pass
+
 x = 10
 _y = 20
 
-
-class A():
+class A(object):
     def __init__(self):
         self.__z = 2  # 私有
 

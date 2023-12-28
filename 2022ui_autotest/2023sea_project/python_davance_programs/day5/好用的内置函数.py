@@ -10,7 +10,7 @@ from functools import reduce
 # reduce()
 def filter_test():
     def f(x):
-        if x>2:
+        if x > 2:
             return True
     print(filter(None, [1,2,3]))
     return filter(f, [1,2,3])   # None 对Itertor不做任何操作
@@ -29,21 +29,26 @@ def map_test():
     # return list(map(lambda x, y: x+y, nums1, nums2)) # 两种方法实现两个列表相加
     return list(map(lambda nums1, nums2: nums1+nums2, nums1, nums2))
 
+
 def reduce_test():
     # 累加功能 1~5的累计功能 [1,2,3,4,5] =>(((1+2) + 3) + 4)
     def f(x, y):
         result = x +y
         return result
-    print(reduce(f, [1,2,3,4,5]))
+    reduce(f, [1,3,1])
+    print(reduce(f, [1, 2, 3, 4, 5]))
 
 def zip_test():
-    print(list(zip('ahhdjf',range(3),[13,2,3,4])))
+    print(list(zip('ahhdjf', range(30), [13,2,3,4])))
     
 
 if __name__ == "__main__":
     for vale in filter_test():
         print(vale)
+
+    print('----------------')
     for value in map_test():
         print(value)
+    print('---------------')
     print(map_test())
     zip_test()
