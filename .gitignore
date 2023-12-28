@@ -1,9 +1,15 @@
-##ignore this file##
+##ignore this file-项目外##
 /RB-autotest
 /.idea
 /.metadata
 */web/test_case/allure_results
 
+
+*/.idea/
+
+
+
+*sea*.py
 
 
 # idea
