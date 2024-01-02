@@ -2,6 +2,7 @@
 Created on 2022年8月30日
 
 @author:
+sql执行的操作
 '''
 import pymysql as ms
 
