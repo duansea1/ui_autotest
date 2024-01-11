@@ -1,2 +1,0 @@
-INFO     web.test_case.conftest:conftest.py:46 ------开始执行用例：test_case/test_demo_case.py::test_assume-------
-INFO     web.test_case.conftest:conftest.py:50 ^^^^^执行结束用例执行：test_case/test_demo_case.py::test_assume^^^^^^

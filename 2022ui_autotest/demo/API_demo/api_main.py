@@ -30,5 +30,5 @@ def add_products():
 
 
 if __name__ == "__main__":
-    # pass
+    pass
     add_products()

@@ -1,6 +1,17 @@
+##ignore this file-项目内##
+/RB-autotest
+/.idea
+/.metadata
+*/web/test_case/allure_results
+
+
+*/.idea/
+
+
+
 
 # idea
-.idea
+*.idea
 
 
 */*__pycache__

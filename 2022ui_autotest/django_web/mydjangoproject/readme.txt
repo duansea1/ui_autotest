@@ -17,3 +17,8 @@ Password: adminroot
 =======
 Password: adminroot
 >>>>>>> 5210fa1b7715b51962a03b38b5322cac1dc97b6c
+
+本地数据库密码：
+-ip：localhost
+-account：root
+-pwd：root

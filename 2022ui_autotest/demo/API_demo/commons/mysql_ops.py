@@ -2,6 +2,7 @@
 Created on 2022年8月30日
 
 @author:
+sql执行的操作
 '''
 import pymysql as ms
 
@@ -54,9 +55,9 @@ def query_mysql(host, user, password, port, database, sql):
         # return rsp_data
 
     finally:
-        print("关闭连接")
+        # print("关闭连接")
         conn.close()
-        print(rsp_data)
+        # print(rsp_data)
         return rsp_data
 
 

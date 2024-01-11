@@ -5,7 +5,7 @@
     url: http://api-test.shop.keyid.cn/platform/auth/login
     params:
       mobile: 13166210872
-      password: duan2324
+      password: shopkyd123
     headers:
       Accept: application/json, text/plain, */*
       Content-Type: application/json

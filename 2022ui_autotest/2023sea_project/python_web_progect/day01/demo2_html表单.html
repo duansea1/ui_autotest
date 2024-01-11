@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+		html表单：
+		表单：form
+		input:输入框type属性
+				text：文本
+		name：表单的参数名
+		value：表单的值
+		button：普通按钮（点击之后没有特殊效果）
+		type=submit 有提交的功能
+		radio--单选框
+		checkbox-多选框
+		file:文件上传
+		hidden：隐藏的表单域，预设一个传递的参数和值
+		reset 清空表单
+		placeholder--输入框默认内容
+		label:对应的for属性应当与相关元素的id属性相同
+		textarea标签：文本输入框
+		select:选择框 ----option：选项
+		【iframe】:会创建包含另外一个文档的内联框架
+		
+		-->
+		<!-- <div>
+			<form action="" method="get">
+				账号：<input type="text" name="user" value=""/><br />
+				密码：<input type="password" name="pwd" value=""/><br />
+				<input type="button" value="登录"/>
+				
+				
+			</form>
+		</div> -->
+		<div>
+			<h1>登录</h1>
+			<form action="" method="get">
+				<input type="hidden" name="token" value="UUUUJGJGGJGJ"/>
+				<label for='u01'>账号:</label>
+				<input type="text" name="user" value="" placeholder="请输入账号" id="u01"/><br />
+				<label for="p01">密码:</label>
+				<input type="password" name="pwd" value="" placeholder="请输入密码" id="p01"/><br />
+				性别：男<input type="radio" name="sex"/>
+				女<input type="radio" name="sex"/>
+				未知<input type="radio" name="sex"/><hr />
+		<!--多选框-->
+		技能：python<input type="checkbox" name="skill"/>
+				java<input type="checkbox"/>
+				C++|<input type="checkbox"/>
+				<br />
+			    上传头像：
+				<input type="file" />
+				个人介绍：
+				<textarea name="userinfo" id="" cols="10" rows=""></textarea><br />
+				所在地区：<br />
+				<select name="" id="">
+					<option value="sh">上海市</option>
+					<option value="bj">北京</option>
+					<option value="hn">河南省</option>
+				</select>
+				市\区:
+				<select name="" id="">
+					<option value="pd">浦东</option>
+					<option value="yp">杨浦</option>
+					<option value="hn">奉贤</option>
+				</select>
+				
+				
+				<br />
+				
+				<input type="submit" value="登录"/>
+				<input type="reset" name="重置"/>
+				
+				
+			</form>
+			<iframe src="https://home-test.scrm.keyid.cn/login" frameborder="0" width="300px" height="200px"></iframe>
+		
+	</body>
+</html>
