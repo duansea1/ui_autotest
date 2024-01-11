@@ -14,19 +14,20 @@ class A(object):
         """被装饰的函数写到这里
         self.func 是被传入的装饰函数
         """
-        pass
+        return self.func(*args, **kwargs)  # 执行func函数
 
 @A   # 类，会把f传给类，然后返回一个A的实例
 def f(a, b):
     """
     """
+    return a + b
 
 nums = [1, 2, 3]
-print(hasattr(nums, "__call__"))
+# print('1:', hasattr(nums, "__call__"))
 
 
 if __name__ == "__main__":
-    print(hasattr(f, "__class__"))
-    print(type(f))
-    print(type(A(f)))
-    f(1, 2)
+    print('2:',hasattr(f, "__class__"))
+    print('3:',type(f))
+    print('4',type(A(f)))
+    print(f(1, 2))

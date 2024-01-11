@@ -16,13 +16,6 @@ def logger(func):
         logging.info(f"{func.__name__} is running,argument is {args}")
     return log_func  # 把log_func函数的引用 传给logger的调用者
 
-def f1(a, b):
-    return a + b
-
-def f2(x, y):
-    return
-
-
 def out_func(n):
     num = n
 
@@ -35,8 +28,15 @@ def out_func(n):
     return inner_func
 
 
+def f1(a, b):
+    return a + b
+
 f1_logger = logger(f1)  # 返回该嵌套的函数func-->f1
+
+
 print(f1_logger)
+def f2(x, y):
+    return
 # f2_logger = logger(f2)
 f1_logger(1, 222)  # 执行f1(1,222)函数
 # f2_logger(2, 3)

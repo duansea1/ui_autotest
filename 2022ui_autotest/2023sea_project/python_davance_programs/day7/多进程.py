@@ -20,24 +20,30 @@
 """
 from multiprocessing import Process, Queue
 import requests
+
 """
-需求：使用多线程实现并发下载图片
+需求：使用多进程实现并发下载图片
 --多进程会独享内存
 - 如何共享资源？队列Queue ,内存数据库redis
 """
+
+
 def init_task():
     tasks = Queue()  # 队列
     tasks.put('http://pic1.win4000.com/wallpaper/5/58cf4009ba10a.jpg')
     tasks.put('https://lmg.jj20.com/up/allimg/811/112014113244/141120113244-5-1200.jpg')
+
+
 def download(q: Queue):
     while True:
         url = q.get()
         r = requests.get(url, verify=False)
         img_name = url.split('/')[-1]
         with open(img_name, 'wb') as f:
-            f.write(r.content)      # 把图片信息保存到文件中
+            f.write(r.content)  # 把图片信息保存到文件中
         if q.empty():
             break
+
 
 if __name__ == "__main__":
     tasks = Queue()  # 不能共享list、Queue和list不同点
@@ -47,3 +53,5 @@ if __name__ == "__main__":
     p2 = Process(target=download, args=(tasks,))  # 创建一个用来执行downlod函数的进程2
     p1.start()  # 启动进程1
     # p2.start()
+
+# TODO 2024-1-10 未复习

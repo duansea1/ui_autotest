@@ -33,9 +33,15 @@ def delete_shop_user(open_kid):
     for sql in delete_shop_user_sqls(open_kid):
         print('执行的sql：', sql)
         res = execute_sql(DB_MANDAO_SHOP, sql)
-        print('执行结果：', res)
+        if res['code'] == 0:
+            print(f"执行成功结果：{res}\n受影响的数据量：{res['rows']}")
+            continue
+        else:
+            print('error----执行失败结果：', res)
+            break
+
 
 
 if __name__ == '__main__':
     # 删除商城的用户
-    delete_shop_user(open_kid="OKIDBHGHsux9VqcA2xdTbYPFtcYSeP9c")
+    delete_shop_user(open_kid="OKIDBHGHsux9VqcA2xdTbYPFtcYSeP9c111")

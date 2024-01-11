@@ -19,7 +19,7 @@ class Myclass2(object):
         pass
 
 print(callable(add))
-print(callable(Myclass))  # 加（）验证对象有没有callable
+print(callable(Myclass()))  # 加（）验证对象有没有callable
 print(callable(Myclass2()))
 
 
@@ -27,13 +27,13 @@ class CallableClass:
     def __call__(self, *args, **kwargs):
         print("Called with:", args, kwargs)
         if args:
-            print('参数正确',[args][0][0]=='a')
+            print('参数正确：', [args][0][0])
         if kwargs:
-            print('dayin:',kwargs['key'])
+            print('dayin:', kwargs['key'])
             if kwargs['key'] == 'value1':
                 print('获取到可变参数', kwargs)
 
-    def sum (self, a, b):
+    def sum(self, a, b):
         return a + b
 
 
@@ -42,6 +42,6 @@ obj = CallableClass()
 
 # 像函数一样调用这个对象
 obj('a', 2, 3, key="value1")
-print(obj.sum(1,2))
+print(obj.sum(1, 2))
 
 print(callable(obj))

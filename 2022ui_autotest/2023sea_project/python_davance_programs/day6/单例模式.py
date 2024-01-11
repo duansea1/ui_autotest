@@ -18,9 +18,9 @@ class Person(object):
         pass
 
     def __new__(cls, *args, **kwargs):
-        print('kaishi ')
+        print(f'kaishi分配内存{cls._obj} ')
         if not cls._obj:
-            print('开始分配内存',super(Person, ).__new__(cls))
+            print('开始分配内存', super().__new__(cls))
             # cls._obj = True
             cls._obj = super().__new__(cls)  # 分配内存
         else:

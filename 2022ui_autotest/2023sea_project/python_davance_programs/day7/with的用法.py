@@ -14,7 +14,14 @@ class Myclass():
     def __exit__(self, exc_type, exc_val, exc_tb):
         print("exit-----")
 
-
+    def openfile(self, filename):
+        with open(filename, 'r') as f:
+            contents = f.read()
+            print(contents)
 
 #  open 返回一个对应-文件对象，文件对象支持上下文管理协议
-f = open()
+# f = open()
+
+if __name__ == '__main__':
+    esc = Myclass()
+    esc.openfile('filename')

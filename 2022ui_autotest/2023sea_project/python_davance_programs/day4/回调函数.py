@@ -5,7 +5,8 @@
 # ---
 # 函数里面套函数
 """
-回调函数（callback function）是一个在特定事件发生时被调用的函数。在Python中，回调函数可以用于各种场景，如事件处理、异步编程、函数式编程等
+回调函数（callback function）是一个在特定事件发生时被调用的函数。
+在Python中，回调函数可以用于各种场景，如事件处理、异步编程、函数式编程等
 """
 def callback_fuc(arg1, arg2):
     return f"callback func:{arg1}、{arg2}"

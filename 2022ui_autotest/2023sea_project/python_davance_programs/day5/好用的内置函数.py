@@ -12,8 +12,8 @@ def filter_test():
     def f(x):
         if x > 2:
             return True
-    print(filter(None, [1,2,3]))
-    return filter(f, [1,2,3])   # None 对Itertor不做任何操作
+    print(filter(None, [1,2,3]))  # None 对Itertor不做任何操作
+    return filter(f, [1, 2, 3])    # 这将打印 [3]
 
 def map_test():
     # return map(lambda x: x+2, [1, 2, 3])   # 对[1,2, 3]中的每一个元素进行x+2的处理

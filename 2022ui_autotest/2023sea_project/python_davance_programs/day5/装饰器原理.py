@@ -8,6 +8,7 @@ from types import FunctionType
 
 def add_itali(s):
     return "<i>" + s + "<i>"
+
 # @add_itali
 def add_bold(s):
     return "<b>" + s + "<b>"
@@ -17,3 +18,5 @@ if __name__ == "__main__":
     print(type(add_itali))
 
     print(add_itali('abc'))
+    # # 打印修饰器函数
+    # print(add_bold('内部函数'))

@@ -45,7 +45,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -74,12 +74,28 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+# 指定在全局配置setting.py中的DATABASES字典配置需要链接的数据库信息
 DATABASES = {
+    # 指定数据库的别名/标签
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+            # 指定当前使用的数据库引擎，支持mysql、oracle、sqllite3
+            # 需要安装 >pip install mysqlclient -i http://mirrors.aliyun.com/pypi/simple --trusted-host mirrors.aliyun.com
+            'ENGINE': 'django.db.backends.mysql',
+            # 指定数据库的名称，如果使用的是sqllite3，需要指定sqllite2文件的绝对路径
+            'NAME': 'mydjango',
+            'USER': 'root',
+            'PASSWORD': 'root',
+            'HOST': '127.0.0.1',
+            'POST': '3306'
+    },
+    'product': {
+                'ENGINE': 'django.db.backends.mysql',
+                'NAME': 'product',
+                'USER': 'root',
+                'PASSWORD': 'root',
+                'HOST': 'localhost',
+                'POST': '3306'
+        }
 }
 
 

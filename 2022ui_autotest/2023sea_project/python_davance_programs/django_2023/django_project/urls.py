@@ -47,15 +47,18 @@ from myappsea import views
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
-    path('project/index/', views.index),
+    # path('project/index/', views.index),
     # path('get_project/', views.get_project),
     # path('get_project1/', views.get_project1),
 
     # 参数值匹配路径路由
-    path('projects/<int:pk>/', views.get_projects),
-    path('project/', include('myappsea.urls')),
-    path('cases/', include('myappsea.urls')),
-    re_path(r'projects/(?P<pk>\w{3})/$',views.get_projects),
+    # path('projects/<int:pk>/', views.get_projects),
+    # path('project/', include('myappsea.urls')),
+    # path('cases/', include('myappsea.urls')),
+    # re_path(r'projects/(?P<pk>\w{3})/', views.get_projects),
+    # re_path(r'projects/(?P<pk>\d+)/', views.get_projects),
+    path('', include('myappsea.urls')),
+    path('csv/', views.ProjectsView.some_view)  # 获取子应用中的urls
 
 ]
 

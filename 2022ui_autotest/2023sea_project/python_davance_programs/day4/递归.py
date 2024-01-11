@@ -39,7 +39,15 @@ def recoder(n: int):  # n必须大于0
         print(n)
         recoder(n)
 def recoder2():
+    # 函数内部调用函数本身就是递归
     recoder2()
+
+def shell_os(cmd):
+    """
+    @param:cmd-shell指令
+    """
+    output = os.popen(cmd).read()
+    return output
 
 
 if __name__ == "__main__":
@@ -48,4 +56,5 @@ if __name__ == "__main__":
     # print_all_file2(p)
     # 注意，os.walk('.') 会遍历当前目录及其所有子目录
     print_all_files('.')
-    recoder(995)
+    recoder(5)
+    print(shell_os('ipconfig'))

@@ -84,8 +84,27 @@ mange.py 用于管理django项目的管理工具
  views 用于定义子应用的业务逻辑
 
 
+六、从数据库中操作数据
+1、可以使用pymysql模块执行原生的sql语句去操作数据库
+    a、备份sql语句一般比较复杂，维护困难
+    b、sql语句的安全性无法得到保障，可能会有sql注入的风险
+    c、数据库的创建、数据表的生产、数据备份以及数据库的迁移非常麻烦
+    d、sql语句的性能无法保障
 
+2、ORM框架
+a、数据库：需要提前准备数据库
+b、数据表：与ORM框架中的模型类一一对应
+c、字段、模型中的类属性（filed子类）
+d、记录：类似于模型类的多个实例
 
-
+3、mysql中有哪些对象
+    a、数据库：
+    b、数据表：
+    c、字段：
+    d、记录：
+【迁移脚本】-只要修改了model.py文件中的字段，需要执行如下
+1、 python manage.py makemigrations projects  
+2、python manage.py sqlmigrate myappsea 0002_projects
+3、python manage.py migrate myappsea
 
 

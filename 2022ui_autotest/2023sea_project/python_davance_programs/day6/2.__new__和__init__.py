@@ -38,10 +38,10 @@ class Student(Person):  # 继承person
         pass
 
     def sum(self, name):
-        print ('重写--' +str(name))
+        print('重写--' + str(name))
         # self.sum('kevin')
 
-        return '重写--' +str(name)
+        return '重写--' + str(name)
 
 class Teacher(Person):
     pass
