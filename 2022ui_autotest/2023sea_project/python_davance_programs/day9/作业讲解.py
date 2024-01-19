@@ -4,6 +4,7 @@
 # @Time: 2023-11-17 12:05
 # ---
 """
+
 https://so.gushiwen.cn/search.aspx?type=title&page=3&value=%e6%98%a5%e5%a4%a9&valuej=%e6%98%a5
 """
 
@@ -14,14 +15,14 @@ import threading
 import requests
 
 count = 1
-def downloader(q:queue.Queue):
+def downloader(q: queue.Queue):
     while not q.empty():
         url = q.get()
-        r = requests.get(url)
+        r = requests.get(url, verify=False)
         print(url)
         print(re.findall(r"page=(\d)&value=", url))
         page_num = (re.findall(r"page=(\d)&value=", url))[0]
-        print(page_num)
+        print('page_num:', page_num)
         filename = f"春天{page_num}.html"
         with open(filename, 'wb') as f:
             f.write(r.content)

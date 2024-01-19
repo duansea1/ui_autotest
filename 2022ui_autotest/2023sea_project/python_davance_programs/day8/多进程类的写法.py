@@ -6,9 +6,11 @@
 from multiprocessing import Process
 class MyProcess(Process):
     def __init__(self):
-        super().__init__()
+        super().__init__()  # 实例化继承的类Process的init方法
+        pass
+
     def run(self):
-        print('running....')
+        print('running....', self.name, self.daemon)
 
 if __name__ == "__main__":
     p1 = MyProcess()

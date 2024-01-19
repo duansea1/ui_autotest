@@ -10,7 +10,7 @@ n = 20000
 lock = threading.Lock()
 def work():
     global n
-    for i in range(1000000):
+    for i in range(100):
         # 上锁
         # lock.acquire()
         n -= 1

@@ -9,15 +9,15 @@
 
 import random
 
-class Myclass(object):
+class MyClass(object):
     objs = []
 
     def __new__(cls, *args, **kwargs):
         if len(cls.objs) < 5:
-            obj = super().__new__(cls)
+            obj = super().__new__(cls)  # 创建实例
             cls.objs.append(obj)
         else:
-            obj = random.choice(cls.objs)
+            obj = random.choice(cls.objs)  # 随机选择一个
         return obj
 
 class Person(object):
@@ -30,11 +30,11 @@ class Person(object):
 
 class Student(Person):
 
-    def __init__(self,firstname, lastname, grade):
+    def __init__(self, firstname, lastname, grade):
         self.grade = grade
         # # 初始化父类
         # Person.__init__(self, firstname, lastname)  # 方法1：将父类初始化
-        super(Student, self).__init__(firstname, lastname)   # 方法2： 与上边是一样的效果
+        super().__init__(firstname, lastname)   # 方法2： 与上边是一样的效果(在子类中调用父类的初始化方法)
         # super().__init__(firstname, lastname)  # 方法3，调用继承的父类
 
     # def __str__(self):
@@ -44,19 +44,30 @@ class Student(Person):
 
 
 class A(object):
-    def __init__(self):
-        super(A, self).__init__()
+    def __init__(self,):
+        # self.a = a
+        super().__init__()
         print("A---")
+
+    def dayin(self):
+        s = 'A'
+        return s
 
 class B(object):
     def __init__(self):
-        super(B, self).__init__()
+        super().__init__()
         print("B---")
 
-class C(A, B):
-    def __init__(self):
-        super().__init__()
+    def dayin(self):
+        s = 'B'
+        return s
 
+class C(A, B):
+    """
+    类继承，优先从左到右继承
+    """
+    def __init__(self):
+        super(B, self).__init__()
         print("C---")
         # B.__init__(self)
 
@@ -65,3 +76,6 @@ if __name__ == "__main__":
     stu.show_student()
 
     c = C()
+    # print(c.dayin())
+
+

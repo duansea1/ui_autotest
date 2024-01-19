@@ -8,6 +8,7 @@ multiprocessing.Queue :管道 序列化
 Redis rabitMQ    kafka
 MQ （message Queue）
 """
+import time
 from multiprocessing import Process, Queue
 
 def work01(q: Queue):
@@ -15,16 +16,16 @@ def work01(q: Queue):
     :param q: 要处理的任务
     :return:
     """
-    print('worko1中的参数q的id：', id(q))
+    print('work01中的参数q的id：', id(q))
     while q.empty():
         print(f"work01开始处理{q.get()}")
 
 def work02(q: Queue):
     """
     :param q: 要做的所有任务
-    :return:
+    :return:#
     """
-    print('worko2中的参数q的id：', id(q))
+    print('work02中的参数q的id：', id(q))
     while q.empty():
         print(f"work02开始处理{q.get()}")
 
@@ -38,5 +39,6 @@ if __name__ == "__main__":
     p1 = Process(target=work01, args=(q,))    # 子进程q1
     p2 = Process(target=work02, args=(q,))    # 子进程q2
     p1.start()
-    p2.start()
+    # p2.start()
+    time.sleep(0.1)
     print("执行结束")

@@ -32,6 +32,7 @@ def init_task():
     tasks = Queue()  # 队列
     tasks.put('http://pic1.win4000.com/wallpaper/5/58cf4009ba10a.jpg')
     tasks.put('https://lmg.jj20.com/up/allimg/811/112014113244/141120113244-5-1200.jpg')
+    return tasks
 
 
 def download(q: Queue):
@@ -46,12 +47,15 @@ def download(q: Queue):
 
 
 if __name__ == "__main__":
-    tasks = Queue()  # 不能共享list、Queue和list不同点
-    tasks.put('http://pic1.win4000.com/wallpaper/5/58cf4009ba10a.jpg')
-    tasks.put('https://lmg.jj20.com/up/allimg/811/112014113244/141120113244-5-1200.jpg')
-    p1 = Process(target=download, args=(tasks,))  # 创建一个用来执行downlod函数的进程1
-    p2 = Process(target=download, args=(tasks,))  # 创建一个用来执行downlod函数的进程2
+    # tasks = Queue()  # 不能共享list、Queue和list不同点
+    # tasks.put('http://pic1.win4000.com/wallpaper/5/58cf4009ba10a.jpg')
+    # tasks.put('https://lmg.jj20.com/up/allimg/811/112014113244/141120113244-5-1200.jpg')
+
+    # -新增进程，arg中的参数是init_task返回的tasks数据
+    p1 = Process(target=download, args=(init_task(),))  # 创建一个用来执行downlod函数的进程1
+    # -p2中的arg参数tasks，是队列新增的参数，同上p1
+    # p2 = Process(target=download, args=(tasks,))  # 创建一个用来执行downlod函数的进程2
     p1.start()  # 启动进程1
     # p2.start()
 
-# TODO 2024-1-10 未复习
+

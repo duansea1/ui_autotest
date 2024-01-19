@@ -33,12 +33,13 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.contenttypes',  # 内容类型框架。
+    'django.contrib.sessions',   # 消息框架
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',  # 静态文件管理框架
     # 注册项目
     'myappsea',
+    'interfaces',
 ]
 
 MIDDLEWARE = [

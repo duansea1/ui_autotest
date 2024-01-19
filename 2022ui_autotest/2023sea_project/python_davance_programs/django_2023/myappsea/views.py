@@ -1,11 +1,14 @@
 # -*- coding:utf-8 -*-
-
+from django.db.models import Q
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views import View
 import json
 
 import csv
+from .models import Projects
+from django.db import connection
+from interfaces.models import Interfaces
 
 # Create your views here.
 """
@@ -77,7 +80,7 @@ class ProjectsView(View):
 
     """
 
-    def get(self, request, pk):
+    def get1(self, request, pk):
         project_data = {
             'id': 1,
             'name': 'XXX项目',
@@ -118,6 +121,103 @@ class ProjectsView(View):
         # 2、前后端分离的开发模式
         # a、后端如果返回的是数据（json、xml）
         return JsonResponse(project_data_list, json_dumps_params={'ensure_ascii': False}, safe=False)
+
+    def get(self, request, pk):
+        # 一、创建
+        # 方式一
+        # 直接使用模型类（字段名=值1，字段2=值2），来创建模型实例
+        # b、必须使用模型实例，调用save（）方法才会执行sql语句
+        # obj = Projects(name='在线哈哈', leader='B负责人')
+        # obj.save()  # 执行sql语句
+        # pass
+        # 方式二
+        # a、使用模型类.objects.create
+        # b\使用manage对象的.create(字段名=值1，字段2=值2)来创建模型类实例
+        # c、无需使用save方法，直接调用皆可
+        # Projects.objects.create(name='在线玲子', leader='玲子夜东京')
+
+        # 二、读取
+        # 1、读取多条数据
+        # qs = Projects.objects.all()
+        # 2、读取单条数据
+        # 方式1：
+        # Projects.objects.get(id=1)
+        # 方式二
+        # a、可以使用模型类.filter()返回querySet对象
+        # b、如果使用指定条件查询的记录数量为0，会返回空的QuerySet对象
+        # c、如果使用指定条件查询的记录数量超过1，将符合条件的模型对象包裹在QuerySet对象中返回
+        # 支持数值索引取值、支持切片操作、first()\last()\获取长度：len（Query对象）、count()
+        # 判断对象是否为空exists（）
+        # obj2 = Projects.objects.filter(id=1)
+        # ORM框架中，会给每一个模型类中的主键设置一个别名<pk>
+        # obj2 = Projects.objects.filter(pk=1)
+        # id__gte:greate_than
+        # Projects.objects.filter(id__in=[1,4]) in(1,2,3)
+        # Projects.objects.filter(id__contains='XXX')--LIKE BINARY '%hhh%'
+        # Projects.objects.filter(id__gte=1)
+
+        """
+         filter方法支持多种查询类型:
+         1、字段名_查询类型=具体值
+         2、字段名_exac = 具体值。==》字段名=具体值
+         3、字段名_gte:大于等于 _gt:大于
+         4、字段名_lt:小于   字段名_lte 小于等于
+         5、contains 包含
+         6、startwith:以XXX开头
+         7、endwith：以XXX结尾
+         8、isnull:是否为null
+         9、一般前面加上i，表示忽略
+         10、exclude为反向查询，filter支持所有类型的查询
+
+
+        """
+        # 创建从表数据
+        # 外键对应的父表如何传递？
+        # -方式一：1、先获取父表的模型对象；2、将获取的父表对象以外件名作为参数传递
+        # project_obj = Projects.objects.get(name='詹姆斯')
+        # interface_obj = Interfaces.objects.create(name='在线图书项目-执行', tester='布克',
+        #                           projects=project_obj)
+
+        # a、通过从表模型对象（已经获取到了），如何获取父表数据
+        # 可以通过外键字段先获取父类模型对象
+        # projects_obj = Projects.objects.get(id=1)
+        # projects_obj.interfaces_set.all()
+
+        # b、通过父表模型对象（已经获取到了）
+        # 默认可以通过从表模型类名小写_set,返回manager对象，可以进一步使用filter进行过滤
+        # projects_obj.interfaces_set.all()-返回的是manager对象
+        # 如果在从表模型类的外键字段，指定了related_name参数，那么可以使用related_name参数projects_obj.inter
+        # interface_obj.projects.name
+
+        # c、如果想要通过父表参数来获取从表数据，想要通过从表参数获取父表数据---关联查询
+        # 可以使用关联查询格式：
+        # 关联字段名称_关联模型类中的字段名_查询类型
+        # projects_obj.inter.filter(interfaces_name='XXX')
+        # interfaces_obj.inter.filter(projects_name='XXX')
+
+        # d\逻辑关系
+        # 与关系
+        # 方式一：在同一个方法内部使用，使用添加多个关键字参数，那么每个条件为“与”的关系
+        # 方式二：可以多次调用filter方法，那么filter方法为“与”的关系---QuerySet链式调用
+        # Projects.objects.filter(name_contains='2', leader='湖人')
+        # 或关系：
+        # 可以使用Q查询，实现逻辑关系，多个Q对象之间，如果使用“|”，那么是或的关系
+        # qs = Projects.objects.filter(Q(name__contains='2') | Q(leader='湖人'))
+
+        # e\ 排序：
+        # 可以使用QuerySet对象.order_by(字段名1，-字段名2)
+        # 默认asc升序，可以在字段前面加-，那么就是降序排列
+        # Projects.objects.filter(Q(name__contains='2') | Q(leader='湖人'))order_by('-name')
+
+        # 三、更新：
+        # 方式一：1、先获取数据
+        pj = Projects.objects.get(id=1)
+        pj.name = 'update-在线用户'
+        pj.leader = '保罗'
+        pj.save()
+        pass
+
+        # return JsonResponse(project_data_list, json_dumps_params={'ensure_ascii': False}, safe=False)
 
     def put(self, request):
         return HttpResponse(f"<h1>更新项目信息{request}哦</h1>")

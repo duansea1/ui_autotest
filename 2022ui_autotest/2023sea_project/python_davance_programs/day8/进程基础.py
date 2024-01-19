@@ -10,14 +10,14 @@ from multiprocessing import Process
 def play_music():
     print('子进程p1', os.getpid())
     for i in range(5):
-        print('play music...')
-        time.sleep(1)
+        print(f'play music...第{i+1}次')
+        time.sleep(0.5)
 
 def play_lol():
     print('子进程p2', os.getpid())
     for i in range(5):
-        print('play lol...')
-        time.sleep(50)
+        print(f'play lol...第{i+1}次')
+        time.sleep(1)
 
 
 if __name__ == '__main__':
@@ -28,6 +28,8 @@ if __name__ == '__main__':
     # p2.daemon = True
 
     p1.start()
+
     p2.start()
     p1.is_alive()
-    # p1.join()  # 上面的代码任务没有运行完，不会运行下面的代码
+    print('join-------------开始执行')
+    p1.join()  # 上面的代码任务没有运行完，不会运行下面的代码

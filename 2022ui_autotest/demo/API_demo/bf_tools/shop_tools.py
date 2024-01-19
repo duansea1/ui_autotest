@@ -41,7 +41,8 @@ def delete_shop_user(open_kid):
             break
 
 
-
 if __name__ == '__main__':
     # 删除商城的用户
     delete_shop_user(open_kid="OKIDBHGHsux9VqcA2xdTbYPFtcYSeP9c111")
+    #     OKIDEYjqqVAb9PHVWrHU9iaHfQ7JmEqo ---2991手机号
+    # OKIDBHGHsux9VqcA2xdTbYPFtcYSeP9c-之前的2991关联的openid
