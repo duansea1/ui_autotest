@@ -58,7 +58,7 @@ urlpatterns = [
     # re_path(r'projects/(?P<pk>\w{3})/', views.get_projects),
     # re_path(r'projects/(?P<pk>\d+)/', views.get_projects),
     path('', include('myappsea.urls')),
-    path('csv/', views.ProjectsView.some_view)  # 获取子应用中的urls
+    # path('csv/', views.ProjectsView.some_view)  # 获取子应用中的urls
 
 ]
 

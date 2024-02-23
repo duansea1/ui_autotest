@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     pytest.main('-vsk')  # '-q','-reruns=2'
     """
-    # pytest .\pytest_test\test_api01.py -q -v --html 1.html    输出html的报告
+    # pytest \pytest_test\test_api01.py -q -v --html 1.html    输出html的报告
     # pytest.mark.skip() ---跳过用例
     # Pytest.mark.ifskip(a=5, reason='跳过'） ---如果a=5，则跳过该用例
     

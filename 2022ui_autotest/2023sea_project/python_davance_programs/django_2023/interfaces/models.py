@@ -28,8 +28,9 @@ class Interfaces(BaseModel):
 
     # c、如果是多对多，使用ManyToManyField
     # d
+    # -- 从表与主表进行关联：to=Projects--指向model模块中的关联【模型类】；；on_delete当主表数据被删除时，从表数据也会删除
     projects = models.ForeignKey(to=Projects, on_delete=models.CASCADE, verbose_name='所属项目', help_text='所属项目',
-                                 related_name='inter')
+                                 related_name='interToP')
     # projects = models.ForeignKey(to='projects.Projects' )  # 两种建立关联方式
     # create_time = models.DateTimeField(auto_now_add=True,verbose_name='创建时间', help_text='创建时间')
     # update_time = models.DateTimeField(auto_now=True, verbose_name='更新时间', help_text='更新时间')
@@ -41,5 +42,9 @@ class Interfaces(BaseModel):
         # 未当前数据表设置中文描述信息
         verbose_name = '接口表'
         verbose_name_plural = '接口表'
+        ordering = ['id']
+
+    def __str__(self):
+        return f"Interfaces({self.name})"
 
 

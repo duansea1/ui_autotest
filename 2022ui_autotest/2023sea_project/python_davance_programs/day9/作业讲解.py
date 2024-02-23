@@ -8,10 +8,10 @@
 https://so.gushiwen.cn/search.aspx?type=title&page=3&value=%e6%98%a5%e5%a4%a9&valuej=%e6%98%a5
 """
 
-import queue
 import re
-import threading
 
+import queue
+import threading
 import requests
 
 count = 1

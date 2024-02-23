@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',  # 静态文件管理框架
     # 注册项目
+    'rest_framework',
     'myappsea',
     'interfaces',
 ]

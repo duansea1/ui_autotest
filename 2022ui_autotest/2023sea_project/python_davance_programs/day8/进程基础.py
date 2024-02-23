@@ -30,6 +30,6 @@ if __name__ == '__main__':
     p1.start()
 
     p2.start()
-    p1.is_alive()
+    p1.is_alive()  # 返回true或者false
     print('join-------------开始执行')
     p1.join()  # 上面的代码任务没有运行完，不会运行下面的代码

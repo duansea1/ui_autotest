@@ -25,6 +25,30 @@ def delete_shop_user_sqls(open_kid):
     sql4 = ("DELETE from zw_member_points where open_kid='" + str(open_kid)+"'")
     yield sql4
 
+def delete_shop_to_scrm_user_sqls(mobile):
+    """
+    删除ucenter库中 商城会员与scrm会员的关系数据
+    :param mobile: 用户的手机号
+    :return:
+    """
+    # zw_kyd_member_v2-会员基础数据表，会员与手机号的绑定关系
+    # sql1 = ("DELETE from zw_kyd_member_v2 where mobile='" + str(mobile)+"'")
+    # yield sql1
+
+    # zw_kyd_member_shop_v2-零售店铺会员数据
+    sql2 = ("DELETE from zw_kyd_member_shop_v2 where channel_id = 1 and mobile='" + str(mobile)+"'")
+    yield sql2
+    # zw_kyd_member_shop_info_v2-店铺会员信息表
+    sql3 = ("DELETE from zw_kyd_member_shop_info_v2 where channel_id = 1 and mobile='" + str(mobile)+"'")
+    yield sql3
+
+    # zw_kyd_member_cust-会员客户关联表 todo:客户详情页面展示关联的会员信息，与该表有关，可手动删除或者根据查询结果删除
+    # sql4 = ("DELETE from zw_kyd_member_cust where  external_user_id='" + external_user_id + "'")
+    # yield sql4
+
+
+
+
 
 
 

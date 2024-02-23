@@ -108,3 +108,46 @@ d、记录：类似于模型类的多个实例
 3、python manage.py migrate myappsea
 
 
+针对myappsea中的view.py文件
+---对项目操作的5个接口有哪些痛点--
+a、大量重复的代码，冗余代码较多
+b、数据校验麻烦，往往需要嵌套多级if判断，校验的复用性较差
+c、代码没有统一的规范，代码维护差
+d、获取项目列表数据时，有很多功能缺失
+    没有分页、过滤筛选、排序功能
+e、整个项目的痛点：
+    1、没有提供认证授权功能
+    2、没有提供限流功能
+    3、传递参数形式比较单一、只支持json格式的参数，不支持xxx-form-urlencoded
+    4、5个接口无法放在同一个类视图中
+
+# **django restframwork**
+
+在Django的REST framework（DRF）中，Field类用于定义序列化器（serializer）中的字段：
+* 1、read_only: 如果设置为True，则此字段在序列化时将被包含，但在反序列化时将被忽略。这意味着，数据可以从模型或查询集中被读取并转换为Python数据类型，但不能从传入的请求数据中更新模型。
+* 2、write_only: 如果设置为True，则此字段在反序列化时将被包含，但在序列化时将被忽略。这意味着，数据可以从传入的请求数据中更新模型，但不会包含在序列化后的输出中。
+* 3、required: 通常用于指定字段是否必须出现在反序列化的数据中。如果设置为False，则字段可以为空或者不存在。默认为True，但如果字段设置了default参数，则required默认为False。
+* 4、default: 如果未提供字段值，则使用此默认值。empty是一个特殊的标记值，用于表示没有默认值。
+* 5、initial: 用于预填充HTML表单字段的值。这不会影响反序列化过程，只是用于在呈现表单时提供一个初始值。
+* 6、source: 用于指定从对象实例中访问的字段名称。例如，如果source='user.email'，则序列化器将从关联的user对象中获取email字段。
+* 7、label: 用于HTML表单字段的标签。如果没有提供，则通常使用字段名称，并将其转换为人类可读的格式。
+* 8、help_text: 用于HTML表单字段的帮助文本。
+* 9、style: 一个字典，包含用于控制如何渲染字段的键值对。这主要用于控制HTML表单字段的呈现方式。
+* 10、error_messages: 一个字典，用于覆盖字段默认的错误消息。例如，您可以自定义“此字段是必需的”消息。
+* 11、validators: 一个用于字段验证的函数列表。每个函数都应该接收一个参数（字段值）并引发一个ValidationError，如果验证失败的话。
+* 12、allow_null: 如果设置为True，则None将被视为有效值。默认情况下，字段不允许None值，除非字段也有default=None设置。
+
+一、创建序列化器对象
+1、只传递instance
+    a、调用is_valid方法会报错
+    b、调用errors、validate_data会报错
+    c、调用data属性，，可以进行序列化输出
+
+2、只传递data参数
+    a、必须调用is_valid方法开始对数据进行校验
+    b、调用errors、validate_data不会报错；
+    c、调用save方法会指定调用序列化器类的create方法
+    d、调用data属性，，可以进行序列化输出
+    （如果调用save方法并且update方法返回模型对象的话，那么会把模型对象作为序列化输出的源数据；如果
+    没有调用save方法，那么会把validate_data作为序列化输出的源数据）
+3、同时传递instance和data参数

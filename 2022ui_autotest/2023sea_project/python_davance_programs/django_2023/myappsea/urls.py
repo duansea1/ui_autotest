@@ -16,6 +16,8 @@ urlpatterns = [
     # path('delete/', views.delete_project),
 
     # 使用类属性定义视图路由；；类视图.as_view
-    path('projects/<int:pk>/', views.ProjectsView.as_view()),
-    path('projects/csv/', views.ProjectsView.as_view())
+    # path('projects/<int:pk>/', views.ProjectsView.as_view()),
+    # path('projects/csv/', views.ProjectsView.as_view()),
+    path('projects/', views.ProjectsView.as_view()),  # 查询数据
+    path('projects/<int:pk>/', views.ProjectsDetailView.as_view())  # 查询、更新、删除
 ]

@@ -14,7 +14,7 @@ def work1():
 
 def work2():
     for i in range(5):
-        print("work1：打游戏---")
+        print("work2：打游戏---")
         time.sleep(1)
         yield
 
@@ -27,7 +27,7 @@ def calc_time(func):
         return end - start_time
     return wrap
 
-@calc_time
+# @calc_time
 def main():
     g1 = work1()
     g2 = work2()
@@ -36,6 +36,7 @@ def main():
             next(g1)
             next(g2)
         except StopIteration as e:
+            print(e)
             break
 
 

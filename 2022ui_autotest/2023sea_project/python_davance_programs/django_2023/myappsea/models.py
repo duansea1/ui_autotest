@@ -39,7 +39,7 @@ class Projects(BaseModel):
                             unique=False)
     # 使用default-指定默认值，在创建记录时，该字段传递，会使用默认值
     is_excue = models.BooleanField(verbose_name='是否启动项目', help_text='是否启动项目',
-                            unique=True, default=True)
+                            unique=False, default=True)
     # null=True指定，前端创建数据时，可以指定该字段未null，默认为null=False，DRF进行反序列化
     # blank=True指定前端创建数据时，可以指定该字段为空字符串，默认为false
     desc = models.TextField(verbose_name='项目描述信息', help_text='是否启动项目', null=True, blank=True, default='')
