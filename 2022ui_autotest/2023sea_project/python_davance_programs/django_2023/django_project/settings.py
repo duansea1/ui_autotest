@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import rest_framework.filters
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -141,3 +143,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# DRFµÄ½âÎöÆ÷
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ['rest_framework.filters.SearchFilter'],
+
+}

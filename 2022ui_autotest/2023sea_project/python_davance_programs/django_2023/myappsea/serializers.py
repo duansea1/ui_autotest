@@ -175,35 +175,42 @@ class ProjectModelSerializer(serializers.ModelSerializer):
     5、会给id主键、有指定auto_now_add
     """
     # 修改自动生成的序列化器字段-todo：参考课程20210521_模型序列化器
-    # 方式一：
+    # 【方式一】：
     # a、可以重新定义模型类中同名的字段；；
     # b、自定义字段的优先级会更高(会覆盖自动生成的序列化器字段)
     #
     name = serializers.CharField(label='项目名称', help_text='项目名称', max_length=20,
                                  min_length=5, write_only=False, allow_null=False,
-                                 error_messages={'min_length': '名称过短不能少于5位',
+                                 error_messages={'min_length': '名称过短不能少于五位',
                                                  'max_value': '超过最大长度限制'},
                                  validators=[UniqueValidator(queryset=Projects.objects.all(),
                                                              message='项目名称不能重复'), is_contains_keyword])
     # 定义关联字段
-    interfaces_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    token = serializers.CharField(read_only=True)
+    # interfaces_set = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    # token = serializers.CharField(read_only=True)
+
     class Meta:
         model = Projects
-        # fields = "__all__"   # 指定模型类中的所有字段
+        fields = "__all__"   # 指定模型类中的所有字段
         # fields元祖中必须指定进行序列化或反序列化操作的所有字段名称，其他的字段需要转化
-        fields = ("id", "name", 'leader', 'interfaces_set', 'token')  # 指定部分模型类中的字段
+        # fields = ("id", "name", 'leader', 'interfaces_set', 'token')  # 指定部分模型类中的字段
         # exclude = ('desc')  # 【排除字段】可以指定exclude模型类中哪些字段不需要序列化字段
+        # 【方式二：】
+        # a、如果“自动生成的序列化器字段”，只有少量不满足要求，可以在meta中的extra_kwargs字典进行微调
+        # b、将需要调整的字段作为key，修改的内容作为value
         extra_kwargs={
             'leader':{
                 'label':'负责人',
-                'max_length':2,
-                'read_only':True,
+                'max_length':10,
+                'min_length': 3,
+                # 'read_only':True,
             },
             'is_excue':{
-                'required':True
+                'required':False
             }
         }
+        # 可以将批量需要设置ready_only=True参数的字段添加到Meta中read_only_fields元祖中
+        ready_only_fields = ('leader', 'is_excue')
 
     def create(self, validated_data):
         """

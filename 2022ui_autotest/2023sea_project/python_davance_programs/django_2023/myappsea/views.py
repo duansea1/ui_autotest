@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
+from urllib.request import Request
+
 from django.db.models import Q, QuerySet, Count
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
@@ -6,16 +8,189 @@ from django.views import View
 import json
 
 import csv
+
+from rest_framework.generics import GenericAPIView
+from rest_framework.response import Response
+from rest_framework import status
 from .models import Projects
 from django.db import connection
 from interfaces.models import Interfaces
 
 from myappsea.serializers import ProjectSerializer,ProjectModelSerializer
+from rest_framework.views import APIView
 
 # Create your views here.
 """
 视图层，在页面展示的，可以在此进行定义方法，返回对应的html格式or其他格式的数据，如csv文件下载
 """
+# class ProjectsView(APIView):
+class ProjectsView(GenericAPIView):
+    """
+    # 2、获取所有项目数据
+    # GET /projects/
+    # 3、新增、
+    # POST /projects/  新的项目数据以JSON的形式传递
+
+    继承APIview父类
+        a、具备View的所有特性
+        b、通过了认证、授权
+
+    继承GenericAPIView父类：具备View的所有属性、
+    """
+    # 一旦继承GenericAPIView之后，往往需要指定queryset、serializer_class类属性
+
+    queryset = Projects.objects.all()
+    # serializer_class指定当前类视图的实例化方法需要使用序列化器类
+    serializer_class = ProjectSerializer
+    search_fields = ['name', 'leader', 'id']
+
+    def get(self, request: Request):
+        # name_param = request.query_params.get('name')
+        # if name_param:
+        #     qs_all = Projects.objects.filter(name__exact=name_param)
+        # else:
+        #     qs_all = Projects.objects.all()
+
+        # qs_all = self.get_queryset()
+        qs_all = self.filter_queryset(self.get_queryset())
+
+        serializer = self.get_serializer(instance=qs_all, many=True)
+        # return JsonResponse(serializer.data, safe=False)
+
+        # 在DRF中Response为HttpResponse的子类
+        # a、data参数为序列化之后的数据（一般为字典或者嵌套字典的列表）
+        # b、会自动根据渲染器来将请求头中的accept需要的格式返回
+        # c、status指定响应状态码
+        # d、
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        # a、一旦继承APIview之后，request是DRF中Request对象
+        # b、Request是在HttpRequest基础上做了拓展
+        # c、兼容HttpRequest所有功能
+        # d、前端传递的查询字符串参数：Get、query_params
+        # e、前端传递application/json\x-www  mutipart\form-data
+        # 可以根据请求头上的Content-type，使用统一的data属性获取
+
+        # try:
+        #     python_data = json.loads(request.body)  # 从HTTP请求的主体中解析JSON数据，并将其转换为Python中的数据类型
+        # except Exception as e:
+        #     return JsonResponse({'msg': '参数有误'}, status=400)
+        python_data = request.data
+        # serializer1 = ProjectSerializer(data=python_data)   # 入参使用data
+        serializer1 = self.get_serializer(data=python_data)
+        # if not serializer1.is_valid():
+        #     return Response(serializer1.errors, status=400)
+
+        #  在调用is_valid(raise_exception=True)，校验失败是，会抛出异常
+        serializer1.is_valid(raise_exception=True)
+        # project_obj = Projects.objects.create(**serializer1.validated_data)
+        # 1、如果在创建序列化器对象时，仅传递data参数，使用序列化对象调用save方法，会自动调用序列化器中的
+        # 2、create方法用于只传data的情况，进行创建数据操作
+        # 3、序列化器类中的create方法，validate_data参数为校验通过之后的数据（一般字典类型）
+        # 4、调用save方法时，可以传递任意的关键字参数，并且会自动并到valite_data字典中
+        # 5、create方法一般需要将创建成功的方法的模型对象进行返回
+        # 6、
+        serializer1.save(myname='耀明', myage='26')
+
+        # serializer = ProjectSerializer(instance=project_obj)
+        return Response(serializer1.data, status=status.HTTP_201_CREATED)
+
+
+class ProjectsDetailView(GenericAPIView):
+    """
+    # 1、获取一条数据（详情数据）、
+    # GET /projects/<int:pk>/
+    # 4、编辑、
+    # # PUT /projects/<int:pk>/ 新的项目数据以JSON的形式传递
+    # 5、删除项目数据
+    # DELETE /projects/<int:pk>/
+    --数据校验（规范传入的参数）--》反序列化输入操作（将json格式的数据转化为复杂的类型）-》数据库操作（判断数据是否存在）--》序列化操作
+    """
+    qs_all = Projects.objects.all()
+    serializer_class = ProjectSerializer
+    search_fields = ['name', 'leader', 'id']
+    def get(self, request, pk):
+
+        # try:
+        #     project_obj = self.qs_all.get(id=pk)
+        # except Exception as e:
+        #     return JsonResponse({'msg':'pk不存在'}, status=400)
+        #  filter_queryset 对查询对象进行过滤
+        qs_all = self.filter_queryset(self.get_queryset())
+        # project_obj = self.get_object()  # self.get_object()  --可以不传递pk参数
+
+        serializer = self.serializer_class(instance=qs_all)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def get_object(self, pk):
+        try:
+            project_obj = Projects.objects.get(id=pk)   # 待更新的数据
+            return project_obj
+        except Exception as e:
+            return JsonResponse({'msg': 'pk不存在'}, status=400)
+
+    def put(self, request, pk):
+        """更新数据"""
+        # 获取指定数据
+        project_obj = self.get_object(pk)
+
+        serializer = ProjectSerializer(instance=project_obj, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        # if not serializer.is_valid():
+        #     return JsonResponse(serializer.errors, status=402)
+        # 需要进行大量的数据校验
+        print('project_obj返回参数：:', project_obj)
+        # 4、更新数据、
+        # project_obj: Projects
+        # project_obj.name = python_data.get('name')
+        # project_obj.leader = python_data.get('leader')
+        # project_obj.desc = python_data.get('desc')
+        # project_obj.is_excue = python_data.get('is_excue')
+        # project_obj.save()
+        serializer.save()
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def delete(self, request, pk):
+        """
+        删除项目数据
+        """
+        # try:
+        #     project_obj = Projects.objects.get(id=pk)
+        # except Exception as e:
+        #     return JsonResponse({'msg': 'pk不存在'}, status=1002)
+        project_obj = self.get_object(pk)
+        # 3、执行删除
+        project_obj:Projects
+        project_obj.delete()
+        project_dic = {
+            'id': project_obj.id,
+            'name': project_obj.name,
+            'msg': '更新项目数据成功'
+        }
+        return Response(project_dic, status=status.HTTP_200_OK)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#  以下为之前学习痕迹-
+
+
+
 
 # def index(request):
 #
@@ -464,112 +639,6 @@ class ProjectsDetailView1(View):
         """
         # 1\校验pk是否存在
         # 2、读取读取主键为pk的数据
-        try:
-            project_obj = Projects.objects.get(id=pk)
-        except Exception as e:
-            return JsonResponse({'msg': 'pk不存在'}, status=1002)
-        # 3、执行删除
-        project_obj:Projects
-        project_obj.delete()
-        project_dic = {
-            'id': project_obj.id,
-            'name': project_obj.name,
-            'msg': '更新项目数据成功'
-        }
-        return JsonResponse(project_dic, status=1000)
-
-class ProjectsView(View):
-    """
-    # 2、获取所有项目数据
-    # GET /projects/
-    # 3、新增、
-    # POST /projects/  新的项目数据以JSON的形式传递
-    """
-    def get(self, request):
-
-        qs_all = Projects.objects.all()
-        serializer = ProjectSerializer(instance=qs_all, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-    def post(self, request):
-        # 课程参考5-19日第一部分视频
-        try:
-            python_data = json.loads(request.body)  # 从HTTP请求的主体中解析JSON数据，并将其转换为Python中的数据类型
-        except Exception as e:
-            return JsonResponse({'msg': '参数有误'}, status=400)
-
-        # serializer1 = ProjectSerializer(data=python_data)   # 入参使用data
-        serializer1 = ProjectModelSerializer(data=python_data)
-        if not serializer1.is_valid():
-            return JsonResponse(serializer1.errors, status=402)
-
-        # project_obj = Projects.objects.create(**serializer1.validated_data)
-        # 1、如果在创建序列化器对象时，仅传递data参数，使用序列化对象调用save方法，会自动调用序列化器中的
-        # 2、create方法用于只传data的情况，进行创建数据操作
-        # 3、序列化器类中的create方法，validate_data参数为校验通过之后的数据（一般字典类型）
-        # 4、调用save方法时，可以传递任意的关键字参数，并且会自动并到valite_data字典中
-        # 5、create方法一般需要将创建成功的方法的模型对象进行返回
-        # 6、
-        project_obj = serializer1.save(myname='耀明', myage='26')
-
-        # serializer = ProjectSerializer(instance=project_obj)
-        return JsonResponse(serializer1.data, status=201)
-
-
-class ProjectsDetailView(View):
-    """
-    # 1、获取一条数据（详情数据）、
-    # GET /projects/<int:pk>/
-    # 4、编辑、
-    # # PUT /projects/<int:pk>/ 新的项目数据以JSON的形式传递
-    # 5、删除项目数据
-    # DELETE /projects/<int:pk>/
-    --数据校验（规范传入的参数）--》反序列化输入操作（将json格式的数据转化为复杂的类型）-》数据库操作（判断数据是否存在）--》序列化操作
-    """
-    def get(self, request, pk):
-
-        try:
-            project_obj = Projects.objects.get(id=pk)
-        except Exception as e:
-            return JsonResponse({'msg':'pk不存在'}, status=400)
-
-        serializer = ProjectSerializer(instance=project_obj)
-        return JsonResponse(serializer.data, safe=False, status=400)
-
-    def put(self, request, pk):
-        """
-        更新数据
-        """
-        try:
-            project_obj = Projects.objects.get(id=pk)   # 待更新的数据
-        except Exception as e:
-            return JsonResponse({'msg': 'pk不存在'}, status=1002)
-
-        try:
-            python_data = json.loads(request.body)   # 需要校验的数据
-        except Exception as e:
-            return JsonResponse({'msg': '参数有误'}, status=1001)
-
-        serializer = ProjectSerializer(instance=project_obj, data=python_data)
-        if not serializer.is_valid():
-            return JsonResponse(serializer.errors, status=402)
-        # 需要进行大量的数据校验
-        print('project_obj返回参数：:', project_obj)
-        # 4、更新数据、
-        # project_obj: Projects
-        # project_obj.name = python_data.get('name')
-        # project_obj.leader = python_data.get('leader')
-        # project_obj.desc = python_data.get('desc')
-        # project_obj.is_excue = python_data.get('is_excue')
-        # project_obj.save()
-        serializer.save()
-
-        return JsonResponse(serializer.data, status=201)
-
-    def delete(self, request, pk):
-        """
-        删除项目数据
-        """
         try:
             project_obj = Projects.objects.get(id=pk)
         except Exception as e:
