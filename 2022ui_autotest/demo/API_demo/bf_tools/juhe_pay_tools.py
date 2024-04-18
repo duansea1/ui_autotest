@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# ---
+# 说明：宝户通账户删除工具--测试环境
 # @Author: duansea
 # @Time: 2023-10-24 17:59
 # ---
@@ -12,6 +12,7 @@ from baofu_method.juhe_pay_methods import Aggregatd_Payment
 from commons.time_tools import TimeTool
 from commons.bf_request import request_bf_del_account
 
+
 SCRM_payhub = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "scrm", "password": "scrm@135qwe",
                    "port": 3306, "data": "payhub"}
 
@@ -23,7 +24,7 @@ def delete_payhub_data_tool(corp_unified_social_credit_code):
     """
     openNo = query_openNo(corp_unified_social_credit_code)
     T = TimeTool()
-    with open('聚合开户删除数据记录表.txt', "a") as f:
+    with open('../聚合开户删除数据记录表.txt', "a") as f:
         f.write("\n" + str(T.current_time()) + str(openNo) + ":对应的统一社会代码 "
                 + str(corp_unified_social_credit_code) + "\t")
     # logger = logging.basicConfig(filename='')

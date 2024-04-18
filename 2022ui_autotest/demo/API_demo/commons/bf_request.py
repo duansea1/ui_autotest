@@ -30,6 +30,16 @@ def request_bf_del_account(loginNo, usertype):
         return True  # 删除成功
     return False    # 删除失败
 
+def request_bct_del_account(openNo):
+    """
+    调宝财通接口，删除测试环境的宝户账号
+
+    """
+    bcf_url = f"https://sp.baofoo.com/support-admin/tools/bct/del?contract_no={openNo}"
+    get_re = requests.get(url=bcf_url, verify=False)
+    if get_re.json()['code'] == 0:
+        return True  # 删除成功
+    return False    # 删除失败
 
 class RequestUtil:
     sess = requests.session()

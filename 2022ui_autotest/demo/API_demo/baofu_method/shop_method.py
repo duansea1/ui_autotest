@@ -24,6 +24,10 @@ def delete_shop_user_sqls(open_kid):
     # zw_member
     sql4 = ("DELETE from zw_member_points where open_kid='" + str(open_kid)+"'")
     yield sql4
+    # zw_coupon_customer --优惠券记录
+    sql5 = ("DELETE from zw_coupon_customer where `tenant_id` = '56' and open_kid='" + str(open_kid)+"'")
+    yield sql5
+
 
 def delete_shop_to_scrm_user_sqls(mobile):
     """
@@ -44,7 +48,11 @@ def delete_shop_to_scrm_user_sqls(mobile):
 
     # zw_kyd_member_cust-会员客户关联表 todo:客户详情页面展示关联的会员信息，与该表有关，可手动删除或者根据查询结果删除
     # sql4 = ("DELETE from zw_kyd_member_cust where  external_user_id='" + external_user_id + "'")
-    # yield sql4
+    # yield sql5
+
+    # # zw_kyd_member_store_index-店铺会员信息表
+    # sql3 = ("DELETE from zw_kyd_member_store_index where channel_id = 1 and mobile='" + str(mobile) + "'")
+    # yield sql3
 
 
 

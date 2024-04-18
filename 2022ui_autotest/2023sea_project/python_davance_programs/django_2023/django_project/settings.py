@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from rest_framework.settings import APISettings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import rest_framework.filters
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-_3&rs34xi0mn%er=6u5_!zjo7@&#&_p0vkhy_yes=-fis*l)$v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# 指定允许使用哪些地址访问当前系统
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -43,7 +44,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'myappsea',
     'interfaces',
+    'users'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -146,6 +149,85 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # DRF的解析器
 REST_FRAMEWORK = {
-    "DEFAULT_FILTER_BACKENDS": ['rest_framework.filters.SearchFilter'],
+    'DEFAULT_FILTER_BACKENDS': ['rest_framework.filters.SearchFilter',
+                                'rest_framework.filters.OrderingFilter'],
+    # 'SEARCH_PARAM':'se',
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS': 'utils.pagination.PageNumberPagination',
+    'PAGE_SIZE': 3,
+    # 指定用于支持coreapi的Schema
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    # 指定使用的认证类
+    # a、在全局指定默认的认证类
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 支持session认证
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication'
+    ],
+    # 在全局指定默认的权限类（当认证通过后，可以获取何种权限）
+    'DEFAULT_PERMISSION_CLASSES': [
+        # AllowAny不管是否有认证成功，都能获取所有权限
+        # IsAdminUser-管理员具备所有权限
+        # IsAuthenticatedOrReadOnly，如果登录就具备所有权限，不登录，只有读取权限
+        # IsAuthenticated
+
+        'rest_framework.permissions.IsAuthenticated',
+    ],
 
 }
+
+import os
+
+# 确保日志文件的路径存在
+LOG_DIR = os.path.join(BASE_DIR, 'logs')
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
+
+# 日志文件的完整路径
+LOG_FILE = os.path.join(LOG_DIR, 'myappsea.log')
+
+LOGGING = {
+    # 指定日志版本
+    'version': 1,
+    'disable_existing_loggers': False,
+    # 定义日志输出格式
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': LOG_FILE,
+            'formatter': 'verbose'
+        },
+    },
+    # 定义日志器的名称
+    'loggers': {
+        'myappsea': {  # 替换为你的应用名称
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+# 指定使用的用户模型类，默认是auth.User
+AUTH_USER_MODEL = "users.UserModel"

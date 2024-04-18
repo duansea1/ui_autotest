@@ -61,7 +61,7 @@ class ConvenientScript(object):
                          "`is_deleted`, `created_at`, `created_uid`, `updated_at`, `deleted_at`) " \
                          "VALUES ( 237, 320, 351, " \
                          "1166," + str(product_id) + ", 1, 2, '" + str(taoword) + "'," + str(strategy_id) + \
-                         ", 2, '2023-08-23 10:29:58'," + str(product_id) +", '2023-08-25 15:22:28', NULL);"
+                         ", 2, '2023-08-23 10:29:58'," + str(product_id) +",'2023-08-25 15:22:28', NULL);"
             print(insert_sql)
             self.scrm_sql(DB=SCRM_scrm, SQL=insert_sql)
             taoword = '测试淘口令' + str(product_id)

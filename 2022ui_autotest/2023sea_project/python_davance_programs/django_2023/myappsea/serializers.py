@@ -90,8 +90,9 @@ class ProjectSerializer(serializers.Serializer):
     # 3、如果在定义模型类的外键字段时，指定了 releated_name参数，那么会把releated_name参数名作为序列化器的字段返回
     # 4、PrimaryKeyRelatedField字段，指定read_only=True，或者指定queryset参数，否则会报错
     # 5、如果知道read_only=true,那么该字段序列化输出
-    interToP = serializers.PrimaryKeyRelatedField(label='项目所属接口id', help_text='项目所属接口-1id'
-                                                        , read_only=True, many=True)
+    # todo 2024-3-6注释关联字段
+    # interToP = serializers.PrimaryKeyRelatedField(label='项目所属接口id', help_text='项目所属接口-1id'
+    #                                                     , read_only=True, many=True)
 
     #     , queryset=Interfaces.objects.all()
 
@@ -120,15 +121,12 @@ class ProjectSerializer(serializers.Serializer):
     # 2、使用固定的validate，会接收上面校验通过之后的字典数据
     # 3、当所有字段定义时添加的校验规则都通过，且每个字典的单字段校验方法通过的情况下，才会调用validate
     def validate(self, attrs):
-        if len(attrs.get('leader')) <=4 or not attrs.get('is_excue'):
-            raise serializers.ValidationError('项目名称不能少于4位、leader必须存在')
+        if len(attrs.get('leader')) <= 4 or not attrs.get('is_excue'):
+            raise serializers.ValidationError('项目名称不能少于4位或者leader必须存在')
         return attrs
 
     def to_internal_value(self, data):
-        """
-        date：2024-1-28-
-
-        """
+        """date：2024-1-28-"""
         # 1、to_internal_value方法，是所有字段开始校验时入口方法（最先调用的方法）
         # 2、会依次对序列化器类的各个序列化器字段进行校验：
         #  对字段类型进行校验--》依次执行validators列表中的校验规则--》从右到左依次验证其他规则--》调用单字段校验方法
@@ -203,10 +201,10 @@ class ProjectModelSerializer(serializers.ModelSerializer):
                 'label':'负责人',
                 'max_length':10,
                 'min_length': 3,
-                # 'read_only':True,
+                'read_only':True,
             },
-            'is_excue':{
-                'required':False
+            'name':{
+                'min_length': 3
             }
         }
         # 可以将批量需要设置ready_only=True参数的字段添加到Meta中read_only_fields元祖中
@@ -218,8 +216,21 @@ class ProjectModelSerializer(serializers.ModelSerializer):
         b、如果父类提供的create和update方法不满足需要时，可以重写create和update方法，最后调用父类的create方法
 
         """
-        validated_data.pop('myname')
-        validated_data.pop('myage')
+        # validated_data.pop('myname')
+        # validated_data.pop('myage')
         instance = super().create(validated_data)
         instance.token = 'token--XX'
         return instance
+
+
+class ProjectModelSerializer1(serializers.ModelSerializer):
+    class Meta:
+        model = Projects
+        exclude = ('id', 'create_time')
+
+
+class ProjectsNamesModelSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Projects
+        fields = ('id', 'names')

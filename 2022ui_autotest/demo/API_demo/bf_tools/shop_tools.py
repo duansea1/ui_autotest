@@ -78,7 +78,7 @@ if __name__ == '__main__':
     # 删除商城会员与scrm会员的关系
     # delete_shop_user_scrm(moblie='17681032991')
 
-    # delete_shop_user_scrm_data(open_kid="OKIDEYjqqVAb9PHVWrHU9iaHfQ7JmEqo", moblie='17681032991')
+    delete_shop_user_scrm_data(open_kid="OKIDEYjqqVAb9PHVWrHU9iaHfQ7JmEqo", moblie='17681032991')
     # delete_shop_user_scrm_data(open_kid="OKID3dwHRux4XvAjWCmpemk3ruiE3T2c", moblie='18321740710')
 
     #     OKIDEYjqqVAb9PHVWrHU9iaHfQ7JmEqo ---2991手机号

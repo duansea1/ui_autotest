@@ -26,6 +26,7 @@ def calc_time(func):
         return end - start_time
     return wrap
 # @calc_time
+
 async def main():
     task1 = asyncio.create_task(work1())  # 创建一个异步任务
     task2 = asyncio.create_task(work2())
