@@ -5,19 +5,15 @@
 # @Time: 2022年10月月11日 19:37
 # ---
 
-class Signale(object):
+class Singleton(object):
+    _instance = None
 
     def __new__(cls, *args, **kwargs):
-        flag = False
+        if not cls._instance:
+            cls._instance = super().__new__(cls, *args, **kwargs)
+        return cls._instance
 
-        if flag == False:
-            flag = True
-            return super().__new__(cls)
-    pass
-
-
-s = Signale()
-print(s)
-s1 = Signale()
-print(s1)
-
+# 使用
+S1 = Singleton()
+S2 = Singleton()
+print(id(S1), id(S2))  # 打印两个实例的id，相同说明是单例模式

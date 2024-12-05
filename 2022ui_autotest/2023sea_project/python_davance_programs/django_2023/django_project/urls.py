@@ -17,9 +17,7 @@ Including another URLconf
 
 # from django.contrib import admin
 
-from django.urls import path, include, re_path
-from myappsea import views
-from myappsea import views
+from django.urls import path, include
 
 """
 # 一、什么是路由？

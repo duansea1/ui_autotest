@@ -79,8 +79,8 @@ def get_connection(serverip, port, db_name, account, password):
 
 def get_connection_qadb(db_name):
     """yyw-qa 的数据库"""
-    from public import files
-    datainfo = files.read_json('yyw-0345', 'mysql')
+    from utils_files import read_json
+    datainfo = read_json('yyw-0345', 'mysql')
     # print("datainfo: ",datainfo)
     conn = ms.connect(
         host=datainfo['host'],
@@ -239,8 +239,122 @@ def query_mysql3(host, user, password, port, database, sql):
         return rsp_data
 
 
+class ZwMysql:
+    """
+    mysql操作类，实行单例模式
+    """
+    _instance = None
+    _conn = None  # 数据库链接
+
+    def __init__(self, host, user, password, port, db_name):
+        ic('开始执行')
+        self.host = host
+        self.user = user
+        self.password = password
+        self.port = port
+        self.db_name = db_name
+        self._conn = ms.connect(
+            host=self.host,
+            port=int(self.port),
+            user=self.user,
+            password=self.password,
+            database=self.db_name,
+            charset="utf8mb4",
+            cursorclass=ms.cursors.DictCursor)
+
+    # def __new__(cls, *args, **kwargs):
+    #
+    #     if cls._instance is None:
+    #         print('已实例化')
+    #         _instance = super().__new__(cls)
+    #         ic(_instance)
+    #     return cls._instance
+
+    def query_mysql(self, sql):
+        """执行mysql语句，执行完会关闭连接"""
+        rsp_data = {}
+        if self._conn is None:
+            msg = ("获取数据库连接失败：%s" % e)
+            rsp_data["code"] = 1
+            rsp_data["msg"] = msg
+            rsp_data["data"] = None
+            rsp_data["rows"] = 0
+            return rsp_data
+        try:
+            cursor = self.cursor()
+            count = cursor.execute(sql)
+            # result=cursor.fetchall()
+            if sql[:6].lower() == "select":
+                result = cursor.fetchall()
+                # print(result)
+                # print(type(result))
+            elif sql[:4].lower() == "show":
+                result = cursor.fetchall()
+            elif sql[:4].lower() == "desc":
+                result = cursor.fetchall()
+            else:
+                result = None
+            self.conn.commit()
+            rsp_data["code"] = 0
+            rsp_data["msg"] = None
+            rsp_data["data"] = result
+            rsp_data["rows"] = count
+            # return rsp_data
+        except Exception as e:
+            msg = ("SQL执行异常：%s" % e)
+            rsp_data["code"] = 1
+            rsp_data["msg"] = msg
+            rsp_data["data"] = None
+            rsp_data["rows"] = 0
+            # return rsp_data
+
+        finally:
+            # print("关闭连接")
+            self.conn.close()
+            # print(rsp_data)
+            return rsp_data
+
+    def execute(self, sql, is_close=False):
+        """执行mysql语句，执行完不关闭连接
+        @param is_close: 是否关闭连接
+        """
+        rsp_data = {}
+        with self._conn.cursor() as cursor:
+            count = cursor.execute(sql)
+            if sql[:6].lower() == "select":
+                result = cursor.fetchall()
+                # print(result)
+                # print(type(result))
+            elif sql[:4].lower() == "show":
+                result = cursor.fetchall()
+            elif sql[:4].lower() == "desc":
+                result = cursor.fetchall()
+            else:
+                result = None
+            self._conn.commit()
+            if is_close:
+                self._conn.close()
+            rsp_data["code"] = 0
+            rsp_data["msg"] = None
+            rsp_data["data"] = result
+            rsp_data["rows"] = count
+            return rsp_data
+
+    def close(self):
+        """关闭数据库连接"""
+        if self._conn:
+            self._conn.close()
+            self._conn = None
+
+
 if __name__ == '__main__':
+    from icecream import ic
     # sql="UPDATE t_shopping_cart SET check_status = 0 WHERE spu_code !=  '8353YCH20014'"
     # query_mysql("10.6.168.14","b2btest","b5zUoR4JbcK3emhhUxdL",3306,'yihaoyaocheng',sql)
-    res = query_mysql('localhost', 'root', 'root', 3306, 'mydjango', 'select * from auth_group')
-    print(res)
+    # res = query_mysql('localhost', 'root', 'root', 3306, 'mydjango', 'select * from auth_group')
+    zw = ZwMysql('localhost', 'root', 'root', 3306, 'mydjango')
+    ic(zw)
+    res2 = zw.execute('select * from auth_group')
+    res3 = zw.execute('select * from auth_group')
+    zw.close()
+    print(res2)

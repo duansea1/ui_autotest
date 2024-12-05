@@ -41,3 +41,7 @@ if __name__ == '__main__':
     print(sums(200))
     print(digui_sums(200))
     print(add(*(t.values())))
+
+
+class API_demo:
+    pass

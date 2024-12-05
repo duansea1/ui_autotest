@@ -25,7 +25,7 @@ def delete_shop_user_sqls(open_kid):
     sql4 = ("DELETE from zw_member_points where open_kid='" + str(open_kid)+"'")
     yield sql4
     # zw_coupon_customer --优惠券记录
-    sql5 = ("DELETE from zw_coupon_customer where `tenant_id` = '56' and open_kid='" + str(open_kid)+"'")
+    sql5 = ("DELETE from zw_coupon_customer where  open_kid='" + str(open_kid)+"'")
     yield sql5
 
 

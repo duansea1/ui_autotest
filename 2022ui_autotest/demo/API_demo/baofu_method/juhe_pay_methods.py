@@ -75,4 +75,13 @@ class Aggregatd_Payment():
         sql_info = f"select open_no,corp_name from zw_merchant_info where corp_unified_social_credit_code ='{corp_unified_social_credit_code}'"
         return sql_info
 
+    def query_bct_merchant_no_sql(self, openNo):
+        """
+        查询BCT2.0商户的统一社会信用代码对应的open_no
+        :param openNo: 登录号
+        :return:
+        """
+        sql_info = f"select merchant_no from zw_merchant_apply where open_no ='{openNo}' and merchant_no_type = 1"
+        return sql_info
+
 

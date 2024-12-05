@@ -2,27 +2,14 @@
 import logging
 from urllib.request import Request
 
-import generics as generics
-from django.db.models import Q, QuerySet, Count
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
-from django.views import View
-import json
-
-import csv
-
+from icecream import ic
 from rest_framework.generics import GenericAPIView
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework import status, filters, viewsets
+from rest_framework import status, filters
 from .models import Projects
-from django.db import connection
-from interfaces.models import Interfaces
 
-from myappsea.serializers import ProjectSerializer,ProjectModelSerializer, \
-    ProjectModelSerializer1, ProjectsNamesModelSerializer
-from rest_framework.views import APIView
-from rest_framework.pagination import PageNumberPagination
+from myappsea.serializers import ProjectSerializer, ProjectModelSerializer
 from utils.pagination import PageNumberPagination
 from rest_framework import mixins
 from rest_framework.decorators import action
@@ -46,9 +33,28 @@ class ListModelMixin:
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+from rest_framework.filters import SearchFilter
 
+class CustomSearchFilter(SearchFilter):
+    search_param = 'keyword'  # 自定义搜索参数名
+
+
+class CustomPageNumberPagination(PageNumberPagination):
+    page_size = 2  # 每页显示的记录数
+    page_size_query_param = 'page_size'  # 允许客户端通过查询参数来覆盖每页大小
+    max_page_size = 100  # 客户端请求的最大每页记录数
+
+    def get_paginated_response(self, data):
+        return Response({
+            'links': {
+                'next': self.get_next_link(),
+                'previous': self.get_previous_link()
+            },
+            'count': self.page.paginator.count,
+            'results': data
+        })
 # class ProjectsView(APIView):
-class ProjectsView(generics.ListCreateAPIView, GenericAPIView):
+class ProjectsView(generics.ListCreateAPIView):
     """
     【定义视图集】
     """
@@ -58,15 +64,28 @@ class ProjectsView(generics.ListCreateAPIView, GenericAPIView):
     serializer_class = ProjectModelSerializer
     # search_fields可以在字段名称前添加相应的符号，指定查询类型
     search_fields = ['=name', '=leader', '=id']
+
     # filter_backends在继承了Ger类视图指定的过滤
-    filter_backends = [filters.SearchFilter]
+    # filter_backends = [filters.SearchFilter]
+    filter_backends = [CustomSearchFilter]
+    search_param = 'keyword'
 
     # 可以在类视图中指定分页引擎类，优先级高于全局
-    Pagination_class = PageNumberPagination
+    pagination_class = PageNumberPagination
+    ic(pagination_class)
 
     def get(self, request: Request, *args, **kwargs):
-        print(ProjectsView.__mro__)
-        return self.list(request, *args, **kwargs)
+        queryset = self.filter_queryset(self.get_queryset())
+        ic(queryset)
+        page = self.paginate_queryset(queryset)
+        print(page)
+        if page is not None:
+            serializer = self.get_serializer(instance=page, many=True)
+            # 调用get_paginated_response方法，将序列化之后的数据进行分页，并返回response
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_serializer(instance=queryset, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
@@ -75,6 +94,7 @@ class ProjectsView(generics.ListCreateAPIView, GenericAPIView):
     # 2、method指定需要使用的请求方法，如果不指定，默认GET
     # 3、detail-指定是否为详情接口，是否需要传递当前模型的pk值（如果需要传递当前模型的pk值，则detail需要设置True）
     # 4、url_path 指定url路由
+    # url_name – 定义此操作的内部（“反向”）URL 名称。默认为使用下划线替换为破折号修饰的方法的名称
 
     @action(methods=['GET'], detail=False)
     def names(self, request, *args, **kwargs):

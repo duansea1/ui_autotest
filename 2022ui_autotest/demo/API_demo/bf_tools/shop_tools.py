@@ -6,9 +6,9 @@
 from redis import Redis
 import time
 
-from demo.API_demo.commons import mysql_ops, time_tools
+from API_demo.commons import mysql_ops, time_tools
 
-from demo.API_demo.baofu_method.shop_method import *
+from API_demo.baofu_method.shop_method import *
 
 # 商城数据库
 DBs = {"host": "zw-db-testing.mysql.polardb.rds.aliyuncs.com", "user": "crm", "password": "JWW4zud0",
@@ -73,15 +73,15 @@ def delete_shop_user_scrm_data(open_kid, moblie):
 
 if __name__ == '__main__':
     # 删除商城的用户
-    # delete_shop_user(open_kid="OKIDEYjqqVAb9PHVWrHU9iaHfQ7JmEqo")
+    # delete_shop_user(open_kid="OKID668f447b10721")
 
     # 删除商城会员与scrm会员的关系
-    # delete_shop_user_scrm(moblie='17681032991')
-
+    delete_shop_user_scrm(moblie='17681032991')
     delete_shop_user_scrm_data(open_kid="OKIDEYjqqVAb9PHVWrHU9iaHfQ7JmEqo", moblie='17681032991')
+
     # delete_shop_user_scrm_data(open_kid="OKID3dwHRux4XvAjWCmpemk3ruiE3T2c", moblie='18321740710')
 
     #     OKIDEYjqqVAb9PHVWrHU9iaHfQ7JmEqo ---2991手机号
     # OKIDBHGHsux9VqcA2xdTbYPFtcYSeP9c-之前的2991关联的openid
     import os
-    print(os.path)
+    # print(os.path)

@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'myappsea',
     'interfaces',
-    'users'
+
 ]
 
 
@@ -149,9 +149,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # DRF的解析器
 REST_FRAMEWORK = {
+
     'DEFAULT_FILTER_BACKENDS': ['rest_framework.filters.SearchFilter',
                                 'rest_framework.filters.OrderingFilter'],
-    # 'SEARCH_PARAM':'se',
+    'SEARCH_PARAM': 'keyword',
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'DEFAULT_PAGINATION_CLASS': 'utils.pagination.PageNumberPagination',
     'PAGE_SIZE': 3,
@@ -230,4 +231,4 @@ LOGGING = {
 }
 
 # 指定使用的用户模型类，默认是auth.User
-AUTH_USER_MODEL = "users.UserModel"
+# AUTH_USER_MODEL = "users.UserModel"

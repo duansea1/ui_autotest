@@ -17,7 +17,7 @@ class PageNumberPagination(_PageNumberPagination):
     # Defaults to `None`, meaning pagination is disabled.
     page_size = 3
     # 指定前端的参数-页面参数
-    page_query_param = 'pp'
+    page_query_param = 'page'
     page_query_description = '获取的页码'
 
     # Client can control the page size using this query parameter.
@@ -33,5 +33,5 @@ class PageNumberPagination(_PageNumberPagination):
     def get_paginated_response(self, data):
         response = super().get_paginated_response(data)
         response.data['current_num'] = self.page.number
-        response.data['max_num'] = self.page.count()
+        response.data['max_num'] = self.page.count(data)
         return response

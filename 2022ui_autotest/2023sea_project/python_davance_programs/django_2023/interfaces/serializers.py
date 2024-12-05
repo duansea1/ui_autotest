@@ -10,8 +10,7 @@ b、文件名称推荐serializers
 
 """
 from rest_framework import serializers
-from interfaces.models import Interfaces
-from .models import Projects
+
 
 # -- 从表获取数据，校验操作主表的数据
 class InterfacesSerializer(serializers.Serializer):

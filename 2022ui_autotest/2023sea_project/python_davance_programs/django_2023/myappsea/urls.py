@@ -3,7 +3,7 @@
 # @Author: duansea
 # @Time: 2024-01-01 13:18
 # ---
-from django.urls import path, include
+from django.urls import path
 from rest_framework.documentation import include_docs_urls
 
 from . import views
@@ -33,9 +33,9 @@ urlpatterns = [
     # path('projects/csv/', views.ProjectsView.as_view()),
     path('projects/', views.ProjectsView.as_view()),  # 查询数据
     path('projects/<int:pk>/', views.ProjectsDetailView.as_view()),  # 查询、更新、删除
-    path('projects/names/',views.ProjectsView.as_view(
+    path('projects/names/', views.ProjectsView.as_view(
     )),
-    path('projects/interfaces/',views.ProjectsView.as_view()),
+    path('projects/interfaces/', views.ProjectsView.as_view()),
     path('docs/', include_docs_urls(title='测试平台接口文档', description='API文档')),
 
     # 7、加载路由条目

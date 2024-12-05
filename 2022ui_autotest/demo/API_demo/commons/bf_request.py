@@ -6,6 +6,7 @@
 
 import requests
 import urllib3
+from icecream import ic
 urllib3.disable_warnings()   # 解决请求提示InsecureRequestWarning（不安全请求警告）的log
 
 def request_bf_del_account(loginNo, usertype):
@@ -30,13 +31,15 @@ def request_bf_del_account(loginNo, usertype):
         return True  # 删除成功
     return False    # 删除失败
 
-def request_bct_del_account(openNo):
+def request_bct_del_account(merchantNo):
     """
     调宝财通接口，删除测试环境的宝户账号
 
     """
-    bcf_url = f"https://sp.baofoo.com/support-admin/tools/bct/del?contract_no={openNo}"
+    bcf_url = f"https://sp.baofoo.com/support-admin/tools/bct/del?contract_no={merchantNo}"
+    ic(bcf_url)
     get_re = requests.get(url=bcf_url, verify=False)
+    ic(get_re.json())
     if get_re.json()['code'] == 0:
         return True  # 删除成功
     return False    # 删除失败

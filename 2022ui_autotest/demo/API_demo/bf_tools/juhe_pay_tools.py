@@ -7,7 +7,7 @@ import logging
 
 from redis import Redis
 import time
-from commons.sqlrecords import excute_sql
+from sqlrecords import excute_sql
 from baofu_method.juhe_pay_methods import Aggregatd_Payment
 from commons.time_tools import TimeTool
 from commons.bf_request import request_bf_del_account

@@ -11,7 +11,6 @@ b、文件名称推荐serializers
 """
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-from interfaces.models import Interfaces
 from .models import Projects
 
 

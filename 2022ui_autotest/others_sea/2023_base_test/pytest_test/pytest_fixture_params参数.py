@@ -23,8 +23,6 @@ class Test_Login:
         print('用例1-')
         print(f"登录的用户名{login}")    # 此处的login是执行login函数的返回值
 
-    def test_02(self):
-        print('----用例02----')
 
 
 if __name__ == '__main__':
