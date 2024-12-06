@@ -17,9 +17,9 @@ def query_rate(env):
     """查询汇率-默认查的是biz_type=1的"""
     # 获取秘钥相关信息
     dataenv = enc.get_envs(env)
-    pfxpath = dataenv.get('pfxpath')
+    pfx_path = dataenv.get('pfx_path')
     pfxpass = dataenv.get('pfx_pass')
-    cerpath = dataenv.get('cerpath')
+    cer_path = dataenv.get('cer_path')
     agentNo = dataenv.get('agentNo')
     base_url = dataenv.get('url')
     certificateId = dataenv.get('certificateId')
@@ -33,7 +33,7 @@ def query_rate(env):
     ic(data)
     # 开始加密操作
     json_str = publicTools.jsonString(data)  # JSON 格式的字符串
-    rsa_util = RSAUtil(pfx_path=pfxpath, pfxpass=pfxpass, cer_path=cerpath)
+    rsa_util = RSAUtil(pfx_path=pfx_path, pfxpass=pfxpass, cer_path=cer_path)
     dataContent = rsa_util.pri_encrypt(json_str)  # RSA加密
 
     url = f"{base_url}/api/rate/query-rate"
@@ -85,9 +85,9 @@ def apply_exchange(env):
     """ GEP汇兑锁定申请"""
     # 获取秘钥相关信息
     dataenv = enc.get_envs(env)
-    pfxpath = dataenv.get('pfxpath')
+    pfx_path = dataenv.get('pfx_path')
     pfxpass = dataenv.get('pfx_pass')
-    cerpath = dataenv.get('cerpath')
+    cer_path = dataenv.get('cer_path')
     agentNo = dataenv.get('agentNo')
     base_url = dataenv.get('url')
     certificateId = dataenv.get('certificateId')
@@ -108,7 +108,7 @@ def apply_exchange(env):
     ic(data)
     # 开始加密操作
     json_str = publicTools.jsonString(data)  # JSON 格式的字符串
-    rsa_util = RSAUtil(pfx_path=pfxpath, pfxpass=pfxpass, cer_path=cerpath)
+    rsa_util = RSAUtil(pfx_path=pfx_path, pfxpass=pfxpass, cer_path=cer_path)
     dataContent = rsa_util.pri_encrypt(json_str)  # RSA加密
 
     url = f"{base_url}/api/exchange/apply-exchange"
@@ -158,9 +158,9 @@ def confirm_exchange(env):
     """ GEP汇兑锁定确认"""
     # 获取秘钥相关信息
     dataenv = enc.get_envs(env)
-    pfxpath = dataenv.get('pfxpath')
+    pfx_path = dataenv.get('pfx_path')
     pfxpass = dataenv.get('pfx_pass')
-    cerpath = dataenv.get('cerpath')
+    cer_path = dataenv.get('cer_path')
     agentNo = dataenv.get('agentNo')
     base_url = dataenv.get('url')
     certificateId = dataenv.get('certificateId')
@@ -172,7 +172,7 @@ def confirm_exchange(env):
     ic(data)
     # 开始加密操作
     json_str = publicTools.jsonString(data)  # JSON 格式的字符串
-    rsa_util = RSAUtil(pfx_path=pfxpath, pfxpass=pfxpass, cer_path=cerpath)
+    rsa_util = RSAUtil(pfx_path=pfx_path, pfxpass=pfxpass, cer_path=cer_path)
     dataContent = rsa_util.pri_encrypt(json_str)  # RSA加密
 
     url = f"{base_url}/api/exchange/confirm-exchange"
@@ -220,9 +220,9 @@ def query_b2b_cal_rate(env):
     """ B2B查询商户计算汇率"""
     # 获取秘钥相关信息
     dataenv = enc.get_envs(env)
-    pfxpath = dataenv.get('pfxpath')
+    pfx_path = dataenv.get('pfx_path')
     pfxpass = dataenv.get('pfx_pass')
-    cerpath = dataenv.get('cerpath')
+    cer_path = dataenv.get('cer_path')
     agentNo = dataenv.get('agentNo')
     base_url = dataenv.get('url')
     certificateId = dataenv.get('certificateId')
@@ -236,7 +236,7 @@ def query_b2b_cal_rate(env):
     ic(data)
     # 开始加密操作
     json_str = publicTools.jsonString(data)  # JSON 格式的字符串
-    rsa_util = RSAUtil(pfx_path=pfxpath, pfxpass=pfxpass, cer_path=cerpath)
+    rsa_util = RSAUtil(pfx_path=pfx_path, pfxpass=pfxpass, cer_path=cer_path)
     dataContent = rsa_util.pri_encrypt(json_str)  # RSA加密
 
     url = f"{base_url}/api/rate/query-b2b-cal-rate"

@@ -22,16 +22,16 @@ def create_user(env):
 
     # 获取秘钥相关信息
     dataenv = enc.get_envs(env)
-    pfxpath = dataenv.get('pfxpath')
+    pfx_path = dataenv.get('pfx_path')
     pfxpass = dataenv.get('pfx_pass')
-    cerpath = dataenv.get('cerpath')
+    cer_path = dataenv.get('cer_path')
     agentNo = dataenv.get('agentNo')
     base_url = dataenv.get('url')
     certificateId = dataenv.get('certificateId')
 
     # 开始加密操作
     json_str = publicTools.jsonString(data)  # JSON 格式的字符串
-    rsa_util = RSAUtil(pfx_path=pfxpath, pfxpass=pfxpass, cer_path=cerpath)
+    rsa_util = RSAUtil(pfx_path=pfx_path, pfxpass=pfxpass, cer_path=cer_path)
     dataContent = rsa_util.pri_encrypt(json_str)  # RSA加密
 
     url = f"{base_url}/api/agent/user/createUser"

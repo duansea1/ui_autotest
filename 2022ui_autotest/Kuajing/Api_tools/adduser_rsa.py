@@ -12,9 +12,9 @@ import base64
 import json
 
 # 加密内容传参
-pfxpath = 'C:\\Users\段海洋\\myfiles\\auto_files\\ui_autotest\\2022ui_autotest\\demo\\API_demo\KuaJing\\tools\\key_5182240620000018698@@2406261353000001391.pfx'
+pfx_path = 'C:\\Users\段海洋\\myfiles\\auto_files\\ui_autotest\\2022ui_autotest\\demo\\API_demo\KuaJing\\tools\\key_5182240620000018698@@2406261353000001391.pfx'
 pfxpass = '5182240620000018698_435548'
-cerpath = 'C:\\Users\段海洋\\myfiles\\auto_files\\ui_autotest\\2022ui_autotest\\demo\\API_demo\\KuaJing\\tools\\key_5182240620000018698@@2406261353000001391.cer'
+cer_path = 'C:\\Users\段海洋\\myfiles\\auto_files\\ui_autotest\\2022ui_autotest\\demo\\API_demo\\KuaJing\\tools\\key_5182240620000018698@@2406261353000001391.cer'
 
 
 data_encode = ("c7806c6822b21884788f1b4561b8fefe13c6ffde50936f307964686bac07d2b0247162563484b3"
@@ -45,7 +45,7 @@ json_str = json.dumps(data_content_map, separators=(',', ':'))
 
 # ic(encoded_data)
 # data = 'eyJlbWFpbCI6IjEyMUAxMTEuY29tIn0='
-rsa_util = RSAUtil(pfxpath, pfxpass, cerpath)
+rsa_util = RSAUtil(pfx_path, pfxpass, cer_path)
 
 pri_en = rsa_util.pri_encrypt(json_str)
 print("私钥加密内容：{}".format(pri_en))

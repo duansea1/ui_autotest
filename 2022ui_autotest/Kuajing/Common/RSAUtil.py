@@ -171,11 +171,11 @@ class RSAUtil:
 # Example usage:
 if __name__ == '__main__':
     testData = 'send_time=2018-01-24 13:25:33&msg_id=456795112&version=4.0.0.0&123=100000949&txn_type=03&member_id=100000749&user_id=123'
-    pfxpath = 'C:\\Users\段海洋\\myfiles\\auto_files\\ui_autotest\\2022ui_autotest\\demo\\API_demo\KuaJing\\tools\\key_5181240821000008798@@2408281533000001302.pfx'
+    pfx_path = 'C:\\Users\段海洋\\myfiles\\auto_files\\ui_autotest\\2022ui_autotest\\demo\\API_demo\KuaJing\\tools\\key_5181240821000008798@@2408281533000001302.pfx'
     pfxpass = '5181240821000008798_774480'
-    cerpath = 'C:\\Users\段海洋\\myfiles\\auto_files\\ui_autotest\\2022ui_autotest\\demo\\API_demo\\KuaJing\\tools\\key_5181240821000008798@@2408281533000001302.cer'
+    cer_path = 'C:\\Users\段海洋\\myfiles\\auto_files\\ui_autotest\\2022ui_autotest\\demo\\API_demo\\KuaJing\\tools\\key_5181240821000008798@@2408281533000001302.cer'
 
-    rsa_util = RSAUtil(pfxpath, pfxpass, cerpath)
+    rsa_util = RSAUtil(pfx_path, pfxpass, cer_path)
 
     pri_en = rsa_util.pri_encrypt(testData)
     print("私钥加密内容：{}".format(pri_en))
