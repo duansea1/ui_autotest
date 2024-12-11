@@ -3,8 +3,11 @@
 # @Author: duansea
 # @Time: 2024-11-21 19:38
 # ---
+
 # from read_files import *
 from Kuajing.Common.read_files import *
+
+
 def get_envs(env):
     if env == 'fat-sea-agent-hzl':  # 海之蓝代理商
         base_env = {
@@ -49,6 +52,28 @@ def get_envs(env):
             "userNo": "5181240829000137108",  # 丝丝
             "certificateId": "2408291525000006449",
             "url": "http://10.254.154.99:8061"
+        }
+        return base_env
+    elif env == 'uat-sea-agent-hzl':  # uat海之蓝
+        base_env = {
+            "pfx_path": get_files("UatAgentFiles", "key_5182240808000102058@@2408291423000006389.pfx"),
+            "cer_path": get_files("UatAgentFiles", "key_5182240808000102058@@2408291423000006389.cer"),
+            "pfx_pass": "5182240808000102058_385192",
+            "agentNo": "5182240808000102058",  # uat海之蓝金牌销售
+            "userNo": "5181240829000137108",  # 丝丝
+            "certificateId": "2408291423000006389",
+            "url": "http://10.254.154.99:8061"
+        }
+        return base_env
+    elif env == 'prod-sea-agent-dhf':  # prod邓湖锋
+        base_env = {
+            "pfx_path": get_files("ProdAgentFiles", "key_5182231019000991078@@2311022112000148877.pfx"),
+            "cer_path": get_files("ProdAgentFiles", "key_5182231019000991078@@2311022112000148877.cer"),
+            "pfx_pass": "5182231019000991078_166157",
+            "agentNo": "5182231019000991078",  # u邓湖锋
+            "userNo": "5181231019000988688",  # 上海迅信网络科技有限公司
+            "certificateId": "2311022112000148877",
+            "url": "https://api.gepholding.com"
         }
         return base_env
     else:

@@ -1,0 +1,155 @@
+
+ {"applyDate":"2024-12-09 11:28:58","costBorne":"OUR","orderId":2412091128290893160,"payeeAmount":7.67,"payeeCcy":"CNH","paymentAmount":1.00,"paymentCcy":"EUR","paymentFeeAmount":0.02,"paymentFeeCcy":"EUR","paymentFeeRate":768.574503,"paymentPurpose":13,"status":1,"tradeRate":767.550333,"userNo":5181240821000008798,"userReqNo":"sea202412070005"}
+ {"applyDate":"2024-12-09 11:30:56","costBorne":"OUR","orderId":2412091130290893165,"payeeAmount":7.68,"payeeCcy":"CNH","paymentAmount":1.00,"paymentCcy":"EUR","paymentFeeAmount":0.02,"paymentFeeCcy":"EUR","paymentFeeRate":767.730000,"paymentPurpose":13,"status":1,"tradeRate":768.652000,"userNo":5181240821000008798,"userReqNo":"sea202412070006"}
+ {"applyDate":"2024-12-09 11:54:24","costBorne":"OUR","orderId":2412091154290903141,"payeeAmount":6.84,"payeeCcy":"CNH","paymentAmount":1.00,"paymentCcy":"USD","paymentFeeAmount":0.06,"paymentFeeCcy":"USD","paymentFeeRate":100.000000,"paymentPurpose":13,"status":1,"tradeRate":727.730000,"userNo":5181240821000008798,"userReqNo":"sea-pal202412070001"}
+ {"accountName":"HKONG WUWU NET Company .LIT","applyDate":"2024-12-09 14:10:35","cardNo":"5686798743","costBorne":"SHA","orderId":2412091410290923138,"payeeAmount":7.24,"payeeCcy":"CNH","paymentAmount":1.00,"paymentCcy":"USD","paymentFeeAmount":21.96,"paymentFeeCcy":"CNH","paymentFeeRate":724.761200,"paymentPurpose":13,"paymentReference":"sea-remarks-b2b","status":1,"tradeRate":724.761200,"userNo":5181240821000008798,"userReqNo":"sea-with202412070001"}
+ {"accountName":"HKONG WUWU NET Company .LIT","applyDate":"2024-12-09 14:11:55","cardNo":"5686798743","costBorne":"SHA","orderId":2412091411290923147,"payeeAmount":7.24,"payeeCcy":"CNH","paymentAmount":1.00,"paymentCcy":"USD","paymentFeeAmount":21.96,"paymentFeeCcy":"CNH","paymentFeeRate":724.732300,"paymentPurpose":13,"paymentReference":"sea-remarks-b2b","status":1,"tradeRate":724.732300,"userNo":5181240821000008798,"userReqNo":"sea-with202412070002"}
+ {"accountName":"HKONG WUWU NET Company .LIT","applyDate":"2024-12-09 14:13:16","cardNo":"5686798743","costBorne":"SHA","orderId":2412091413290923150,"payeeAmount":8.18,"payeeCcy":"CNH","paymentAmount":1.00,"paymentCcy":"EUR","paymentFeeAmount":21.96,"paymentFeeCcy":"CNH","paymentFeeRate":724.762500,"paymentPurpose":13,"paymentReference":"sea-remarks-b2b","status":1,"tradeRate":818.184227,"userNo":5181240821000008798,"userReqNo":"sea-with202412070003"}
+ {"accountName":"HKONG WUWU NET Company .LIT","applyDate":"2024-12-09 14:14:09","cardNo":"5686798743","costBorne":"SHA","orderId":2412091414290923161,"payeeAmount":8.18,"payeeCcy":"CNH","paymentAmount":1.00,"paymentCcy":"EUR","paymentFeeAmount":21.96,"paymentFeeCcy":"CNH","paymentFeeRate":724.772600,"paymentPurpose":13,"paymentReference":"sea-remarks-b2b","status":1,"tradeRate":818.237477,"userNo":5181240821000008798,"userReqNo":"sea-with202412070005"}
+ {"applyDate":"2024-12-09 14:23:05","costBorne":"OUR","orderId":2412091423290923177,"payeeAmount":6.84,"payeeCcy":"CNH","paymentAmount":1.00,"paymentCcy":"USD","paymentFeeAmount":0.06,"paymentFeeCcy":"USD","paymentFeeRate":100.000000,"paymentPurpose":13,"status":1,"tradeRate":727.730000,"userNo":5181240821000008798,"userReqNo":"sea-p202412070001"}
+ {"accountName":"HKONG WUWU NET Company .LIT","applyDate":"2024-12-09 14:59:17","cardNo":"5686798743","costBorne":"OUR","orderId":2412091459290924396,"payeeAmount":6.69,"payeeCcy":"CNH","paymentAmount":1.00,"paymentCcy":"USD","paymentFeeAmount":0.08,"paymentFeeCcy":"USD","paymentFeeRate":100.000000,"paymentPurpose":18,"paymentReference":"sea-remarks-b2b","status":1,"tradeRate":727.730000,"userNo":5181240821000008798,"userReqNo":"sea-plat202412070005"}
+ {"accountName":"HKONG WUWU NET Company .LIT","applyDate":"2024-12-09 15:24:48","cardNo":"566978098342","costBorne":"OUR","orderId":2412091524290963155,"payeeAmount":7.39,"payeeCcy":"HKD","paymentAmount":1.00,"paymentCcy":"USD","paymentFeeAmount":0.05,"paymentFeeCcy":"USD","paymentFeeRate":100.000000,"paymentPurpose":18,"paymentReference":"TRADE TEST","status":1,"tradeRate":778.009400,"userNo":5181240821000008798,"userReqNo":"sea202412070009"}
+ {"applyDate":"2024-12-09 16:44:03","costBorne":"OUR","orderId":2412091644290993139,"payeeAmount":7.24,"payeeCcy":"CNY","paymentAmount":1.00,"paymentCcy":"USD","paymentFeeAmount":0.04,"paymentFeeCcy":"USD","paymentFeeRate":728.690000,"paymentPurpose":18,"status":1,"tradeRate":724.032900,"userNo":5181240821000008798,"userReqNo":"sea-gep202412070001"}
+ {"applyDate":"2024-12-09 16:47:20","costBorne":"OUR","orderId":2412091647290993172,"payeeAmount":72.39,"payeeCcy":"CNY","paymentAmount":10.00,"paymentCcy":"USD","paymentFeeAmount":0.40,"paymentFeeCcy":"USD","paymentFeeRate":728.690000,"paymentPurpose":18,"status":1,"tradeRate":723.983300,"userNo":5181240821000008798,"userReqNo":"sea-gep202412070003"}
+ {"applyDate":"2024-12-09 17:24:45","costBorne":"OUR","orderId":2412091724291003199,"payeeAmount":72.33,"payeeCcy":"CNY","paymentAmount":10.00,"paymentCcy":"USD","paymentFeeAmount":0.40,"paymentFeeCcy":"USD","paymentFeeRate":728.690000,"paymentPurpose":18,"status":1,"tradeRate":723.317500,"userNo":5181240821000008798,"userReqNo":"sea-gep202412070004"}
+ {"buyAmount":0.42,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091739000011943,"orderState":0,"sellAmount":3.11,"sellCcy":"CNH","tradeRate":7.309822,"userNo":5181240829000137108,"userReqNo":"202412090000015"}
+ {"buyAmount":0.42,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091741000027121,"orderState":0,"sellAmount":3.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"202412090000015"}
+ {"buyAmount":0.42,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091745000027123,"orderState":0,"sellAmount":3.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090001"}
+ {"buyAmount":0.42,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091749000027124,"orderState":0,"sellAmount":3.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090002"}
+ {"buyAmount":0.42,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091750000027125,"orderState":0,"sellAmount":3.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090003"}
+ {"buyAmount":0.42,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091751000027126,"orderState":0,"sellAmount":3.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090004"}
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091753000027127,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090006"}
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091756000027136,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090007"}
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091803000027147,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090008"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091807000027148,"orderState":0,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.310512,"userNo":5181240821000008798,"userReqNo":"fat202412090010"}
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091812000027149,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090011"}
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091813000027152,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090012"}
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":2,"exchangeId":2412091813000027152,"orderState":1,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090012"}
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091814000027154,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090013"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091815000027156,"orderState":0,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.310512,"userNo":5181240821000008798,"userReqNo":"fat202412090014"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091824000011944,"orderState":0,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.263770,"userNo":5181240829000137108,"userReqNo":"fat202412090014"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091827000011945,"orderState":0,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.264020,"userNo":5181240829000137108,"userReqNo":"fat202412090015"}
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091908000027161,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090015"}
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091909000027162,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.286900,"userNo":5181240821000008798,"userReqNo":"fat202412090016"}
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091910000027165,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.283600,"userNo":5181240821000008798,"userReqNo":"fat202412090017"}
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091911000027166,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.283600,"userNo":5181240821000008798,"userReqNo":"fat202412090018"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091912000027169,"orderState":0,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.310512,"userNo":5181240821000008798,"userReqNo":"fat202412090019"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091912000027172,"orderState":0,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.310512,"userNo":5181240821000008798,"userReqNo":"fat202412090020"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":2,"exchangeId":2412091912000027172,"orderState":1,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.310512,"userNo":5181240821000008798,"userReqNo":"fat202412090020"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091915000027176,"orderState":0,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.310512,"userNo":5181240821000008798,"userReqNo":"fat202412090021"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091917000027177,"orderState":0,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.310512,"userNo":5181240821000008798,"userReqNo":"fat202412090022"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091917000027179,"orderState":0,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.310512,"userNo":5181240821000008798,"userReqNo":"fat202412090023"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":2,"exchangeId":2412091917000027179,"orderState":1,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.310512,"userNo":5181240821000008798,"userReqNo":"fat202412090023"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"direction":2,"exchangeId":2412091922000027181,"orderState":0,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.310512,"userNo":5181240821000008798,"userReqNo":"fat202412090024"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"exchangeId":2412091922000027181,"orderState":1,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.310512,"userNo":5181240821000008798,"userReqNo":"fat202412090024"}
+ {"buyAmount":0.04,"buyCcy":"USD","closingDate":"2024-12-09","closingStatus":0,"exchangeId":2412091922000027181,"orderState":1,"sellAmount":0.31,"sellCcy":"CNH","tradeRate":7.310512,"userNo":5181240821000008798,"userReqNo":"fat202412090024"}
+ true
+ true
+ true
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":0.02,"buyCcy":"USD","closingDate":"2024-12-11","closingStatus":0,"direction":2,"exchangeId":2412101010000027217,"orderState":0,"sellAmount":0.21,"sellCcy":"CNH","tradeRate":7.260000,"userNo":5181240821000008798,"userReqNo":"20241210-001"}
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":0.02,"buyCcy":"USD","closingDate":"2024-12-11","closingStatus":0,"direction":2,"exchangeId":2412101012000027218,"orderState":0,"sellAmount":0.21,"sellCcy":"CNH","tradeRate":7.260000,"userNo":5181240821000008798,"userReqNo":"20241210-002"}
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":0.01,"buyCcy":"CNH","closingDate":"2024-12-11","closingStatus":0,"direction":2,"exchangeId":2412101013000027219,"orderState":0,"sellAmount":0.21,"sellCcy":"JPY","tradeRate":20.849839,"userNo":5181240821000008798,"userReqNo":"20241210-003"}
+ http://10.254.95.181:8061/api/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101024000027223,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.321300,"userNo":5181240628000024148,"userReqNo":"20241210-004"}
+ http://10.254.95.181:8061/api/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101025000027224,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.283300,"userNo":5181240628000024148,"userReqNo":"20241210-005"}
+ http://10.254.95.181:8061/api/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-10","cl
+ osingStatus":0,"direction":2,"exchangeId":2412101025000027225,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.321300,"userNo":5181240628000024148,"userReqNo":"20241210-008"}
+ http://10.254.95.181:8061/api/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-10","closingStatus":2,"closingSuccessDate":1733797565092,"direction":2,"exchangeId":2412101025000027225,"orderState":1,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.321300,"userNo":5181240628000024148,"userReqNo":"20241210-008"}
+ http://10.254.95.181:8061/api/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101034000027228,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.302000,"userNo":5181240628000024148,"userReqNo":"20241210-009"}
+ http://10.254.95.181:8061/api/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-10","closingStatus":2,"closingSuccessDate":1733798078477,"direction":2,"exchangeId":2412101034000027228,"orderState":1,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.302000,"userNo":5181240628000024148,"userReqNo":"20241210-009"}
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":0.01,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101509000027256,"orderState":1,"sellAmount":0.21,"sellCcy":"JPY","tradeRate":20.691795,"userNo":5181240821000008798,"userReqNo":"20241210-009"}
+ http://10.254.95.181:8061/api/exchange/query-exchange-order调用成功返回结果：
+ {"buyAmount":0.01,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"deliveryType":"MANUAL","direction":2,"exchangeId":2412101509000027256,"orderState":1,"sellAmount":0.21,"sellCcy":"JPY","tradeRate":20.691795,"userNo":5181240821000008798,"userReqNo":"20241210-009"}
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":0.01,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101512000027257,"orderState":1,"sellAmount":0.21,"sellCcy":"JPY","tradeRate":20.691795,"userNo":5181240821000008798,"userReqNo":"20241210-010"}
+ http://10.254.95.181:8061/api/exchange/query-exchange-order调用成功返回结果：
+ {"buyAmount":0.01,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"deliveryType":"MANUAL","direction":2,"exchangeId":2412101512000027257,"orderState":1,"sellAmount":0.21,"sellCcy":"JPY","tradeRate":20.691795,"userNo":5181240821000008798,"userReqNo":"20241210-010"}
+ http://10.254.95.181:8061/api/exchange/query-exchange-order调用成功返回结果：
+ {"buyAmount":0.01,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"deliveryType":"MANUAL","direction":2,"exchangeId":2412101512000027257,"orderState":1,"sellAmount":0.21,"sellCcy":"JPY","tradeRate":20.691795,"userNo":5181240821000008798,"userReqNo":"20241210-010"}
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":0.01,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101515000027264,"orderState":0,"sellAmount":0.21,"sellCcy":"JPY","tradeRate":20.590842,"userNo":5181240821000008798,"userReqNo":"20241210-013"}
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":0.01,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101515000027264,"orderState":1,"sellAmount":0.21,"sellCcy":"JPY","tradeRate":20.590842,"userNo":5181240821000008798,"userReqNo":"20241210-013"}
+ http://10.254.95.181:8061/api/exchange/query-exchange-order调用成功返回结果：
+ {"buyAmount":0.01,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"deliveryType":"AUTO","direction":2,"exchangeId":2412101515000027264,"orderState":1,"sellAmount":0.21,"sellCcy":"JPY","tradeRate":20.590842,"userNo":5181240821000008798,"userReqNo":"20241210-013"}
+ http://10.254.95.181:8061/api/exchange/query-exchange-order调用成功返回结果：
+ {"buyAmount":0.01,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":2,"closingSuccessDate":1733815204000,"deliveryType":"AUTO","direction":2,"exchangeId":2412101515000027264,"orderState":1,"sellAmount":0.21,"sellCcy":"JPY","tradeRate":20.590842,"userNo":5181240821000008798,"userReqNo":"20241210-013"}
+ http://10.254.154.99:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":1.52,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101522000012185,"orderState":0,"sellAmount":0.21,"sellCcy":"USD","tradeRate":7.258680,"userNo":5181240829000137108,"userReqNo":"20241210-013"}
+ http://10.254.154.99:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":1.52,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101522000012185,"orderState":1,"sellAmount":0.21,"sellCcy":"USD","tradeRate":7.258680,"userNo":5181240829000137108,"userReqNo":"20241210-013"}
+ http://10.254.95.181:8061/api/exchange/query-exchange-order调用成功返回结果：
+ {"buyAmount":0.01,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":2,"closingSuccessDate":1733815204000,"deliveryType":"AUTO","direction":2,"exchangeId":2412101515000027264,"orderState":1,"sellAmount":0.21,"sellCcy":"JPY","tradeRate":20.590842,"userNo":5181240821000008798,"userReqNo":"20241210-013"}
+ http://10.254.95.181:8061/api/exchange/query-exchange-order调用成功返回结果：
+ {"buyAmount":0.01,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":2,"closingSuccessDate":1733815204000,"deliveryType":"AUTO","direction":2,"exchangeId":2412101515000027264,"orderState":1,"sellAmount":0.21,"sellCcy":"JPY","tradeRate":20.590842,"userNo":5181240821000008798,"userReqNo":"20241210-013"}
+ http://10.254.154.99:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":1.52,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101529000012188,"orderState":0,"sellAmount":0.21,"sellCcy":"USD","tradeRate":7.258928,"userNo":5181240829000137108,"userReqNo":"20241210-014"}
+ http://10.254.154.99:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":1.52,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101529000012188,"orderState":1,"sellAmount":0.21,"sellCcy":"USD","tradeRate":7.258928,"userNo":5181240829000137108,"userReqNo":"20241210-014"}
+ http://10.254.154.99:8061/api/agent/exchange/exchange-modify-delivery调用成功返回结果：
+ {"buyAmount":1.52,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"exchangeId":2412101529000012188,"orderState":1,"sellAmount":0.21,"sellCcy":"USD","tradeRate":7.258928,"userNo":5181240829000137108,"userReqNo":"20241210-014"}
+ http://10.254.154.99:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":1.52,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101530000012190,"orderState":0,"sellAmount":0.21,"sellCcy":"USD","tradeRate":7.258455,"userNo":5181240829000137108,"userReqNo":"20241210-015"}
+ http://10.254.154.99:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":1.52,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101530000012190,"orderState":1,"sellAmount":0.21,"sellCcy":"USD","tradeRate":7.258455,"userNo":5181240829000137108,"userReqNo":"20241210-015"}
+ http://10.254.154.99:8061/api/agent/exchange/exchange-modify-delivery调用成功返回结果：
+ {"buyAmount":1.52,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"exchangeId":2412101530000012190,"orderState":1,"sellAmount":0.21,"sellCcy":"USD","tradeRate":7.258455,"userNo":5181240829000137108,"userReqNo":"20241210-015"}
+ http://10.254.154.99:8061/api/agent/exchange/exchange-modify-delivery调用成功返回结果：
+ {"buyAmount":1.52,"buyCcy":"CNH","closingDate":"2024-12-10","fclosingStatus":0,"exchangeId":2412101530000012190,"orderState":1,"sellAmount":0.21,"sellCcy":"USD","tradeRate":7.258455,"userNo":5181240829000137108,"userReqNo":"20241210-015"}
+ http://10.254.154.99:8061/api/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101535000012191,"orderState":0,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.279921,"userNo":5181240829000137108,"userReqNo":"20241210-016"}
+ http://10.254.154.99:8061/api/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":0.15,"buyCcy":"USD","closingDate":"2024-12-10","closingStatus":2,"closingSuccessDate":1733816120861,"direction":2,"exchangeId":2412101535000012191,"orderState":1,"sellAmount":1.11,"sellCcy":"CNH","tradeRate":7.279921,"userNo":5181240829000137108,"userReqNo":"20241210-016"}
+ http://10.254.154.99:8061/api/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":1,"buyCcy":"USD","closingDate":"2024-12-10","closingStatus":0,"direction":1,"exchangeId":2412101536000012194,"orderState":0,"sellAmount":7.27,"sellCcy":"CNH","tradeRate":7.279921,"userNo":5181240829000137108,"userReqNo":"20241210-017"}
+ http://10.254.154.99:8061/api/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":1.00,"buyCcy":"USD","closingDate":"2024-12-10","closingStatus":2,"closingSuccessDate":1733816215535,"direction":1,"exchangeId":2412101536000012194,"orderState":1,"sellAmount":7.27,"sellCcy":"CNH","tradeRate":7.279921,"userNo":5181240829000137108,"userReqNo":"20241210-017"}
+ http://10.254.154.99:8061/api/exchange/query-exchange-order调用成功返回结果：
+ {"buyAmount":1.52,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":2,"closingSuccessDate":1733815771000,"deliveryType":"MANUAL","direction":2,"exchangeId":2412101529000012188,"orderState":1,"sellAmount":0.21,"sellCcy":"USD","tradeRate":7.258928,"userNo":5181240829000137108,"userReqNo":"20241210-014"}
+ http://10.254.154.99:8061/api/payment/b2b/apply-payment调用成功返回结果：
+ {"accountName":"sisi","applyDate":"2024-12-10 16:08:29","cardNo":"35759780","costBorne":"SHA","orderId":2412101608000012315,"payeeAmount":7.26,"payeeCcy":"CNH","paymentAmount":1.00,"paymentCcy":"USD","paymentFeeAmount":36.54,"paymentFeeCcy":"CNH","paymentFeeRate":726.507000,"paymentPurpose":13,"paymentReference":"sea-remarks-b2b","status":1,"tradeRate":726.507000,"userNo":5181240829000137108,"userReqNo":"sea202412060005"}
+ http://10.254.154.99:8061/api/payment/b2b/apply-payment调用成功返回结果：
+ {"accountName":"sisi","applyDate":"2024-12-10 16:10:11","cardNo":"35759780",
+ "costBorne":"SHA","orderId":2412101610000012324,"payeeAmount":7.26,"payeeCcy":"CNH",
+ "paymentAmount":1.00,"paymentCcy":"USD","paymentFeeAmount":36.54,"paymentFeeCcy":"CNH",
+ "paymentFeeRate":726.377700,"paymentPurpose":13,"paymentReference":"sea-remarks-b2b","status":1,
+ "tradeRate":726.377700,"userNo":5181240829000137108,"userReqNo":"sea20241210001"}
+ http://10.254.154.99:8061/api/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":1,"buyCcy":"EUR","closingDate":"2024-12-10","closingStatus":0,"direction":1,"exchangeId":2412101628000012344,"orderState":0,"sellAmount":7.68,"sellCcy":"CNH","tradeRate":7.689606,"userNo":5181240829000137108,"userReqNo":"20241210-020"}
+ http://10.254.154.99:8061/api/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":1.00,"buyCcy":"EUR","closingDate":"2024-12-10","closingStatus":2,"closingSuccessDate":1733819334102,"direction":1,"exchangeId":2412101628000012344,"orderState":1,"sellAmount":7.68,"sellCcy":"CNH","tradeRate":7.689606,"userNo":5181240829000137108,"userReqNo":"20241210-020"}
+ http://10.254.154.99:8061/api/exchange/query-exchange-order调用成功返回结果：
+ {"buyAmount":1.00,"buyCcy":"EUR","closingDate":"2024-12-10","closingStatus":2,"closingSuccessDate":1733819334000,"deliveryType":"AUTO","direction":1,"exchangeId":2412101628000012344,"orderState":1,"sellAmount":7.68,"sellCcy":"CNH","tradeRate":7.689606,"userNo":5181240829000137108,"userReqNo":"20241210-020"}
+ http://10.254.154.99:8061/api/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":2427,"buyCcy":"VND","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412101704000012364,"orderState":0,"sellAmount":0.11,"sellCcy":"USD","tradeRate":22069.290000,"userNo":5181240829000137108,"userReqNo":"20241210-021"}
+ http://10.254.154.99:8061/api/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":2427.00,"buyCcy":"VND","closingDate":"2024-12-10","closingStatus":2,"closingSuccessDate":1733821468631,"direction":2,"exchangeId":2412101704000012364,"orderState":1,"sellAmount":0.11,"sellCcy":"USD","tradeRate":22069.290000,"userNo":5181240829000137108,"userReqNo":"20241210-021"}
+ https://api.gepholding.com/api/agent/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":7.24,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412102019060619621,"orderState":0,"sellAmount":1,"sellCcy":"USD","tradeRate":7.241400,"userNo":5181231019000988688,"userReqNo":"20241210-021"}
+ https://api.gepholding.com/api/agent/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":7.24,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412102021060619690,"orderState":0,"sellAmount":1,"sellCcy":"USD","tradeRate":7.241400,"userNo":5181231019000988688,"userReqNo":"20241210-022"}
+ https://api.gepholding.com/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":7.24,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412102021060619690,"orderState":1,"sellAmount":1.00,"sellCcy":"USD","tradeRate":7.241400,"userNo":5181231019000988688,"userReqNo":"20241210-022"}
+ https://api.gepholding.com/api/agent/exchange/exchange-modify-delivery调用成功返回结果：
+ {"buyAmount":7.24,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"exchangeId":2412102021060619690,"orderState":1,"sellAmount":1.00,"sellCcy":"USD","tradeRate":7.241400,"userNo":5181231019000988688,"userReqNo":"20241210-022"}
+ https://api.gepholding.com/api/exchange/query-exchange-order调用成功返回结果：
+ {"buyAmount":7.24,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":4,"deliveryType":"AUTO","direction":2,"exchangeId":2412102021060619690,"orderState":1,"sellAmount":1.00,"sellCcy":"USD","tradeRate":7.241400,"userNo":5181231019000988688,"userReqNo":"20241210-022"}
+ https://api.gepholding.com/api/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":7.23,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412102027060619729,"orderState":0,"sellAmount":1,"sellCcy":"USD","tradeRate":7.238280,"userNo":5181231019000988688,"userReqNo":"20241210-023"}
+ https://api.gepholding.com/api/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":7.23,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412102037060619814,"orderState":0,"sellAmount":1,"sellCcy":"USD","tradeRate":7.238280,"userNo":5181231019000988688,"userReqNo":"20241210-025"}
+ https://api.gepholding.com/api/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":7.23,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":2,"closingSuccessDate":1733834253554,"direction":2,"exchangeId":2412102037060619814,"orderState":1,"sellAmount":1.00,"sellCcy":"USD","tradeRate":7.238280,"userNo":5181231019000988688,"userReqNo":"20241210-025"}
+ https://api.gepholding.com/api/agent/exchange/apply-exchange调用成功返回结果：
+ {"buyAmount":7.24,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412102038060619834,"orderState":0,"sellAmount":1,"sellCcy":"USD","tradeRate":7.241400,"userNo":5181231019000988688,"userReqNo":"20241210-026"}
+ https://api.gepholding.com/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {"buyAmount":7.24,"buyCcy":"CNH","closingDate":"2024-12-10","closingStatus":0,"direction":2,"exchangeId":2412102038060619834,"orderState":1,"sellAmount":1.00,"sellCcy":"USD","tradeRate":7.241400,"userNo":5181231019000988688,"userReqNo":"20241210-026"}

@@ -86,8 +86,45 @@ def payeeTradeRelatedOrder(env):
         return None
 
 
+def launch_transfer(env):
+    """
+   账户转账申请接口"""
+    # 获取秘钥相关信息
+    data_env = enc.get_envs(env)
+    url = f"{data_env.get('url')}/api/account-transfer/launch-transfer"
+    data = {
+            "userNo": data_env.get('userNo'),
+            "userReqNo": "sea-th202412070004",
+            "payerAccount": 3,  # 付款账户：1-余额户(汇兑账户)  3-B2B收款户
+
+            "payerAmt": 1,  # 付款金额
+            "payerCcy": "EUR",  # 付款币种
+            "payeeUserNo": 5181240628000024148,  # 收款用户编号
+            "payerReference": "A商户给B商户转钱",  # 附言
+            "callBackUrl": "121-sea",  # 通知地址 - 必填
+
+
+            }
+
+    # 提示：在实际使用时，请确保所有必填项都有提供具体值。
+    ic(data)
+
+    # 开始加密操作
+    rsa_utils, dataContent = publicTools.rsa_generate(data, env)
+
+    # 构建请求数据
+    dataMap = publicTools.data_Map(data_env, dataContent, apiType=3)
+
+    ic(dataMap)
+
+    # 发送请求
+    publicTools.send_request(rsa_utils, url, dataMap)
+
+
 if __name__ == '__main__':
     # 代理商
-    payeeTradeRelatedOrder(env="fat-sea-agent-hzl")
+    # payeeTradeRelatedOrder(env="fat-sea-agent-hzl")
+
+    launch_transfer(env="fat-sea-agent-hzl")
 
 
