@@ -5,7 +5,7 @@
 # ---
 
 # from read_files import *
-from Kuajing.Common.read_files import *
+from Common.read_files import *
 
 
 def get_envs(env):

@@ -13,15 +13,16 @@ import json
 ic.configureOutput(includeContext=True)
 
 
-def b2b_apply_payment(env):
+def b2b_apply_payment(env, userReqNo):
     """ B2B汇款申请(海外付款)"""
     # 获取秘钥相关信息
     data_env = enc.get_envs(env)
+    url = f"{data_env.get('url')}/api/payment/b2b/apply-payment"
 
     data = {
         "userNo": data_env.get('userNo'),  # 商户号 - 必填
         "certificateId": data_env.get('certificateId'),  # 证书编号 - 必填
-        "userReqNo": "sea202412060005",  # 汇款申请单号 - 必填, 字符串长度不超过32
+        "userReqNo": userReqNo,  # 汇款申请单号 - 必填, 字符串长度不超过32
         "paymentMode": "SWIFT",  # 付款模式 - 必填, SWIFT、 LOCAL、 BILLPAY、 BPAY 为空则默认SWIFT，此值需要与添加银行账号选择的付款方式要一致
         "paymentCcy": "USD",  # 付款币种 - 必填 商户开通的出款币种
         "paymentAmount": 1,  # 实际付款的资金，当付款币种和收款币种不一致时，并且固定模式为1时，此字段必须大于0，固定模式为2时此字段填写0
@@ -48,7 +49,7 @@ def b2b_apply_payment(env):
     # 开始加密操作
     rsa_utils, dataContent = publicTools.rsa_generate(data, env)
 
-    url = f"{data_env.get('url')}/api/payment/b2b/apply-payment"
+
 
     # 构建请求数据
     dataMap = {
@@ -109,8 +110,10 @@ def b2b_apply_payment2(env,userReqNo):
 
 if __name__ == '__main__':
     # B2b 海外付款审核接口
-    userReqNo = "sea20241210001"
-    # b2b_apply_payment(env="fat-sea-wu")
+    userReqNo = "sea20241217004"
+    # b2b_apply_payment(env="fat-sea-agent-hzl", userReqNo=userReqNo)
 
     # uat-环境的数据
     b2b_apply_payment2(env="uat-sea-agent-hzl", userReqNo=userReqNo)
+    import time
+

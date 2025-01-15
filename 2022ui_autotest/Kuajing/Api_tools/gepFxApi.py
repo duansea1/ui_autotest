@@ -3,11 +3,11 @@
 # GEP-FX相关接口
 # @Time: 2024-12-03 19:35
 # ---
-from commons.RSAUtil import *
-from Kuajing.Common import publicTools
-from Kuajing.Common import enviromments as enc
+from Common import publicTools
+from Common import enviromments as enc
 from icecream import ic
 
+from Api_tools.uploadFile import upload_file
 # ic.configureOutput(prefix='DEBUG: ')
 ic.configureOutput(includeContext=True)
 
@@ -16,11 +16,12 @@ def gep_apply_payment(env):
     """ GEP汇款申请(对应业务：GEP付款-旧版)"""
     # 获取秘钥相关信息
     data_env = enc.get_envs(env)
+    url = f"{data_env.get('url')}/api/payment/applyPayment"
 
     data = {
         "userNo": data_env.get('userNo'),  # 商户号 - 必填
         "certificateId": data_env.get('certificateId'),  # 证书编号 - 必填
-        "userReqNo": "sea202412060010",  # 汇款申请单号 - 必填, 字符串长度不超过32
+        "userReqNo": "sea202412170010",  # 汇款申请单号 - 必填, 字符串长度不超过32
         "paymentMode": "SWIFT",  # 付款模式 - 必填, SWIFT、 LOCAL、 BILLPAY、 BPAY 为空则默认SWIFT，此值需要与添加银行账号选择的付款方式要一致
         "paymentCcy": "USD",  # 付款币种 - 必填 商户开通的出款币种
         "paymentAmount": 1,  # 实际付款的资金，当付款币种和收款币种不一致时，并且固定模式为1时，此字段必须大于0，固定模式为2时此字段填写0
@@ -30,9 +31,9 @@ def gep_apply_payment(env):
         "paymentPurpose": 13,  # 付款用途：12-供货商 13-物流服务 14-分销推广 15-广告宣传 16-技术服务 17-留学 18-其他
         "paymentReference": 'sea-remarks-b2b',  # 汇款附言，只能是英文付款模式是BPAY的场景时,付款附言必填
         "costBorne": "SHA",  # 费用承担方式：SHA-非全额到账、OUR-全额到账、BEN-收款人承担
-        "paymentMaterial": 13469798,  # 通过文件上传接口上传成功之后返回的文件编号
-        "cardNo": "622878876256535",  # 已经在GEP平台绑定的帐号--通过接口获取
-        "accountName": "CNH acount name",  # 已经在GEP平台绑定的账户名称，其中银行帐号 + 账户名 + 收款到账币种确认一个收款人帐号信息
+        "paymentMaterial": upload_file(filename='wePay.png'),  # 通过文件上传接口上传成功之后返回的文件编号 13469798
+        "cardNo": "622878876256535",  # 已经在GEP平台绑定的账号--通过接口获取
+        "accountName": "CNH acount name",  # 已经在GEP平台绑定的账户名称，其中银行账号 + 账户名 + 收款到账币种确认一个收款人账号信息
         "businessNo": "2411181141000000415",  # 收款方主体编号,在添加收款方主体时返回的编号
         "paymentFeeCcy": "CNH",  # 只能是商户开通的账户币种，出款的手续费币种
         "callBackUrl": "121-sea",  # 通知地址 - 必填
@@ -46,18 +47,8 @@ def gep_apply_payment(env):
     # 开始加密操作
     rsa_utils, dataContent = publicTools.rsa_generate(data, env)
 
-    url = f"{data_env.get('url')}/api/payment/applyPayment"
-
-    # 请求数据
-    dataMap = {
-        "version": "1.0.0",
-        "certificateId": data_env.get('certificateId'),
-        "userNo": data_env.get('userNo'),
-        "dataType": "JSON",
-        "dataContent": dataContent,
-        "agentNo": data_env.get('agentNo'),
-        "apiType": 1      # 1-代理商  2-商户
-    }
+    # 构建请求数据
+    dataMap = publicTools.data_Map(data_env, dataContent, apiType=3)
     ic(dataMap)
 
     # 发送请求
@@ -74,7 +65,7 @@ def platform_apply_payment(env):
     data = {
         "userNo": data_env.get('userNo'),
         "certificateId": data_env.get('certificateId'),
-        "userReqNo": "sea202412070009",
+        "userReqNo": "sea202412170009",
         "paymentCcy": "USD",
         "paymentAmount": 1,
         "payeeCcy": "HKD",  # 收款账户币种
@@ -105,16 +96,7 @@ def platform_apply_payment(env):
     rsa_utils, dataContent = publicTools.rsa_generate(data, env)
 
     # 构建请求数据
-    dataMap = {
-        "version": "1.0.0",
-        "certificateId": data_env.get('certificateId'),
-        "userNo": data_env.get('userNo'),
-        "dataType": "JSON",
-        "dataContent": dataContent,
-        # "agentNo": data_env.get('agentNo'),
-        # "apiType": 1    # 1-代理商  2-商户
-
-    }
+    dataMap = publicTools.data_Map(data_env, dataContent, apiType=3)
     ic(dataMap)
 
     # 发送请求
@@ -125,10 +107,11 @@ def gep_apply_settle(env):
     GEP结汇申请（对应业务：gep-境内结汇申请-选择汇兑账户）"""
     # 获取秘钥相关信息
     data_env = enc.get_envs(env)
+    url = f"{data_env.get('url')}/api/settle/apply-settle"
     data = {
             "userNo": data_env.get('userNo'),
             "certificateId": data_env.get('certificateId'),
-            "userReqNo": "sea202412070006",
+            "userReqNo": "sea202412170001",
             "paymentCcy": "EUR",
             "paymentAmount": 1,
             "paymentPurpose": 13,
@@ -145,19 +128,8 @@ def gep_apply_settle(env):
     # 开始加密操作
     rsa_utils, dataContent = publicTools.rsa_generate(data, env)
 
-    url = f"{data_env.get('url')}/api/settle/apply-settle"
-
     # 构建请求数据
-    dataMap = {
-        "version": "1.0.0",
-        "certificateId": data_env.get('certificateId'),
-        "userNo": data_env.get('userNo'),
-        "dataType": "JSON",
-        "dataContent": dataContent,
-        "agentNo": data_env.get('agentNo'),
-        "apiType": 1    # 1-代理商  2-商户
-
-    }
+    dataMap = publicTools.data_Map(data_env, dataContent, apiType=3)
     ic(dataMap)
 
     # 发送请求
@@ -172,16 +144,16 @@ def platform_apply_settle(env):
     data = {
             "userNo": data_env.get('userNo'),
             "certificateId": data_env.get('certificateId'),
-            "userReqNo": "sea-p202412070001",
+            "userReqNo": "sea-p202412070021",
             "paymentStoreList": [
                 {"paymentAmt": "1", "storeNo": "2409061133000000417"}
             ],
             "paymentCcy": "USD",
-            "paymentAmount": 1,
+            "paymentAmount": 5,
             "paymentPurpose": 13,
             "industryType": "01",
             "paymentFeeCcy": "USD",  # 只能是商户开通的账户币种，出款的手续费币种
-            "paymentMaterial": 13477959,
+            "paymentMaterial": 13512583,
             "paymentMaterialName": "fat-GEP-结汇货物贸易明细（付款至境内-结汇申请）.xlsx",
             "callBackUrl": "m071102",
             }
@@ -193,16 +165,7 @@ def platform_apply_settle(env):
     rsa_utils, dataContent = publicTools.rsa_generate(data, env)
 
     # 构建请求数据
-    dataMap = {
-        "version": "1.0.0",
-        "certificateId": data_env.get('certificateId'),
-        "userNo": data_env.get('userNo'),
-        "dataType": "JSON",
-        "dataContent": dataContent,
-        # "agentNo": data_env.get('agentNo'),
-        "apiType": 2    # 1-代理商  2-商户
-
-    }
+    dataMap = publicTools.data_Map(data_env, dataContent, apiType=1)
     ic(dataMap)
 
     # 发送请求
@@ -245,16 +208,7 @@ def apply_unify_settle(env):
     rsa_utils, dataContent = publicTools.rsa_generate(data, env)
 
     # 构建请求数据
-    dataMap = {
-        "version": "1.0.0",
-        "certificateId": data_env.get('certificateId'),
-        "userNo": data_env.get('userNo'),
-        "dataType": "JSON",
-        "dataContent": dataContent,
-        # "agentNo": data_env.get('agentNo'),
-        "apiType": 2    # 1-代理商  2-商户
-
-    }
+    dataMap = publicTools.data_Map(data_env, dataContent, apiType=1)
     ic(dataMap)
 
     # 发送请求
@@ -270,7 +224,7 @@ def gep_apply_withdrawal(env):
     data = {
             "userNo": data_env.get('userNo'),
             "certificateId": data_env.get('certificateId'),
-            "userReqNo": "sea-with202412070005",
+            "userReqNo": "sea-with2024121070005",
             "paymentCcy": "EUR",  # 付款币种 - 必填 商户开通的出款币种
             "paymentAmount": 1,  # 实际付款的资金，当付款币种和收款币种不一致时，并且固定模式为1时，此字段必须大于0，固定模式为2时此字段填写0
             "payeeCcy": "CNH",  # 实际境外收款的币种
@@ -280,8 +234,8 @@ def gep_apply_withdrawal(env):
             "paymentReference": 'sea-remarks-b2b',  # 汇款附言，只能是英文付款模式是BPAY的场景时,付款附言必填
             "costBorne": "SHA",  # 费用承担方式：SHA-非全额到账、OUR-全额到账、BEN-收款人承担
 
-            "cardNo": "5686798743",  # 已经在GEP平台绑定的帐号--通过接口获取 5686798743-fat
-            "accountName": "HKONG WUWU NET Company .LIT",  # 已经在GEP平台绑定的账户名称，其中银行帐号 + 账户名 + 收款到账币种确认一个收款人帐号信息
+            "cardNo": "5686798743",  # 已经在GEP平台绑定的账号--通过接口获取 5686798743-fat
+            "accountName": "HKONG WUWU NET Company .LIT",  # 已经在GEP平台绑定的账户名称，其中银行账号 + 账户名 + 收款到账币种确认一个收款人账号信息
             # "businessNo": "2411181141000000415",  # 收款方主体编号,在添加收款方主体时返回的编号
             "paymentFeeCcy": "CNH",  # 只能是商户开通的账户币种，出款的手续费币种
             "callBackUrl": "121-sea",  # 通知地址 - 必填
@@ -296,7 +250,7 @@ def gep_apply_withdrawal(env):
     rsa_utils, dataContent = publicTools.rsa_generate(data, env)
 
     # 构建请求数据
-    dataMap = publicTools.data_Map(data_env, dataContent, apiType=1)
+    dataMap = publicTools.data_Map(data_env, dataContent, apiType=3)
 
     ic(dataMap)
 
@@ -313,7 +267,7 @@ def gep_platform_apply_withdrawal(env):
     data = {
             "userNo": data_env.get('userNo'),
             "certificateId": data_env.get('certificateId'),
-            "userReqNo": "sea-plat202412070005",
+            "userReqNo": "sea-plat202412070015",
             "paymentCcy": "USD",  # 付款币种 - 必填 商户开通的出款币种
             "paymentAmount": 1,  # 实际付款的资金，当付款币种和收款币种不一致时，并且固定模式为1时，此字段必须大于0，固定模式为2时此字段填写0
             "payeeCcy": "CNH",  # 实际境外收款的币种
@@ -321,8 +275,8 @@ def gep_platform_apply_withdrawal(env):
             "paymentReference": 'sea-remarks-b2b',  # 汇款附言，只能是英文付款模式是BPAY的场景时,付款附言必填
             "costBorne": "SHA",  # 费用承担方式：SHA-非全额到账、OUR-全额到账、BEN-收款人承担
 
-            "cardNo": "5686798743",  # 已经在GEP平台绑定的帐号--通过接口获取
-            "accountName": "HKONG WUWU NET Company .LIT",  # 已经在GEP平台绑定的账户名称，其中银行帐号 + 账户名 + 收款到账币种确认一个收款人帐号信息
+            "cardNo": "5686798743",  # 已经在GEP平台绑定的账号--通过接口获取
+            "accountName": "HKONG WUWU NET Company .LIT",  # 已经在GEP平台绑定的账户名称，其中银行账号 + 账户名 + 收款到账币种确认一个收款人账号信息
 
             "callBackUrl": "121-sea",  # 通知地址 - 必填
             "paymentStoreList": [
@@ -339,7 +293,35 @@ def gep_platform_apply_withdrawal(env):
     rsa_utils, dataContent = publicTools.rsa_generate(data, env)
 
     # 构建请求数据
-    dataMap = publicTools.data_Map(data_env, dataContent, apiType=None)
+    dataMap = publicTools.data_Map(data_env, dataContent, apiType=3)
+    ic(dataMap)
+
+    # 发送请求
+    publicTools.send_request(rsa_utils, url, dataMap)
+
+def vcc_recharge(env):
+    """
+    卡充值 https://doc.gepholding.com/docs/api-zh/vas-card-recharge"""
+    # 获取秘钥相关信息
+    data_env = enc.get_envs(env)
+    url = f"{data_env.get('url')}/api/vas/card/recharge"
+    data = {
+            "cardId": 2501081013000000561, # 卡唯一编号【channelType=1时必传】
+            "userReqNo": "sea-plat202412070015",
+            "authLimitAmount": "20",  # 充值额度
+            "channelType": 1,  # 1(常规卡，默认) 2(共享卡)
+            # "groupId":    # 共享卡卡组唯一编号【channelType=2时必传】
+
+
+            }
+
+    ic(data)
+
+    # 开始加密操作
+    rsa_utils, dataContent = publicTools.rsa_generate(data, env)
+
+    # 构建请求数据
+    dataMap = publicTools.data_Map(data_env, dataContent, apiType=2)
     ic(dataMap)
 
     # 发送请求
@@ -347,13 +329,16 @@ def gep_platform_apply_withdrawal(env):
 
 
 if __name__ == '__main__':
+    fat_env = "fat-sea-agent-hzl"
+    uat_env = "uat-sea-agent-hzl"
+    prod_env = "prod-sea-agent-dhf"
 
     # B2b 海外付款审核接口-done
     # gep_apply_payment(env="fat-sea-wu")
     # gep_apply_payment(env="fat-sea-agent-hzl")
-
+    #
     # 电商平台付款申请 -done
-    # platform_apply_payment(env="fat-sea-wu")
+    # platform_apply_payment(env="fat-sea-agent-hzl")
 
     # GEP结汇申请 -done
     # gep_apply_settle(env="fat-sea-agent-hzl")
@@ -362,14 +347,14 @@ if __name__ == '__main__':
     # platform_apply_settle(env="fat-sea-wu")
 
     # GEP提现申请 -done
-    gep_apply_withdrawal(env="uat-sea-agent-hzl")
+    # gep_apply_withdrawal(env="fat-sea-agent-hzl")
 
     # 4-收款账户用户提现 -done
-    # gep_platform_apply_withdrawal(env="fat-sea-wu")
+    # gep_platform_apply_withdrawal(env="fat-sea-agent-hzl")
 
     # GEP结汇申请api -done
     # apply_unify_settle(env="fat-sea-wu")
 
-
-
+    #
+    vcc_recharge(env="fat-sea-wu")
 
