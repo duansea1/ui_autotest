@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # ---
 # @Author: duansea
+# 描述：彭博掉期点#
 # @Time: 2025-01-10 16:34
 # ---
 def calculate_forward_bid(spot_bid, swap_bid):
@@ -14,7 +15,8 @@ def calculate_forward_bid(spot_bid, swap_bid):
     返回:
     - forward bid 的计算结果 (float)
     """
-    return spot_bid + swap_bid / 10000
+    # 原来的是 10000，需求修改，所以改成 100
+    return spot_bid + swap_bid / 100
 
 
 def calculate_spot_bid(forward_bid, swap_bid):
@@ -28,17 +30,17 @@ def calculate_spot_bid(forward_bid, swap_bid):
     返回:
     - spot bid 的计算结果 (float)
     """
-    return forward_bid - swap_bid / 10000
+    return forward_bid - swap_bid / 100
 
 
 # 示例用法：
 if __name__ == "__main__":
     # 已知数据点
-    spot_bid_example = 735.3700   #
-    swap_bid_example = -59.72
+    spot_bid_example = 786.51   #
+    swap_bid_example = -52.3709
 
-    spot_ask_example = 735.16
-    swap_ask_example = -62
+    spot_ask_example = 786.58
+    swap_ask_example = -46.0379
 
 
     forward_bid_result = calculate_forward_bid(spot_bid_example, swap_bid_example)

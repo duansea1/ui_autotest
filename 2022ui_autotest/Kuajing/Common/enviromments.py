@@ -21,6 +21,18 @@ def get_envs(env):
             "url": "http://10.254.95.181:8061"
         }
         return base_env
+    if env == 'fat-yi-agent-hzl':  # 海之蓝代理商
+        base_env = {
+            "pfx_path": get_files("FatAgentFiles", "key_5182240909000002158@@2409101910000000504.pfx"),
+            "cer_path": get_files("FatAgentFiles", "key_5182240909000002158@@2409101910000000504.cer"),
+            "pfx_pass": "5182240909000002158_882745",
+            "userNo": "5181240823000000178",  # 上海一一网络科技有限公司
+            "agentNo": "5182240909000002158",
+            "certificateId": "2409101910000000504",
+            # "certificateId": "2408281533000001302",   # 海之蓝的
+            "url": "http://10.254.95.181:8061"
+        }
+        return base_env
     elif env == 'fat-sea-wu':  # 香港五五
         base_env = {
             "pfx_path": get_files("FatTenantFiles", "key_5181240821000008798@@2408281533000001302.pfx"),

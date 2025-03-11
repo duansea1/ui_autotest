@@ -13,22 +13,24 @@ from Common import publicTools as p
 from Common import enviromments as enc
 from icecream import ic
 
-
+from Common.read_files import *
 # ic.configureOutput(prefix='DEBUG: ')
 ic.configureOutput(includeContext=True)
 
 
-def upload_file(env, filename='wePay.png'):
+def upload_file(env, name='wePay.png'):
     """HTTP文件上传接口"""
     # 获取秘钥相关信息
+    filename = get_files("OtherFiles", name)
+    ic(filename)
     data_env = enc.get_envs(env)
     url = f"{data_env.get('url')}/api/agent/common/file/upload-file"
-    file_name, file_path, md5_encryption = p.get_file_info(filename)
+    file_name, file_path, md5_encryption = p.get_file_info(name)
     data = {
         "userNo": data_env.get('userNo'),
         "fileName": file_name,  # 文件名称
         "fileMd5encryption": md5_encryption,  # 文件Md5加密
-        "fileType": "B2B_OPEN_ACC_FILE",  # 付款证明文件 B2B_OPEN_ACC_FILE
+        "fileType": "STORE_ORDER_FILE",  # 付款证明文件 B2B_OPEN_ACC_FILE  \STORE_ORDER_FILE--订单文件
     }
     ic(data)
 
@@ -55,4 +57,4 @@ def upload_file(env, filename='wePay.png'):
 if __name__ == '__main__':
     fat_env = "fat-sea-agent-hzl"
     uat_env = "uat-sea-agent-hzl"
-    upload_file(fat_env, filename='wePay.png')
+    upload_file(fat_env, name='B2B收款材料上传明细模板-未发货.xls')

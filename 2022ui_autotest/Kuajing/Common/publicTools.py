@@ -15,6 +15,8 @@ import requests
 
 from read_files import get_files
 
+# 获取当前时间并格式化
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def jsonString(data):
     """
@@ -45,11 +47,16 @@ def send_request(rsa_utils, url, dataMap, **kwargs):
             if response_data.get('result'):
                 result = response_data.get('result')  # 提取result字段
                 logger.info(f"{url}未解密前的响应结果：{response_data}")
-                result = rsa_utils.pub_decrypt(result)  # RSA解密
+
+                # RSA解密
+                result = rsa_utils.pub_decrypt(result)
+
+                result = json.dumps(json.loads(result), indent=1, ensure_ascii=False)
+
                 with open('跨境接口调用成功返回记录表.txt', "a") as f:
-                    f.write(f"\n {url}调用成功返回结果：\n {result}")
+                    f.write(f"\n ---记录时间[{current_time}]\n {url}调用成功返回结果：\n {result}")
+
                 logger.info(f"{url}解密结果：{result}")
-                ic(result)
                 return json.loads(result)
             else:
                 logger.info(f"{url}解密result失败结果：{response_data}")
@@ -95,7 +102,8 @@ def data_Map(data_env, dataContent, apiType=None):
 
     }
     api_type_mapping = {
-        1: {'apiType': 1, 'agentNo': data_env.get('agentNo')},
+        # 1: {'apiType': 1, 'agentNo': data_env.get('agentNo')},
+        1: {'agentNo': data_env.get('agentNo')},
         2: {'apiType': 2, 'userNo': data_env.get('userNo')},
         3: {'apiType': 1, 'userNo': data_env.get('userNo'), 'agentNo': data_env.get('agentNo')}
     }
@@ -138,7 +146,8 @@ def rsa_and_send_request(data, env, url, apiType=3, **kwargs):
 
     # 构建请求数据
     dataMap = data_Map(data_env, dataContent, apiType)
-    logger.info(f"请求数据参数：{dataMap}\n")
+    # logger.info(f"请求数据参数：{dataMap}\n")
+    ic(dataMap)
 
     # 发送请求
     result = send_request(rsa_utils, url, dataMap, **kwargs)
