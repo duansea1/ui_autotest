@@ -22,36 +22,58 @@ def b2b_apply_payment(env):
 
 
     # fat环境 五五商户的海外付款账户
+    account_data1 ={
+                    "accType": 2,
+                    "accountCcy": "CNH",
+                    "accountName": "chins_sea",
+                    "bankCode": "",
+                    "bankName": "中国银行",
+                    "businessNo": "2410162050000001016",
+                    "cardNo": "465876536475",
+                    "countryCode": "CHN",
+                    "middleSwiftCode": "",
+                    "payeeAddress": "shanghai",
+                    "paymentChannelType": "SWIFT",
+                    "paymentDesc": "SWIFT",
+                    "recordNo": "2410162050000007725",
+                    "swiftCode": "BKCHCNBJ",
+                    "userNo": "5181240821000008798",
+                    "fileId":13614407
+                    }
+    # uat环境 其他丝丝-商户的海外付款账户
     account_data ={
-        "accType": 2,
-        "accountCcy": "CNH",
-        "accountName": "chins_sea",
-        "bankCode": "",
-        "bankName": "中国银行",
-        "businessNo": "2410162050000001016",
-        "cardNo": "465876536475",
-        "countryCode": "CHN",
-        "middleSwiftCode": "",
-        "payeeAddress": "shanghai",
-        "paymentChannelType": "SWIFT",
-        "paymentDesc": "SWIFT",
-        "recordNo": "2410162050000007725",
-        "swiftCode": "BKCHCNBJ",
-        "userNo": "5181240821000008798"
-    }
+                "accType": 2,
+                "accountCcy": "CNH",
+                "accountName": "sisi",
+                "bankCode": "",
+                "bankName": "中国银行",
+                "businessNo": "2411051800002003919",
+                "cardNo": "35759780",
+                "countryCode": "CHN",
+                "middleSwiftCode": "",
+                "payeeAddress": "shanghai",
+                "paymentChannelType": "SWIFT",
+                "paymentDesc": "SWIFT",
+                "recordNo": "2411051800000010274",
+                "swiftCode": "BKCHCNBJ",
+                "userNo": "5181240829000137108",
+                "fileId":14149637,
+                 }
+
+
 
     data = {
         "userNo": data_env.get('userNo'),  # 商户在GEP系统开通的唯一商户编号
         "certificateId": data_env.get('certificateId'),  # GEP提供给商户的证书编号
-        "userReqNo": "2025020136-0005",  # 商户请求GEP系统的申请订单号，保证此单号唯一
+        "userReqNo": "2025052136-0002",  # 商户请求GEP系统的申请订单号，保证此单号唯一
         "paymentMode": "SWIFT",  # 付款模式，默认为SWIFT，可选值：SWIFT、LOCAL、BILLPAY、BPAY
-        "paymentCcy": "EUR",  # 示例：商户开通的出款币种
+        "paymentCcy": "HKD",  # 示例：商户开通的出款币种
         "paymentAmount": 2,  # 示例：实际付款的资金
         "payeeCcy": account_data.get("accountCcy"),  # 示例：实际境外收款的币种
         "fixedModel": 1,  # 固定模式：1-固定付款金额，2-固定收款金额
         "paymentPurpose": 12,  # 示例：付款用途，12-供货商
         "costBorne": "SHA",  # 示例：费用承担方式，SHA-非全额到账
-        "paymentMaterial": 13614407,  # 示例：通过文件上传接口返回的文件编号
+        "paymentMaterial": account_data.get("fileId"),  # 示例：通过文件上传接口返回的文件编号
         "cardNo": account_data.get("cardNo"),  # 示例：已经在GEP平台绑定的帐号
         "accountName": account_data.get("accountName"),  # 示例：已经在GEP平台绑定的账户名称
         "businessNo": account_data.get("businessNo"),  # 示例：收款方主体编号
@@ -197,9 +219,9 @@ if __name__ == '__main__':
     # query_rate(env=fat_env)
 
     # 海外付款场景
-    # b2b_apply_payment(env="fat-sea-agent-hzl")
+    b2b_apply_payment(env="uat-sea-agent-hzl")
     # 结汇付款
-    b2bSettleApply(env=uat_env)
+    # b2bSettleApply(env=uat_env)
     # b2bSettleApply(env="fat-sea-tx")
     # b2b_submit_Order(env="fat-sea-agent-hzl")
 

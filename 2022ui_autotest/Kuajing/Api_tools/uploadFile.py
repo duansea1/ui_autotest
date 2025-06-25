@@ -43,13 +43,14 @@ def upload_file(env, name='wePay.png'):
     file = {'file': (filename, open(file_path, 'rb'))}
     ic(file)
     result = p.rsa_and_send_request(data, env, url, apiType=3, files=file)
-    if result:
-        try:
-            logger.info(f"上传成功的文件id：{result.get('fileId')}")
-            return result.get('fileId')
-        except json.JSONDecodeError:
-            logger.info(f"JSON 解析出错: {result.text}")
-            return None
+    if result is None:
+        return None
+    try:
+        logger.info(f"上传成功的文件id：{result.get('fileId')}")
+        return result.get('fileId')
+    except json.JSONDecodeError:
+        logger.info(f"JSON 解析出错: {result.text}")
+        return None
     else:
         logger.info(f"HTTP 状态码: {result.status_code}, 错误信息: {result.text}")
         return None

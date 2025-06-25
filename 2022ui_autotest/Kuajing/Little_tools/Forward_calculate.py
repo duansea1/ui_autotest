@@ -36,9 +36,14 @@ def calculate_swap_point(delivery_date_str, d1_delivery_date_str, w1_delivery_da
 
 if __name__ == "__main__":
     # 示例数据
-    delivery_date_str = "2025-3-30"  # 目标交割日-查询日期
-    d1_delivery_date_str = "2025-3-29"  # 1D交割日
-    w1_delivery_date_str = "2025-4-5"  # 1W交割日
+    # "1D": "2025-04-11",
+    # "3W": "2025-05-01",
+    # "2W": "2025-04-24",
+    # "1W": "2025-04-17",
+    # "1M": "2025-05-10"
+    delivery_date_str = "2025-4-12"  # 目标交割日-查询日期
+    d1_delivery_date_str = "2025-4-11"  # 1D交割日
+    w1_delivery_date_str = "2025-4-17"  # 1W交割日
     d1_swap = -100.53000  # 1D掉期点
     w1_swap = -151.73000  # 1W掉期点
 

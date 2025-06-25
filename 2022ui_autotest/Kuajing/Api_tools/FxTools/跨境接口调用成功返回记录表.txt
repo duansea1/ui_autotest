@@ -1,0 +1,934 @@
+
+ ---记录时间[2025-03-12 10:50:19]
+ http://10.254.95.181:8061/api/rate/query-rate调用成功返回结果：
+ {
+ "closingDate": "2025-03-12",
+ "exchangeRate": 7.22045,
+ "originalCcy": "CNH",
+ "targetCcy": "USD",
+ "userNo": 5181240821000008798
+}
+ ---记录时间[2025-03-12 10:50:19]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.22,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121050006117040,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.225119,
+ "userNo": 5181240821000008798,
+ "userReqNo": "1741747820"
+}
+ ---记录时间[2025-03-12 10:50:19]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.22,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121050006117040,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.225119,
+ "userNo": 5181240821000008798,
+ "userReqNo": "1741747820"
+}
+ ---记录时间[2025-03-12 10:51:31]
+ http://10.254.95.181:8061/api/rate/query-rate调用成功返回结果：
+ {
+ "closingDate": "2025-03-12",
+ "exchangeRate": 7.22045,
+ "originalCcy": "CNH",
+ "targetCcy": "USD",
+ "userNo": 5181240821000008798
+}
+ ---记录时间[2025-03-12 10:51:31]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.22,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121051006117041,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.225119,
+ "userNo": 5181240821000008798,
+ "userReqNo": "1741747892"
+}
+ ---记录时间[2025-03-12 10:51:31]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.22,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121051006117041,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.225119,
+ "userNo": 5181240821000008798,
+ "userReqNo": "1741747892"
+}
+ ---记录时间[2025-03-12 10:51:31]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.22,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121051006117042,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.225119,
+ "userNo": 5181240821000008798,
+ "userReqNo": "1741747893"
+}
+ ---记录时间[2025-03-12 10:51:31]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.22,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121051006117042,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.225119,
+ "userNo": 5181240821000008798,
+ "userReqNo": "1741747893"
+}
+ ---记录时间[2025-03-12 11:22:27]
+ http://10.254.95.181:8061/api/rate/query-rate调用成功返回结果：
+ {
+ "closingDate": "2025-03-12",
+ "exchangeRate": 7.2198,
+ "originalCcy": "CNH",
+ "targetCcy": "USD",
+ "userNo": 5181240821000008798
+}
+ ---记录时间[2025-03-12 11:22:27]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.22,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121122006117048,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.227519,
+ "userNo": 5181240821000008798,
+ "userReqNo": "1741749748"
+}
+ ---记录时间[2025-03-12 11:22:27]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.22,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121122006117048,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.227519,
+ "userNo": 5181240821000008798,
+ "userReqNo": "1741749748"
+}
+ ---记录时间[2025-03-12 11:24:19]
+ http://10.254.154.99:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.23,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121124000205142,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.232,
+ "userNo": 5181240829000137108,
+ "userReqNo": "1741749860"
+}
+ ---记录时间[2025-03-12 11:28:38]
+ http://10.254.154.99:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.23,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121128000205143,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.232,
+ "userNo": 5181240829000137108,
+ "userReqNo": "tWXcnRvlqN"
+}
+ ---记录时间[2025-03-12 11:28:38]
+ http://10.254.154.99:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.23,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121128000205144,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.232,
+ "userNo": 5181240829000137108,
+ "userReqNo": "PW6tzLtmuJ"
+}
+ ---记录时间[2025-03-12 11:29:25]
+ http://10.254.154.99:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.23,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121129000205145,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.232,
+ "userNo": 5181240829000137108,
+ "userReqNo": "ze6MAJgCbC"
+}
+ ---记录时间[2025-03-12 11:29:25]
+ http://10.254.154.99:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.23,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121129000205145,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.232,
+ "userNo": 5181240829000137108,
+ "userReqNo": "ze6MAJgCbC"
+}
+ ---记录时间[2025-03-12 11:29:25]
+ http://10.254.154.99:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.23,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121129000205146,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.232,
+ "userNo": 5181240829000137108,
+ "userReqNo": "nO7Z12iYYV"
+}
+ ---记录时间[2025-03-12 11:29:25]
+ http://10.254.154.99:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.23,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121129000205146,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.232,
+ "userNo": 5181240829000137108,
+ "userReqNo": "nO7Z12iYYV"
+}
+ ---记录时间[2025-03-12 11:29:25]
+ http://10.254.154.99:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.23,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121129000205147,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.232,
+ "userNo": 5181240829000137108,
+ "userReqNo": "mA8dky2KBk"
+}
+ ---记录时间[2025-03-12 11:29:25]
+ http://10.254.154.99:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.23,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121129000205147,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.232,
+ "userNo": 5181240829000137108,
+ "userReqNo": "mA8dky2KBk"
+}
+ ---记录时间[2025-03-12 11:30:13]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.2,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121130006117052,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.208211,
+ "userNo": 5181240821000008798,
+ "userReqNo": "Lpazx3Vu2m"
+}
+ ---记录时间[2025-03-12 11:30:13]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.2,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121130006117052,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.208211,
+ "userNo": 5181240821000008798,
+ "userReqNo": "Lpazx3Vu2m"
+}
+ ---记录时间[2025-03-12 11:30:13]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.2,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121130006117053,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.208211,
+ "userNo": 5181240821000008798,
+ "userReqNo": "FcGx5i4MPG"
+}
+ ---记录时间[2025-03-12 11:30:13]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.2,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121130006117053,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.208211,
+ "userNo": 5181240821000008798,
+ "userReqNo": "FcGx5i4MPG"
+}
+ ---记录时间[2025-03-12 11:30:13]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.2,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121130006117054,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.208211,
+ "userNo": 5181240821000008798,
+ "userReqNo": "5o9AIATk3c"
+}
+ ---记录时间[2025-03-12 16:38:29]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.22,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121638006117248,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.221393,
+ "userNo": 5181240821000008798,
+ "userReqNo": "apidGWZaerce1MiC3NHq"
+}
+ ---记录时间[2025-03-12 16:38:29]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.22,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-12",
+ "closingStatus": 2,
+ "closingSuccessDate": 1741768713070,
+ "direction": 2,
+ "exchangeId": 2503121638006117248,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.221393,
+ "userNo": 5181240821000008798,
+ "userReqNo": "apidGWZaerce1MiC3NHq"
+}
+ ---记录时间[2025-03-12 16:41:30]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 22150,
+ "buyCcy": "VND",
+ "closingDate": "2025-03-12",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121641006117251,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 22150.635,
+ "userNo": 5181240821000008798,
+ "userReqNo": "F3PICRvykLBmqO6ipL7I"
+}
+ ---记录时间[2025-03-12 16:41:30]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 22150.0,
+ "buyCcy": "VND",
+ "closingDate": "2025-03-12",
+ "closingStatus": 2,
+ "closingSuccessDate": 1741768892750,
+ "direction": 2,
+ "exchangeId": 2503121641006117251,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 22150.635,
+ "userNo": 5181240821000008798,
+ "userReqNo": "F3PICRvykLBmqO6ipL7I"
+}
+ ---记录时间[2025-03-12 16:48:43]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.24,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121648006117258,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.247732,
+ "userNo": 5181240821000008798,
+ "userReqNo": "TBkEdj7MctQV1vx7hQek"
+}
+ ---记录时间[2025-03-12 16:48:43]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.24,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121648006117258,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.247732,
+ "userNo": 5181240821000008798,
+ "userReqNo": "TBkEdj7MctQV1vx7hQek"
+}
+ ---记录时间[2025-03-12 17:05:04]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.24,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121705006117279,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.244047,
+ "userNo": 5181240821000008798,
+ "userReqNo": "FoSbYQpKmWCu2ShMcdde"
+}
+ ---记录时间[2025-03-12 17:05:04]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.24,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121705006117279,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.244047,
+ "userNo": 5181240821000008798,
+ "userReqNo": "FoSbYQpKmWCu2ShMcdde"
+}
+ ---记录时间[2025-03-12 17:07:11]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.24,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121707006117280,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.244047,
+ "userNo": 5181240821000008798,
+ "userReqNo": "OvsWmQfEu9RPAUWZgG18"
+}
+ ---记录时间[2025-03-12 17:07:11]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.24,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-31",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503121707006117280,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.244047,
+ "userNo": 5181240821000008798,
+ "userReqNo": "OvsWmQfEu9RPAUWZgG18"
+}
+ ---记录时间[2025-03-17 15:16:30]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.21,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-17",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503171516006118003,
+ "orderState": 0,
+ "sellAmount": 1,
+ "sellCcy": "USD",
+ "tradeRate": 7.21181,
+ "userNo": 5181240821000008798,
+ "userReqNo": "07iU7YfaUvxHo0bVoRPY"
+}
+ ---记录时间[2025-03-17 15:16:30]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 7.21,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-17",
+ "closingStatus": 2,
+ "closingSuccessDate": 1742195796977,
+ "direction": 2,
+ "exchangeId": 2503171516006118003,
+ "orderState": 1,
+ "sellAmount": 1.0,
+ "sellCcy": "USD",
+ "tradeRate": 7.21181,
+ "userNo": 5181240821000008798,
+ "userReqNo": "07iU7YfaUvxHo0bVoRPY"
+}
+ ---记录时间[2025-03-17 19:46:13]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 0.66,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-17",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503171946006118142,
+ "orderState": 0,
+ "sellAmount": 2000.45,
+ "sellCcy": "VND",
+ "tradeRate": 2995.17976,
+ "userNo": 5181240821000008798,
+ "userReqNo": "iRg9cjNQJTmfhimQlA3t"
+}
+ ---记录时间[2025-03-17 19:46:13]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 0.66,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-17",
+ "closingStatus": 2,
+ "closingSuccessDate": 1742211975139,
+ "direction": 2,
+ "exchangeId": 2503171946006118142,
+ "orderState": 1,
+ "sellAmount": 2000.45,
+ "sellCcy": "VND",
+ "tradeRate": 2995.17976,
+ "userNo": 5181240821000008798,
+ "userReqNo": "iRg9cjNQJTmfhimQlA3t"
+}
+ ---记录时间[2025-03-17 20:05:23]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 9.82,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-17",
+ "closingStatus": 0,
+ "direction": 2,
+ "exchangeId": 2503172005006118163,
+ "orderState": 0,
+ "sellAmount": 200.45,
+ "sellCcy": "JPY",
+ "tradeRate": 20.398969,
+ "userNo": 5181240821000008798,
+ "userReqNo": "PBd5OFLM0NsN9mUE3DO5"
+}
+ ---记录时间[2025-03-17 20:05:23]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 9.82,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-17",
+ "closingStatus": 2,
+ "closingSuccessDate": 1742213125492,
+ "direction": 2,
+ "exchangeId": 2503172005006118163,
+ "orderState": 1,
+ "sellAmount": 200.45,
+ "sellCcy": "JPY",
+ "tradeRate": 20.398969,
+ "userNo": 5181240821000008798,
+ "userReqNo": "PBd5OFLM0NsN9mUE3DO5"
+}
+ ---记录时间[2025-03-17 20:06:10]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 1,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-17",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503172006006118166,
+ "orderState": 0,
+ "sellAmount": 20,
+ "sellCcy": "JPY",
+ "tradeRate": 20.398969,
+ "userNo": 5181240821000008798,
+ "userReqNo": "hO2hNsM7cvX7El9x55PS"
+}
+ ---记录时间[2025-03-17 20:06:10]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 1.0,
+ "buyCcy": "CNH",
+ "closingDate": "2025-03-17",
+ "closingStatus": 2,
+ "closingSuccessDate": 1742213171869,
+ "direction": 1,
+ "exchangeId": 2503172006006118166,
+ "orderState": 1,
+ "sellAmount": 20.0,
+ "sellCcy": "JPY",
+ "tradeRate": 20.398969,
+ "userNo": 5181240821000008798,
+ "userReqNo": "hO2hNsM7cvX7El9x55PS"
+}
+ ---记录时间[2025-03-17 20:06:53]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 100.2,
+ "buyCcy": "JPY",
+ "closingDate": "2025-03-17",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503172006006118169,
+ "orderState": 0,
+ "sellAmount": 5.35,
+ "sellCcy": "CNH",
+ "tradeRate": 18.716997,
+ "userNo": 5181240821000008798,
+ "userReqNo": "z4jrKYdvZHadCgreGgxp"
+}
+ ---记录时间[2025-03-17 20:06:53]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 100.2,
+ "buyCcy": "JPY",
+ "closingDate": "2025-03-17",
+ "closingStatus": 2,
+ "closingSuccessDate": 1742213216163,
+ "direction": 1,
+ "exchangeId": 2503172006006118169,
+ "orderState": 1,
+ "sellAmount": 5.35,
+ "sellCcy": "CNH",
+ "tradeRate": 18.716997,
+ "userNo": 5181240821000008798,
+ "userReqNo": "z4jrKYdvZHadCgreGgxp"
+}
+ ---记录时间[2025-03-19 10:49:50]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 100.2,
+ "buyCcy": "JPY",
+ "closingDate": "2025-03-19",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503191049006118811,
+ "orderState": 0,
+ "sellAmount": 5.31,
+ "sellCcy": "CNH",
+ "tradeRate": 18.849102,
+ "userNo": 5181240821000008798,
+ "userReqNo": "cONRk9H1ABsy6ay9chmW"
+}
+ ---记录时间[2025-03-19 10:49:50]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 100.2,
+ "buyCcy": "JPY",
+ "closingDate": "2025-03-19",
+ "closingStatus": 2,
+ "closingSuccessDate": 1742352622868,
+ "direction": 1,
+ "exchangeId": 2503191049006118811,
+ "orderState": 1,
+ "sellAmount": 5.31,
+ "sellCcy": "CNH",
+ "tradeRate": 18.849102,
+ "userNo": 5181240821000008798,
+ "userReqNo": "cONRk9H1ABsy6ay9chmW"
+}
+ ---记录时间[2025-03-19 10:51:42]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 100.2,
+ "buyCcy": "JPY",
+ "closingDate": "2025-03-19",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503191051006118814,
+ "orderState": 0,
+ "sellAmount": 5.31,
+ "sellCcy": "CNH",
+ "tradeRate": 18.849102,
+ "userNo": 5181240821000008798,
+ "userReqNo": "tt7KnT6ILXgkWtL4lVzB"
+}
+ ---记录时间[2025-03-19 10:51:42]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 100.2,
+ "buyCcy": "JPY",
+ "closingDate": "2025-03-19",
+ "closingStatus": 2,
+ "closingSuccessDate": 1742352735077,
+ "direction": 1,
+ "exchangeId": 2503191051006118814,
+ "orderState": 1,
+ "sellAmount": 5.31,
+ "sellCcy": "CNH",
+ "tradeRate": 18.849102,
+ "userNo": 5181240821000008798,
+ "userReqNo": "tt7KnT6ILXgkWtL4lVzB"
+}
+ ---记录时间[2025-03-19 10:55:53]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 1.2,
+ "buyCcy": "USD",
+ "closingDate": "2025-03-19",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503191055006118817,
+ "orderState": 0,
+ "sellAmount": 8.69,
+ "sellCcy": "CNH",
+ "tradeRate": 7.242862,
+ "userNo": 5181240821000008798,
+ "userReqNo": "q269YEWpYDD6lZM8WLyE"
+}
+ ---记录时间[2025-03-19 10:55:53]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 1.2,
+ "buyCcy": "USD",
+ "closingDate": "2025-03-19",
+ "closingStatus": 2,
+ "closingSuccessDate": 1742353016381,
+ "direction": 1,
+ "exchangeId": 2503191055006118817,
+ "orderState": 1,
+ "sellAmount": 8.69,
+ "sellCcy": "CNH",
+ "tradeRate": 7.242862,
+ "userNo": 5181240821000008798,
+ "userReqNo": "q269YEWpYDD6lZM8WLyE"
+}
+ ---记录时间[2025-03-19 10:57:25]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 1.2,
+ "buyCcy": "USD",
+ "closingDate": "2025-03-19",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503191057006118821,
+ "orderState": 0,
+ "sellAmount": 8.69,
+ "sellCcy": "CNH",
+ "tradeRate": 7.242862,
+ "userNo": 5181240821000008798,
+ "userReqNo": "oOHqY9nHrFLz11YiIce2"
+}
+ ---记录时间[2025-03-19 11:01:22]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 1.2,
+ "buyCcy": "USD",
+ "closingDate": "2025-03-19",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503191101006118831,
+ "orderState": 0,
+ "sellAmount": 8.69,
+ "sellCcy": "CNH",
+ "tradeRate": 7.242262,
+ "userNo": 5181240821000008798,
+ "userReqNo": "8dH72sSJl7pLwNq46pQt"
+}
+ ---记录时间[2025-03-28 14:05:33]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 1.2,
+ "buyCcy": "USD",
+ "closingDate": "2025-03-28",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503281405006125277,
+ "orderState": 0,
+ "sellAmount": 8.74,
+ "sellCcy": "CNH",
+ "tradeRate": 7.291012,
+ "userNo": 5181240821000008798,
+ "userReqNo": "0XO0ri6AsL40mi8qVyzA"
+}
+ ---记录时间[2025-03-28 14:05:33]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 1.2,
+ "buyCcy": "USD",
+ "closingDate": "2025-03-28",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503281405006125277,
+ "orderState": 1,
+ "sellAmount": 8.74,
+ "sellCcy": "CNH",
+ "tradeRate": 7.291012,
+ "userNo": 5181240821000008798,
+ "userReqNo": "0XO0ri6AsL40mi8qVyzA"
+}
+ ---记录时间[2025-03-28 14:45:37]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 12,
+ "buyCcy": "EUR",
+ "closingDate": "2025-03-28",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503281445006125373,
+ "orderState": 0,
+ "sellAmount": 94.32,
+ "sellCcy": "CNH",
+ "tradeRate": 7.8608,
+ "userNo": 5181240821000008798,
+ "userReqNo": "hMZfCWRemQBwDqH4748n"
+}
+ ---记录时间[2025-03-28 14:45:37]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 12.0,
+ "buyCcy": "EUR",
+ "closingDate": "2025-03-28",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503281445006125373,
+ "orderState": 1,
+ "sellAmount": 94.32,
+ "sellCcy": "CNH",
+ "tradeRate": 7.8608,
+ "userNo": 5181240821000008798,
+ "userReqNo": "hMZfCWRemQBwDqH4748n"
+}
+ ---记录时间[2025-03-28 14:46:56]
+ http://10.254.95.181:8061/api/agent/exchange/apply-exchange调用成功返回结果：
+ {
+ "buyAmount": 12,
+ "buyCcy": "EUR",
+ "closingDate": "2025-03-28",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503281446006125375,
+ "orderState": 0,
+ "sellAmount": 94.32,
+ "sellCcy": "CNH",
+ "tradeRate": 7.8608,
+ "userNo": 5181240821000008798,
+ "userReqNo": "tiTQY8yhu45fWFKdv329"
+}
+ ---记录时间[2025-03-28 14:46:56]
+ http://10.254.95.181:8061/api/agent/exchange/confirm-exchange调用成功返回结果：
+ {
+ "buyAmount": 12.0,
+ "buyCcy": "EUR",
+ "closingDate": "2025-03-28",
+ "closingStatus": 0,
+ "direction": 1,
+ "exchangeId": 2503281446006125375,
+ "orderState": 1,
+ "sellAmount": 94.32,
+ "sellCcy": "CNH",
+ "tradeRate": 7.8608,
+ "userNo": 5181240821000008798,
+ "userReqNo": "tiTQY8yhu45fWFKdv329"
+}

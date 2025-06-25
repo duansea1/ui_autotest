@@ -13,7 +13,7 @@ from logging import getLogger, basicConfig, INFO
 import json
 import requests
 
-from read_files import get_files
+from Common.read_files import get_files
 
 # 获取当前时间并格式化
 current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

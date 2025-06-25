@@ -1,0 +1,6187 @@
+{
+    "clientID": "BFU",
+    "clientRequestID": "2886328864a74e7f8fb801c2bfb81061",
+    "status": "SUCCESS",
+    "rates": [
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1RIMORX4UB3OE",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338254,
+            "validTill": 1745893353254,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "CAD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.88914197"
+            },
+            "ask": {
+                "rate": "0.89164175"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.8904"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1KTDMBSEN1H45",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338261,
+            "validTill": 1745893353261,
+            "baseCurrency": "USD",
+            "quoteCurrency": "NZD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.66925707"
+            },
+            "ask": {
+                "rate": "1.67331665"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.671287"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1FI7ESU49260K",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338267,
+            "validTill": 1745893353267,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "JPY",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "18.32871194"
+            },
+            "ask": {
+                "rate": "18.3707504"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "18.344242"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU14WULW3X567D7",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338276,
+            "validTill": 1745893353276,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "SGD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.84183632"
+            },
+            "ask": {
+                "rate": "0.84401317"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.842933"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU16SWTGRTLFCW4",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338282,
+            "validTill": 1745893353282,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "HKD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "8.84255"
+            },
+            "ask": {
+                "rate": "8.86247"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1JI5EHPETPPCK",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338289,
+            "validTill": 1745893353289,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "GBP",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.56834"
+            },
+            "ask": {
+                "rate": "0.5697"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1CG1BO6CKIOZ3",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338295,
+            "validTill": 1745893353295,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "AUD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.77167655"
+            },
+            "ask": {
+                "rate": "1.77579602"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.773726"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU118Y2ZDRVUA5J",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338300,
+            "validTill": 1745893353300,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "CHF",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.48950501"
+            },
+            "ask": {
+                "rate": "0.4911927"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.490348"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1T6XXT3ZPVN6Q",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338308,
+            "validTill": 1745893353308,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "EUR",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.5637"
+            },
+            "ask": {
+                "rate": "0.5652"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU112WQZL8P6B0W",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338314,
+            "validTill": 1745893353314,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "CHF",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.11277705"
+            },
+            "ask": {
+                "rate": "0.11344544"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.11310919"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU15BOOMZJ3HJ8P",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338319,
+            "validTill": 1745893353319,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "USD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00700888"
+            },
+            "ask": {
+                "rate": "0.00703443"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.007029"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1N8339ZAIVJVL",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338326,
+            "validTill": 1745893353326,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "SGD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.94522883"
+            },
+            "ask": {
+                "rate": "0.9478469"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.946541"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFUZS15PSHPJ54E",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338332,
+            "validTill": 1745893353332,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "NZD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.2091"
+            },
+            "ask": {
+                "rate": "1.2124"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1STF9SEXLNQ52",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338337,
+            "validTill": 1745893353337,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "SGD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00918029"
+            },
+            "ask": {
+                "rate": "0.00920281"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.00919486"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU157FZAWLTSY09",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338342,
+            "validTill": 1745893353342,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "USD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.13720943"
+            },
+            "ask": {
+                "rate": "0.13787863"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.13754165"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1IFPCD3ZD13SU",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338349,
+            "validTill": 1745893353349,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "JPY",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "102.87"
+            },
+            "ask": {
+                "rate": "103.14"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU12OVX5P05KXHF",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338354,
+            "validTill": 1745893353354,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "USD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00701408"
+            },
+            "ask": {
+                "rate": "0.00703933"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0070341"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1FMIMUAVUEVUM",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338359,
+            "validTill": 1745893353359,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "GBP",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.0958071"
+            },
+            "ask": {
+                "rate": "0.09601912"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0959186"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1M2LJG95BL9LT",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338364,
+            "validTill": 1745893353364,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "SGD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.8413"
+            },
+            "ask": {
+                "rate": "0.8434"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1GW8J63IZMVAR",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338368,
+            "validTill": 1745893353368,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "SGD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.49044506"
+            },
+            "ask": {
+                "rate": "1.49418069"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.492314"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1746RFZPPAG86",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338373,
+            "validTill": 1745893353373,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "HKD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "4.62282755"
+            },
+            "ask": {
+                "rate": "4.63378215"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "4.628032"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1IHI21LSBFSAY",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338380,
+            "validTill": 1745893353380,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "CHF",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.10263826"
+            },
+            "ask": {
+                "rate": "1.10598989"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.104312"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1CQ01IXF1WNSH",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338385,
+            "validTill": 1745893353385,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "AUD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.01089819"
+            },
+            "ask": {
+                "rate": "0.01092131"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0109098"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU12RXPOYBHK0ON",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338390,
+            "validTill": 1745893353390,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "CNH",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "8.8205"
+            },
+            "ask": {
+                "rate": "8.8679"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU15SBA79DBE7BM",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338397,
+            "validTill": 1745893353397,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "CNH",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "9.7464"
+            },
+            "ask": {
+                "rate": "9.7955"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1KENOTY1CYVBZ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338401,
+            "validTill": 1745893353401,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "AUD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.18493927"
+            },
+            "ask": {
+                "rate": "1.18802964"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.1864745"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1MJ6WQEUZHFIE",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338407,
+            "validTill": 1745893353407,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "CNH",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.93506"
+            },
+            "ask": {
+                "rate": "0.93962"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.937404"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1UCCXZ9XZU13X",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338414,
+            "validTill": 1745893353414,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "SGD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.49081469"
+            },
+            "ask": {
+                "rate": "1.49451402"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.492664"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1K4KI2AS4O27J",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338420,
+            "validTill": 1745893353420,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "CNH",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "5.5470454"
+            },
+            "ask": {
+                "rate": "5.575559"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "5.561373"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1VAU5Y4BI70FA",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338426,
+            "validTill": 1745893353426,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "JPY",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "84.97"
+            },
+            "ask": {
+                "rate": "85.18"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1TJLLQL4I5WOM",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338430,
+            "validTill": 1745893353430,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "HKD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "8.83816998"
+            },
+            "ask": {
+                "rate": "8.85888303"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "8.848002"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU11QRFGRO2CU0D",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338434,
+            "validTill": 1745893353434,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "AUD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "2.08212279"
+            },
+            "ask": {
+                "rate": "2.08734326"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "2.084713"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1CCPTJ8RWG66R",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338441,
+            "validTill": 1745893353441,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "NZD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.9054926"
+            },
+            "ask": {
+                "rate": "1.91053963"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.908017"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU16K9Y2LVKXE6Z",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338446,
+            "validTill": 1745893353446,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "GBP",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.09597003"
+            },
+            "ask": {
+                "rate": "0.09617938"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.0960804"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1DRCW8GZPRIMR",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338449,
+            "validTill": 1745893353449,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "SGD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.84099416"
+            },
+            "ask": {
+                "rate": "0.84307023"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.842039"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU12ZL1N6NY5DLY",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338457,
+            "validTill": 1745893353457,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "HKD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.0643"
+            },
+            "ask": {
+                "rate": "1.0695"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1H25JK6AVAJ6E",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338462,
+            "validTill": 1745893353462,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "AUD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.92685422"
+            },
+            "ask": {
+                "rate": "0.92933341"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.928085"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1EG2ZWTUYLCWB",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338466,
+            "validTill": 1745893353466,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "CNH",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.05099412"
+            },
+            "ask": {
+                "rate": "0.05125126"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.05114166"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1JBMWBAR3CGNK",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338473,
+            "validTill": 1745893353473,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "EUR",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.1763"
+            },
+            "ask": {
+                "rate": "1.1789"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1BJ1U5J0ZXO95",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338481,
+            "validTill": 1745893353481,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "GBP",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00522"
+            },
+            "ask": {
+                "rate": "0.00524"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1MPJ8BK7RSBJG",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338484,
+            "validTill": 1745893353484,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "CNH",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "5.5957986"
+            },
+            "ask": {
+                "rate": "5.6080024"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU13BYJZV3G3EIL",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338489,
+            "validTill": 1745893353489,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "CHF",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.5288"
+            },
+            "ask": {
+                "rate": "0.5303"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1IIQDGXF9PNAI",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338496,
+            "validTill": 1745893353496,
+            "baseCurrency": "USD",
+            "quoteCurrency": "CHF",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.82033884"
+            },
+            "ask": {
+                "rate": "0.82286404"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.821601"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1EKDUPKMCDH9M",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338501,
+            "validTill": 1745893353501,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "EUR",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.17607475"
+            },
+            "ask": {
+                "rate": "1.17861944"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.177349"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU13LH3SJCJ6P3Y",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338507,
+            "validTill": 1745893353507,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "GBP",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.538"
+            },
+            "ask": {
+                "rate": "0.5394"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1470ZL0T44D7J",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338514,
+            "validTill": 1745893353514,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "GBP",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.10289422"
+            },
+            "ask": {
+                "rate": "0.10340384"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.10314723"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1HWMSVMK92K66",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338518,
+            "validTill": 1745893353518,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "NZD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.21520158"
+            },
+            "ask": {
+                "rate": "0.21572351"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.215473"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1CSTITC3VNZAM",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338525,
+            "validTill": 1745893353525,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "AUD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.7694"
+            },
+            "ask": {
+                "rate": "1.7739"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFUZFE7BSR0R8JC",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338529,
+            "validTill": 1745893353529,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "USD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.64254381"
+            },
+            "ask": {
+                "rate": "0.64389625"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.643225"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU14G1P42XN8YUK",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338534,
+            "validTill": 1745893353534,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "SGD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.009181"
+            },
+            "ask": {
+                "rate": "0.009202"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1PPA1TU5696VV",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338539,
+            "validTill": 1745893353539,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "EUR",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.52236611"
+            },
+            "ask": {
+                "rate": "0.52437185"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.52337"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1NYMBYXT9R9PS",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338544,
+            "validTill": 1745893353544,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "GBP",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.102088"
+            },
+            "ask": {
+                "rate": "0.102601"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1JEL2HAGZF0QA",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338550,
+            "validTill": 1745893353550,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "HKD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "5.9251"
+            },
+            "ask": {
+                "rate": "5.9385"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU16ZEHRJIBC56J",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338554,
+            "validTill": 1745893353554,
+            "baseCurrency": "USD",
+            "quoteCurrency": "GBP",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.74377948"
+            },
+            "ask": {
+                "rate": "0.74540066"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.744589"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1X7R3O6R3ITE7",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338561,
+            "validTill": 1745893353561,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "CAD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.05483"
+            },
+            "ask": {
+                "rate": "1.05752"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU10Z3D8EZSSO34",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338564,
+            "validTill": 1745893353564,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "CAD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.6810213"
+            },
+            "ask": {
+                "rate": "1.68680412"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.683911"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1HPNYH3M4IAMI",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338571,
+            "validTill": 1745893353571,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "AUD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "2.0835"
+            },
+            "ask": {
+                "rate": "2.0887"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1XT4IEQSO4FG7",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338580,
+            "validTill": 1745893353580,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "CHF",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.112766"
+            },
+            "ask": {
+                "rate": "0.113373"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1LRQTZLATDP3D",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338586,
+            "validTill": 1745893353586,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "NZD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.9063"
+            },
+            "ask": {
+                "rate": "1.9111"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1DVTIRJL2AK6O",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338592,
+            "validTill": 1745893353592,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "CHF",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00576807"
+            },
+            "ask": {
+                "rate": "0.00578577"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.005779"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1JZTQ9BWOLKO0",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338599,
+            "validTill": 1745893353599,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "EUR",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.1127829"
+            },
+            "ask": {
+                "rate": "0.11303702"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.1129164"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU157NEVUJGG9HB",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338603,
+            "validTill": 1745893353603,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "HKD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "9.4237"
+            },
+            "ask": {
+                "rate": "9.4479"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU14K52L2GQSLFH",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338611,
+            "validTill": 1745893353611,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "JPY",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "18.32"
+            },
+            "ask": {
+                "rate": "18.36"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1GXNZYSXP0Z6A",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338616,
+            "validTill": 1745893353616,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "CAD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.57441601"
+            },
+            "ask": {
+                "rate": "1.57870613"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.576563"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU124DH0SGFR4P5",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338622,
+            "validTill": 1745893353622,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "GBP",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.4788"
+            },
+            "ask": {
+                "rate": "0.4799"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1T6D5GHSTBT10",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338628,
+            "validTill": 1745893353628,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "CNH",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "4.336"
+            },
+            "ask": {
+                "rate": "4.3583"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1R0EP4LEC6ORH",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338635,
+            "validTill": 1745893353635,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "CHF",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.59284356"
+            },
+            "ask": {
+                "rate": "0.59490331"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.593876"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1II4ADSNRXG2V",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338638,
+            "validTill": 1745893353638,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "AUD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.21426048"
+            },
+            "ask": {
+                "rate": "0.21531185"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.21478076"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU163T3Y9EAPSPU",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338644,
+            "validTill": 1745893353644,
+            "baseCurrency": "USD",
+            "quoteCurrency": "GBP",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.74313312"
+            },
+            "ask": {
+                "rate": "0.744747"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.743944"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1648HYIKX1U4H",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338651,
+            "validTill": 1745893353651,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "GBP",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.90497412"
+            },
+            "ask": {
+                "rate": "0.90766075"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.906314"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1L6YPH4885P5V",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338655,
+            "validTill": 1745893353655,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "CAD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.57419923"
+            },
+            "ask": {
+                "rate": "1.57816159"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.576181"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU125DJ0J32O1QW",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338662,
+            "validTill": 1745893353662,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "EUR",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.5233"
+            },
+            "ask": {
+                "rate": "0.5246"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1X09CD95G2F4O",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338668,
+            "validTill": 1745893353668,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "EUR",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.06475918"
+            },
+            "ask": {
+                "rate": "1.06748542"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.066121"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU133QEG1QVKJE1",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338671,
+            "validTill": 1745893353671,
+            "baseCurrency": "USD",
+            "quoteCurrency": "EUR",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.87478634"
+            },
+            "ask": {
+                "rate": "0.87689502"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.875839"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1M0572ECM842C",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338678,
+            "validTill": 1745893353678,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "GBP",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.44459996"
+            },
+            "ask": {
+                "rate": "0.44572328"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.445162"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1MQ8BSDD2TPH3",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338686,
+            "validTill": 1745893353686,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "USD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.137191"
+            },
+            "ask": {
+                "rate": "0.137857"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU13G43SIPND5MA",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338691,
+            "validTill": 1745893353691,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "CAD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.17783"
+            },
+            "ask": {
+                "rate": "0.17826"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU186ODKPMNROCU",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338699,
+            "validTill": 1745893353699,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "CAD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.8248"
+            },
+            "ask": {
+                "rate": "0.827"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1CXTAHZC1SCYZ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338708,
+            "validTill": 1745893353708,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "NZD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "2.0316"
+            },
+            "ask": {
+                "rate": "2.0373"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU19IQVGUJJ5D1P",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338713,
+            "validTill": 1745893353713,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "SGD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.4906"
+            },
+            "ask": {
+                "rate": "1.4942"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1XOFGNU4ZKXHP",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338719,
+            "validTill": 1745893353719,
+            "baseCurrency": "USD",
+            "quoteCurrency": "CNH",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "7.28643627"
+            },
+            "ask": {
+                "rate": "7.30155426"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "7.294095"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1Q3UMD7H0EGZN",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338724,
+            "validTill": 1745893353724,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "SGD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.16864918"
+            },
+            "ask": {
+                "rate": "0.16903787"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.168855"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1Q576I6KGP7MJ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338729,
+            "validTill": 1745893353729,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "CAD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.8886"
+            },
+            "ask": {
+                "rate": "0.891"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU15THQXCTFYTPN",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338733,
+            "validTill": 1745893353733,
+            "baseCurrency": "USD",
+            "quoteCurrency": "EUR",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.87483729"
+            },
+            "ask": {
+                "rate": "0.87693106"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.875883"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1AZG2WMP7I696",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338738,
+            "validTill": 1745893353738,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "GBP",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.47906945"
+            },
+            "ask": {
+                "rate": "0.48028481"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.479682"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1SZ1MBPPINBLI",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338741,
+            "validTill": 1745893353741,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "EUR",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.12016839"
+            },
+            "ask": {
+                "rate": "0.12078069"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.12047243"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1VTVMRYDD5NJL",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338745,
+            "validTill": 1745893353745,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "USD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.14033752"
+            },
+            "ask": {
+                "rate": "1.14306893"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.141703"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1JXX0JPYS5IRK",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338750,
+            "validTill": 1745893353750,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "JPY",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "19.51157"
+            },
+            "ask": {
+                "rate": "19.61019"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "19.5535"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFUZEXEJPHCR8M5",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338753,
+            "validTill": 1745893353753,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "CNH",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "8.8229732"
+            },
+            "ask": {
+                "rate": "8.8762824"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "8.849722"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1OMNPQN8BTZ9O",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338760,
+            "validTill": 1745893353760,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "HKD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "4.6326"
+            },
+            "ask": {
+                "rate": "4.6434"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1UF1KA2EFM2KS",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338765,
+            "validTill": 1745893353765,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "USD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.72323005"
+            },
+            "ask": {
+                "rate": "0.72513942"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.724187"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1V24LFZZZXDBG",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338772,
+            "validTill": 1745893353772,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "EUR",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.0647"
+            },
+            "ask": {
+                "rate": "1.0671"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1WGFMMLGFJ6TI",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338776,
+            "validTill": 1745893353776,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "EUR",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.17660722"
+            },
+            "ask": {
+                "rate": "1.17910693"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.177859"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFUZ7YAY6DIFYJM",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338784,
+            "validTill": 1745893353784,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "EUR",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.112835"
+            },
+            "ask": {
+                "rate": "0.113091"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1NMS0DLOV8TB4",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338789,
+            "validTill": 1745893353789,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "CHF",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.10150739"
+            },
+            "ask": {
+                "rate": "1.10526216"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.10338"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1A8C6XDO534WA",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338798,
+            "validTill": 1745893353798,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "JPY",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "108.67"
+            },
+            "ask": {
+                "rate": "108.92"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1VG2BCSEJAFZ2",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338805,
+            "validTill": 1745893353805,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "JPY",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "108.5518395"
+            },
+            "ask": {
+                "rate": "108.813705"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "108.6437"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU10NNBAWJZ336J",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338810,
+            "validTill": 1745893353810,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "CNH",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "9.7251331"
+            },
+            "ask": {
+                "rate": "9.746764"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "9.736081"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1GCPMLHFT171V",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338817,
+            "validTill": 1745893353817,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "SGD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.179408"
+            },
+            "ask": {
+                "rate": "0.180315"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1SQMKYRYPPBNQ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338826,
+            "validTill": 1745893353826,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "SGD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.58867174"
+            },
+            "ask": {
+                "rate": "1.59347488"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.591074"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU14ULT4ZVDNV55",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338829,
+            "validTill": 1745893353829,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "EUR",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.66873959"
+            },
+            "ask": {
+                "rate": "0.67050263"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.6696212"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1BZ7ZQRQZR5AT",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338835,
+            "validTill": 1745893353835,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "CNH",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "8.2799767"
+            },
+            "ask": {
+                "rate": "8.3221709"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "8.301171"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1GCDPPZSUYBT1",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338842,
+            "validTill": 1745893353842,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "USD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.64404631"
+            },
+            "ask": {
+                "rate": "0.6455469"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.644802"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1L3L4QA2RTH57",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338850,
+            "validTill": 1745893353850,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "USD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.1288"
+            },
+            "ask": {
+                "rate": "0.129"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1AJL0AO1XEH7O",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338857,
+            "validTill": 1745893353857,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "USD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.2146"
+            },
+            "ask": {
+                "rate": "1.218"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU12YTRK9RU7UVB",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338864,
+            "validTill": 1745893353864,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "CNH",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "5.2509178"
+            },
+            "ask": {
+                "rate": "5.2789907"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "5.26502"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1CZ8P6DGV0QKY",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338867,
+            "validTill": 1745893353867,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "CAD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.82451466"
+            },
+            "ask": {
+                "rate": "0.82664982"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.825579"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU13XBXVU036LIH",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338874,
+            "validTill": 1745893353874,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "EUR",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.66926"
+            },
+            "ask": {
+                "rate": "0.67087"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1DXMHUPW77YJV",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338879,
+            "validTill": 1745893353879,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "CHF",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.93679627"
+            },
+            "ask": {
+                "rate": "0.93917424"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.937985"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1JDX6WT13N0OA",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338882,
+            "validTill": 1745893353882,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "USD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.76284239"
+            },
+            "ask": {
+                "rate": "0.76452076"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.763682"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1F0EGV8S2XUG9",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338889,
+            "validTill": 1745893353889,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "AUD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.0109"
+            },
+            "ask": {
+                "rate": "0.01093"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1A8E4U4E6LYUA",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338896,
+            "validTill": 1745893353896,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "USD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00702"
+            },
+            "ask": {
+                "rate": "0.00704"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU15KRBZB11H31M",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338901,
+            "validTill": 1745893353901,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "EUR",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.6336"
+            },
+            "ask": {
+                "rate": "0.6353"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1LVXV9JHCO944",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338908,
+            "validTill": 1745893353908,
+            "baseCurrency": "USD",
+            "quoteCurrency": "JPY",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "142.2709866"
+            },
+            "ask": {
+                "rate": "142.5795371"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "142.3742"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1EG9KSHC5R59C",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338914,
+            "validTill": 1745893353914,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "CNH",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "5.5459"
+            },
+            "ask": {
+                "rate": "5.5738"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1IQBVV2JSQEOC",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338920,
+            "validTill": 1745893353920,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "HKD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "4.9914"
+            },
+            "ask": {
+                "rate": "5.002"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1637F8Q9QP85K",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338924,
+            "validTill": 1745893353924,
+            "baseCurrency": "USD",
+            "quoteCurrency": "JPY",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "142.0661916"
+            },
+            "ask": {
+                "rate": "142.3783361"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "142.1712"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1PT03JFA94M0Z",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338929,
+            "validTill": 1745893353929,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "AUD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.21277144"
+            },
+            "ask": {
+                "rate": "0.21387192"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.21331624"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1REITU43KZ3LQ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338932,
+            "validTill": 1745893353932,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "NZD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.07604288"
+            },
+            "ask": {
+                "rate": "1.07899191"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.077526"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU19RDUAQJTYYX8",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338938,
+            "validTill": 1745893353938,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "CAD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.82511306"
+            },
+            "ask": {
+                "rate": "0.82744962"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.826284"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFUZZPXFMO9G0RP",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338944,
+            "validTill": 1745893353944,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "GBP",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.8483"
+            },
+            "ask": {
+                "rate": "0.8501"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1MU9Y5M4ARRH8",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338949,
+            "validTill": 1745893353949,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "CAD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.18942171"
+            },
+            "ask": {
+                "rate": "0.19043545"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.18992519"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1L9QY47ILE2CI",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338955,
+            "validTill": 1745893353955,
+            "baseCurrency": "USD",
+            "quoteCurrency": "AUD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.54921124"
+            },
+            "ask": {
+                "rate": "1.55283729"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.551013"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1MPTFNWAE3HJF",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338963,
+            "validTill": 1745893353963,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "CNH",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.935"
+            },
+            "ask": {
+                "rate": "0.9396"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1NSG0J6M0N5NZ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338968,
+            "validTill": 1745893353968,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "CAD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.5741"
+            },
+            "ask": {
+                "rate": "1.5782"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1RCTF3M09OZWX",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338974,
+            "validTill": 1745893353974,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "CAD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.17778644"
+            },
+            "ask": {
+                "rate": "0.17823336"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.1780208"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU13C37ORV1TZ30",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338979,
+            "validTill": 1745893353979,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "GBP",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.56847845"
+            },
+            "ask": {
+                "rate": "0.56986049"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.5691694"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1SFRHCPZ4S20I",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338983,
+            "validTill": 1745893353983,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "AUD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.12264124"
+            },
+            "ask": {
+                "rate": "1.12534422"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.12398"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1TRJF1BEQD6O9",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338989,
+            "validTill": 1745893353989,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "USD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.13719785"
+            },
+            "ask": {
+                "rate": "0.13786252"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.13752784"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1SK8V5RWWQH45",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338995,
+            "validTill": 1745893353995,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "SGD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.17940616"
+            },
+            "ask": {
+                "rate": "0.18029888"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.17984941"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU16RXT4ZVHNNRZ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893338999,
+            "validTill": 1745893353999,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "GBP",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.84849266"
+            },
+            "ask": {
+                "rate": "0.85031947"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.849406"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU18ST3A8NK5S8Z",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339006,
+            "validTill": 1745893354006,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "NZD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.0759"
+            },
+            "ask": {
+                "rate": "1.0787"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1PHOLJG48GD8A",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339011,
+            "validTill": 1745893354011,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "NZD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.215789"
+            },
+            "ask": {
+                "rate": "0.2163131"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.216064"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1XT0O8BSIKXA8",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339016,
+            "validTill": 1745893354016,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "CAD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.6776"
+            },
+            "ask": {
+                "rate": "1.6825"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1LZV7QZGFBXBJ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339021,
+            "validTill": 1745893354021,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "HKD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.05446"
+            },
+            "ask": {
+                "rate": "0.054584"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU16R5DZBHDUCW0",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339026,
+            "validTill": 1745893354026,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "CHF",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.93599207"
+            },
+            "ask": {
+                "rate": "0.93856162"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.937276"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1TYMOIIFB0KA5",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339032,
+            "validTill": 1745893354032,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "AUD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.88435476"
+            },
+            "ask": {
+                "rate": "1.89095607"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.887638"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1MFWTWYAM5BF1",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339037,
+            "validTill": 1745893354037,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "SGD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.5886"
+            },
+            "ask": {
+                "rate": "1.5928"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1STKBA4FK0X0S",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339043,
+            "validTill": 1745893354043,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "JPY",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "91.53"
+            },
+            "ask": {
+                "rate": "91.71"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1B8T2SEVDVQEK",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339048,
+            "validTill": 1745893354048,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "CHF",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00577"
+            },
+            "ask": {
+                "rate": "0.005786"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1TOOMKK05XYKK",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339055,
+            "validTill": 1745893354055,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "GBP",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.4444"
+            },
+            "ask": {
+                "rate": "0.4455"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU16SCUJ83YMX17",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339062,
+            "validTill": 1745893354062,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "JPY",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "172.8424845"
+            },
+            "ask": {
+                "rate": "173.3647916"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "173.0415"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU11M6BAPDQNDP4",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339067,
+            "validTill": 1745893354067,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "AUD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.12167221"
+            },
+            "ask": {
+                "rate": "1.12478867"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.123221"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU130FQNFLMN55Y",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339072,
+            "validTill": 1745893354072,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "NZD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.22925799"
+            },
+            "ask": {
+                "rate": "0.23046614"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.22985798"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1GPYRHSQLOK80",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339077,
+            "validTill": 1745893354077,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "CNH",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "8.2621815"
+            },
+            "ask": {
+                "rate": "8.3036834"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "8.283032"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1MXWB1AH43B60",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339082,
+            "validTill": 1745893354082,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "NZD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.27658584"
+            },
+            "ask": {
+                "rate": "1.27993396"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.2782593"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1TEK8GOCOZHMK",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339089,
+            "validTill": 1745893354089,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "USD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.1397"
+            },
+            "ask": {
+                "rate": "1.1425"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1F5WPAMT0CFIC",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339095,
+            "validTill": 1745893354095,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "HKD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "9.42494462"
+            },
+            "ask": {
+                "rate": "9.45575331"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "9.439785"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU17DYPI9M53YTC",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339100,
+            "validTill": 1745893354100,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "CAD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.88707504"
+            },
+            "ask": {
+                "rate": "0.89161472"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.889348"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1C5VUMHQRKYKB",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339104,
+            "validTill": 1745893354104,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "JPY",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "84.8266884"
+            },
+            "ask": {
+                "rate": "85.0398549"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "84.903"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1TMWRXPTSXKI5",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339109,
+            "validTill": 1745893354109,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "NZD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "2.03591505"
+            },
+            "ask": {
+                "rate": "2.04295892"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "2.039437"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1OCCBVHQXL1HQ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339114,
+            "validTill": 1745893354114,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "AUD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.77147875"
+            },
+            "ask": {
+                "rate": "1.77564387"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.77355"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU10LAJOGWJ4X36",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339120,
+            "validTill": 1745893354120,
+            "baseCurrency": "USD",
+            "quoteCurrency": "HKD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "7.7479483"
+            },
+            "ask": {
+                "rate": "7.76413138"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "7.75558"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1WRA50JEB1N03",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339125,
+            "validTill": 1745893354125,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "CHF",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.1033"
+            },
+            "ask": {
+                "rate": "1.1063"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1I1IS2QRZWTWK",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339130,
+            "validTill": 1745893354130,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "SGD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.9453547"
+            },
+            "ask": {
+                "rate": "0.94797303"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.946667"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1MEUHGI9PZN7O",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339135,
+            "validTill": 1745893354135,
+            "baseCurrency": "USD",
+            "quoteCurrency": "NZD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.6706"
+            },
+            "ask": {
+                "rate": "1.6744"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1QQLSYLV1M2HY",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339140,
+            "validTill": 1745893354140,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "NZD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.2154"
+            },
+            "ask": {
+                "rate": "0.2159"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1A2PEWBT0B7BZ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339145,
+            "validTill": 1745893354145,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "GBP",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.84892922"
+            },
+            "ask": {
+                "rate": "0.85086201"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.849896"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1LV1H7SW5WJ5W",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339149,
+            "validTill": 1745893354149,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "HKD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "5.45454"
+            },
+            "ask": {
+                "rate": "5.46658112"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1QAXR7PCLW794",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339157,
+            "validTill": 1745893354157,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "AUD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.927"
+            },
+            "ask": {
+                "rate": "0.9294"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1AQ5NKDNNAT7F",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339160,
+            "validTill": 1745893354160,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "GBP",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.47850901"
+            },
+            "ask": {
+                "rate": "0.47959512"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.479059"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1RRHP2Q20XF75",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339166,
+            "validTill": 1745893354166,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "HKD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "8.84522093"
+            },
+            "ask": {
+                "rate": "8.86514829"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "8.854657"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1UJX74ABV6HED",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339172,
+            "validTill": 1745893354172,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "EUR",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.1128904"
+            },
+            "ask": {
+                "rate": "0.11315875"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.1130315"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU18J2HF26O4RX3",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339177,
+            "validTill": 1745893354177,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "JPY",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "84.9855294"
+            },
+            "ask": {
+                "rate": "85.2090239"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "85.0663"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1OJA19VUK5U6W",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339182,
+            "validTill": 1745893354182,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "AUD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.89034676"
+            },
+            "ask": {
+                "rate": "1.89573084"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.893022"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU10MIRZ93V6IVV",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339188,
+            "validTill": 1745893354188,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "CNH",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "5.2428379"
+            },
+            "ask": {
+                "rate": "5.2694111"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "5.256189"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU19OTQZ80FB8AX",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339193,
+            "validTill": 1745893354193,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "CHF",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.628"
+            },
+            "ask": {
+                "rate": "0.63"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU13L761AQQ65LL",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339199,
+            "validTill": 1745893354199,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "CNH",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "4.6357097"
+            },
+            "ask": {
+                "rate": "4.6450104"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1B14O8ZVNGDXO",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339207,
+            "validTill": 1745893354207,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "CHF",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.9371"
+            },
+            "ask": {
+                "rate": "0.9392"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1QCYYNM5XRVGP",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339211,
+            "validTill": 1745893354211,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "EUR",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00615464"
+            },
+            "ask": {
+                "rate": "0.00616906"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0061617"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFUZO650U9YYC4C",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339216,
+            "validTill": 1745893354216,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "CAD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.85521493"
+            },
+            "ask": {
+                "rate": "1.85969284"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.857454"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU105DC51BBL7OO",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339221,
+            "validTill": 1745893354221,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "JPY",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "108.6587325"
+            },
+            "ask": {
+                "rate": "108.923815"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "108.7523"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1ANH24BRSIVWE",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339225,
+            "validTill": 1745893354225,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "AUD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.18565"
+            },
+            "ask": {
+                "rate": "1.18861"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1ES298RSWW9N0",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339231,
+            "validTill": 1745893354231,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "CAD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.18973337"
+            },
+            "ask": {
+                "rate": "0.19018059"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.18995434"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1WKGSQ12E5BRK",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339237,
+            "validTill": 1745893354237,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "CHF",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.62748189"
+            },
+            "ask": {
+                "rate": "0.62963901"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.62857"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1PM1I2UV211BX",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339242,
+            "validTill": 1745893354242,
+            "baseCurrency": "USD",
+            "quoteCurrency": "SGD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.30573296"
+            },
+            "ask": {
+                "rate": "1.3087074"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.30722"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1PNUWXCC8E9JH",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339248,
+            "validTill": 1745893354248,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "CAD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.67791441"
+            },
+            "ask": {
+                "rate": "1.68351583"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.68071"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU12Z2LHKS0U8B6",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339254,
+            "validTill": 1745893354254,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "CHF",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.5288726"
+            },
+            "ask": {
+                "rate": "0.53054401"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.529712"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1C2TFLTTD5GDP",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339259,
+            "validTill": 1745893354259,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "USD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.21526252"
+            },
+            "ask": {
+                "rate": "1.2190158"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.217135"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1MTXX8NJHM24R",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339265,
+            "validTill": 1745893354265,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "HKD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.0642177"
+            },
+            "ask": {
+                "rate": "1.0694524"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.06675"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1GP1PTQHWMTFE",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339268,
+            "validTill": 1745893354268,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "GBP",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.53801645"
+            },
+            "ask": {
+                "rate": "0.5394379"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.538727"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1JOZR4XR6R2JU",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339273,
+            "validTill": 1745893354273,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "GBP",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.53759886"
+            },
+            "ask": {
+                "rate": "0.53892739"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.538263"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1MVPPFLGUQ2FX",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339280,
+            "validTill": 1745893354280,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "CNH",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "8.2766"
+            },
+            "ask": {
+                "rate": "8.3185"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1V83OYB3C5HWL",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339285,
+            "validTill": 1745893354285,
+            "baseCurrency": "USD",
+            "quoteCurrency": "EUR",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.8753"
+            },
+            "ask": {
+                "rate": "0.8774"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1LAAKMFTS84XS",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339290,
+            "validTill": 1745893354290,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "NZD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.0760229"
+            },
+            "ask": {
+                "rate": "1.07897189"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.077508"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1U0DYOP3W2AWO",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339296,
+            "validTill": 1745893354296,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "AUD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.18616884"
+            },
+            "ask": {
+                "rate": "1.18907248"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.187611"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1FRRSTNBKVQT9",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339301,
+            "validTill": 1745893354301,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "AUD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.1223"
+            },
+            "ask": {
+                "rate": "1.1254"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1B3ZFYV6EJQW0",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339308,
+            "validTill": 1745893354308,
+            "baseCurrency": "USD",
+            "quoteCurrency": "CHF",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.821"
+            },
+            "ask": {
+                "rate": "0.8233"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1467NRQ77SV0F",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339312,
+            "validTill": 1745893354312,
+            "baseCurrency": "USD",
+            "quoteCurrency": "HKD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "7.74830294"
+            },
+            "ask": {
+                "rate": "7.76406731"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "7.755725"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1L8746SOTMYK8",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339317,
+            "validTill": 1745893354317,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "AUD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.92749258"
+            },
+            "ask": {
+                "rate": "0.9318349"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.929653"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU10J78XLAPB457",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339322,
+            "validTill": 1745893354322,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "HKD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "5.6097"
+            },
+            "ask": {
+                "rate": "5.6233"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU141PNA0KYZPNZ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339329,
+            "validTill": 1745893354329,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "EUR",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.12049457"
+            },
+            "ask": {
+                "rate": "0.12078055"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.1206359"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFUZ3K4WYIULK27",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339333,
+            "validTill": 1745893354333,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "NZD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.229445"
+            },
+            "ask": {
+                "rate": "0.230626"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1HYVV6CMHQH9C",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339338,
+            "validTill": 1745893354338,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "CHF",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.10568421"
+            },
+            "ask": {
+                "rate": "0.10616606"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.1059"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU10EQU18404MTB",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339345,
+            "validTill": 1745893354345,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "CAD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00969629"
+            },
+            "ask": {
+                "rate": "0.00972291"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0097132"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1SNMKS19EWDZP",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339350,
+            "validTill": 1745893354350,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "USD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.21516562"
+            },
+            "ask": {
+                "rate": "1.21934713"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.217256"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1IYMSDPAQEXMB",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339355,
+            "validTill": 1745893354355,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "NZD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "2.03096001"
+            },
+            "ask": {
+                "rate": "2.0374354"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "2.034195"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU15B8XG2AY5K60",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339361,
+            "validTill": 1745893354361,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "CHF",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00576377"
+            },
+            "ask": {
+                "rate": "0.00578117"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.00577453"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU11FMDPPTHHEGO",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339366,
+            "validTill": 1745893354366,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "NZD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.20852826"
+            },
+            "ask": {
+                "rate": "1.21194373"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.210237"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1HJUMHJG8MNN8",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339374,
+            "validTill": 1745893354374,
+            "baseCurrency": "USD",
+            "quoteCurrency": "CAD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.3795"
+            },
+            "ask": {
+                "rate": "1.383"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1KHUXTQKYKM34",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339379,
+            "validTill": 1745893354379,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "JPY",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "91.569339"
+            },
+            "ask": {
+                "rate": "91.756665"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "91.6628"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1KW94RAS2STLU",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339385,
+            "validTill": 1745893354385,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "CHF",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.5944"
+            },
+            "ask": {
+                "rate": "0.5961"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU15BBFTCASP7ZM",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339390,
+            "validTill": 1745893354390,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "SGD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.59117024"
+            },
+            "ask": {
+                "rate": "1.59650891"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.593839"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFUZ3CWNTU42UDO",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339398,
+            "validTill": 1745893354398,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "NZD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.27737"
+            },
+            "ask": {
+                "rate": "1.28055"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1GOD8IB1XZSHY",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339402,
+            "validTill": 1745893354402,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "CAD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.05515689"
+            },
+            "ask": {
+                "rate": "1.05778623"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.0564711"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1G7KY4Q6ELZOP",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339407,
+            "validTill": 1745893354407,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "HKD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.05448309"
+            },
+            "ask": {
+                "rate": "0.05460439"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.05456021"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1DX6R6YKUUNBY",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339414,
+            "validTill": 1745893354414,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "USD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.5972"
+            },
+            "ask": {
+                "rate": "0.5986"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU18058JXWLW2XZ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339419,
+            "validTill": 1745893354419,
+            "baseCurrency": "USD",
+            "quoteCurrency": "CNH",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "7.2539"
+            },
+            "ask": {
+                "rate": "7.2891"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1J7NBKAGSPLK5",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339424,
+            "validTill": 1745893354424,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "EUR",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.56312032"
+            },
+            "ask": {
+                "rate": "0.56443487"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.563785"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1XUTW4NW9XEQH",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339428,
+            "validTill": 1745893354428,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "USD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.12878509"
+            },
+            "ask": {
+                "rate": "0.12904892"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.128924"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU18XGBTHFPDJGP",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339432,
+            "validTill": 1745893354432,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "JPY",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "19.51157"
+            },
+            "ask": {
+                "rate": "19.61019"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "19.5535"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1N9L2XE3JDWW6",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339440,
+            "validTill": 1745893354440,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "NZD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.27789243"
+            },
+            "ask": {
+                "rate": "1.28120412"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.2795478"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1HZAD74JNAU7G",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339446,
+            "validTill": 1745893354446,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "EUR",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.52342605"
+            },
+            "ask": {
+                "rate": "0.52477825"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.524102"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1M5XXAKBNJBWL",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339450,
+            "validTill": 1745893354450,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "USD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.7638"
+            },
+            "ask": {
+                "rate": "0.7655"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1H35OHKD3A6J5",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339457,
+            "validTill": 1745893354457,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "CNH",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "4.6719"
+            },
+            "ask": {
+                "rate": "4.695"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1M0CTF4KG995S",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339461,
+            "validTill": 1745893354461,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "CNH",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.93513"
+            },
+            "ask": {
+                "rate": "0.9397"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.937482"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1M9J6QXA10HWD",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339468,
+            "validTill": 1745893354468,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "CNH",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.050975"
+            },
+            "ask": {
+                "rate": "0.051232"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1NB0LLIBZ4L0U",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339474,
+            "validTill": 1745893354474,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "CHF",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.49079471"
+            },
+            "ask": {
+                "rate": "0.49240191"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.491595"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1RUA1C5976ANK",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339479,
+            "validTill": 1745893354479,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "JPY",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "18.31310556"
+            },
+            "ask": {
+                "rate": "18.35334101"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "18.327732"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1OX2NUGHU35RA",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339483,
+            "validTill": 1745893354483,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "USD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.59613827"
+            },
+            "ask": {
+                "rate": "0.59750491"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.596821"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1JA9Q1LMOP8JP",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339489,
+            "validTill": 1745893354489,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "CNH",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "9.7483779"
+            },
+            "ask": {
+                "rate": "9.7974156"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "9.773014"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1810SLWJ4111W",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339494,
+            "validTill": 1745893354494,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "CHF",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.62635302"
+            },
+            "ask": {
+                "rate": "0.62827765"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.62736"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1DFXGF1KLUWGZ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339499,
+            "validTill": 1745893354499,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "JPY",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "172.8444825"
+            },
+            "ask": {
+                "rate": "173.3657926"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "173.0427"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU14Y5MG3HYXZLT",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339503,
+            "validTill": 1745893354503,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "GBP",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00522447"
+            },
+            "ask": {
+                "rate": "0.00523813"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0052331"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFUZR9G6ALJIKGG",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339510,
+            "validTill": 1745893354510,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "JPY",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "162.11"
+            },
+            "ask": {
+                "rate": "162.47"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1BDKU5EQJ2Y7A",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339515,
+            "validTill": 1745893354515,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "CHF",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.1056942"
+            },
+            "ask": {
+                "rate": "0.10613603"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.10593"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1268YISVL8PR9",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339523,
+            "validTill": 1745893354523,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "GBP",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.09582"
+            },
+            "ask": {
+                "rate": "0.09603"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU13HX1U2N1U5YS",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339530,
+            "validTill": 1745893354530,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "USD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.7641331"
+            },
+            "ask": {
+                "rate": "0.76587411"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.765"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU18UPD2I3JLLU5",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339535,
+            "validTill": 1745893354535,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "CAD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00970728"
+            },
+            "ask": {
+                "rate": "0.00973192"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.009723"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU10FAAXVINF9L0",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339540,
+            "validTill": 1745893354540,
+            "baseCurrency": "USD",
+            "quoteCurrency": "CNH",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "7.25325"
+            },
+            "ask": {
+                "rate": "7.28836"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "7.270895"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1PKT1Y1C42XWO",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339546,
+            "validTill": 1745893354546,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "EUR",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.66922171"
+            },
+            "ask": {
+                "rate": "0.67087901"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.6700503"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1P4Y0GKI1CDJ6",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339549,
+            "validTill": 1745893354549,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "JPY",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "162.0395982"
+            },
+            "ask": {
+                "rate": "162.4073451"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "162.2235"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU16KRL28OZ3M22",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339554,
+            "validTill": 1745893354554,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "SGD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.1793308"
+            },
+            "ask": {
+                "rate": "0.18024859"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.17978656"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU135LQTHID00B0",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339560,
+            "validTill": 1745893354560,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "USD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.6434"
+            },
+            "ask": {
+                "rate": "0.6448"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1ULBB8YMUKNU3",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339564,
+            "validTill": 1745893354564,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "CAD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.0097"
+            },
+            "ask": {
+                "rate": "0.00972"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1HTEBZCWEIPSU",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339570,
+            "validTill": 1745893354570,
+            "baseCurrency": "USD",
+            "quoteCurrency": "CAD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.379"
+            },
+            "ask": {
+                "rate": "1.3826"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1NNUJ7NE7PUAL",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339575,
+            "validTill": 1745893354575,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "CNH",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "5.2506"
+            },
+            "ask": {
+                "rate": "5.2781"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1SKJC5ELFAWY7",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339580,
+            "validTill": 1745893354580,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "AUD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "2.08203188"
+            },
+            "ask": {
+                "rate": "2.08720912"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "2.084603"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1KDXFT4YTQEJL",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339586,
+            "validTill": 1745893354586,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "HKD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.05443414"
+            },
+            "ask": {
+                "rate": "0.05456036"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.05451379"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU17KP6F61N73ZV",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339592,
+            "validTill": 1745893354592,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "JPY",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "162.11772"
+            },
+            "ask": {
+                "rate": "162.470308"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "162.294"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1J1DBU4HFR5XW",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339596,
+            "validTill": 1745893354596,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "EUR",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00615"
+            },
+            "ask": {
+                "rate": "0.00617"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1PJ4VKN5J952J",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339601,
+            "validTill": 1745893354601,
+            "baseCurrency": "USD",
+            "quoteCurrency": "NZD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.67507825"
+            },
+            "ask": {
+                "rate": "1.67898831"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.677033"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1Q7WGXL1PIMVU",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339607,
+            "validTill": 1745893354607,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "EUR",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00615464"
+            },
+            "ask": {
+                "rate": "0.00616906"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0061618"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU19JHGK84RLL5T",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339612,
+            "validTill": 1745893354612,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "EUR",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.06455038"
+            },
+            "ask": {
+                "rate": "1.06764258"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.066096"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU19LRPPCTA5S1U",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339618,
+            "validTill": 1745893354618,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "JPY",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "102.8484486"
+            },
+            "ask": {
+                "rate": "103.1257227"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "102.9503"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1NLPNCNXZQ6DG",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339624,
+            "validTill": 1745893354624,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "CHF",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.4908"
+            },
+            "ask": {
+                "rate": "0.4922"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1JQ7RJYURSL79",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339627,
+            "validTill": 1745893354627,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "HKD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "4.98328273"
+            },
+            "ask": {
+                "rate": "4.99414716"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "4.988457"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1O0ECRNYI8YHL",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339632,
+            "validTill": 1745893354632,
+            "baseCurrency": "USD",
+            "quoteCurrency": "AUD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.55291453"
+            },
+            "ask": {
+                "rate": "1.55619164"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.554541"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU19VJJF85XYMDL",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339637,
+            "validTill": 1745893354637,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "JPY",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "102.8174796"
+            },
+            "ask": {
+                "rate": "103.0716687"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "102.9076"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1KJ0JLIVEV46H",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339642,
+            "validTill": 1745893354642,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "SGD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.1684"
+            },
+            "ask": {
+                "rate": "0.1688"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1N8JFODUI3QBT",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339650,
+            "validTill": 1745893354650,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "GBP",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.56841671"
+            },
+            "ask": {
+                "rate": "0.56980764"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.5691122"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1KGMTCK685EA4",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339656,
+            "validTill": 1745893354656,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "USD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.723"
+            },
+            "ask": {
+                "rate": "0.7249"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1K1DCYO9WRSY8",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339661,
+            "validTill": 1745893354661,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "JPY",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "172.83"
+            },
+            "ask": {
+                "rate": "173.3"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1PO01RCE8RX0U",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339666,
+            "validTill": 1745893354666,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "GBP",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00522347"
+            },
+            "ask": {
+                "rate": "0.00523713"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0052328"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1RVRQF3EEZ6F9",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339672,
+            "validTill": 1745893354672,
+            "baseCurrency": "USD",
+            "quoteCurrency": "SGD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.30563306"
+            },
+            "ask": {
+                "rate": "1.3086073"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "1.30712"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1LBUS3VXD3WQC",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339677,
+            "validTill": 1745893354677,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "GBP",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.90401009"
+            },
+            "ask": {
+                "rate": "0.90705615"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.905531"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU14S8YSEBM8LO6",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339681,
+            "validTill": 1745893354681,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "EUR",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.56407636"
+            },
+            "ask": {
+                "rate": "0.56552096"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.564802"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1HSHQX4BGQ8PZ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339688,
+            "validTill": 1745893354688,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "HKD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.0676313"
+            },
+            "ask": {
+                "rate": "1.0699689"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1GTLP0J2Z3ZR0",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339693,
+            "validTill": 1745893354693,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "CAD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.189462"
+            },
+            "ask": {
+                "rate": "0.190455"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1HDN214H5D8Z6",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339698,
+            "validTill": 1745893354698,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "HKD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "4.63592244"
+            },
+            "ask": {
+                "rate": "4.64733369"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "4.64135"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1Y1V6NF1HJN42",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339704,
+            "validTill": 1745893354704,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "AUD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.212993"
+            },
+            "ask": {
+                "rate": "0.214043"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1TWM8ATVBS3EV",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339708,
+            "validTill": 1745893354708,
+            "baseCurrency": "USD",
+            "quoteCurrency": "CHF",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.82059259"
+            },
+            "ask": {
+                "rate": "0.82329748"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.821945"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU14O8LFWEUD17D",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339714,
+            "validTill": 1745893354714,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "GBP",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.44460995"
+            },
+            "ask": {
+                "rate": "0.4457433"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.445177"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU17MO42EX7JVSD",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339721,
+            "validTill": 1745893354721,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "CAD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.05496048"
+            },
+            "ask": {
+                "rate": "1.05787972"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.0564195"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1S3P8FMQDGA48",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339725,
+            "validTill": 1745893354725,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "CNH",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "4.3391935"
+            },
+            "ask": {
+                "rate": "4.3617604"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "4.35053"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU13OXPJJDRDT80",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339732,
+            "validTill": 1745893354732,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "SGD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.9456"
+            },
+            "ask": {
+                "rate": "0.948"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1BPOY4WQYBD4X",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339737,
+            "validTill": 1745893354737,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "NZD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.22925799"
+            },
+            "ask": {
+                "rate": "0.23046614"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.22985798"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1WRPACQA1PZ4B",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339740,
+            "validTill": 1745893354740,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "HKD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "5.60996942"
+            },
+            "ask": {
+                "rate": "5.62404743"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "5.616673"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1COWNMH09LVL3",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339745,
+            "validTill": 1745893354745,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "HKD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "4.99533267"
+            },
+            "ask": {
+                "rate": "5.00699199"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "5.000903"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU13I4WFU8UCW0O",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339750,
+            "validTill": 1745893354750,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "CHF",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.5941033"
+            },
+            "ask": {
+                "rate": "0.5958923"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.594996"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1XYD3SKP1Y65Y",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339755,
+            "validTill": 1745893354755,
+            "baseCurrency": "USD",
+            "quoteCurrency": "GBP",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.7434"
+            },
+            "ask": {
+                "rate": "0.745"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1619AG909MHR3",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339759,
+            "validTill": 1745893354759,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "HKD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "9.42834322"
+            },
+            "ask": {
+                "rate": "9.45537493"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "9.441298"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1QLY6BF6ZIK7H",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339767,
+            "validTill": 1745893354767,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "CAD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.8539"
+            },
+            "ask": {
+                "rate": "1.8586"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1GJMA5Q3LRXLD",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339772,
+            "validTill": 1745893354772,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "USD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.12881006"
+            },
+            "ask": {
+                "rate": "0.12908095"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.128953"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1K209NGPFPETY",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339777,
+            "validTill": 1745893354777,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "NZD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.9055925"
+            },
+            "ask": {
+                "rate": "1.9105096"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.908053"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1MT7QVFF07ES3",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339782,
+            "validTill": 1745893354782,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "CNH",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "4.3389837"
+            },
+            "ask": {
+                "rate": "4.3617104"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "4.350394"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1GPE16E2VUMED",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339785,
+            "validTill": 1745893354785,
+            "baseCurrency": "NZD",
+            "quoteCurrency": "USD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.59763677"
+            },
+            "ask": {
+                "rate": "0.59908649"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.598361"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFUZR9XUDTXFKF5",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339792,
+            "validTill": 1745893354792,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "GBP",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.10206792"
+            },
+            "ask": {
+                "rate": "0.10258129"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.10232286"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU12XGUXAGGXVQH",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339800,
+            "validTill": 1745893354800,
+            "baseCurrency": "USD",
+            "quoteCurrency": "JPY",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "142.14"
+            },
+            "ask": {
+                "rate": "142.45"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1VEN31JBNVCNE",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339806,
+            "validTill": 1745893354806,
+            "baseCurrency": "USD",
+            "quoteCurrency": "AUD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.5509"
+            },
+            "ask": {
+                "rate": "1.5541"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1WVNIIBEOJT44",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339811,
+            "validTill": 1745893354811,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "JPY",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "91.367541"
+            },
+            "ask": {
+                "rate": "91.559468"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "91.4635"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1GK86JKBHL9WY",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339820,
+            "validTill": 1745893354820,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "JPY",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "19.52"
+            },
+            "ask": {
+                "rate": "19.62"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1G4W9AT3IXLN9",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339825,
+            "validTill": 1745893354825,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "CNH",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "8.8243608"
+            },
+            "ask": {
+                "rate": "8.8747709"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "8.849669"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1SGJQ7O4Z9NMG",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339831,
+            "validTill": 1745893354831,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "CNH",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "4.6755847"
+            },
+            "ask": {
+                "rate": "4.6997661"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "4.687769"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU11LF30KU00XST",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339839,
+            "validTill": 1745893354839,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "NZD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.01175903"
+            },
+            "ask": {
+                "rate": "0.01178888"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0117782"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1NODOOO5X78BA",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339843,
+            "validTill": 1745893354843,
+            "baseCurrency": "EUR",
+            "quoteCurrency": "USD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.14038248"
+            },
+            "ask": {
+                "rate": "1.14310797"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.141745"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1OAVGUF1Q5Z5N",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339848,
+            "validTill": 1745893354848,
+            "baseCurrency": "AUD",
+            "quoteCurrency": "CHF",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.52886461"
+            },
+            "ask": {
+                "rate": "0.53054502"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "0.529712"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1X7QOOOF2SVHX",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339856,
+            "validTill": 1745893354856,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "GBP",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.9039"
+            },
+            "ask": {
+                "rate": "0.9064"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1FPZ1AJ41ALKG",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339863,
+            "validTill": 1745893354863,
+            "baseCurrency": "CHF",
+            "quoteCurrency": "AUD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.8857"
+            },
+            "ask": {
+                "rate": "1.891"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1NEM84BQ0I89R",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339868,
+            "validTill": 1745893354868,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "EUR",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.63341395"
+            },
+            "ask": {
+                "rate": "0.63515052"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.634282"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1N81ERTUZBDSS",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339875,
+            "validTill": 1745893354875,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "CHF",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.11267953"
+            },
+            "ask": {
+                "rate": "0.11331764"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.11299655"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1WUIM6MRH02WE",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339879,
+            "validTill": 1745893354879,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "HKD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "5.91589319"
+            },
+            "ask": {
+                "rate": "5.92939047"
+            },
+            "valueDate": "2025-04-29",
+            "valid": true,
+            "midMarketPrice": "5.92229"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1WMXKW2J004CC",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339885,
+            "validTill": 1745893354885,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "USD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.72175752"
+            },
+            "ask": {
+                "rate": "0.72350278"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1J1N29YSL27KS",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339891,
+            "validTill": 1745893354891,
+            "baseCurrency": "USD",
+            "quoteCurrency": "HKD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "7.74996"
+            },
+            "ask": {
+                "rate": "7.76579"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1PK5XJX4BEXDP",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339895,
+            "validTill": 1745893354895,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "NZD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.20877701"
+            },
+            "ask": {
+                "rate": "1.21193272"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.210353"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU12HQ1A7NSJLWW",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339901,
+            "validTill": 1745893354901,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "CAD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.17816266"
+            },
+            "ask": {
+                "rate": "0.17858931"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.1783864"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1JDXXLOUUMRB8",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339910,
+            "validTill": 1745893354910,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "SGD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.00918958"
+            },
+            "ask": {
+                "rate": "0.00921222"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.00920423"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1VBE4EKD9NCI3",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339914,
+            "validTill": 1745893354914,
+            "baseCurrency": "USD",
+            "quoteCurrency": "SGD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.3064"
+            },
+            "ask": {
+                "rate": "1.3093"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1KV6WY5QN3A8Y",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339921,
+            "validTill": 1745893354921,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "NZD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.01174904"
+            },
+            "ask": {
+                "rate": "0.01177987"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0117688"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU16IZEJ43DF3BO",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339928,
+            "validTill": 1745893354928,
+            "baseCurrency": "GBP",
+            "quoteCurrency": "CAD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.85368046"
+            },
+            "ask": {
+                "rate": "1.85861576"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.85615"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1T1OO26WNDL61",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339934,
+            "validTill": 1745893354934,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "AUD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.01089819"
+            },
+            "ask": {
+                "rate": "0.01092131"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.0109098"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFUZBOFC5AO8V71",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339940,
+            "validTill": 1745893354940,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "NZD",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.01174"
+            },
+            "ask": {
+                "rate": "0.01177"
+            },
+            "valueDate": "2025-05-01",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU15S8PE9AYKCMM",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339947,
+            "validTill": 1745893354947,
+            "baseCurrency": "CNH",
+            "quoteCurrency": "EUR",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.120213"
+            },
+            "ask": {
+                "rate": "0.120823"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1LD6EPIYRZD8F",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339954,
+            "validTill": 1745893354954,
+            "baseCurrency": "SGD",
+            "quoteCurrency": "HKD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "5.92654952"
+            },
+            "ask": {
+                "rate": "5.94024831"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "5.933047"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1Q22APYBF2D4H",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339960,
+            "validTill": 1745893354960,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "CHF",
+            "tenor": "SP",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.106"
+            },
+            "ask": {
+                "rate": "0.106"
+            },
+            "valueDate": "2025-05-02",
+            "valid": true,
+            "midMarketPrice": "0.0"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU13HW32HRAB73R",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339965,
+            "validTill": 1745893354965,
+            "baseCurrency": "CAD",
+            "quoteCurrency": "EUR",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.63343393"
+            },
+            "ask": {
+                "rate": "0.63514651"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.634288"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1V4E432JTOIAX",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339969,
+            "validTill": 1745893354969,
+            "baseCurrency": "USD",
+            "quoteCurrency": "CAD",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "1.37902959"
+            },
+            "ask": {
+                "rate": "1.38265127"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "1.38084"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1RG5KSJU9ASJ3",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339975,
+            "validTill": 1745893354975,
+            "baseCurrency": "HKD",
+            "quoteCurrency": "SGD",
+            "tenor": "T+1",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.1687351"
+            },
+            "ask": {
+                "rate": "0.16911395"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.168936"
+        },
+        {
+            "rateType": "TRADABLE",
+            "rateQuoteID": "BFU1AESZAVYX86TJ",
+            "rateCategoryID": "BFU-GR15S",
+            "validFrom": 1745893339980,
+            "validTill": 1745893354980,
+            "baseCurrency": "JPY",
+            "quoteCurrency": "CNH",
+            "tenor": "T+0",
+            "status": "GOOD",
+            "bid": {
+                "rate": "0.05099412"
+            },
+            "ask": {
+                "rate": "0.05125126"
+            },
+            "valueDate": "2025-04-30",
+            "valid": true,
+            "midMarketPrice": "0.05114166"
+        }
+    ]
+}

@@ -3,7 +3,7 @@
 # 入账交易关联申报订单
 # @Time: 2024-11-25 10:30
 # ---
-from commons.RSAUtil import *
+from Kuajing.Common.RSAUtil import *
 import requests
 import json
 from Kuajing.Common import publicTools

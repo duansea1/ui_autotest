@@ -44,19 +44,19 @@ class TestDictValueFormatFunctions(unittest.TestCase):
         # 验证执行函数时抛出了 TypeError 异常
         self.assertRaises(TypeError, random.shuffle, (1, 2, 3))
 
-    if __name__ == '__main__':
-        """
-        TestLoader类：测试用例加载器，返回一个测试用例集合
-        LoadTestFromTestCase类：根据给定的测试类，获取其中的所有以“test”开头的测试方法，并返回一个测试集合
-        TestSuit类  组装测试用例的实例，其中Text 表示以文本形式输出测试结果
-        """
-        # 根据给定的测试类，获取其中的所有以test开头的测试方法，并返回一个测试套件
-        testCase1 = unittest.TestLoader().loadTestsFromTestCase(TestSequenceFunctions)
-        testCase2 = unittest.TestLoader().loadTestsFromTestCase(TestDictValueFormatFunctions)
-        #将多个测试类加载到 测试套件中
-        suite = unittest.TestSuite([testCase1, testCase2])
-        # 设置verbosity = 2，可以打印更详细的执行信息
-        unittest.TextTestRunner(verbosity=2).run(suite)
+if __name__ == '__main__':
+    """
+    TestLoader类：测试用例加载器，返回一个测试用例集合
+    LoadTestFromTestCase类：根据给定的测试类，获取其中的所有以“test”开头的测试方法，并返回一个测试集合
+    TestSuit类  组装测试用例的实例，其中Text 表示以文本形式输出测试结果
+    """
+    # 根据给定的测试类，获取其中的所有以test开头的测试方法，并返回一个测试套件
+    testCase1 = unittest.TestLoader().loadTestsFromTestCase(TestSequenceFunctions)
+    testCase2 = unittest.TestLoader().loadTestsFromTestCase(TestDictValueFormatFunctions)
+    #将多个测试类加载到 测试套件中
+    suite = unittest.TestSuite([testCase1, testCase2])
+    # 设置verbosity = 2，可以打印更详细的执行信息
+    unittest.TextTestRunner(verbosity=2).run(suite)
 
 
 

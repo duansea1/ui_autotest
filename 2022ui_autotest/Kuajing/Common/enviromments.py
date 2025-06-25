@@ -64,6 +64,7 @@ def get_envs(env):
             "userNo": "5181240829000137108",  # 丝丝
             "certificateId": "2408291525000006449",
             "url": "http://10.254.154.99:8061"
+            # "url": "https://member-test-api.gepholding.com"
         }
         return base_env
     elif env == 'uat-sea-agent-hzl':  # uat海之蓝
@@ -75,6 +76,7 @@ def get_envs(env):
             "userNo": "5181240829000137108",  # 丝丝
             "certificateId": "2408291423000006389",
             "url": "http://10.254.154.99:8061"
+            # "url": "https://member-test-api.gepholding.com"
         }
         return base_env
     elif env == 'prod-sea-agent-dhf':  # prod邓湖锋
@@ -88,10 +90,43 @@ def get_envs(env):
             "url": "https://api.gepholding.com"
         }
         return base_env
+    elif env == 'prod-sea-dhf':  # prod邓湖锋
+        base_env = {
+            "pfx_path": get_files("ProdAgentFiles", "key_5181231019000988688@@2310192002000117594.pfx"),
+            "cer_path": get_files("ProdAgentFiles", "key_5181231019000988688@@2310192002000117594.cer"),
+            "pfx_pass": "5181231019000988688_332705",
+            "userNo": "5181231019000988688",  # 上海迅信网络科技有限公司
+            "certificateId": "2310192002000117594",
+            "url": "https://api.gepholding.com"
+        }
+        return base_env
+
+    elif env == 'fat-sea-hua':  # 花舞及-fat环境商户
+        base_env = {
+            "pfx_path": get_files("FatTenantFiles", "key_5181240709000042588@@2505071058000018981.pfx"),
+            "cer_path": get_files("FatTenantFiles", "key_5181240709000042588@@2505071058000018981.cer"),
+            "pfx_pass": "5181240709000042588_794470",
+            "userNo": "5181240709000042588",  # 上海迅信网络科技有限公司
+            "certificateId": "2505071058000018981",
+            "url": "http://10.254.95.181:8061"
+        }
+        return base_env
+
+    elif env == 'uat-sea-tx':  # uat-桐乡
+        base_env = {
+            "pfx_path": get_files("UatTenantFiles", "key_5181240702000026848@@2410221545000009467.pfx"),
+            "cer_path": get_files("UatTenantFiles", "key_5181240702000026848@@2410221545000009467.cer"),
+            "pfx_pass": "5181240702000026848_202957",
+            "userNo": "5181240702000026848",  # uat 桐乡
+            "certificateId": "2410221545000009467",
+            "url": "http://10.254.154.99:8061"
+        }
+        return base_env
+
     else:
-        return None
+        return {}
 
 
 if __name__ == '__main__':
-    get_envs = get_envs('fat-sea-agent-hzl')
-    print(get_envs)
+    get_evs = get_envs('fat-sea-agent-hzl')
+    print(get_evs)
