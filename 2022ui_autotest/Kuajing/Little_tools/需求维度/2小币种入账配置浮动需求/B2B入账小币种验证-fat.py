@@ -1,3 +1,10 @@
+"""
+@Author    : duansea
+@Date      : 2025/6/23 19:19
+@Description: {6月26}KJ-9386 小币种加点（入账汇率浮动值管理）
+"""
+
+
 import requests
 import json
 from dataclasses import dataclass
@@ -9,8 +16,14 @@ from typing import Optional, List, Tuple, Dict, Any
 import pymysql
 from pymysql.cursors import DictCursor
 from datetime import datetime
+from decimal import Decimal
+import logging
 
-
+# 设置日志格式
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 # ========== 货币对查询==========
 class CurrencyRuleDAO:
@@ -267,7 +280,10 @@ def default_serializer(obj):
         return obj.isoformat()  # 标准时间格式
     return str(obj)
 
-def query_rate(req_dto: AccountFxRateReq) -> dict:
+def query_rate_cal_merchant_amount(req_dto: AccountFxRateReq) -> dict:
+    """
+    入账查询配置浮动接口；1、若是同币种，则取配置浮动计算；2、若是不同币种，则取报价源汇率计算后再算浮动值，最后计算商户入账金额。
+    """
     try:
         payload = json.dumps(req_dto.__dict__, default=default_serializer)
         # print("发送请求体:", payload)  # 可选：打印请求内容便于调试
@@ -278,8 +294,44 @@ def query_rate(req_dto: AccountFxRateReq) -> dict:
         print(f"请求失败: {e}")
         return {}
 
+def query_rate_info(rateId: str) -> dict:
+    """
+    入账查询配置浮动接口；1、若是同币种，则取配置浮动计算；
+                              2、若是不同币种，则取报价源汇率计算后再算浮动值，
+                                 最后计算商户入账金额。
+    输出日志说明：
+        tradeDirection=1 表示买入方向：targetCcy -> originalCcy
+        tradeDirection=2 表示卖出方向：targetCcy -> originalCcy
+    """
+    base_url = "http://10.254.192.119:21103/accountFxFloatConfig/queryAcctRate"
+    req_dto = {
+        "rateId": rateId,
+    }
 
-from decimal import Decimal
+    try:
+        payload = json.dumps(req_dto, default=default_serializer)
+        # print("发送请求体:", payload)  # 可选：打印请求内容便于调试
+        response = requests.post(base_url, headers=headers, data=payload)
+        response.raise_for_status()
+        result = response.json()
+
+        if result.get("success") and "result" in result:
+            rate_data = result["result"]
+            trade_direction = rate_data.get("tradeDirection")
+            target_ccy = rate_data.get("targetCcy")
+            original_ccy = rate_data.get("originalCcy")
+            rate = rate_data.get("rate")
+
+            # 根据交易方向打印日志
+            direction_str = "买入方向" if trade_direction == 1 else "卖出方向"
+            logging.info(f"{direction_str}--{target_ccy}-->{original_ccy}: 汇率{rate}")
+
+        return result
+
+    except requests.exceptions.RequestException as e:
+        logging.error(f"请求失败: {e}")
+        return {}
+
 
 
 def calculate_merchant_amount(direction, channel_amount,  exchange_rate, fluctuation, channel_ccy, merchant_ccy):
@@ -307,9 +359,17 @@ def calculate_merchant_amount(direction, channel_amount,  exchange_rate, fluctua
     if direction.upper() == 'BUY':
         # 客买-购汇方向：渠道金额 ÷ 汇率 × (1 - 浮动%)
         merchant_amount = (channel_amount*100 / exchange_rate) * (1 - fluctuation / 100)
+        # # 计算新的汇率-2025-7-4 反推出汇率
+        merchant_amount_a = merchant_amount if merchant_amount > 0.01 else 0.01    #如果小于0.01，则取0.01
+        new_exchange_rate = round((channel_amount / merchant_amount_a) * 100, 6)
+        new_exchange_rate1 = (exchange_rate / 100) / (1 - fluctuation / 100) * 100
+
     elif direction.upper() == 'SELL':
         # 客卖-结汇方向：渠道金额 × 汇率 × (1 - 浮动%)
         merchant_amount = (channel_amount * exchange_rate/100) * (1 - fluctuation / 100)
+        new_exchange_rate = round((merchant_amount / channel_amount) * 100, 6)
+        new_exchange_rate1 = (exchange_rate / 100) * (1 - fluctuation / 100) * 100
+
     else:
         raise ValueError(f"未知的交易方向: {direction}")
 
@@ -318,28 +378,28 @@ def calculate_merchant_amount(direction, channel_amount,  exchange_rate, fluctua
 
     print(f"客{direction}方向，渠道入账金额={channel_amount}{channel_ccy}, "
           f"报价源汇率={exchange_rate}, "
-          f"浮动值={fluctuation}%, 商户入账金额={merchant_amount}{merchant_ccy}")
+          f"浮动值={fluctuation}%, 商户入账金额={merchant_amount}{merchant_ccy}--浮动后的计算出来的汇率{new_exchange_rate}-->{new_exchange_rate1}")
 
     return merchant_amount
 
 
 
 if __name__ == "__main__":
-    req_dto = AccountFxRateReq(
+    req_dto1 = AccountFxRateReq(
         userNo=5181240628000024148,  # 5181240821000008798-五五 、5181240628000024148-桐乡
         orderNo="ORDER123456",
         business=RateBusinessTypeEnum.BUSINESS_b2b,
-        # receiveChannel="120092303811",  # GME-电商收款-1200923038 1108301001 1200923077-pay
+        receiveChannel="1200923038",  # GME-电商收款-1200923038 1108301001 1200923077-pay
         # bank="45",
         ReceiveCcy="PHP",
         ReceiveAmt=Decimal("10.00"),
-        accountCcy="PHP",    # 渠道入账币种
-        accountAmt=Decimal("10000"),
+        accountCcy="USD",    # 渠道入账币种
+        accountAmt=Decimal("0.01"),
         merchantCcy="USD"     # 商户入账币种
     )
-    log_response=  {"accountAmt":9890,"accountCcy":"VND","business":"B2B_BUSINESS","merchantCcy":"USD","orderNo":"20250625150859148","receiveAmt":9890,"receiveCcy":"VND","receiveChannel":"1200923050","userNo":5181240628000024148}
+    log_response= {"accountAmt":89000,"accountCcy":"VND","business":"B2B_BUSINESS","merchantCcy":"USD","orderNo":"20250710104645947","receiveAmt":989000,"receiveCcy":"VND","receiveChannel":"1200923050","userNo":5181240628000024148}
 
-    req_dto1 = AccountFxRateReq(
+    req_dto = AccountFxRateReq(
         userNo=log_response.get("userNo"),  # 5181240821000008798-五五 、5181240628000024148-桐乡
         orderNo="ORDER123456",
         business=log_response.get("business"),
@@ -365,10 +425,8 @@ if __name__ == "__main__":
     else:
         print("⚠️没有找到符合条件的配置⚠")
 
-    # 调用汇率查询接口
-
-
-    result = query_rate(req_dto)
+    # 调用汇率查询接口计算商户入账金额
+    result = query_rate_cal_merchant_amount(req_dto)
 
     # 货币对查询
     print("\n")
@@ -378,11 +436,16 @@ if __name__ == "__main__":
 
         # 计算商户入账金额
         calculate_merchant_amount(direction, channel_amount=req_dto.accountAmt,
-                                  exchange_rate=result['result'].get('rate', 0),
+                                  exchange_rate=result['result'].get('rate', 117.0348),
                                   fluctuation=float(db_result.get("FLOAT_PERCENT") or 0),
                                   channel_ccy=req_dto.accountCcy, merchant_ccy=req_dto.merchantCcy)
     else:
         print("⚠️汇率查询计算失败：",result)
+
+    # 调用汇率详情查询接口-查询当时的汇率
+    result_info = query_rate_info(rateId=result['result'].get('rateId', 0))
+    
+    print("🎉api调用OK，查询到的汇率详情", result_info)
 
 
 
