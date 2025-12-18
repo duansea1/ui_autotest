@@ -444,7 +444,7 @@ if __name__ == "__main__":
 
     # 调用汇率详情查询接口-查询当时的汇率
     result_info = query_rate_info(rateId=result['result'].get('rateId', 0))
-    
+
     print("🎉api调用OK，查询到的汇率详情", result_info)
 
 

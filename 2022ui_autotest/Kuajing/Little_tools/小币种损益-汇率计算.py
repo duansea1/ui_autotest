@@ -123,16 +123,18 @@ def calculate_profit_loss(sell_amount, buy_amount, third_party_rate, ccy_pair, d
 if __name__ == '__main__':
 
     # 计算电商渠道的第三方汇率
-    channels1 = {
-        "A_37": {"amount": 188000.0 , "rate":5641.500000, "rate_float": round(0/100,4)},   # 37qudao
-        "B_77": {"amount": 99000.00, "rate":5631.450, "rate_float": round(2/100,4)}
+    # （1）交易方向为买入，即卖出小币种，买入美金USD。销售损益 = 卖出金额 * 100 / 第三方汇率（订单生成时间）-买入金额
+    # （2）交易方向为卖出，即买入小币种，卖出美金USD。销售损益 = 卖出金额 - 买入金额 * 100 / 第三方汇率（订单生成时间）
+    channels2 = {
+        "A_37": {"amount": 99 , "rate":5581.600, "rate_float": round(2/100,4)},   # 37qudao
+        "B_77": {"amount": 731, "rate":5569.630000, "rate_float": round(0.5/100,4)}
     }
-    channels1 = {
-        "A_37": {"amount": 136702.00, "rate": 136250.000, "rate_float": round(0.3 / 100, 4)},  # KRW
+    channels5 = {
+        "A_37": {"direction":"卖出", "amount": 100, "rate": 2266880.70, "rate_float": round(2.1 / 100, 4)},  # KRW  卖出大币种
 
     }
     channels = {
-        "A_37": {"amount":45174500.0, "rate":136906.444, "rate_float": round(0 / 100, 4)},  # 2506161113001217108
+        "A_37": {"direction":"买入","amount":8900.00, "rate":361.44, "rate_float": round(3.1 / 100, 4)},  # 2506161113001217108 卖出小币种
 
     }
     print("电商渠道的第三方汇率：")
@@ -140,27 +142,19 @@ if __name__ == '__main__':
 
 
 
-    #  # # 计算销售损益
+     # 计算销售损益
     calculate_profit_loss(
-        ccy_pair="USD/PHP",
+        ccy_pair="USD/PLN",
         direction="买入",
-        sell_amount=45174500.0 ,
-        buy_amount=33282.23,
+        sell_amount=8900.00  , #卖出小币种金额
+        buy_amount=2406.19,  #买入USD金额
         third_party_rate=third_party_rate,
     )
 
     # calculate_profit_loss(
-    #     ccy_pair="USD/KRW",
+    #     ccy_pair="USD/PHP",
     #     direction="卖出",
-    #     sell_amount=10000,
-    #     buy_amount= 13682900.00  ,
-    #     third_party_rate=third_party_rate,
-    # )
-
-    # calculate_profit_loss(
-    #     ccy_pair="USD/KRW",
-    #     direction="买入",
-    #     sell_amount=136702.00,
-    #     buy_amount=100.26,
+    #     sell_amount=100,    #卖出USD金额
+    #     buy_amount= 2084488.00 ,  #买入小币种金额
     #     third_party_rate=third_party_rate,
     # )

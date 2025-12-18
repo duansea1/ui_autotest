@@ -123,6 +123,21 @@ def get_envs(env):
         }
         return base_env
 
+
+    elif env == 'uat-sea-agent-hzl-yi':  # uat上海一一API科技有限公司-自动化专用
+        base_env = {
+            "pfx_path": get_files("UatAgentFiles", "key_5182240808000102058@@2408291423000006389.pfx"),
+            "cer_path": get_files("UatAgentFiles", "key_5182240808000102058@@2408291423000006389.cer"),
+            "pfx_pass": "5182240808000102058_385192",
+            "agentNo": "5182240808000102058",  # uat海之蓝金牌销售
+            "userNo": "5181240829000136248",  # 上海一一API科技有限公司-自动化专用
+            "certificateId": "2408291423000006389",
+            "url": "http://10.254.154.99:8061"
+
+        }
+
+        return base_env
+
     else:
         return {}
 

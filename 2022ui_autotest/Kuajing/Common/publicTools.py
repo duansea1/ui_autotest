@@ -2,6 +2,7 @@
 # ---
 # @Author: duansea
 # @Time: 2024-11-23 16:39
+# @Description: 公共的工具类
 # ---
 import os
 
@@ -40,13 +41,14 @@ def send_request(rsa_utils, url, dataMap, **kwargs):
     request_params = {k: v for k, v in request_params.items() if v is not None}
 
     response = requests.post(**request_params)
-
+    logger.info(f"{url}对外api的响应码状态----------：{response.status_code}")
     if response.status_code == 200:
         try:
             response_data = response.json()  # 解析JSON响应
             if response_data.get('result'):
                 result = response_data.get('result')  # 提取result字段
                 logger.info(f"{url}未解密前的响应结果：{response_data}")
+                logger.info(f"{url}未解密前的响应码状态----------：{response_data.get('errorMsg')}")
 
                 # RSA解密
                 result = rsa_utils.pub_decrypt(result)
@@ -81,6 +83,20 @@ def rsa_generate(data, env):
                         cer_path=data_env.get('cer_path'))
     dataContent = rsa_utils.pri_encrypt(json.dumps(data))  # RSA加密
     return rsa_utils, dataContent
+
+
+def rsa_generate_tool( env):
+    """RAS加密只返回加密工具类-用于解密
+    @param data: json
+    @param env: 环境
+    @return rsa_utils: RSA 工具类
+    @date 2025-08-19 10：30
+    """
+    data_env = enc.get_envs(env)
+    rsa_utils = RSAUtil(pfx_path=data_env.get('pfx_path'), pfxpass=data_env.get('pfx_pass'),
+                        cer_path=data_env.get('cer_path'))
+
+    return rsa_utils
 
 
 def data_Map(data_env, dataContent, apiType=None):
@@ -147,7 +163,7 @@ def rsa_and_send_request(data, env, url, apiType=3, **kwargs):
     # 构建请求数据
     dataMap = data_Map(data_env, dataContent, apiType)
     # logger.info(f"请求数据参数：{dataMap}\n")
-    ic(dataMap)
+    # ic(dataMap)
 
     # 发送请求
     result = send_request(rsa_utils, url, dataMap, **kwargs)
@@ -182,6 +198,12 @@ def get_file_info(filename):
     md5_encryption = calculate_md5(file_path)
     return file_name, file_path, md5_encryption
 
+
+
+
+
+
 if __name__ == '__main__':
     pass
     # calculate_md5(r"C:\Users\段海洋\BF_javafiles\kuajing_javas\baofu-test-core\file\fileUpload\wePay.png")
+

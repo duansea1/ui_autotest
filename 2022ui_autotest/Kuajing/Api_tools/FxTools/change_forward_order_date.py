@@ -1,5 +1,6 @@
 
 """
+【修改交割日期】
 修改FORWARD订单日期，可以修改到当前日期之前的日期。
 
 # 汇兑订单表
@@ -29,194 +30,250 @@ UPDATE `BAOFU_CBCA`.`T_USER_EXCHANGE_ORDER` SET `CLOSING_DATE` = '2025-03-17' WH
 10.0.19.206:3306
 用户名密码：GEPHOLDING  GEPHOLDING
 """
-import pymysql
+# -*- coding: utf-8 -*-
+"""
+远期汇兑订单交割日期修改工具
+支持 FAT / UAT 环境切换
+使用统一数据库配置模块
+"""
+
+import logging
 from datetime import datetime
+from typing import Dict, Optional, Tuple
 
-# # 数据库连接配置-fat
-DB_CONFIG = {
-    'host': '10.0.19.206',
-    'port': 3306,
-    'user': 'GEPHOLDING',
-    'password': 'GEPHOLDING',
-    'database': 'BAOFU_CBCA',
-    'charset': 'utf8mb4',
-    'cursorclass': pymysql.cursors.DictCursor
-}
+# 使用统一数据库配置
+from Kuajing.Common.kjMysql import get_db_config
+import pymysql
+from pymysql.cursors import DictCursor
 
-# 数据库连接配置-uat环境
-# DB_CONFIG = {
-#     'host': '10.0.23.200',
-#     'port': 3306,
-#     'user': 'BAOFOO_CBPAY',
-#     'password': 'BAOFOO_CBPAY',
-#     'database': 'BAOFU_CBCA',
-#     'charset': 'utf8mb4',
-#     'cursorclass': pymysql.cursors.DictCursor
-# }
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+logger = logging.getLogger(__name__)
+
 
 # --------------------------
 # 增强型数据访问层 (DAL)
 # --------------------------
-def _get_db_connection():
-    """创建数据库连接（自动选择主库）"""
-    return pymysql.connect(**DB_CONFIG)
+def _get_connection(env: str = 'FAT'):
+    """根据环境获取数据库连接"""
+    try:
+        db_config = get_db_config(env)
+        if not db_config:
+            raise ValueError(f"无效的环境配置: {env}")
+
+        # 确保使用 DictCursor
+        if 'cursorclass' not in db_config:
+            db_config['cursorclass'] = DictCursor
+
+        conn = pymysql.connect(**db_config)
+        logger.info(f"✅ 成功连接到 {env} 环境数据库: {db_config['host']}")
+        return conn
+    except Exception as e:
+        logger.error(f"❌ 连接数据库失败: {e}")
+        raise
 
 
-def _query_full_order(conn, exchange_id):
-    """获取订单全量数据"""
-    with conn.cursor() as cursor:
-        sql = """
-            SELECT 
-                EXCHANGE_ID, 
-                CLOSING_DATE,
-                CLOSING_STATUS,
-                CREATE_AT,
-                UPDATE_AT 
-            FROM BAOFU_CBCA.T_USER_EXCHANGE_ORDER 
-            WHERE EXCHANGE_ID = %s"""
-        cursor.execute(sql, (exchange_id,))
-        return cursor.fetchone()
+def _query_order(conn, exchange_id: str) -> Optional[Dict]:
+    """查询汇兑订单表"""
+    sql = """
+        SELECT 
+            EXCHANGE_ID, 
+            CLOSING_DATE,
+            CLOSING_STATUS,
+            CREATE_AT,
+            UPDATE_AT 
+        FROM BAOFU_CBCA.T_USER_EXCHANGE_ORDER 
+        WHERE EXCHANGE_ID = %s
+    """
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(sql, (exchange_id,))
+            return cursor.fetchone()
+    except Exception as e:
+        logger.error(f"❌ 查询订单表失败: {e}")
+        raise
 
 
-def _query_full_receipt(conn, exchange_id):
-    """获取凭证全量数据"""
-    with conn.cursor() as cursor:
-        sql = """
-            SELECT 
-                REQUEST_NO,
-                RECEIPT_NO,
-                CLOSING_DATE,
-                TRADE_STATUS,
-                TRADE_DATE,
-                TRADE_TIME,
-                CREATE_AT,
-                UPDATE_AT 
-            FROM BAOFU_TRADE.T_TRADE_RECEIPT 
-            WHERE REQUEST_NO = %s """
-              # AND CLOSING_TYPE = 'FORWARD'
-        cursor.execute(sql, (exchange_id,))
-        return cursor.fetchone()
+def _query_receipt(conn, exchange_id: str) -> Optional[Dict]:
+    """查询交易凭证表"""
+    sql = """
+        SELECT 
+            REQUEST_NO,
+            RECEIPT_NO,
+            CLOSING_DATE,
+            TRADE_STATUS,
+            TRADE_DATE,
+            TRADE_TIME,
+            CREATE_AT,
+            UPDATE_AT 
+        FROM BAOFU_TRADE.T_TRADE_RECEIPT 
+        WHERE REQUEST_NO = %s 
+    """
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute(sql, (exchange_id,))
+            return cursor.fetchone()
+    except Exception as e:
+        logger.error(f"❌ 查询凭证表失败: {e}")
+        raise
 
 
-def _update_dates(conn, exchange_id, new_date):
-    """执行双表日期更新"""
-    with conn.cursor() as cursor:
-        # 更新订单表
-        # ,CREATE_AT = '2025-04-06 11:42:20'
-        cursor.execute(""" 
+def _update_order_and_receipt(conn, exchange_id: str, new_date: str):
+    """更新两个表的交割日期"""
+    try:
+        with conn.cursor() as cursor:
+            # 更新订单表
+            cursor.execute("""
                 UPDATE BAOFU_CBCA.T_USER_EXCHANGE_ORDER 
-                SET CLOSING_DATE = %s,
-                    UPDATE_AT = NOW()
-                WHERE EXCHANGE_ID = %s""",
-                       (new_date, exchange_id))
+                SET CLOSING_DATE = %s, UPDATE_AT = NOW()
+                WHERE EXCHANGE_ID = %s
+            """, (new_date, exchange_id))
 
-        # 更新凭证表
-        cursor.execute(""" 
+            # 更新凭证表
+            cursor.execute("""
                 UPDATE BAOFU_TRADE.T_TRADE_RECEIPT 
-                SET CLOSING_DATE = %s,
-                    UPDATE_AT = NOW() 
-                WHERE REQUEST_NO = %s""",
-                       (new_date, exchange_id))
+                SET CLOSING_DATE = %s, UPDATE_AT = NOW()
+                WHERE REQUEST_NO = %s 
+            """, (new_date, exchange_id))
+
+            affected_rows = conn.affected_rows()
+            if affected_rows == 0:
+                raise ValueError(f"⚠️ 未找到匹配的订单或凭证，可能订单号错误或非远期订单: {exchange_id}")
+            logger.info(f"🔄 已更新 {affected_rows} 行数据")
+
+    except Exception as e:
+        logger.error(f"❌ 更新数据失败: {e}")
+        raise
 
 
 # --------------------------
-# 增强型业务逻辑层 (BLL)
+# 业务逻辑层 (BLL)
 # --------------------------
-def format_closing_status(code):
-    """订单状态解码"""
+def _format_closing_status(code) -> str:
     status_map = {
-        0: '待交割', 1: '处理中', 2: '完成',
-        3: '失败', 4: '超时', 5: '部分成功', 6: '已违约'
+        0: '待交割', 1: '交割处理中', 2: '交割完成',
+        3: '交割失败', 4: '交割超时', 5: '部分交割成功', 6: '已违约'
     }
     return status_map.get(code, f'未知状态({code})')
 
 
-def format_trade_status(code):
-    """交易状态解码"""
-    return {1: '待交易', 2: '处理中', 3: '完成'}.get(code, f'未知({code})')
+def _format_trade_status(code) -> str:
+    return {1: '待交易', 2: '处理中', 3: '交易完成'}.get(code, f'未知({code})')
 
 
-def show_data_details(order, receipt):
-    """可视化数据展示"""
-    print("\n【订单明细】BAOFU_CBCA.T_USER_EXCHANGE_ORDER")
+def _show_data_details(order: Dict, receipt: Dict):
+    """打印订单与凭证明细"""
+    print("\n" + "=" * 50)
+    print("【订单明细】BAOFU_CBCA.T_USER_EXCHANGE_ORDER")
     print(f"订单号: {order['EXCHANGE_ID']}")
     print(f"创建时间: {order['CREATE_AT'].strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"最后更新: {order['UPDATE_AT'].strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"交割日期: {order['CLOSING_DATE']}")
-    print(f"状态: {format_closing_status(order['CLOSING_STATUS'])}")
+    print(f"原交割日期: {order['CLOSING_DATE']}")
+    print(f"状态: {_format_closing_status(order['CLOSING_STATUS'])}")
 
     print("\n【凭证明细】BAOFU_TRADE.T_TRADE_RECEIPT")
-    print(f"交易日期: {receipt['TRADE_DATE']} {receipt['TRADE_TIME']}")
     print(f"交易订单号: {receipt['RECEIPT_NO']}")
-    print(f"交割日期: {receipt['CLOSING_DATE']}")
-    print(f"交易状态: {format_trade_status(receipt['TRADE_STATUS'])}")
+    print(f"交易时间: {receipt['TRADE_DATE']} {receipt['TRADE_TIME']}")
+    print(f"原交割日期: {receipt['CLOSING_DATE']}")
+    print(f"交易状态: {_format_trade_status(receipt['TRADE_STATUS'])}")
     print(f"最后更新: {receipt['UPDATE_AT'].strftime('%Y-%m-%d %H:%M:%S')}")
 
 
-def process_forward_order(exchange_id, action='query', new_date=None):
+def process_forward_order(
+    exchange_id: str,
+    action: str = 'query',
+    new_date: Optional[str] = None,
+    env: str = 'FAT'
+):
     """
-    远期订单处理器
+    远期订单处理器：查询或更新交割日期
     :param exchange_id: 订单号
-    :param action: 操作类型 [query|update]
-    :param new_date: 新交割日期 (仅action=update时需传入)
+    :param action: 操作类型 ['query', 'update']
+    :param new_date: 新交割日期，格式 'YYYY-MM-DD'
+    :param env: 环境 ['FAT', 'UAT']
     """
-    conn = _get_db_connection()
+    conn = None
     try:
-        # 数据获取
-        order = _query_full_order(conn, exchange_id)
-        receipt = _query_full_receipt(conn, exchange_id)
+        # 获取数据库连接
+        conn = _get_connection(env.upper())
+        logger.info(f"🔍 开始处理订单: {exchange_id} (环境: {env.upper()}, 操作: {action})")
 
-        if not all([order, receipt]):
-            raise ValueError("查询无结果，请检查订单号是否正确")
+        # 查询数据
+        order = _query_order(conn, exchange_id)
+        receipt = _query_receipt(conn, exchange_id)
 
-        # 当前状态展示
-        print("\n" + "=" * 40)
-        print(f"订单号 {exchange_id} 当前状态")
-        show_data_details(order, receipt)
+        if not order:
+            raise ValueError(f"❌ 订单表未找到订单: {exchange_id}")
+        if not receipt:
+            raise ValueError(f"❌ 凭证表未找到远期订单记录: {exchange_id}")
 
-        # 执行更新逻辑
+        # 展示当前状态
+        _show_data_details(order, receipt)
+
+        # 执行更新
         if action == 'update':
             if not new_date:
-                raise ValueError("更新操作必须提供new_date参数")
+                raise ValueError("❌ 更新操作必须提供 new_date 参数")
 
-            # 执行更新
-            _update_dates(conn, exchange_id, new_date)
+            logger.info(f"📅 正在将交割日期从 {order['CLOSING_DATE']} 修改为 {new_date}...")
+
+            _update_order_and_receipt(conn, exchange_id, new_date)
             conn.commit()
 
-            # 获取更新后数据
-            updated_order = _query_full_order(conn, exchange_id)
-            updated_receipt = _query_full_receipt(conn, exchange_id)
+            # 查询更新后数据
+            updated_order = _query_order(conn, exchange_id)
+            updated_receipt = _query_receipt(conn, exchange_id)
 
-            # 变更对比展示
-            print("\n" + "=" * 40)
-            print(f"订单号 {exchange_id} 变更结果")
-            print(f"交割日期变更: {order['CLOSING_DATE']} → {new_date}")
-            show_data_details(updated_order, updated_receipt)
-            print("\n✅ 数据更新完成")
+            # 显示变更结果
+            print("\n" + "=" * 50)
+            print("✅ 更新完成！变更结果：")
+            print(f"交割日期: {order['CLOSING_DATE']} → {new_date}")
+            _show_data_details(updated_order, updated_receipt)
+            logger.info(f"✅ 订单 {exchange_id} 更新成功")
+
+        elif action == 'query':
+            logger.info(f"✅ 查询完成")
+        else:
+            raise ValueError(f"❌ 不支持的操作类型: {action}")
 
     except Exception as e:
-        conn.rollback()
-        print(f"\n❌ 操作异常: {str(e)}")
+        if conn:
+            conn.rollback()
+        logger.error(f"❌ 操作失败: {str(e)}")
         raise
+
     finally:
-        conn.close()
+        if conn:
+            conn.close()
+            logger.info("🔗 数据库连接已关闭")
 
-        # --------------------------
 
-
-
+# --------------------------
+# 主程序入口
+# --------------------------
 if __name__ == "__main__":
+    # 示例：单个订单更新（UAT环境）
+    try:
+        process_forward_order(
+            exchange_id="2512120948006335631",
+            action="update",
+            new_date="2025-12-11",
+            env="FAT"  # 可改为 "FAT"
+        )
+    except Exception as e:
+        logger.error(f"程序执行失败: {e}")
 
-    # 示例1：仅查询
-    # process_forward_order("2503191907006119109")
-
-    # # 示例2：查询并更新
-    process_forward_order(exchange_id="2504230956006150277",action="update",new_date="2025-04-23")  # 更新交割日
-
-    # # 批量执行
-    # orders = [
+    # 示例：批量更新（可选）
+    # batch_orders = [
     #     ("2503171533006118013", "2025-03-18"),
     #     ("2503171533006118014", "2025-03-19")
     # ]
-    # for order_id, new_date in orders:
-    #     process_forward_order(exchange_id=order_id, action="update",new_date=new_date)
+    # for order_id, date in batch_orders:
+    #     try:
+    #         process_forward_order(exchange_id=order_id, action="update", new_date=date, env="FAT")
+    #     except Exception as e:
+    #         logger.error(f"批量处理失败: {order_id} - {e}")

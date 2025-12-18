@@ -1,4 +1,6 @@
 # 2025-3-11 14:45
+# 查询用户渠道
+
 
 import pymysql
 import logging
@@ -171,10 +173,10 @@ if __name__ == "__main__":
 
     # 5181240829000137108-丝丝 5181240702000026848-桐乡
     result = service.query_channel_config(
-        user_no='5181240821000008798',
+        user_no='0',
         biz_type=7,
-        ccy_pair='USD/CNH',
-        closing_type='FORWARD'
+        ccy_pair='USD/VND',
+        closing_type='TOD'
     )
     print("最终结果:", result)
 

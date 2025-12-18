@@ -43,7 +43,7 @@ if手续费外扣，汇兑损益(in 目标币种)：卖出金额*（渠道汇率
 汇率管理-渠道兑换订单明细，里面增加销售收益、交易员损益字段。
 
 """
-
+# TODO: 概述：损益计算工具-渠道汇兑完成触发计算
 
 def calculate_forex_profits(
         buy_amount: float,
@@ -125,19 +125,20 @@ def format_directional_results(results: dict, direction: str) -> str:
 if __name__ == "__main__":
     # 测试数据（保持不变）
     params = {
-        'sell_amount': 13.88,  # 卖出金额
-        'buy_amount': 53.00 ,  # 买入金额
+        'sell_amount': 100.00,  # 卖出金额
+        'buy_amount': 706.78 ,  # 买入金额
 
-        'customer_rate': 371.1816,  # 用户汇率
-        'channel_rate': 372.181500,   # 渠道汇率
-        'third_party_rate': 360.465970,    # 第三方汇率
+        'customer_rate': 706.7842,  # 用户汇率   --用户订单成交的汇率
+        'channel_rate': 7.11109808,   # 渠道汇率    渠道表 成交的汇率
+        'third_party_rate': 711.160000,    # 第三方汇率   T_TRADE_RECEIPT-ORDER_GEP_RATE
         'fee': 0,
         'is_internal_fee': True
+        
     }
 
     # 分别计算买卖方向
-    buy_results = calculate_forex_profits(direction='买入', **params)
-    print(format_directional_results(buy_results, '买入'))
+    # buy_results = calculate_forex_profits(direction='买入', **params)
+    # print(format_directional_results(buy_results, '买入'))
 
     sell_results = calculate_forex_profits(direction='卖出', **params)
     print(format_directional_results(sell_results, '卖出'))

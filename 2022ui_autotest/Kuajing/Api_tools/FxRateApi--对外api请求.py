@@ -362,13 +362,13 @@ if __name__ == '__main__':
     """GEP汇兑锁定申请-done"""
     # apply_exchange(env="uat-sea-ss")
     userReqNo = int(time.time())
-    userReqNo = "a20296fb-2f3d-4cba-8470-3de555fdc843"
+    userReqNo = "a20296fb-2f3d-4cba-8470-3de555fdc841"
 
     """GEP汇兑锁定申请-done"""
-    # apply_exchange(env=fat_env, userReqNo=userReqNo, closingType="TOM",
-    #                      closingDate=p.generate_dates(day_offset=1), deliveryType="AUTO", tradeModel=2)  # TODO 汇兑申请
+    apply_exchange(env=fat_env, userReqNo=userReqNo, closingType="TOM",
+                         closingDate=p.generate_dates(day_offset=1), deliveryType="AUTO", tradeModel=2)  # TODO 汇兑申请
 
-    apply_exchange(env="uat-sea-dhf", userReqNo=userReqNo, closingType="TOM", closingDate="", deliveryType="MANUAL", tradeModel=2)
+    # apply_exchange(env="uat-sea-dhf", userReqNo=userReqNo, closingType="TOM", closingDate="", deliveryType="MANUAL", tradeModel=2)
     # MANUAL-手动交割 prod-sea-agent-dhf   --prod  MANUAL-手动交割
     """B2B汇兑申请-done"""
     # apply_exchange_agent(env=fat_env, userReqNo=userReqNo, closingType="TOD",closingDate="", deliveryType="MANUAL")  # TODO-跨境b2b 汇兑申请

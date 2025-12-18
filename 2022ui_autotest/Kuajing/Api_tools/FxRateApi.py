@@ -20,10 +20,18 @@ def query_rate(env):
     data_env = enc.get_envs(env)
     url = f"{data_env.get('url')}/api/rate/query-rate"
 
-    data = {
+    # 卖出方向
+    data1 = {
         "userNo": data_env.get('userNo'),
         "originalCcy": "CNH",  # 买入
         "targetCcy": "USD",  # 卖出币种
+        "closingDate": p.generate_dates()
+    }
+    # 买入方向
+    data = {
+        "userNo": data_env.get('userNo'),
+        "originalCcy": "USD",  # 买入
+        "targetCcy": "CNH",  # 卖出币种
         "closingDate": p.generate_dates()
     }
     ic(data)
@@ -345,15 +353,15 @@ if __name__ == '__main__':
     prod: 代理商 prod-sea-agent-dhf
     
     """
-    # fat_env = "fat-sea-agent-hzl"
-    fat_env = "uat-sea-agent-hzl"
+    fat_env = "fat-sea-agent-hzl"
+    # fat_env = "uat-sea-agent-hzl"
     # fat_env = "fat-sea-wu"
-    # fat_env = "uat-sea-ss"  # uat环境 其他企业丝丝
+    fat_env = "uat-sea-ss"  # uat环境 其他企业丝丝
     # fat_env = ""fat-sea-tx""
     fat11_env = "prod-sea-agent-dhf"  # 生产环境TODO
     # prod_env = "prod-sea-agent-dhf"
     # 代理商
-    # query_rate(env=fat_env)
+    query_rate(env=fat_env)
     # b2b_query_rate(env=fat_env)
     # b2b_cal_query_rate(env=fat_env)
     # 商户
@@ -362,22 +370,22 @@ if __name__ == '__main__':
     """GEP汇兑锁定申请-done"""
     # apply_exchange(env="uat-sea-ss")
     userReqNo = int(time.time())
-    userReqNo = "a20296fb-2f3d-4cba-8470-3de555fdc843"
+    # userReqNo = "a20296fb-2f3d-4cba-8470-3de555fdc843"
 
     """GEP汇兑锁定申请-done"""
     # apply_exchange(env=fat_env, userReqNo=userReqNo, closingType="TOM",
     #                      closingDate=p.generate_dates(day_offset=1), deliveryType="AUTO", tradeModel=2)  # TODO 汇兑申请
 
-    apply_exchange(env="uat-sea-dhf", userReqNo=userReqNo, closingType="TOM", closingDate="", deliveryType="MANUAL", tradeModel=2)
+    # apply_exchange(env=fat_env, userReqNo=userReqNo, closingType="TOM", closingDate="", deliveryType="MANUAL", tradeModel=2)
     # MANUAL-手动交割 prod-sea-agent-dhf   --prod  MANUAL-手动交割
     """B2B汇兑申请-done"""
     # apply_exchange_agent(env=fat_env, userReqNo=userReqNo, closingType="TOD",closingDate="", deliveryType="MANUAL")  # TODO-跨境b2b 汇兑申请
     # query_exchange_order(env="uat-sea-tx", userReqNo=userReqNo)  # TODO-# 2.3.9 GEP汇兑订单查询-done 汇兑订单查询
-    time.sleep(1)
+    # time.sleep(1)
     """GEP汇兑锁定确认 -done"""
     # confirm_exchange(env="uat-sea-tx", userReqNo=userReqNo, apiType=2)
-    # confirm_exchange(env="uat-sea-tx", userReqNo=userReqNo, apiType=2)    # TODO-2 GEP汇兑锁定确认-商户
-    # confirm_exchange_agent(env=fat11_env, userReqNo=userReqNo)  # TODO-跨境b2b 汇兑单确认--代理商
+    # confirm_exchange(env=fat_env, userReqNo=userReqNo, apiType=2)    # TODO-2 GEP汇兑锁定确认-商户
+    # confirm_exchange_agent(env=fat_env, userReqNo=userReqNo)  # TODO-跨境b2b 汇兑单确认--代理商
     # confirm_exchange(env=uat_env, userReqNo=userReqNo)
 
     """GEP汇兑申请取消  -done"""

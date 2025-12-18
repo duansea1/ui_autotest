@@ -364,20 +364,21 @@ def calculate_projected_profit_simple(
 
 if __name__ == '__main__':
     # 计算销售损益
-    rate = '7.1934'
+    rate = '147.26'
     db_result = calculate_sales_profit(
-        currency_pair='USD/CNH',
-        closing_date_start='2025-07-30',
-        closing_date_end='2025-08-13',
+        currency_pair='USD/JPY',
+        closing_date_start='2025-08-06',
+        closing_date_end='2025-08-20',
         mode='allNew',
         now_rate=Decimal(rate),
         incomeCcy='right',
-        exclude_types=[]
+        exclude_types=[],
+        env='FAT'
     )
 
     # 计算预计总损益损益
     projected_profit = calculate_projected_profit_simple(
         db_result=db_result,
         now_rate=Decimal(rate),
-        income_ccy='saleCcy'
+        income_ccy='buyCcy'    # 留存币种为卖出币种
     )

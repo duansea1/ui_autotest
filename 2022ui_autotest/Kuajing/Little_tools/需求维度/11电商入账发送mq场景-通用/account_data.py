@@ -22,6 +22,18 @@ TEST_DATA_POOL = {
                 "remarks": "fat环境-上海一一网络科技有限公司-自动化--gep-电商收款账户"
             }
         },
+    5181241126000123328: {
+            "qiya_shop": {
+                "bankPayeeFeeCcy": "EUR",   # 渠道手续费币种 (BANK_PAYEE_FEE_CCY)
+                "channelId": 1108701001,    # 收款渠道ID → BC
+                "payeeAccountNo": "20250527172221152",  # 收款方银行账号
+                "payeeCcy": "EUR",          # 渠道入账币种 (PAYEE_CCY)，即资金到账币种
+                "payeeType": 1,             # 账号类型 1-电商  3-B2B收款  2-gep收款  4-服贸交易
+                "remitCcy": "EUR",          # 汇款币种 (REMIT_CCY)，即出款行汇出币种
+                "storeNo": 2507161346006207661,  # 关联店铺号（电商平台专用），非电商则为0
+                "remarks": "fat环境-qiya"
+            }
+        },
         5181240731000102528: {  # 用户信息：手机号 17681032993，姓名 董春旭
             "shop_ozon_cnh": {
                 "bankPayeeFeeCcy": "CNH",   # 渠道手续费币种 → CNH离岸人民币
@@ -56,6 +68,16 @@ TEST_DATA_POOL = {
                 "storeNo": 2509091904006264535,               # 独立站
                 "remarks": "香港五五网络科技公司-fat-独立站-hkd-电商收款账户"
             },
+            "b2b_eur": {
+                            "bankPayeeFeeCcy": "EUR",   # 渠道手续费币种 → EUR欧元
+                            "channelId": 1200923053,    # Banking Circle S.A. - E贸汇
+                            "payeeAccountNo": "DK9189000020547275",  # 收款方虚拟银行账号
+                            "payeeCcy": "EUR",          # 入账币种：HKD
+                            "payeeType": 3,             # 账号类型：3-B2B收款
+                            "remitCcy": "EUR",          # 汇款币种：HKD
+                            "storeNo": 0,               #
+                            "remarks": "香港五五网络科技公司-fat-b2b-EUR-B2B收款账户"
+                        },
         },
         5181240628000024148: {  # 用户信息：手机号 13166210872，商户名 桐乡市高桥旭木汽车咨询服务部
             "cc_vnd": {

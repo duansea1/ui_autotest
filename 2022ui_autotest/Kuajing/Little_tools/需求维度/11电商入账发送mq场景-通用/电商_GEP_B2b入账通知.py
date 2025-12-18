@@ -3,8 +3,11 @@
 import time
 import requests
 import json
+from icecream import ic
+import os
+
 from Common.CommonLittle.random_string import generate_random_string
-from account_data import get_test_data  # ✅ 改为导入函数
+from account_data import get_test_data  
 import urllib3
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
@@ -20,6 +23,35 @@ _token_cache = {
     "last_login_time": None,
     "max_age": 60 * 60
 }
+
+# 缓存文件路径
+CACHE_FILE = os.path.join(os.path.dirname(__file__), '.token_cache.json')
+
+def _load_token_cache():
+    """从文件加载缓存的token"""
+    global _token_cache
+    try:
+        if os.path.exists(CACHE_FILE):
+            with open(CACHE_FILE, 'r') as f:
+                cached_data = json.load(f)
+                # 验证缓存数据的有效性
+                if all(key in cached_data for key in ["token", "env", "last_login_time", "max_age"]):
+                    _token_cache = cached_data
+                    print(f"[INFO] 从文件加载缓存的token，环境: {_token_cache['env']}")
+    except Exception as e:
+        print(f"[ERROR] 加载token缓存失败: {e}")
+
+def _save_token_cache():
+    """将token缓存保存到文件"""
+    try:
+        with open(CACHE_FILE, 'w') as f:
+            json.dump(_token_cache, f)
+        print(f"[INFO] Token缓存已保存到文件: {CACHE_FILE}")
+    except Exception as e:
+        print(f"[ERROR] 保存token缓存失败: {e}")
+
+# 在模块加载时加载缓存
+_load_token_cache()
 
 def _is_token_expired():
     if not _token_cache["token"]:
@@ -53,6 +85,8 @@ def login(env="uat", login_no="13166210870", password="uKXPzIcL55uI1IUq0yGrMw=="
                 _token_cache["token"] = data["token"]
                 _token_cache["env"] = env
                 _token_cache["last_login_time"] = time.time()
+                # 保存到文件
+                _save_token_cache()
                 print(f"[INFO] {env}环境 - 登录成功，获取新 token")
                 return data["token"]
             else:
@@ -104,7 +138,7 @@ def payee_income_mq(account_key=None, env="uat", userNo=None, max_retries=1):
                 "detailsId": generate_random_string(),
                 "payeeAccountName": "WAN ECOMMERCE SOLUTIONS SDN. BHD.",
                 "payeeAccountNo": test_data["payeeAccountNo"],  # 收款方账号
-                "payeeAmount": 5000,  # 渠道入账金额 CHANNEL_ENTRY_CCY
+                "payeeAmount": 50,  # 渠道入账金额 CHANNEL_ENTRY_CCY
                 "payeeCcy": test_data["payeeCcy"],  # 渠道入账币种  HKD,EUR,GBP,SAR,ZAR,HUF,TRY,AED,USD,NOK,RON,KES,CZK,SEK
                 "payeeDate": "20250724",
                 "payeeIncomeStatus": 2,
@@ -116,8 +150,8 @@ def payee_income_mq(account_key=None, env="uat", userNo=None, max_retries=1):
                 "payerSwiftCode": "SVBKUS6SXXX",
                 "reference": "bank seasea111",
                 "remarks": test_data["remarks"],  # fat环境-上海一一网络科技有限公司-自动化--gep-电商收款账户
-                "remitAmount": 5050,  # 渠道汇款金额
-                "remitCcy": test_data["remitCcy"],  # 入账币种
+                "remitAmount": 50,  # 渠道汇款金额
+                "remitCcy": test_data["remitCcy"],  # 渠道汇款币种
                 "remitPayerAddress": "29145 CRYSTAL RIDGE CT212amazon WeLLSFAGO ",
                 "reserveFieldOne": "UT1868854659089010579",
                 "storeNo": test_data["storeNo"],  # 店铺号  没有则为0
@@ -127,7 +161,7 @@ def payee_income_mq(account_key=None, env="uat", userNo=None, max_retries=1):
         },
         "retryReason": "入账mqsea"
     }
-
+    ic(data)
     for attempt in range(max_retries + 1):
         if _token_cache["env"] != env or _is_token_expired():
             print(f"[INFO] Token 缓存失效，重新登录...")
@@ -187,6 +221,12 @@ if __name__ == '__main__':
     #
     # ✅ 示例4：香港五五测试
     # payee_income_mq(account_key="shop_alone_hkd", env="fat", userNo=5181240821000008798)
+    # # ✅ 示例5：香港五五-b2b入账
+    # payee_income_mq(account_key="b2b_eur", env="fat", userNo=5181240821000008798)
+
+
     # local_eur_gbp
     # ✅ 示例4：桐乡
-    payee_income_mq(account_key="local_eur_gbp", env="fat", userNo=5181240628000024148)
+    # payee_income_mq(account_key="local_eur_gbp", env="fat", userNo=5181240628000024148)
+    # ✅ 示例4：qiya
+    payee_income_mq(account_key="qiya_shop", env="fat", userNo=5181241126000123328)

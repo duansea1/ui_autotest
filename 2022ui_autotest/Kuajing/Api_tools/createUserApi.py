@@ -3,7 +3,7 @@
 # @Author: duansea
 # @Time: 2024-11-23 16:30
 # ---
-from commons.RSAUtil import *
+from Kuajing.Common.RSAUtil import *
 from icecream import ic
 import requests
 import base64
@@ -17,7 +17,7 @@ def create_user(env):
     """新增代理商用户"""
 
     data = {
-        "email": "121@111.com"
+        "email": "140@111.com"
     }
 
     # 获取秘钥相关信息

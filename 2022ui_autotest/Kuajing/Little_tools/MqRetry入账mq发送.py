@@ -8,7 +8,7 @@ import time
 import requests
 import json
 from Common.CommonLittle.random_string import  generate_random_string
-from account_data import DEFAULT_DATA
+from account_data1 import DEFAULT_DATA
 import urllib3
 
 # 禁用所有不安全的 HTTPS 警告（适用于测试/内部环境）
@@ -185,18 +185,6 @@ def payee_income_mq(env="fat", max_retries=1):
 
 
 if __name__ == '__main__':
-    # mq_retry_process(env="fat")
-    # mq_retry_process_php(env="fat")
 
-    # mq_retry_process(env="uat")
-    # mq_retry_process_php(env="uat")
-
-
-    # 电商入账和gep收款账户入账
-    # gep_shop_mq_retry_process(env="fat")
-
-    # B2B入账
-    # b2b_mq_retry_process(env="fat")
-
-    # 通用的入账mq
-    payee_income_mq(env="uat")
+    # 通用的入账mq 电商入账、b2b入账、汇兑入账   环境 fat/uat
+    payee_income_mq(env="fat")

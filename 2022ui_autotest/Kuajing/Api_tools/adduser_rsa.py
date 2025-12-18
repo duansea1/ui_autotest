@@ -2,6 +2,7 @@
 # ---
 # @Author: duansea
 # @Time: 2024-08-22 10:22
+# @Desc: 新增商户 openapi注册商户
 # ---
 
 from Common import publicTools as p
@@ -28,6 +29,6 @@ def add_user(env, email):
 if __name__ == '__main__':
     fat_env = "fat-sea-agent-hzl"
     uat_env = "uat-sea-agent-hzl"
-    email = "121@111.com"
+    email = "139@111.com"
     """新增商户"""
-    add_user(fat_env, email)
+    add_user(uat_env, email)
