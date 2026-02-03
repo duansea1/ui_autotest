@@ -259,10 +259,10 @@ if __name__ == "__main__":
     # 示例：单个订单更新（UAT环境）
     try:
         process_forward_order(
-            exchange_id="2512120948006335631",
+            exchange_id="2512302013000402734",
             action="update",
-            new_date="2025-12-11",
-            env="FAT"  # 可改为 "FAT"
+            new_date="2025-12-29",
+            env="UAT"  # 可改为 "FAT"
         )
     except Exception as e:
         logger.error(f"程序执行失败: {e}")

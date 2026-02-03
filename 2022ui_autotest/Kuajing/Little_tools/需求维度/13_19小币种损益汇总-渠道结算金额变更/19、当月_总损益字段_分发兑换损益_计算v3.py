@@ -84,11 +84,11 @@ class MonthlyProfitLossCalculator:
             # 如果是USD，保存返回值
             if current_ccy == 'USD':
                 usd_profit_loss = current_amount
-                print(f"  {idx}. 🎉损益币种: {current_ccy}")
-                print(f"     🎉🎉🎉分发兑换损益(USD)--: {current_amount}")
+                # print(f"  {idx}. 🎉损益币种: {current_ccy}")
+                print(f"     🎉🎉🎉分发兑换损益(USD)--: {current_amount} {current_ccy}")
             else:
-                print(f"  {idx}. 📈损益币种: {current_ccy}")
-                print(f"     📈📈📈分发兑换损益--: {current_amount}")
+                # print(f"  {idx}. 📈损益币种: {current_ccy}")
+                print(f"     📈📈📈分发兑换损益--: {current_amount} {current_ccy}")
         
         # 返回USD的分发兑换损益总和（保持方法返回值兼容性）
         return usd_profit_loss
@@ -106,7 +106,7 @@ class MonthlyProfitLossCalculator:
         print(f"\n===== 计算当月总损益 =====")
         print(f"输入参数：")
         print(f"  GEP小币种敞口: {gep_record_ccy_exposure}")
-        print(f"  当月报表汇率: {current_day_rate}")
+        print(f"  当月报表汇率: {current_day_rate:.10f}")
         print(f"  分发兑换损益(USD): {distribution_profit_amt}")
         print(f"  GEP美元敞口: {gep_usd_exposure}")
         
@@ -115,7 +115,7 @@ class MonthlyProfitLossCalculator:
         total_profit_loss = (gep_record_ccy_exposure * current_day_rate) + gep_usd_exposure + distribution_profit_amt
         
         print(f"\n计算结果：")
-        print(f"  🚀总损益(美元) = {gep_record_ccy_exposure} * {current_day_rate} + {gep_usd_exposure} + {distribution_profit_amt}")
+        print(f"  🚀总损益(美元) = {gep_record_ccy_exposure} * {current_day_rate:.10f} + {gep_usd_exposure} + {distribution_profit_amt}")
         print(f"  🚀总损益(美元) = {total_profit_loss:.2f} USD")
         
         return total_profit_loss
@@ -163,7 +163,7 @@ class MonthlyProfitLossCalculator:
         if usd_to_ccy_result:
             usd_to_ccy_rate = float(usd_to_ccy_result['CHANNEL_RATE'])
             exchange_rates['usd_to_ccy'] = usd_to_ccy_rate
-            print(f"  USD→{ccy}方向的汇率如下：{usd_to_ccy_rate}")
+            print(f"  USD→{ccy}方向的汇率如下：{usd_to_ccy_rate:.10f}")
             print(f"  详细信息：")
             print(f"    ID: {usd_to_ccy_result['ID']}")
             print(f"    CHANNEL_ID: {usd_to_ccy_result['CHANNEL_ID']}")
@@ -194,7 +194,7 @@ class MonthlyProfitLossCalculator:
         if ccy_to_usd_result:
             ccy_to_usd_rate = float(ccy_to_usd_result['CHANNEL_RATE'])
             exchange_rates['ccy_to_usd'] = ccy_to_usd_rate
-            print(f"  {ccy}→USD方向的汇率如下：{ccy_to_usd_rate}")
+            print(f"  {ccy}→USD方向的汇率如下：{ccy_to_usd_rate:.10f}")
             print(f"  详细信息：")
             print(f"    ID: {ccy_to_usd_result['ID']}")
             print(f"    CHANNEL_ID: {ccy_to_usd_result['CHANNEL_ID']}")
@@ -203,10 +203,10 @@ class MonthlyProfitLossCalculator:
         else:
             print(f"  未查询到 {ccy}→USD 方向的汇率")
         
-        print(f"\n===== 汇率查询结果汇总 =====")
+        print(f"\n===== 汇率查询结果汇总-sql查询 =====")
         print(f"USD/{ccy} 汇率：")
-        print(f"  USD→{ccy}：{exchange_rates['usd_to_ccy'] if exchange_rates['usd_to_ccy'] is not None else '未查询到'}")
-        print(f"  {ccy}→USD：{exchange_rates['ccy_to_usd'] if exchange_rates['ccy_to_usd'] is not None else '未查询到'}")
+        print(f"  USD→{ccy}：{exchange_rates['usd_to_ccy']:.10f}" if exchange_rates['usd_to_ccy'] is not None else f"  USD→{ccy}：未查询到")
+        print(f"  {ccy}→USD：{exchange_rates['ccy_to_usd']:.10f}" if exchange_rates['ccy_to_usd'] is not None else f"  {ccy}→USD：未查询到")
         
         return exchange_rates
 
@@ -216,11 +216,11 @@ if __name__ == "__main__":
     print("启动当月总损益计算脚本")
     
     # 从命令行参数获取币种和日期范围
-    env = "UAT"
-    ccy = 'VND'
-    start_date = '2025-12-01'
-    end_date = '2025-12-18'
-    rate_date = '2025-12-18'
+    env = "FAT"
+    ccy = 'KRW'
+    start_date = '2026-01-01'
+    end_date = '2026-01-06'
+    rate_date = end_date
     
     print(f"查询币种: {ccy}")
     print(f"日期范围: {start_date} 至 {end_date}")
@@ -235,11 +235,12 @@ if __name__ == "__main__":
     
     # 查询分发兑换损益(USD)
     distribution_profit = calculator.query_distribution_profit(start_date, end_date, ccy)
-    
+    print("分发兑换损益：------>",distribution_profit)
     # 计算总损益
-    gep_ccy_exposure = -1889147  # GEP小币种敞口
-    current_rate = 0.0006873002  # 当月报表汇率
-    gep_usd_exp = -20.61  # GEP美元敞口
+    # distribution_profit = 0   #动态获取or固定值
+    gep_ccy_exposure = -2020234  # GEP小币种敞口
+    current_rate = 0.0006912426  # 当月-当天报表汇率
+    gep_usd_exp = 66.84  # GEP美元敞口
     
     total_profit_loss = calculator.calculate_monthly_total_profit_loss(
         gep_record_ccy_exposure=gep_ccy_exposure,
@@ -249,9 +250,7 @@ if __name__ == "__main__":
     )
     
     # 示例2：独立使用获取汇率方法
-    print("\n" + "="*80)
-    print("示例2：独立使用获取汇率方法")
-    print("="*80)
+    print("\n" + "="*30 + "示例2：独立使用获取汇率方法" + "="*30)
     
     # 调用独立的获取汇率方法，查询报表的汇率
     exchange_rates = calculator.get_exchange_rates(ccy, rate_date)

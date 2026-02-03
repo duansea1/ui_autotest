@@ -120,18 +120,33 @@ def calculate_exchange_rates(target_ASK_rate, target_BID_rate, float_type="百�
 # 示例用法
 if __name__ == "__main__":
     # 提取共有参数 -gep USD/CNH
-    target_ASK = 2198.2614 
-    target_BID = 2198.0002
-    float_type = "百分比"
+    target_ASK = 703.691   #渠道汇率 购汇-客买
+    target_BID = 702.916900    #渠道汇率 结汇-客卖
+    float_type = "BP"
     
     # 浮动参数 bid-客卖-结汇   ask-客买-购汇
-    trade_ask = 0
-    sale_ask = -0.1 
-    agent_ask = 0
+    trade_ask = 12
+    sale_ask = 51.66 
+    agent_ask = 18.71
     
-    trade_bid = 0
-    sale_bid = -1.39   #销售浮动
-    agent_bid = 1.9
+    trade_bid = 35
+    sale_bid = 124.64   #销售浮动
+    agent_bid = 100
+
+
+    # 提取共有参数 -gep USD/VND
+    # target_ASK = 3160380.000000    #渠道汇率 购汇-客买
+    # target_BID = 2106680.000000    #渠道汇率 结汇-客卖
+    # float_type = "百分比"
+    
+    # # 浮动参数 bid-客卖-结汇   ask-客买-购汇
+    # trade_ask = 0
+    # sale_ask = 11 
+    # agent_ask = 9.99
+    
+    # trade_bid = 0
+    # sale_bid = 10.02   #销售浮动
+    # agent_bid = 2.76
 
     
     print("\n\n=== 商户类型汇率计算示例 ===")

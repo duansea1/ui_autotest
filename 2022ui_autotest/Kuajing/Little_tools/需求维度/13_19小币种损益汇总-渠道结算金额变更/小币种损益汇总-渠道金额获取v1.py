@@ -104,7 +104,7 @@ class CurrencyAmountQuery:
     
     def query_fund_transfer_data(self, start_date, end_date, currencies):
         """
-        查询资金调拨交易订单表(T_FUND_TRANSFER_ORDER)数据
+        查询资金调拨交易订单表(T_FUND_TRANSFER_ORDER)数据，并根据需求计算渠道当月结算金额
         :param start_date: 开始日期，格式：YYYY-MM-DD
         :param end_date: 结束日期，格式：YYYY-MM-DD
         :param currencies: 小币种列表
@@ -116,7 +116,7 @@ class CurrencyAmountQuery:
         start_dt = datetime.strptime(start_date, '%Y-%m-%d')
         end_dt = datetime.strptime(end_date, '%Y-%m-%d')
         
-        # 转换为当月的第一天和最后一天
+        # 转换为当月的第一天和最后一天（筛选条件：开始时间为当月1号凌晨，结束时间为当月最后一天24点）
         start_of_month = start_dt.replace(day=1).strftime('%Y-%m-%d 00:00:00')
         # 计算当月最后一天
         import calendar
@@ -128,34 +128,126 @@ class CurrencyAmountQuery:
             result[ccy] = {
                 'count': 0,
                 'local_amount': 0.0,  # 小币种金额
-                'usd_amount': 0.0    # 美元金额
+                'usd_amount': 0.0     # 美元金额
             }
             
             try:
-                # 查询符合条件的记录
-                sql = """SELECT COUNT(*) as count, SUM(SOURCE_AMT) as local_sum, SUM(DEST_AMT) as usd_sum 
+                print(f"\n===== 处理小币种 {ccy} 资金调拨数据 =====")
+                print(f"查询区间：{start_of_month} 至 {end_of_month}")
+                print(f"结算状态：结算成功 (TRANSFER_STATE IN (3))")
+                
+                # 查询所有相关记录
+                sql = """SELECT 
+                            ID, SOURCE_CCY, DEST_CCY, SOURCE_AMT, DEST_AMT
                          FROM T_FUND_TRANSFER_ORDER 
                          WHERE CREATE_AT >= %s AND CREATE_AT <= %s 
                          AND TRANSFER_STATE IN (3)  -- 已汇出或已到账（相当于结算成功）
-                         AND SOURCE_CCY = %s  -- 汇出币种为小币种
-                         AND DEST_CCY = 'USD'  -- 目标币种为美元
+                         AND (SOURCE_CCY = %s OR DEST_CCY = %s)  -- 源或目标币种为当前小币种
                       """
                 
-                self.cursor.execute(sql, (start_of_month, end_of_month, ccy))
-                row = self.cursor.fetchone()
+                self.cursor.execute(sql, (start_of_month, end_of_month, ccy, ccy))
+                rows = self.cursor.fetchall()
                 
-                if row:
-                    result[ccy]['count'] = row['count'] or 0
-                    # 将decimal.Decimal类型转换为float类型
-                    result[ccy]['local_amount'] = float(row['local_sum'] or 0.0)
-                    result[ccy]['usd_amount'] = float(row['usd_sum'] or 0.0)
+                if rows:
+                    result[ccy]['count'] = len(rows)
+                    print(f"共找到 {len(rows)} 条相关记录")
                     
-                # 打印日志
-                print(f"T_FUND_TRANSFER_ORDER表  {ccy} 符合条件的明细{result[ccy]['count']}条")
-                print(f"T_FUND_TRANSFER_ORDER表  渠道当月结算金额（小币种-{ccy}）：{result[ccy]['local_amount']}   渠道当月结算金额（美元）：{result[ccy]['usd_amount']}")
+                    for i, row in enumerate(rows, 1):
+                        transfer_id = row['ID']
+                        source_ccy = row['SOURCE_CCY']
+                        dest_ccy = row['DEST_CCY']
+                        source_amt = float(row['SOURCE_AMT'] or 0.0)
+                        dest_amt = float(row['DEST_AMT'] or 0.0)
+                        virtual_usd_amt = 0.0
+                        
+                        print(f"\n记录 {i}: 订单ID={transfer_id}")
+                        print(f"  付款币种: {source_ccy}, 付款金额: {source_amt:.2f} {source_ccy}")
+                        print(f"  到账币种: {dest_ccy}, 到账金额: {dest_amt:.2f} {dest_ccy}")
+                        
+                        # 情况1：付款币种是小币种，到账币种是美金
+                        if source_ccy == ccy and dest_ccy == 'USD':
+                            print(f"  处理类型: 情况1 - 付款小币种，到账美金")
+                            
+                            # 渠道当月结算金额（小币种）取付款小币种金额之和
+                            result[ccy]['local_amount'] += source_amt
+                            # 渠道当月结算金额（美金）取到账美金字段之和
+                            result[ccy]['usd_amount'] += dest_amt
+                            
+                            print(f"  累计小币种金额: {result[ccy]['local_amount']:.2f} {ccy}")
+                            print(f"  累计美元金额: {result[ccy]['usd_amount']:.2f} USD")
+                        
+                        # 情况2：付款币种是小币种，到账币种非美金
+                        elif source_ccy == ccy and dest_ccy != 'USD':
+                            print(f"  处理类型: 情况2 - 付款小币种，到账非美金")
+                            
+                            # 从T_FUND_CENTER_ORDER表获取虚拟美金字段
+                            center_sql = """SELECT VIRTUAL_USD_AMT 
+                                           FROM T_FUND_CENTER_ORDER 
+                                           WHERE ID = %s AND STATUS = 5"""
+                            self.cursor.execute(center_sql, (transfer_id,))
+                            center_row = self.cursor.fetchone()
+                            
+                            if center_row:
+                                virtual_usd_amt = float(center_row['VIRTUAL_USD_AMT'] or 0.0)
+                                print(f"  虚拟美金金额: {virtual_usd_amt:.2f} USD")
+                            else:
+                                print(f"  警告: 未找到对应T_FUND_CENTER_ORDER记录，虚拟美金金额默认0")
+                            
+                            # 渠道当月结算金额（小币种）取付款金额之和
+                            result[ccy]['local_amount'] += source_amt
+                            # 渠道当月结算金额（美金）取虚拟美金字段之和
+                            result[ccy]['usd_amount'] += virtual_usd_amt
+                            
+                            print(f"  累计小币种金额: {result[ccy]['local_amount']:.2f} {ccy}")
+                            print(f"  累计美元金额: {result[ccy]['usd_amount']:.2f} USD")
+                        
+                        # 情况3：到账币种是小币种，付款币种是美金
+                        elif dest_ccy == ccy and source_ccy == 'USD':
+                            print(f"  处理类型: 情况3 - 到账小币种，付款美金")
+                            
+                            # 渠道当月结算金额（小币种）减少到账金额
+                            result[ccy]['local_amount'] -= dest_amt
+                            # 渠道当月结算金额（美元）减少付款金额
+                            result[ccy]['usd_amount'] -= source_amt
+                            
+                            print(f"  累计小币种金额: {result[ccy]['local_amount']:.2f} {ccy}")
+                            print(f"  累计美元金额: {result[ccy]['usd_amount']:.2f} USD")
+                        
+                        # 情况4：到账币种是小币种，付款币种是非美金
+                        elif dest_ccy == ccy and source_ccy != 'USD':
+                            print(f"  处理类型: 情况4 - 到账小币种，付款非美金")
+                            
+                            # 从T_FUND_CENTER_ORDER表获取虚拟美金字段
+                            center_sql = """SELECT VIRTUAL_USD_AMT 
+                                           FROM T_FUND_CENTER_ORDER 
+                                           WHERE ID = %s AND STATUS = 5"""
+                            self.cursor.execute(center_sql, (transfer_id,))
+                            center_row = self.cursor.fetchone()
+                            
+                            if center_row:
+                                virtual_usd_amt = float(center_row['VIRTUAL_USD_AMT'] or 0.0)
+                                print(f"  虚拟美金金额: {virtual_usd_amt:.2f} USD")
+                            else:
+                                print(f"  警告: 未找到对应T_FUND_CENTER_ORDER记录，虚拟美金金额默认0")
+                            
+                            # 渠道当月结算金额（小币种）减少到账金额
+                            result[ccy]['local_amount'] -= dest_amt
+                            # 渠道当月结算金额（美元）减少虚拟美金字段
+                            result[ccy]['usd_amount'] -= virtual_usd_amt
+                            
+                            print(f"  累计小币种金额: {result[ccy]['local_amount']:.2f} {ccy}")
+                            print(f"  累计美元金额: {result[ccy]['usd_amount']:.2f} USD")
+                
+                # 打印最终统计结果
+                print(f"\n===== T_FUND_TRANSFER_ORDER表 {ccy} 统计结果 =====")
+                print(f"符合条件的明细: {result[ccy]['count']}条")
+                print(f"渠道当月结算金额（小币种-{ccy}）：{result[ccy]['local_amount']:.2f} {ccy}")
+                print(f"渠道当月结算金额（美元）：{result[ccy]['usd_amount']:.2f} USD")
                 
             except Exception as e:
-                print(f"查询T_FUND_TRANSFER_ORDER表{ccy}数据时发生错误: {str(e)}")
+                print(f"\n查询T_FUND_TRANSFER_ORDER表{ccy}数据时发生错误: {str(e)}")
+                import traceback
+                traceback.print_exc()
         
         return result
     
@@ -256,8 +348,8 @@ class CurrencyAmountQuery:
             SELECT 
                 ft.ID as TRANSFER_ID,
                 fc.ID as CENTER_ID,
-                ft.CCY as CCY,
-                ft.AMOUNT as TRANSFER_AMT,
+                ft.SOURCE_CCY as CCY,
+                ft.SOURCE_AMT as TRANSFER_AMT,
                 fc.SOURCE_AMT as CENTER_AMT
             FROM 
                 T_FUND_TRANSFER_ORDER ft
@@ -279,7 +371,7 @@ class CurrencyAmountQuery:
             
             # 如果指定了币种，添加币种条件
             if currency:
-                sql += " AND ft.CCY = %s AND fc.SOURCE_CCY = %s"
+                sql += " AND ft.SOURCE_CCY = %s AND fc.SOURCE_CCY = %s"
                 params.append(currency)
                 params.append(currency)
             
@@ -376,6 +468,8 @@ class CurrencyAmountQuery:
             SOURCE_AMT, 
             DEST_CCY, 
             DEST_AMT,
+            VIRTUAL_USD_CCY,
+            VIRTUAL_USD_AMT,
             STATUS,
             CREATE_AT,
             UPDATE_AT
@@ -392,18 +486,26 @@ class CurrencyAmountQuery:
             self.cursor.execute(sql)
             raw_results = self.cursor.fetchall()
             
-            # 按币种分组统计并转换结果格式
-            currency_stats = {}
-            total_records = 0
-            total_source_amount = 0.0
-            total_dest_amount = 0.0
+            # 定义小币种列表（根据实际情况调整）
+            small_currencies = ['DKK', 'KRW', 'CNH', 'JPY', 'EUR', 'GBP']
+            
+            # 初始化渠道结算金额统计，按币种分别统计
+            channel_settlement = {
+                'by_currency': {},  # 按币种统计的小币种结算金额
+                'usd_amount': 0.0     # 渠道当月结算金额（美元）
+            }
+            
+            # 按交易类型分组统计
+            transaction_groups = {}
             
             # 转换结果为包含ORDER_NO的字典列表
             results = []
             for row in raw_results:
-                ccy = row['SOURCE_CCY']
+                source_ccy = row['SOURCE_CCY']
+                dest_ccy = row['DEST_CCY']
                 source_amt = float(row['SOURCE_AMT'] or 0.0)
                 dest_amt = float(row['DEST_AMT'] or 0.0)
+                virtual_usd_amt = float(row['VIRTUAL_USD_AMT'] or 0.0)
                 
                 # 将ID重命名为ORDER_NO
                 record = {
@@ -411,35 +513,102 @@ class CurrencyAmountQuery:
                     'ID': row['ID'],
                     'SOURCE_CCY': row['SOURCE_CCY'],
                     'SOURCE_AMT': row['SOURCE_AMT'],
+                    'DEST_CCY': row['DEST_CCY'],
                     'DEST_AMT': row['DEST_AMT'],
+                    'VIRTUAL_USD_CCY': row['VIRTUAL_USD_CCY'],
+                    'VIRTUAL_USD_AMT': row['VIRTUAL_USD_AMT'],
                     'CREATE_AT': row['CREATE_AT']
                 }
                 results.append(record)
                 
-                if ccy not in currency_stats:
-                    currency_stats[ccy] = {
+                # 构建交易类型标识
+                transaction_key = f"{source_ccy}->{dest_ccy}"
+                if transaction_key not in transaction_groups:
+                    transaction_groups[transaction_key] = {
                         'count': 0,
-                        'total_source_amt': 0.0,
-                        'total_dest_amt': 0.0
+                        'source_total': 0.0,
+                        'dest_total': 0.0,
+                        'virtual_usd_total': 0.0
                     }
                 
-                currency_stats[ccy]['count'] += 1
-                currency_stats[ccy]['total_source_amt'] += source_amt
-                currency_stats[ccy]['total_dest_amt'] += dest_amt
-                
-                total_records += 1
-                total_source_amount += source_amt
-                total_dest_amount += dest_amt
+                # 累加交易统计
+                transaction_groups[transaction_key]['count'] += 1
+                transaction_groups[transaction_key]['source_total'] += source_amt
+                transaction_groups[transaction_key]['dest_total'] += dest_amt
+                transaction_groups[transaction_key]['virtual_usd_total'] += virtual_usd_amt
             
             # 打印统计信息
+            total_records = len(raw_results)
             print(f"\n查询结果统计：")
             print(f"总记录数: {total_records}")
-            print(f"总金额 (小币种): {total_source_amount}")
-            print(f"总金额 (美元): {total_dest_amount}")
             
-            print(f"\n各币种统计：")
-            for ccy, stats in currency_stats.items():
-                print(f"币种 {ccy}: 记录数={stats['count']}, 总金额={stats['total_source_amt']} {ccy}, 美元金额={stats['total_dest_amt']} USD")
+            # 按交易类型打印详细统计
+            print(f"\n交易类型统计：")
+            for txn_type, stats in transaction_groups.items():
+                source_ccy = txn_type.split('->')[0]
+                dest_ccy = txn_type.split('->')[1]
+                
+                # 根据业务逻辑计算渠道结算金额
+                if source_ccy in small_currencies:
+                    # 付款币种是小币种
+                    if dest_ccy == 'USD':
+                        # 情况1：付款币种是小币种，到账币种是美金
+                        # 按币种统计渠道结算金额
+                        if source_ccy not in channel_settlement['by_currency']:
+                            channel_settlement['by_currency'][source_ccy] = 0.0
+                        channel_settlement['by_currency'][source_ccy] += stats['source_total']
+                        channel_settlement['usd_amount'] += stats['dest_total']
+                        print(f"\n{txn_type} 付款币种是小币种，到账币种是美金：")
+                        print(f"  付款币种{source_ccy} 汇总{stats['source_total']:.2f} {source_ccy}")
+                        print(f"  到账币种{dest_ccy} 汇总{stats['dest_total']:.2f} {dest_ccy}")
+                        print(f"  渠道当月结算金额（小币种）: +{stats['source_total']:.2f} {source_ccy}")
+                        print(f"  渠道当月结算金额（美金）: +{stats['dest_total']:.2f} USD")
+                    else:
+                        # 情况2：付款币种是小币种，到账币种非美金
+                        # 按币种统计渠道结算金额
+                        if source_ccy not in channel_settlement['by_currency']:
+                            channel_settlement['by_currency'][source_ccy] = 0.0
+                        channel_settlement['by_currency'][source_ccy] += stats['source_total']
+                        channel_settlement['usd_amount'] += stats['virtual_usd_total']
+                        print(f"\n{txn_type} 付款币种是小币种，到账币种非美金：")
+                        print(f"  付款币种{source_ccy} 汇总{stats['source_total']:.2f} {source_ccy}")
+                        print(f"  到账币种{dest_ccy} 汇总{stats['dest_total']:.2f} {dest_ccy}")
+                        print(f"  虚拟美金金额: {stats['virtual_usd_total']:.2f} USD")
+                        print(f"  渠道当月结算金额（小币种）: +{stats['source_total']:.2f} {source_ccy}")
+                        print(f"  渠道当月结算金额（美金）: +{stats['virtual_usd_total']:.2f} USD")
+                elif dest_ccy in small_currencies:
+                    # 到账币种是小币种
+                    if source_ccy == 'USD':
+                        # 情况3：到账币种是小币种，付款币种是美金
+                        # 按币种统计渠道结算金额
+                        if dest_ccy not in channel_settlement['by_currency']:
+                            channel_settlement['by_currency'][dest_ccy] = 0.0
+                        channel_settlement['by_currency'][dest_ccy] -= stats['dest_total']
+                        channel_settlement['usd_amount'] -= stats['source_total']
+                        print(f"\n{txn_type} 到账币种是小币种，付款币种是美金：")
+                        print(f"  付款币种{source_ccy} 汇总{stats['source_total']:.2f} {source_ccy}")
+                        print(f"  到账币种{dest_ccy} 汇总-{stats['dest_total']:.2f} {dest_ccy}（代表减少）")
+                        print(f"  渠道当月结算金额（小币种）: -{stats['dest_total']:.2f} {dest_ccy}")
+                        print(f"  渠道当月结算金额（美金）: -{stats['source_total']:.2f} USD")
+                    else:
+                        # 情况4：到账币种是小币种，付款币种是非美金
+                        # 按币种统计渠道结算金额
+                        if dest_ccy not in channel_settlement['by_currency']:
+                            channel_settlement['by_currency'][dest_ccy] = 0.0
+                        channel_settlement['by_currency'][dest_ccy] -= stats['dest_total']
+                        channel_settlement['usd_amount'] -= stats['virtual_usd_total']
+                        print(f"\n{txn_type} 到账币种是小币种，付款币种是非美金：")
+                        print(f"  付款币种{source_ccy} 汇总{stats['source_total']:.2f} {source_ccy}")
+                        print(f"  到账币种{dest_ccy} 汇总-{stats['dest_total']:.2f} {dest_ccy}（代表减少）")
+                        print(f"  虚拟美金金额: {stats['virtual_usd_total']:.2f} USD")
+                        print(f"  渠道当月结算金额（小币种）: -{stats['dest_total']:.2f} {dest_ccy}")
+                        print(f"  渠道当月结算金额（美金）: -{stats['virtual_usd_total']:.2f} USD")
+            
+            # 打印最终渠道结算金额
+            print(f"\n===== 渠道当月结算金额汇总 =====")
+            for ccy, amount in channel_settlement['by_currency'].items():
+                print(f"渠道当月结算金额（小币种-{ccy}）: {amount:.2f} {ccy}")
+            print(f"渠道当月结算金额（美元）: {channel_settlement['usd_amount']:.2f} USD")
             
             return results
             
@@ -480,90 +649,20 @@ def query_channel_ccy_amount(params=None, env='FAT'):
 
 # 保留命令行执行功能，方便测试
 if __name__ == '__main__':
-    # 默认参数
-    default_params = {
-        'startRunDate': '2025-09-01',
-        'endRunDate': '2025-09-30',
-        'ccy': ['DKK']
-    }
+    # 固定参数设置
+    start_date = '2026-01-01'
+    end_date = '2026-01-06'
     
-    params = default_params
+    # 只查询T_FUND_CENTER_ORDER表的数据
+    print("===== 查询T_FUND_CENTER_ORDER表STATUS=5的数据 =====")
     
-    # 如果有命令行参数，则解析JSON格式的参数
-    if len(sys.argv) > 1:
-        try:
-            params = json.loads(sys.argv[1])
-        except json.JSONDecodeError:
-            print("命令行参数不是有效的JSON格式，使用默认参数")
+    # 创建查询实例
+    query = CurrencyAmountQuery(env='FAT')
     
-    # 查询指定币种和期限内的汇总金额
-    query_channel_ccy_amount(params)
+    # 执行查询，不指定币种查询所有币种
+    center_data = query.query_fund_center_status5(start_date, end_date)
     
-    # 测试新增的数据一致性比对功能
-    print("\n\n===== 测试T_FUND_TRANSFER_ORDER和T_FUND_CENTER_ORDER数据一致性比对功能 =====")
-    try:
-        # 创建查询实例
-        query = CurrencyAmountQuery(env='FAT')
-        
-        # 定义日期范围
-        start_date = '2025-09-01'
-        end_date = '2025-09-30'
-        
-        # 执行数据一致性比对，不指定币种查询所有币种
-        # 使用正确的参数名currency而非ccy
-        inconsistent_data = query.compare_fund_transfer_center(start_date, end_date)
-        
-        print(f"\n数据一致性比对完成，共发现 {len(inconsistent_data)} 条不一致记录")
-        
-        # 打印不一致记录详情（如果有）
-        if inconsistent_data:
-            print("\n不一致记录详情（前5条）:")
-            for i, record in enumerate(inconsistent_data[:5]):
-                print(f"\n记录 {i+1}:")
-                print(f"  转账订单ID: {record.get('TRANSFER_ORDER_ID', 'N/A')}")
-                print(f"  中心订单ID: {record.get('CENTER_ORDER_ID', 'N/A')}")
-                print(f"  币种: {record.get('CCY', 'N/A')}")
-                print(f"  转账金额: {record.get('TRANSFER_AMT', 'N/A')} {record.get('CCY', '')}")
-                print(f"  中心金额: {record.get('CENTER_AMT', 'N/A')} {record.get('CCY', '')}")
+    print(f"\nT_FUND_CENTER_ORDER STATUS=5数据查询完成，共获取 {len(center_data)} 条记录")
     
-    except Exception as e:
-        print(f"测试数据一致性比对功能时发生错误: {str(e)}")
-    finally:
-        # 确保关闭数据库连接
-        if 'query' in locals():
-            query.close_db()
-    
-    # 测试新增的T_FUND_CENTER_ORDER STATUS=5数据查询功能
-    print("\n\n===== 测试T_FUND_CENTER_ORDER STATUS=5数据查询功能 =====")
-    try:
-        # 创建新的查询实例
-        query = CurrencyAmountQuery(env='FAT')
-        
-        # 使用与上面相同的日期范围
-        start_date = '2025-09-01'
-        end_date = '2025-09-30'
-        
-        # 执行查询，不指定币种查询所有币种
-        # 使用正确的参数名currency而非ccy
-        center_data = query.query_fund_center_status5(start_date, end_date)
-        
-        print(f"\nT_FUND_CENTER_ORDER STATUS=5数据查询完成，共获取 {len(center_data)} 条记录")
-        
-        # 打印前5条记录作为示例
-        if center_data:
-            print("\n前5条记录示例:")
-            for i, record in enumerate(center_data[:5]):
-                print(f"\n记录 {i+1}:")
-                # 使用get方法避免KeyError
-                print(f"  订单ID: {record.get('ORDER_NO', record.get('ID', 'N/A'))}")
-                print(f"  币种: {record.get('SOURCE_CCY', 'N/A')}")
-                print(f"  金额: {record.get('SOURCE_AMT', 'N/A')} {record.get('SOURCE_CCY', '')}")
-                print(f"  美元金额: {record.get('DEST_AMT', 'N/A')} USD")
-                print(f"  创建时间: {record.get('CREATE_AT', 'N/A')}")
-    
-    except Exception as e:
-        print(f"测试T_FUND_CENTER_ORDER STATUS=5数据查询功能时发生错误: {str(e)}")
-    finally:
-        # 确保关闭数据库连接
-        if 'query' in locals():
-            query.close_db()
+    # 确保关闭数据库连接
+    query.close_db()

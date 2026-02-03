@@ -36,28 +36,28 @@ def calculate_exchange_rates(target_ASK_rate, target_BID_rate, float_type="百�
         print(f"公式：target_ASK_rate * (1 + trade_float_ask / 100) * (1 + sale_float_ask / 100) * (1 + agent_float_ask / 100)")
         print(f"带入参数：{target_ASK_rate} * (1 + {trade_float_ask} / 100) * (1 + {sale_float_ask} / 100) * (1 + {agent_float_ask} / 100)")
         buy_rate = target_ASK_rate * (1 + trade_float_ask / 100) * (1 + sale_float_ask / 100) * (1 + agent_float_ask / 100)
-        print(f"当前用户汇率【客买方向】：{buy_rate} ----🚀🚀🚀{result_prefix}【客买方向】结果：{buy_rate}")
+        print(f"🚀🚀🚀{result_prefix}【客买方向】结果：{buy_rate}")
         
         # 客卖方向汇率 - 百分比浮动
         print(f"{float_type}浮动-客卖方向计算：")
         print(f"公式：target_BID_rate * (1 - trade_float_bid / 100) * (1 - sale_float_bid / 100) * (1 - agent_float_bid / 100)")
         print(f"带入参数：{target_BID_rate} * (1 - {trade_float_bid} / 100) * (1 - {sale_float_bid} / 100) * (1 - {agent_float_bid} / 100)")
         sell_rate = target_BID_rate * (1 - trade_float_bid/100)*(1 - sale_float_bid/100)*(1 - agent_float_bid/100)
-        print(f"当前用户汇率【客卖方向】：{sell_rate} ----🚀🚀🚀{result_prefix}【客卖方向】结果：{sell_rate}")
+        print(f"🚀🚀🚀{result_prefix}【客卖方向】结果：{sell_rate}")
     elif float_type == "BP":
         # 客买方向汇率 - BP浮动
         print(f"{float_type}浮动-客买方向计算：")
         print(f"公式：target_ASK_rate + trade_float_ask / 100 + sale_float_ask / 100 + agent_float_ask / 100")
         print(f"带入参数：{target_ASK_rate} + {trade_float_ask} / 100 + {sale_float_ask} / 100 + {agent_float_ask} / 100")
         buy_rate = target_ASK_rate + trade_float_ask/100 + sale_float_ask/100 + agent_float_ask/100
-        print(f"当前用户汇率【客买方向】：{buy_rate} ----🚀🚀🚀{result_prefix}【客买方向】结果：{buy_rate}")
+        print(f"🚀🚀🚀{result_prefix}【客买方向】结果：{buy_rate}")
         
         # 客卖方向汇率 - BP浮动
         print(f"{float_type}浮动-客卖方向计算：")
         print(f"公式：target_BID_rate - trade_float_bid / 100 - sale_float_bid / 100 - agent_float_bid / 100")
         print(f"带入参数：{target_BID_rate} - {trade_float_bid} / 100 - {sale_float_bid} / 100 - {agent_float_bid} / 100")
         sell_rate = target_BID_rate - trade_float_bid/100 - sale_float_bid/100 - agent_float_bid/100
-        print(f"当前用户汇率【客卖方向】：{sell_rate} ----🚀🚀🚀{result_prefix}【客卖方向】结果：{sell_rate}")
+        print(f"🚀🚀🚀{result_prefix}【客卖方向】结果：{sell_rate}")
     else:
         raise ValueError("浮动方式只能是 '百分比' 或 'BP'")
 

@@ -36,11 +36,11 @@ def calculate_spot_bid(forward_bid, swap_bid):
 # 示例用法：
 if __name__ == "__main__":
     # 已知数据点
-    spot_bid_example = 1988.21	  #
-    swap_bid_example = -2.2535
+    spot_bid_example = 698.12	  #
+    swap_bid_example = 	-4.4
 
-    spot_ask_example = 1988.43
-    swap_ask_example = -2.0633
+    spot_ask_example = 	698.15
+    swap_ask_example = 	-3.5
 
 
     forward_bid_result = calculate_forward_bid(spot_bid_example, swap_bid_example)
