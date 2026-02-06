@@ -39,7 +39,7 @@ URL : POST /front/decision/flow/api/execute       /front/decision/flow/node/api/
 """
 # FLOW_000048决策流 SEA000001
 data = {
-    "decisionFlowCode": "SEA00711",  # 决策流 CODE   SEA007   SEA000001  SEA0004
+    "decisionFlowCode": "SEA007",  # 决策流 CODE   SEA007   SEA000001  SEA0004
     "executeType": "SYNC",  # 执行方式（SYNC，ASYNC）
     "requestSerialId": "uuid-" + datetime.now().strftime("%Y%m%d%H%M%S"),  # 请求流水号
     "initiatingParty": "Python-sea129-SEA000001",  # 调用方
@@ -71,7 +71,7 @@ data = {
     "extensionData": {}
 }
 # 发送请求
-r = requests.post(url, json=data, headers={"Content-Type": "application/json", "accept": "*/*"})
+# r = requests.post(url, json=data, headers={"Content-Type": "application/json", "accept": "*/*"})
 # 电商结汇需要的参数值 NEW_FX_BD_DIANSHANG
 biz_data = {
     "externalItemId": 9918209,
@@ -92,7 +92,7 @@ biz_data = {
 }
 
 # 决策需要的参数数据
-data1 = {
+data = {
     "decisionFlowCode": "NEW_FX_BD_DIANSHANG",  # 决策流 CODE
     "executeType": "SYNC",  # 执行方式（SYNC，ASYNC）
     "requestSerialId": "uuid-" + datetime.now().strftime("%Y%m%d%H%M%S"),  # 请求流水号

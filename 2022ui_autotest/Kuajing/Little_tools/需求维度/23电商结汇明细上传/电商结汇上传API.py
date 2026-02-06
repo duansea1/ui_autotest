@@ -13,7 +13,10 @@ requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 class ECommerceSettlementUpload:
     def __init__(self):
         # 公共Cookie
-        self.cookie ="BF-INTERNATIONAL-MEMBER-TOKEN=3eyJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiI1MTgzMjQwNjI4MDAwMDI0Mjc4IiwiaWF0IjoxNzcwMDk5MTY5fQ.AbinHI206rdzvUg_ryt51-9S6YvQ4yjQTAkDiyZ8kEhSxBiV0SAW9LfHmmIeLMiyktZEbIFIYTf7WbcPxRdCXw; hinasdk_crossdata=%7B%22accountId%22%3A%225181240628000024148%22%2C%22deviceId%22%3A%222c654a76-91d4-4ba3-bc65-b4ce8885951f%22%2C%22anonymousId%22%3A%222c654a76-91d4-4ba3-bc65-b4ce8885951f%22%2C%22sessionId%22%3A%221770099299925_281117%22%2C%22firstVisitTime%22%3A1765416812597%2C%22props%22%3A%7B%22H_latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22H_latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%2C%22H_latest_referrer%22%3A%22%22%7D%7D"
+        self.cookie ="BF-INTERNATIONAL-MEMBER-TOKEN=3eyJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiI1MTgzMjQwODIzMDAwMDAwMjA4IiwiaWF0IjoxNzcwMjcyMjg2fQ.pp0aikeb7fATj7ZWuTsnjyOdXKmnAhBcrLgyX5BRmTS1JXKsONIb3mUWACraCnaISIix6HNJXqAHkBpxlzDZcg; hinasdk_crossdata=%7B%22accountId%22%3A%225181240823000000178%22%2C%22deviceId%22%3A%22f88719e3-804c-45ee-b146-1dd767ff7018%22%2C%22anonymousId%22%3A%22f88719e3-804c-45ee-b146-1dd767ff7018%22%2C%22sessionId%22%3A%221770272273460_408010%22%2C%22firstVisitTime%22%3A1770272273203%2C%22props%22%3A%7B%22H_latest_traffic_source_type%22%3A%22%E7%9B%B4%E6%8E%A5%E6%B5%81%E9%87%8F%22%2C%22H_latest_search_keyword%22%3A%22%E6%9C%AA%E5%8F%96%E5%88%B0%E5%80%BC_%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%22%2C%22H_latest_referrer%22%3A%22%22%7D%7D"
+
+
+
 
         # 模板文件路径
         self.template_path = r"c:\Users\段海洋\myfiles\auto_files\ui_autotest\2022ui_autotest\Kuajing\Little_tools\需求维度\23电商结汇明细上传\custom-电商收款-通用--一列1个商品-EUR.xlsx"
@@ -280,7 +283,7 @@ if __name__ == "__main__":
     uploader = ECommerceSettlementUpload()
     order_no, tracking_no = generate_order_and_tracking()
 
-    custom_data = {
+    custom_data1 = {
     0: "more20260203032",      # 订单号*
     1: "2026-01-26 10:00:00",  # 交易时间（YYYY-MM-DD HH:MM:SS）*
     2: "USD",                   # 交易币种*
@@ -302,7 +305,7 @@ if __name__ == "__main__":
 
     # 单个商品
     custom_data = {
-    0: "only202602030005",      # 订单号*
+    0: "only20260204005",      # 订单号*
     1: "2026-01-26 10:00:00",  # 交易时间（YYYY-MM-DD HH:MM:SS）*
     2: "PLN",                   # 交易币种*
     3: "2.24",                    # 交易金额*
