@@ -26,21 +26,30 @@ def get_db_config(env: str) -> dict:
             'database': 'BAOFU_CBA',
             'charset': 'utf8mb4',
             'cursorclass': DictCursor
-        }
-    }
+        },
+
+        'FAT_DATA': {
+            'host': '10.0.19.156',    # 数仓库
+            'port': 9030,
+            'user': 'bf_hpt',
+            'password': 'bf_hpt',
+            'database': 'BAOFU_CGW',  # 
+            'charset': 'utf8mb4',
+            # 'cursorclass': DictCursor
+    }}
     return configs.get(env, configs['FAT'])
 
 
 
 def get_db_config_topic(env: str) -> dict:
-    """璺ㄥ鏀粯绯荤粺鏁版嵁搴撻厤缃?-鏁颁粨"""
+    """"""
     configs = {
         'FAT': {
             'host': '10.0.19.156',
             'port': 9030,
             'user': 'bf_hpt',
             'password': 'bf_hpt',
-            'database': 'BAOFU_CGW',  # 娉ㄦ剰浣犳彁渚涚殑SQL涓槸 BAOFU_CBA 鑰屼笉鏄?BAOFU_CBCA
+            'database': 'BAOFU_CGW',  # 
             'charset': 'utf8mb4',
             # 'cursorclass': DictCursor
         }
