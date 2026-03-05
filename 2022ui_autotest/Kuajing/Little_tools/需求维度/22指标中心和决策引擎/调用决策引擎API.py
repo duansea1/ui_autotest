@@ -58,13 +58,13 @@ data = {
         "externalOrderId": 2601191010412064676,
         "TAG_ID": "2509021003000524137",
         "FX_BD_TRANAMT": 9999.9,      # 控制R10 、R02 
-        "CLIENT_90D_1000USD_ORDER_QTY": "12",  # R5 >11--TRUE 
+        "CLIENT_90D_1000USD_ORDER_QTY": "20%",  # R5 >11--TRUE 
         "FX_BD_ITEMNAME": "delllatitude牌",
         "FX_BD_PRICE": "1100.09",   #R6 >1200 --TRUE
         "CLIENT_90D_ORDERAMT": 0,
         "CHANNEL_RATE": 1.209292,
         "CLIENT_LABEL": "东方红,流失客户,潜在流失客户,电商",
-        "CLIENT_90D_5000USD_ORDER_QTY": "12",
+        "CLIENT_90D_5000USD_ORDER_QTY": "12%",
         "CLIENT_90D_5000USD_ORDER_QTYAMT": "0",      #R08
         "FX_BD_QTY": 31   #R02       (FX_BD_QTY=31  FX_BD_TRANAMT=4000）-flase   (FX_BD_QTY=20  FX_BD_TRANAMT=4000）-flase
     },  #指标中心传入的参数值(指标code)
@@ -86,7 +86,7 @@ biz_data = {
     "CLIENT_90D_ORDERAMT": 0,
     "CHANNEL_RATE": 1.209292,
     "CLIENT_LABEL": "东方红,流失客户,潜在流失客户,电商",
-    "CLIENT_90D_5000USD_ORDER_QTY": "12",
+    "CLIENT_90D_5000USD_ORDER_QTY": "12%",
     "CLIENT_90D_5000USD_ORDER_QTYAMT": "0",      #R08
     "FX_BD_QTY": 31   #R02       (FX_BD_QTY=31  FX_BD_TRANAMT=4000）-flase   (FX_BD_QTY=20  FX_BD_TRANAMT=4000）-flase
 }

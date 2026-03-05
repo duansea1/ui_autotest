@@ -241,6 +241,7 @@ def calculate_change_rate(currency_pair: str, closing_type: str, start_time: str
     # 计算当前价
     current_buy = latest_rate.get('buyRate', 0)
     current_sell = latest_rate.get('sellRate', 0)
+    # 当前价=(当前买入+当前卖出)/2 
     current_price = (current_buy + current_sell) / 2 if current_buy and current_sell else 0
     
     # 计算当日第一条汇率价格
@@ -277,10 +278,10 @@ def calculate_change_rate(currency_pair: str, closing_type: str, start_time: str
 if __name__ == "__main__":
     # 可配置参数
     env = 'FAT_DATA'  # 数据库环境参数
-    currency_pair = 'USD/VND'
+    currency_pair = 'USD/HKD'
     closing_type = 'TOD'
-    start_time = '2026-02-10 00:00:00'
-    end_time = '2026-02-10 23:59:59'
+    start_time = '2026-03-05 00:00:00'
+    end_time = '2026-03-05 23:59:59'
     channel_id = '1200923069'  # 1200923069-彭博
     
     # 测试单位=1（除以100）
