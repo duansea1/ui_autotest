@@ -87,6 +87,7 @@ def get_receipt_netting(
     """
     凭证轧差统计 - 通过参数控制统计维度
     """
+    # 构建WHERE条件
     where_clause, params = build_where_conditions(
         user_no=user_no,
         source_currency=source_currency,
@@ -95,6 +96,24 @@ def get_receipt_netting(
         update_time_start=update_time_start,
         update_time_end=update_time_end
     )
+    
+    # 生成详细的WHERE条件描述
+    where_description = []
+    if user_no:
+        where_description.append(f"用户号 = '{user_no}'")
+    if currency_pair:
+        where_description.append(f"货币对 = '{currency_pair}'")
+    elif source_currency or target_currency:
+        if source_currency:
+            where_description.append(f"源币种 = '{source_currency}'")
+        if target_currency:
+            where_description.append(f"目标币种 = '{target_currency}'")
+    if update_time_start:
+        where_description.append(f"更新时间 >= '{update_time_start}'")
+    if update_time_end:
+        where_description.append(f"更新时间 <= '{update_time_end}'")
+    where_description.append("交易状态 = 2 (已完成)")
+    where_desc_str = " AND ".join(where_description)
     
     group_fields = []
     select_fields = []
@@ -114,20 +133,37 @@ def get_receipt_netting(
         select_clause = select_clause + ", "
     
     sql = f"""
+    -- 查询凭证轧差统计
+    -- 筛选条件: {where_desc_str}
+    -- 分组方式: {group_clause or '无分组'}
+    
     SELECT 
         {select_clause}
-        SUM(CASE WHEN TRADE_DIRECTION = 1 THEN 1 ELSE 0 END) AS BUY_DIRECTION_COUNT,
-        SUM(CASE WHEN TRADE_DIRECTION = 2 THEN 1 ELSE 0 END) AS SELL_DIRECTION_COUNT,
-        SUM(CASE WHEN TRADE_DIRECTION = 1 THEN SALE_AMOUNT ELSE 0 END) AS BUY_DIRECTION_SALE_AMT,
-        SUM(CASE WHEN TRADE_DIRECTION = 1 THEN BUY_AMOUNT ELSE 0 END) AS BUY_DIRECTION_BUY_AMT,
-        SUM(CASE WHEN TRADE_DIRECTION = 2 THEN SALE_AMOUNT ELSE 0 END) AS SELL_DIRECTION_SALE_AMT,
-        SUM(CASE WHEN TRADE_DIRECTION = 2 THEN BUY_AMOUNT ELSE 0 END) AS SELL_DIRECTION_BUY_AMT,
-        MAX(COALESCE(PROFIT_CCY, '')) AS PROFIT_CCY,
-        SUM(CASE WHEN TRADE_DIRECTION = 1 THEN BUY_AMOUNT ELSE -SALE_AMOUNT END) AS NETTING_AMOUNT,
-        SUM(COALESCE(PROFIT_AMT, 0)) AS TOTAL_PROFIT_AMT,
-        SUM(COALESCE(SALES_PROFIT_AMT, 0)) AS TOTAL_SALES_PROFIT_AMT,
-        SUM(COALESCE(TRADES_PROFIT_AMT, 0)) AS TOTAL_TRADES_PROFIT_AMT,
-        COUNT(*) AS TRADE_COUNT
+        -- 方向统计
+        SUM(CASE WHEN TRADE_DIRECTION = 1 THEN 1 ELSE 0 END) AS BUY_DIRECTION_COUNT,     -- 买入方向交易笔数
+        SUM(CASE WHEN TRADE_DIRECTION = 2 THEN 1 ELSE 0 END) AS SELL_DIRECTION_COUNT,    -- 卖出方向交易笔数
+        
+        -- 买入方向金额
+        SUM(CASE WHEN TRADE_DIRECTION = 1 THEN SALE_AMOUNT ELSE 0 END) AS BUY_DIRECTION_SALE_AMT,   -- 买入方向卖出金额
+        SUM(CASE WHEN TRADE_DIRECTION = 1 THEN BUY_AMOUNT ELSE 0 END) AS BUY_DIRECTION_BUY_AMT,     -- 买入方向买入金额
+        
+        -- 卖出方向金额
+        SUM(CASE WHEN TRADE_DIRECTION = 2 THEN SALE_AMOUNT ELSE 0 END) AS SELL_DIRECTION_SALE_AMT,  -- 卖出方向卖出金额
+        SUM(CASE WHEN TRADE_DIRECTION = 2 THEN BUY_AMOUNT ELSE 0 END) AS SELL_DIRECTION_BUY_AMT,    -- 卖出方向买入金额
+        
+        -- 损益信息
+        MAX(COALESCE(PROFIT_CCY, '')) AS PROFIT_CCY,                                         -- 损益币种
+        
+        -- 轧差计算
+        SUM(CASE WHEN TRADE_DIRECTION = 1 THEN BUY_AMOUNT ELSE -SALE_AMOUNT END) AS NETTING_AMOUNT,  -- 轧差金额
+        
+        -- 损益统计
+        SUM(COALESCE(PROFIT_AMT, 0)) AS TOTAL_PROFIT_AMT,                                      -- 总损益
+        SUM(COALESCE(SALES_PROFIT_AMT, 0)) AS TOTAL_SALES_PROFIT_AMT,                          -- 销售员损益
+        SUM(COALESCE(TRADES_PROFIT_AMT, 0)) AS TOTAL_TRADES_PROFIT_AMT,                        -- 交易员损益
+        
+        -- 统计信息
+        COUNT(*) AS TRADE_COUNT                                                                -- 交易总笔数
     FROM BAOFU_TRADE.T_TRADE_RECEIPT
     WHERE {where_clause}
     """
@@ -251,12 +287,12 @@ def print_netting_result(result: List[Dict[str, Any]], title: str = "轧差统�
 if __name__ == "__main__":
     # ==================== 参数配置区 ====================
     env = 'FAT'                          # 环境: FAT / UAT
-    user_no = 5181240823000000178                       # 用户号，如 '123456'，None表示不筛选
-    currency_pair = 'EUR/USD'            # 货币对，如 'USD/CNH' 或 'USDCNH'，None表示不筛选
-    source_currency = "EUR"               # 源币种，如 'USD'，None表示不筛选
-    target_currency = "USD"               # 目标币种，如 'CNH'，None表示不筛选
-    update_time_start = "2026-02-01 00:00:00"             # 更新时间开始，如 '2025-01-01 00:00:00'
-    update_time_end = "2026-03-01 00:00:00"               # 更新时间结束，如 '2025-01-31 23:59:59'
+    user_no = None                       # 用户号，如 '123456'，None表示不筛选
+    currency_pair = 'USD/CNH'            # 货币对，如 'USD/CNH' 或 'USDCNH'，None表示不筛选
+    source_currency = "USD"               # 源币种，如 'USD'，None表示不筛选
+    target_currency = "CNH"               # 目标币种，如 'CNH'，None表示不筛选
+    update_time_start = "2026-03-01 00:00:00"             # 更新时间开始，如 '2025-01-01 00:00:00'
+    update_time_end = "2026-03-06 00:00:00"               # 更新时间结束，如 '2025-01-31 23:59:59'
     group_by_user = False                # 是否按用户分组
     group_by_currency = True             # 是否按货币对分组
     # ===================================================
