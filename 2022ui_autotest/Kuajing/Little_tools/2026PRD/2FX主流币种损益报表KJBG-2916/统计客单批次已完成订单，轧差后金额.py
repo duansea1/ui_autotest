@@ -12,6 +12,7 @@ from typing import Optional, List, Dict, Any
 import time
 
 exce_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+
 def parse_currency_pair(currency_pair: str) -> tuple:
     """
     解析货币对，返回源币种和目标币种

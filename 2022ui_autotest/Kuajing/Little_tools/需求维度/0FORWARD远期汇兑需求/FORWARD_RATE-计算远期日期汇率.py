@@ -38,8 +38,7 @@ if __name__ == '__main__':
     one_w_forward = 1957.1937  #1W远期报价    2W-3W同样适用，计算在标准汇率区间的Forward报价
     one_d_settlement_date = date(2025, 4, 20)  # 例如：2025-3-22作为1D交割日--
     one_w_settlement_date = date(2025, 4, 27)  # 例如：2025-3-28作为1W交割日
-    target_settlement_date = date(2025, 4, 26)  # 目标交割日期
-
+    target_settlement_date = date(2026, 4, 26)  # 目标交割日期6
     # 计算并打印结果
     quote = calculate_forward_quote(one_d_forward, one_w_forward, one_d_settlement_date, one_w_settlement_date,
                                     target_settlement_date)

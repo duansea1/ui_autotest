@@ -78,6 +78,17 @@ TEST_DATA_POOL = {
                             "storeNo": 0,               #
                             "remarks": "香港五五网络科技公司-fat-b2b-EUR-B2B收款账户"
                         },
+
+            "b2b_php": {
+                            "bankPayeeFeeCcy": "PHP",   # 渠道手续费币种 → VND越南盾
+                            "channelId": 1200923077 ,    # Payso-电商收款-API- E贸汇
+                            "payeeAccountNo": "P900100109721",  # 收款方虚拟银行账号
+                            "payeeCcy": "PHP",          # 入账币种：VND
+                            "payeeType": 3,             # 账号类型：3-B2B收款   
+                            "remitCcy": "PHP",          # 汇款币种：VND
+                            "storeNo": 0,               #
+                            "remarks": "香港五五网络科技公司-fat-b2b-VND-B2B收款账户"
+                        },
         },
         5181240628000024148: {  # 用户信息：手机号 13166210872，商户名 桐乡市高桥旭木汽车咨询服务部
             "cc_vnd": {
@@ -121,6 +132,16 @@ TEST_DATA_POOL = {
                 "remarks": "我的桐乡-fat-new-use-user-rule"
 
             },
+            "b2b_php": {
+                            "bankPayeeFeeCcy": "PHP",   # 渠道手续费币种 → VND越南盾
+                            "channelId": 1200923077 ,    # Payso-电商收款-API- E贸汇
+                            "payeeAccountNo": "P900100108612",  # 收款方虚拟银行账号
+                            "payeeCcy": "PHP",          # 入账币种：VND
+                            "payeeType": 3,             # 账号类型：3-B2B收款   
+                            "remitCcy": "PHP",          # 汇款币种：VND
+                            "storeNo": 0,               #
+                            "remarks": "桐乡-fat-b2b-VND-B2B收款账户"
+                        },
         }
     },
     "uat": {

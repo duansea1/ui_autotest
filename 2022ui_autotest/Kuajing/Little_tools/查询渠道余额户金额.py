@@ -88,4 +88,4 @@ if __name__ == '__main__':
 
     # 或者指定查询特定币种，例如 USD 和 EUR
     # query_jpm_accounts('FAT', ccys=['USD', 'EUR'])
-    query_jpm_accounts('FAT', params=['%渣打%'])  #--fat环境  渣打
+    query_jpm_accounts('UAT', params=['%渣打%'])  #--fat环境  渣打

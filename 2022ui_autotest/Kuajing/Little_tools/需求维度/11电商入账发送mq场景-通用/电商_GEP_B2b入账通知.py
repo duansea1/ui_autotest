@@ -138,9 +138,9 @@ def payee_income_mq(account_key=None, env="uat", userNo=None, max_retries=1):
                 "detailsId": generate_random_string(),
                 "payeeAccountName": "WAN ECOMMERCE SOLUTIONS SDN. BHD.",
                 "payeeAccountNo": test_data["payeeAccountNo"],  # 收款方账号
-                "payeeAmount": 50,  # 渠道入账金额 CHANNEL_ENTRY_CCY
+                "payeeAmount": 500,  # 渠道入账金额 CHANNEL_ENTRY_CCY
                 "payeeCcy": test_data["payeeCcy"],  # 渠道入账币种  HKD,EUR,GBP,SAR,ZAR,HUF,TRY,AED,USD,NOK,RON,KES,CZK,SEK
-                "payeeDate": "20250724",
+                "payeeDate": "20260324",
                 "payeeIncomeStatus": 2,
                 "payeeType": test_data["payeeType"],  # 账号类型 1-gep电商  3-B2B收款  2-gep汇兑收款   4-服贸交易
                 "payerAccountName": "seatongxiang",
@@ -150,7 +150,7 @@ def payee_income_mq(account_key=None, env="uat", userNo=None, max_retries=1):
                 "payerSwiftCode": "SVBKUS6SXXX",
                 "reference": "bank seasea111",
                 "remarks": test_data["remarks"],  # fat环境-上海一一网络科技有限公司-自动化--gep-电商收款账户
-                "remitAmount": 50,  # 渠道汇款金额
+                "remitAmount": 550,  # 渠道汇款金额
                 "remitCcy": test_data["remitCcy"],  # 渠道汇款币种
                 "remitPayerAddress": "29145 CRYSTAL RIDGE CT212amazon WeLLSFAGO ",
                 "reserveFieldOne": "UT1868854659089010579",
@@ -221,12 +221,14 @@ if __name__ == '__main__':
     #
     # ✅ 示例4：香港五五测试
     # payee_income_mq(account_key="shop_alone_hkd", env="fat", userNo=5181240821000008798)
-    # # ✅ 示例5：香港五五-b2b入账
-    # payee_income_mq(account_key="b2b_eur", env="fat", userNo=5181240821000008798)
+    # ✅ 示例5：香港五五-b2b入账   b2b_vnd \b2b_eur
+    payee_income_mq(account_key="b2b_php", env="fat", userNo=5181240821000008798)
 
 
     # local_eur_gbp
     # ✅ 示例4：桐乡
     # payee_income_mq(account_key="local_eur_gbp", env="fat", userNo=5181240628000024148)
     # ✅ 示例4：qiya
-    payee_income_mq(account_key="qiya_shop", env="fat", userNo=5181241126000123328)
+    # payee_income_mq(account_key="qiya_shop", env="fat", userNo=5181241126000123328)
+    # 桐乡-b2b入账
+    payee_income_mq(account_key="b2b_php", env="fat", userNo=5181240628000024148)
