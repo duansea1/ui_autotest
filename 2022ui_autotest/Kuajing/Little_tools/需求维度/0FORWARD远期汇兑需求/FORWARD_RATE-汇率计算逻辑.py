@@ -215,8 +215,3 @@ if __name__ == '__main__':
     # 卖出价计算
     non_std_ask = calculate_non_standard_forward(one_d_forward_ask, one_w_forward_ask, one_d_date, one_w_date, target_date)
     print(f"   目标日期({target_date})在{one_d_date}和{one_w_date}之间的汇率: 买入价={non_std_bid}, 卖出价={non_std_ask}")
-    
-    print("\n" + "=" * 50)
-    print("使用说明:")
-    print("1. 标准期限汇率: 修改掉期点参数，程序会自动计算对应期限的远期汇率")
-    print("2. 不标准期限汇率: 修改目标交割日期，程序会计算1D-1W之间的汇率")

@@ -22,18 +22,18 @@ TEST_DATA_POOL = {
                 "remarks": "fat环境-上海一一网络科技有限公司-自动化--gep-电商收款账户"
             }
         },
-    5181241126000123328: {
-            "qiya_shop": {
-                "bankPayeeFeeCcy": "EUR",   # 渠道手续费币种 (BANK_PAYEE_FEE_CCY)
-                "channelId": 1108701001,    # 收款渠道ID → BC
-                "payeeAccountNo": "20250527172221152",  # 收款方银行账号
-                "payeeCcy": "EUR",          # 渠道入账币种 (PAYEE_CCY)，即资金到账币种
-                "payeeType": 1,             # 账号类型 1-电商  3-B2B收款  2-gep收款  4-服贸交易
-                "remitCcy": "EUR",          # 汇款币种 (REMIT_CCY)，即出款行汇出币种
-                "storeNo": 2507161346006207661,  # 关联店铺号（电商平台专用），非电商则为0
-                "remarks": "fat环境-qiya"
-            }
-        },
+        5181241126000123328: {
+                "qiya_shop": {
+                    "bankPayeeFeeCcy": "EUR",   # 渠道手续费币种 (BANK_PAYEE_FEE_CCY)
+                    "channelId": 1108701001,    # 收款渠道ID → BC
+                    "payeeAccountNo": "20250527172221152",  # 收款方银行账号
+                    "payeeCcy": "EUR",          # 渠道入账币种 (PAYEE_CCY)，即资金到账币种
+                    "payeeType": 1,             # 账号类型 1-电商  3-B2B收款  2-gep收款  4-服贸交易
+                    "remitCcy": "EUR",          # 汇款币种 (REMIT_CCY)，即出款行汇出币种
+                    "storeNo": 2507161346006207661,  # 关联店铺号（电商平台专用），非电商则为0
+                    "remarks": "fat环境-qiya"
+                }
+            },
         5181240731000102528: {  # 用户信息：手机号 17681032993，姓名 董春旭
             "shop_ozon_cnh": {
                 "bankPayeeFeeCcy": "CNH",   # 渠道手续费币种 → CNH离岸人民币
@@ -136,11 +136,21 @@ TEST_DATA_POOL = {
                             "bankPayeeFeeCcy": "PHP",   # 渠道手续费币种 → VND越南盾
                             "channelId": 1200923077 ,    # Payso-电商收款-API- E贸汇
                             "payeeAccountNo": "P900100108612",  # 收款方虚拟银行账号
-                            "payeeCcy": "PHP",          # 入账币种：VND
+                            "payeeCcy": "PHP",          # 入账币种：php
                             "payeeType": 3,             # 账号类型：3-B2B收款   
-                            "remitCcy": "PHP",          # 汇款币种：VND
+                            "remitCcy": "PHP",          # 汇款币种：php
                             "storeNo": 0,               #
-                            "remarks": "桐乡-fat-b2b-VND-B2B收款账户"
+                            "remarks": "桐乡-fat-PHP-B2B收款账户"
+                        },
+            "b2b_gbp": {
+                            "bankPayeeFeeCcy": "GBP",   # 渠道手续费币种 → GBP, EUR, CHF, HKD, DKK, USD, CAD, MYR, VND, CNY, THB, AUD, KRW, IDR, SEK, NZD, PHP, CNH, RUB 
+                            "channelId": 1200923050 ,    # CurrencyCloud - 电商平台
+                            "payeeAccountNo": "GB85TCCL12345669644978",  # 收款方虚拟银行账号
+                            "payeeCcy": "GBP",          # 入账币种：php
+                            "payeeType": 3,             # 账号类型：3-B2B收款   
+                            "remitCcy": "GBP",          # 汇款币种：php
+                            "storeNo": 0,               #
+                            "remarks": "桐乡-fatGBP-B2B收款账户"
                         },
         }
     },
@@ -166,7 +176,7 @@ TEST_DATA_POOL = {
                 "storeNo": 0,               # B2B无店铺概念
                 "remarks": "我的桐乡-uat-B2B收款账户"
             },
-            "bank_php": {
+            "b2b_php": {
                 "bankPayeeFeeCcy": "PHP",   # 渠道手续费币种 → PHP菲律宾比索
                 "channelId": 1200923079,    # 收款渠道ID → PesoPay - B2B本地化渠道
                 "payeeAccountNo": "P900100110260",  # 本地收款账号（PesoPay分配）

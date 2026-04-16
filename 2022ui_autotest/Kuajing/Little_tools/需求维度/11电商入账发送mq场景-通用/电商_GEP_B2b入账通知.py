@@ -222,7 +222,7 @@ if __name__ == '__main__':
     # ✅ 示例4：香港五五测试
     # payee_income_mq(account_key="shop_alone_hkd", env="fat", userNo=5181240821000008798)
     # ✅ 示例5：香港五五-b2b入账   b2b_vnd \b2b_eur
-    payee_income_mq(account_key="b2b_php", env="fat", userNo=5181240821000008798)
+    # payee_income_mq(account_key="b2b_php", env="fat", userNo=5181240821000008798)
 
 
     # local_eur_gbp
@@ -230,5 +230,7 @@ if __name__ == '__main__':
     # payee_income_mq(account_key="local_eur_gbp", env="fat", userNo=5181240628000024148)
     # ✅ 示例4：qiya
     # payee_income_mq(account_key="qiya_shop", env="fat", userNo=5181241126000123328)
-    # 桐乡-b2b入账
-    payee_income_mq(account_key="b2b_php", env="fat", userNo=5181240628000024148)
+    # 桐乡-b2b入账b2b_gbp b2b_php
+    # payee_income_mq(account_key="b2b_php", env="fat", userNo=5181240628000024148)
+    # uat--桐乡  2026.4.14
+    payee_income_mq(account_key="b2b_php", env="uat", userNo=5181240702000026848)
