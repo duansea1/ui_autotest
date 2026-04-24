@@ -232,5 +232,5 @@ if __name__ == '__main__':
     # payee_income_mq(account_key="qiya_shop", env="fat", userNo=5181241126000123328)
     # 桐乡-b2b入账b2b_gbp b2b_php
     # payee_income_mq(account_key="b2b_php", env="fat", userNo=5181240628000024148)
-    # uat--桐乡  2026.4.14
-    payee_income_mq(account_key="b2b_php", env="uat", userNo=5181240702000026848)
+    # uat--桐乡  2026.4.14  电商KRW tx_shop_krw   b2b:b2b_jpy
+    payee_income_mq(account_key="tx_shop_krw", env="uat", userNo=5181240702000026848)

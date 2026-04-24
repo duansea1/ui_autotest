@@ -166,13 +166,33 @@ TEST_DATA_POOL = {
                 "storeNo": 2407221607000032510,  # 店铺号 → uat环境电商店铺
                 "remarks": "uat环境-桐乡--gep-电商收款账户"
             },
-            "bank_pln": {
+            "tx_shop_krw": {
+                "bankPayeeFeeCcy": "KRW",   # 渠道手续费币种 → EUR欧元
+                "channelId": 1200923114,    # 收款渠道ID → SENTBE-KRW收款渠道
+                "payeeAccountNo": "30000000000839",  # 收款账号（Adyen提供，丹麦格式）
+                "payeeCcy": "KRW",          # 入账币种：EUR
+                "payeeType": 1,             # 账号类型：1=gep电商收款
+                "remitCcy": "KRW",          # 汇款币种：EUR
+                "storeNo": 2604011739000519867,  # 店铺号 → uat环境电商店铺
+                "remarks": "uat环境-桐乡--gep-电商收款账户-KRW-coupang"
+            },
+            "b2b_pln": {
                 "bankPayeeFeeCcy": "PLN",   # 渠道手续费币种 → PLN波兰兹罗提
                 "channelId": 1200923053,    # 收款渠道ID → CurrencyCloud - B2B收款
                 "payeeAccountNo": "79900202404773",  # 共用虚拟账号（B2B业务线）
                 "payeeCcy": "PLN",          # 入账币种：PLN
                 "payeeType": 3,             # 账号类型：3=B2B收款
                 "remitCcy": "PLN",          # 汇款币种：PLN
+                "storeNo": 0,               # B2B无店铺概念
+                "remarks": "我的桐乡-uat-B2B收款账户"
+            },
+            "b2b_jpy": {
+                "bankPayeeFeeCcy": "JPY",   # 渠道手续费币种 → PLN波兰兹罗提
+                "channelId": 1200923053,    # 收款渠道ID → CurrencyCloud - B2B收款
+                "payeeAccountNo": "79900202404773",  # 共用虚拟账号（B2B业务线）
+                "payeeCcy": "JPY",          # 入账币种：PLN
+                "payeeType": 3,             # 账号类型：3=B2B收款
+                "remitCcy": "JPY",          # 汇款币种：PLN
                 "storeNo": 0,               # B2B无店铺概念
                 "remarks": "我的桐乡-uat-B2B收款账户"
             },

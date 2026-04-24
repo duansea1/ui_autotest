@@ -14,10 +14,10 @@ from icecream import ic
 
 
 def create_user(env):
-    """新增代理商用户"""
+    """新增代理商用户 注册账号 邮箱注册"""
 
     data = {
-        "email": "140@111.com"
+        "email": "141@111.com"
     }
 
     # 获取秘钥相关信息

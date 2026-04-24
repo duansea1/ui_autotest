@@ -294,7 +294,7 @@ if __name__ == "__main__":
     insert_bind_and_request_records_auto_plat(
         env='FAT',
         user_no=5181240628000024148,    # 平台用户号5181240628000024148-桐乡
-        seller_id="SEA20251112AUTO-4",  # 需要修改为唯一的，不然每次会变
+        seller_id="SEA20251112AUTO-6",  # 需要修改为唯一的，不然每次会变
         seller_cert_no="92330483MA2JGLRF7A",
         country="CHN",
         seller_name="autoTest-sea-ozon0001",
