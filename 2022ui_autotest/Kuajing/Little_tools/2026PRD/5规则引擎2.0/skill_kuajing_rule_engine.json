@@ -1,0 +1,582 @@
+{
+  "skill_name": "kuajing-rule-engine-analyzer",
+  "description": "跨境支付系统规则引擎2.0数据库表分析技能。用于分析SQL日志、还原完整SQL、判断业务功能是否符合预期。",
+  "version": "1.0.0",
+  "last_updated": "2026-06-02",
+  "databases": {
+    "BAOFU_CRM": {
+      "description": "跨境支付CRM核心业务库",
+      "tables": {
+        "T_RULE_ENGINE": {
+          "description": "规则引擎主表",
+          "primary_key": "ID",
+          "key_fields": {
+            "RULE_ID": "规则ID，例如：RULE_000001",
+            "RULE_NAME": "规则名称",
+            "RULE_TYPE": "规则类型，默认script",
+            "EL": "EL表达式",
+            "STATUS": "状态:normal, delete",
+            "ENABLE": "是否启用（1-启用，0-禁用）",
+            "PUBLISH_STATUS": "发布状态:unpublished/preview/publish/offline",
+            "STRATEGY_TYPE": "策略分类",
+            "RISK_FLAG_HIT": "命中风险标识 no=无风险 yes=有风险"
+          },
+          "indexes": ["IDX_RULE_NAME", "IDX_CREATE_TIME"],
+          "usage": "存储规则引擎的核心规则配置，包含EL表达式、输入输出参数等"
+        },
+        "T_DECISION_FLOW": {
+          "description": "决策流主表",
+          "primary_key": "ID",
+          "key_fields": {
+            "DECISION_FLOW_ID": "决策流ID",
+            "DECISION_NAME": "决策流名称",
+            "DECISION_TYPE": "决策类型 API-实时；JOB-跑批",
+            "DECISION_SCENE": "决策场景 TAGGING-打标签；CLOSING_USER-关闭商户",
+            "CRON_EXPRESSION": "CRON表达式",
+            "INPUT_PARAMS": "入参 JSON格式",
+            "PUBLISH_STATUS": "发布状态",
+            "EL": "表达式",
+            "EXTEND": "扩展字段"
+          },
+          "usage": "定义决策流的整体配置，包括决策类型、触发方式、输入参数等"
+        },
+        "T_BATCH_TAGGING_DETAIL": {
+          "description": "规则打标明细表",
+          "primary_key": "ID",
+          "key_fields": {
+            "BATCH_NO": "批次号",
+            "RULE_ID": "规则ID",
+            "DECISION_FLOW_ID": "决策流ID",
+            "DECISION_FLOW_DESC": "决策流描述",
+            "DATA_SOURCE_ID": "数据源编号",
+            "USER_NO": "用户号",
+            "STATUS": "状态:process, success, fail"
+          },
+          "usage": "记录规则打标的执行明细，用于追踪每条数据的处理结果"
+        },
+        "T_BATCH_TAGGING_STATS": {
+          "description": "规则打标统计表",
+          "primary_key": "ID",
+          "key_fields": {
+            "BATCH_NO": "批次号",
+            "RULE_ID": "规则ID",
+            "TOTAL_COUNT": "总条数",
+            "SUCCESS_COUNT": "成功条数",
+            "FAIL_COUNT": "失败条数",
+            "MISS_COUNT": "未命中条数"
+          },
+          "usage": "统计规则打标的整体执行情况，包括成功/失败/未命中数量"
+        },
+        "T_EXEC_DECISION_FLOW_HISTORY": {
+          "description": "决策流执行记录表",
+          "primary_key": "ID",
+          "key_fields": {
+            "DECISION_FLOW_ID": "决策流ID",
+            "INPUT_PARAMS": "入参 JSON格式",
+            "INITIATING_PARTY": "发起方",
+            "STATUS": "执行状态：SUCCESS、FAIL",
+            "ERROR_CODE": "错误码",
+            "ERROR_MSG": "错误描述",
+            "COST_TIME": "执行耗时（ms）",
+            "FLOW_NAME": "流程名称",
+            "CALL_RULE_LIST": "调用规则集信息"
+          },
+          "usage": "记录决策流的执行历史，用于问题追踪和性能分析"
+        },
+        "T_BATCH_EXEC_DECISION_FLOW_HISTORY": {
+          "description": "决策流跑批执行记录表",
+          "primary_key": "ID",
+          "key_fields": {
+            "DECISION_FLOW_ID": "决策流ID",
+            "RULE_ID": "规则ID",
+            "SUCCESS_COUNT": "成功数量",
+            "FAILED_COUNT": "失败数量",
+            "COST_TIME": "执行总耗时（ms）"
+          },
+          "usage": "记录跑批型决策流的执行统计"
+        },
+        "T_DECISION_ACTION": {
+          "description": "决策流动作表",
+          "primary_key": "ID",
+          "key_fields": {
+            "ACTION_ID": "动作ID",
+            "ACTION_TYPE": "动作类型",
+            "ACTION_CODE": "动作CODE",
+            "ACTION_DESC": "动作描述",
+            "STATUS": "状态:normal, delete",
+            "ACTION_OPERATE": "操作",
+            "DECISION_ACTION_SCENE": "动作场景"
+          },
+          "usage": "定义决策流中可执行的动作/操作"
+        },
+        "T_DECISION_DATA_SOURCE": {
+          "description": "决策流数据源表",
+          "primary_key": "ID",
+          "key_fields": {
+            "DATA_SOURCE_ID": "数据源ID",
+            "DATA_SOURCE_NAME": "数据源名称",
+            "DATA_SOURCE_DESC": "数据源描述",
+            "SCRIPT": "脚本",
+            "DB_SOURCE": "数据源类型（默认mysql）"
+          },
+          "usage": "配置决策流所需的数据来源"
+        },
+        "T_RULE_SCRIPT": {
+          "description": "脚本表",
+          "primary_key": "ID",
+          "key_fields": {
+            "SCRIPT_ID": "脚本ID",
+            "SCRIPT_NAME": "脚本名字",
+            "SCRIPT_CONTENT": "脚本内容",
+            "SCRIPT_TYPE": "脚本类型",
+            "SCRIPT_LANGUAGE": "脚本语言 java、javascript、groovy"
+          },
+          "usage": "存储规则脚本代码"
+        },
+        "T_CUSTOMER_ORG": {
+          "description": "企业客户表",
+          "primary_key": "ID",
+          "key_fields": {
+            "CUSTOMER_NO": "客户编号",
+            "NAME": "企业名称",
+            "LEGAL_NAME": "法人姓名",
+            "LEGAL_ID_NO": "法人证件号",
+            "REGISTER_ADDRESS": "注册地址",
+            "RISK_STATUS": "法人风控名单状态"
+          },
+          "usage": "存储企业客户的基本信息和法人信息"
+        },
+        "T_CUSTOMER_PERSONAL": {
+          "description": "个人客户表",
+          "primary_key": "ID",
+          "key_fields": {
+            "CUSTOMER_NO": "客户编号",
+            "NAME": "用户姓名",
+            "ID_TYPE": "证件类型",
+            "ID_NO": "证件号",
+            "PHONE_NUMBER": "手机号"
+          },
+          "usage": "存储个人客户的基本信息"
+        },
+        "T_CUSTOMER_STAKEHOLDER": {
+          "description": "客户干系人信息表",
+          "primary_key": "ID",
+          "key_fields": {
+            "RECORD_NO": "记录编号",
+            "CUSTOMER_NO": "客户编号",
+            "STAKEHOLDER_TYPE": "干系人类型: 1-收益人 2-董事 3-控股股东",
+            "NAME": "姓名",
+            "ID_TYPE": "证件类型",
+            "ID_NO": "证件号",
+            "SHAREHOLDER_RATIO": "持股比率",
+            "RISK_STATUS": "干系人风控名单状态"
+          },
+          "usage": "存储客户的干系人信息，包括股东、董事等"
+        },
+        "T_DIR_COUNTRY": {
+          "description": "国家信息表",
+          "primary_key": "ID",
+          "key_fields": {
+            "COUNTRY_NAME": "中文名称",
+            "EN_NAME": "英文名",
+            "COUNTRY_CODE": "国家代码"
+          },
+          "usage": "国家基础数据字典"
+        },
+        "T_CONST_DICT": {
+          "description": "常量数据字典表",
+          "primary_key": "ID",
+          "key_fields": {
+            "CONST_ID": "常量编号",
+            "CONST_NAME": "常量类别名",
+            "CONST_VAL": "常量值",
+            "CONST_CN_DESC": "中文描述"
+          },
+          "usage": "系统常量字典，用于配置各种枚举值"
+        }
+      }
+    },
+    "PAYFUL_BRMS": {
+      "description": "规则引擎BRMS业务库",
+      "tables": {
+        "T_PARAM_RELATION": {
+          "description": "参数关联表",
+          "primary_key": "ID",
+          "key_fields": {
+            "CODE": "指标CODE",
+            "SCENE": "场景",
+            "BIZ_ID": "关联业务ID",
+            "STATUS": "状态:normal, delete",
+            "TARGET_SOURCE": "参数来源",
+            "PUBLISH_STATUS": "发布状态:preview/publish/offline/cancel_preview",
+            "RULE_VERSION": "规则版本",
+            "DECISION_FLOW_VERSION": "规则集版本"
+          },
+          "indexes": ["IDX_CODE_AND_BIZ_ID", "IDX_CREATE_AT"],
+          "usage": "关联参数与业务对象的关系，用于参数配置和分发"
+        },
+        "T_RULE_ENGINE_DRAFT": {
+          "description": "规则引擎草稿表",
+          "primary_key": "ID",
+          "key_fields": {
+            "RULE_ID": "规则ID",
+            "RULE_NAME": "规则名称",
+            "RULE_TYPE": "规则类型",
+            "EL": "EL表达式",
+            "INPUT_PARAMS_TYPE": "输入参数格式定义",
+            "OUTPUT_PARAMS_TYPE": "输出参数格式定义",
+            "SCRIPT_CONFIG": "配置字段",
+            "STATUS": "状态:normal, delete",
+            "PUBLISH_STATUS": "发布状态",
+            "SCRIPT_ID": "脚本编号",
+            "SCRIPT_NAME": "脚本名称",
+            "SCRIPT_CONTENT": "脚本内容",
+            "SCRIPT_TYPE": "脚本类型",
+            "SCRIPT_LANGUAGE": "脚本语言",
+            "RISK_FLAG_HIT": "命中风险标识"
+          },
+          "usage": "规则编辑时的草稿存储，支持版本管理"
+        },
+        "T_RULE_ENGINE_PREV_PUBLISH": {
+          "description": "规则引擎灰度发布表",
+          "primary_key": "ID",
+          "key_fields": {
+            "RULE_ID": "规则ID",
+            "RULE_NAME": "规则名称",
+            "PUBLISH_STATUS": "预发布状态:preview/cancel_preview"
+          },
+          "usage": "灰度发布版本的规则存储，支持预发布验证"
+        },
+        "T_RULE_ENGINE_PUBLISH": {
+          "description": "规则引擎发布表",
+          "primary_key": "ID",
+          "key_fields": {
+            "RULE_ID": "规则ID",
+            "RULE_NAME": "规则名称",
+            "PUBLISH_STATUS": "发布状态:publish/offline"
+          },
+          "usage": "正式发布版本的规则存储，用于生产环境执行"
+        },
+        "T_DECISION_FLOW_DRAFT": {
+          "description": "决策流草稿表",
+          "primary_key": "ID",
+          "key_fields": {
+            "DECISION_FLOW_ID": "归属决策流ID",
+            "DECISION_NAME": "决策流名称",
+            "DECISION_TYPE": "决策类型 API-实时；JOB-跑批",
+            "DECISION_SCENE": "决策场景 TAGGING-打标签；CLOSING_USER-关闭商户",
+            "DECISION_FLOW_CODE": "决策CODE",
+            "ARRANGEMENT_METHOD": "编排方式，PAR-并行；SER-串行",
+            "API_ADDRESS": "调用地址",
+            "INPUT_PARAMS": "入参 JSON格式",
+            "PUBLISH_STATUS": "发布状态",
+            "EXTEND": "扩展字段"
+          },
+          "usage": "决策流编辑时的草稿存储"
+        },
+        "T_DECISION_FLOW_PREV_PUBLISH": {
+          "description": "决策流灰度发布表",
+          "primary_key": "ID",
+          "key_fields": {
+            "DECISION_FLOW_ID": "决策流ID",
+            "DECISION_NAME": "决策流名称",
+            "PUBLISH_STATUS": "发布状态:preview/cancel_preview"
+          },
+          "usage": "灰度发布版本的决策流"
+        },
+        "T_DECISION_FLOW_PUBLISH": {
+          "description": "决策流发布表",
+          "primary_key": "ID",
+          "key_fields": {
+            "DECISION_FLOW_ID": "决策流ID",
+            "DECISION_NAME": "决策流名称",
+            "PUBLISH_STATUS": "发布状态:publish/offline"
+          },
+          "usage": "正式发布版本的决策流"
+        },
+        "T_DECISION_FLOW_VERSION": {
+          "description": "决策流版本变动表",
+          "primary_key": "ID",
+          "key_fields": {
+            "DECISION_FLOW_ID": "决策流ID",
+            "DECISION_NAME": "决策流名称",
+            "DECISION_TYPE": "决策类型",
+            "DECISION_SCENE": "决策场景",
+            "CRON_EXPRESSION": "CRON表达式",
+            "PUBLISH_VERSION": "发布版本",
+            "FLOW_VERSION": "决策流版本号",
+            "STATUS": "状态:normal, delete",
+            "PREV_PUBLISH_VERSION": "预发布版本"
+          },
+          "usage": "记录决策流的版本变更历史"
+        },
+        "T_DECISION_NODE": {
+          "description": "流程节点信息表",
+          "primary_key": "ID",
+          "key_fields": {
+            "NODE_CODE": "节点CODE",
+            "BELONG_FLOW_CODE": "所属流程CODE",
+            "NODE_NAME": "节点名称",
+            "NODE_SEQ": "节点顺序",
+            "NODE_TYPE": "节点类型(reject、pass、manual等)",
+            "COMPONENT_TYPE": "组件类型(start,end,switch等)",
+            "COMPONENT_INPUT_PARAMS": "组件入参信息",
+            "COMPONENT_OUTPUT_PARAMS": "组件出参信息",
+            "COMPONENT_CONFIG": "组件配置信息",
+            "TRIGGER_CONDITION": "触发条件表达式",
+            "STATUS": "状态:normal, delete",
+            "IS_CALC": "是否参与运算：yes/no",
+            "IS_PUBLISH": "是否发布：yes/no"
+          },
+          "usage": "定义决策流中的各个节点及其配置"
+        },
+        "T_DECISION_NODE_PREV_PUBLISH": {
+          "description": "流程节点信息灰度发布表",
+          "primary_key": "ID",
+          "usage": "灰度发布版本的节点配置"
+        },
+        "T_DECISION_NODE_PUBLISH": {
+          "description": "流程节点信息发布表",
+          "primary_key": "ID",
+          "usage": "正式发布版本的节点配置"
+        },
+        "T_CONNECT_EDGE": {
+          "description": "流程节点连接表",
+          "primary_key": "ID",
+          "key_fields": {
+            "BELONG_FLOW_CODE": "所属流程",
+            "FROM_NODE_CODE": "来源节点CODE",
+            "TO_NODE_CODE": "目标节点CODE",
+            "CONNECTION_TYPE": "条件类型",
+            "CONDITION_EXPR": "表达式",
+            "NODE_STATUS": "节点状态"
+          },
+          "usage": "定义决策流中节点之间的连接关系"
+        },
+        "T_CONNECT_EDGE_PUBLISH": {
+          "description": "流程节点连接发布表",
+          "primary_key": "ID",
+          "usage": "正式发布版本的节点连接"
+        },
+        "T_RULE_SET": {
+          "description": "规则集主表",
+          "primary_key": "ID",
+          "key_fields": {
+            "RULE_SET_CODE": "规则集编码",
+            "RULE_SET_NAME": "规则集名称",
+            "INPUT_PARAM": "入参列表",
+            "OUTPUT_PARAM": "出参列表",
+            "STATUS": "状态:normal, delete",
+            "PUBLISH_STATUS": "发布状态",
+            "STRATEGY_TYPE": "策略分类",
+            "DAG_VALIDATION_STATUS": "DAG校验状态：PENDING/VALID/INVALID",
+            "RISK_FLAG_HIT": "命中风险标识"
+          },
+          "usage": "定义规则集的整体配置"
+        },
+        "T_RULE_SET_DRAFT": {
+          "description": "规则集草稿表",
+          "primary_key": "ID",
+          "usage": "规则集编辑时的草稿"
+        },
+        "T_RULE_SET_PREV_PUBLISH": {
+          "description": "规则集灰度发布表",
+          "primary_key": "ID",
+          "usage": "灰度发布版本的规则集"
+        },
+        "T_RULE_SET_PUBLISH": {
+          "description": "规则集发布表",
+          "primary_key": "ID",
+          "usage": "正式发布版本的规则集"
+        },
+        "T_RULE_SET_VERSION": {
+          "description": "规则集版本表",
+          "primary_key": "ID",
+          "key_fields": {
+            "RULE_SET_CODE": "规则集编码",
+            "PUBLISH_STATUS": "发布状态",
+            "CANVAS_CONFIG": "画布配置JSON",
+            "SCRIPT_CONTENT": "脚本内容",
+            "ACTION": "动作",
+            "CURRENT_DECISION_FLOWS": "当前关联决策流"
+          },
+          "usage": "记录规则集的版本变更历史"
+        },
+        "T_RULE_RULE_SET_RELATION": {
+          "description": "规则-规则集关联关系表",
+          "primary_key": "ID",
+          "key_fields": {
+            "RULE_ID": "规则ID",
+            "RULE_SET_CODE": "规则集编码",
+            "NODE_CODE": "节点编号",
+            "NODE_TYPE": "节点类型",
+            "IS_CALC": "是否参与运算",
+            "PUBLISH_STATUS": "发布状态"
+          },
+          "usage": "建立规则与规则集的关联关系"
+        },
+        "T_RULE_RULE_SET_PUBLISH_RELATION": {
+          "description": "规则-规则集发布关联关系表",
+          "primary_key": "ID",
+          "usage": "正式版本的规则-规则集关联"
+        },
+        "T_RULE_DECISION_RELATION": {
+          "description": "规则策略关联表",
+          "primary_key": "ID",
+          "key_fields": {
+            "RULE_ID": "规则ID",
+            "SCENE_TYPE": "场景",
+            "DECISION_FLOW_ID": "决策流ID",
+            "STATUS": "状态:normal, delete",
+            "PUBLISH_STATUS": "发布状态",
+            "RULE_VERSION": "规则版本",
+            "DECISION_FLOW_VERSION": "决策流版本"
+          },
+          "usage": "关联规则与决策流的策略关系"
+        },
+        "T_RULE_SET_DECISION_RELATION": {
+          "description": "规则集策略关联表",
+          "primary_key": "ID",
+          "key_fields": {
+            "RULE_SET_CODE": "规则集编码",
+            "SCENE_TYPE": "场景",
+            "DECISION_FLOW_ID": "决策流ID",
+            "PUBLISH_STATUS": "发布状态",
+            "RULE_SET_VERSION": "规则集版本号"
+          },
+          "usage": "关联规则集与决策流"
+        },
+        "T_RULE_CALL_LOG": {
+          "description": "规则调用履历表",
+          "primary_key": "ID",
+          "key_fields": {
+            "RULE_CODE": "被调用规则编号",
+            "RULE_DESC": "被调用规则描述",
+            "CALL_TIME": "调用时间",
+            "CALLER": "调用方",
+            "VERSION": "规则版本号",
+            "STATUS_CODE": "调用状态码",
+            "INPUT_PARAM": "入参列表",
+            "OUTPUT_PARAM": "出参列表",
+            "CALL_RESULT": "调用结果（SUCCESS/FAIL）"
+          },
+          "usage": "记录规则的每次调用，用于审计和问题追踪"
+        },
+        "T_EXEC_DECISION_FLOW_HISTORY": {
+          "description": "决策流执行记录表",
+          "primary_key": "ID",
+          "key_fields": {
+            "REQUEST_SERIAL_NO": "请求流水号",
+            "DECISION_FLOW_ID": "决策流ID",
+            "INPUT_PARAMS": "入参 JSON格式",
+            "INITIATING_PARTY": "发起方",
+            "OUTPUT_PARAMS": "出参 JSON格式",
+            "DECISION_FLOW_VERSION": "决策流版本号",
+            "STATUS": "执行状态：SUCCESS、FAIL",
+            "ERROR_CODE": "错误码",
+            "ERROR_MSG": "错误描述",
+            "COST_TIME": "执行耗时（ms）",
+            "SCENE": "执行场景",
+            "EXECUTE_RESULT": "执行结果",
+            "CALL_ID": "调用编号"
+          },
+          "usage": "记录决策流的执行历史"
+        },
+        "T_PARAMETER": {
+          "description": "参数表",
+          "primary_key": "ID",
+          "key_fields": {
+            "PARAM_TYPE": "参数类型（入参、出参）",
+            "PARAM_CODE": "参数CODE",
+            "PARAM_NAME": "参数名称",
+            "DATA_TYPE": "数据类型",
+            "PARAM_SOURCE": "参数来源",
+            "STATUS": "状态:normal, delete",
+            "REFERENCE_VALUE": "参考值"
+          },
+          "usage": "定义规则引擎的输入输出参数"
+        },
+        "T_SYSTEM_FUNCTION": {
+          "description": "系统函数表",
+          "primary_key": "ID",
+          "key_fields": {
+            "FUNCTION_CODE": "函数ID",
+            "FUNCTION_NAME": "函数名",
+            "FUNCTION_DESC": "函数描述",
+            "FUNCTION_SCRIPT": "函数脚本内容",
+            "USAGE_EXAMPLE": "用法示意",
+            "FUNCTION_TYPE": "函数类型：math/string/date/custom",
+            "RETURN_TYPE": "返回类型",
+            "CACHE_KEY": "缓存标识"
+          },
+          "usage": "系统内置函数库"
+        },
+        "T_SYSTEM_PARAM": {
+          "description": "系统参数表",
+          "primary_key": "ID",
+          "key_fields": {
+            "PARAM_CODE": "参数CODE",
+            "PARAM_NAME": "参数名",
+            "PARAM_DESC": "参数说明",
+            "PARAM_TYPE": "参数类型",
+            "STATUS": "状态:normal, delete",
+            "REFERENCE_VALUE": "参考值",
+            "RISK_REMARKS": "对风控备注",
+            "CUSTOMER_REMARKS": "对客备注"
+          },
+          "usage": "系统级参数配置"
+        },
+        "T_DATA_ROLE": {
+          "description": "数据权限表",
+          "primary_key": "ID",
+          "key_fields": {
+            "APPLY_SCENE": "适用场景",
+            "BIZ_DATA_CODE": "业务数据项编码",
+            "DATA_TYPE": "数据分类类型",
+            "BUSINESS_TABLE_NAME": "业务数据表名",
+            "PRINCIPAL_TYPE": "权限主体类型（用户、部门）",
+            "ROLE_ID": "关联指标编号",
+            "PERMISSION_LEVEL": "权限级别（可见、可编辑）"
+          },
+          "usage": "配置数据权限控制"
+        },
+        "T_TEST_PASS_RECORD": {
+          "description": "测试通过记录表",
+          "primary_key": "ID",
+          "key_fields": {
+            "TYPE": "类型: rule, rule_set, decision_flow",
+            "BIZ_CODE": "业务编号",
+            "VERSION": "版本号",
+            "TEST_RESULT": "测试结果: pass"
+          },
+          "usage": "记录测试通过的配置"
+        }
+      }
+    }
+  },
+  "common_fields": {
+    "STATUS": "状态字段，通常值为 normal/delete，查询时需排除delete",
+    "CREATE_AT": "创建时间",
+    "UPDATE_AT": "更新时间",
+    "CREATE_BY": "创建人",
+    "UPDATE_BY": "更新人",
+    "VERSION": "版本号",
+    "REMARKS": "备注"
+  },
+  "publish_status_meanings": {
+    "draft": "草稿",
+    "preview": "预发布/灰度",
+    "publish": "正式发布",
+    "offline": "下线",
+    "cancel_preview": "取消预发布",
+    "unpublished": "未发布"
+  },
+  "decision_types": {
+    "API": "实时决策",
+    "JOB": "跑批决策"
+  },
+  "decision_scenes": {
+    "TAGGING": "打标签",
+    "CLOSING_USER": "关闭商户"
+  }
+}

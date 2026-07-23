@@ -91,6 +91,24 @@ biz_data = {
     "FX_BD_QTY": 31   #R02       (FX_BD_QTY=31  FX_BD_TRANAMT=4000）-flase   (FX_BD_QTY=20  FX_BD_TRANAMT=4000）-flase
 }
 
+biz_date = {
+     "externalItemId": "9985494",
+  "ABS_ORDERAMT_SUM_QTY_PRICR": "0",
+  "CLIENT_90D_1000USD_ORDER_QTYAMT": "0",
+  "externalOrderId": "2602110329419414986",
+  "TAG_ID": "2509021003000524137",
+  "FX_BD_TRANAMT": "100",
+  "CLIENT_90D_1000USD_ORDER_QTY": "0.00%",
+  "FX_BD_ITEMNAME": "吹风机",
+  "FX_BD_PRICE": "100",
+  "CLIENT_90D_ORDERAMT": "5",
+  "CHANNEL_RATE": "1",
+  "CLIENT_LABEL": "东方红",
+  "CLIENT_90D_5000USD_ORDER_QTY": "0.00%",
+  "CLIENT_90D_5000USD_ORDER_QTYAMT": "0",
+  "FX_BD_QTY": "1"
+}
+
 # 决策需要的参数数据
 data = {
     "decisionFlowCode": "NEW_FX_BD_DIANSHANG",  # 决策流 CODE

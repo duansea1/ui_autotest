@@ -270,19 +270,19 @@ def update_bind_status(
 # 使用示例
 # ========================
 if __name__ == "__main__":
-    # insert_bind_and_request_records_auto_plat(
-    #     env='UAT',
-    #     user_no=5181240702000026848,
-    #     seller_id="SEA20250911AUTO",    #需要修改为唯一的，不然每次会变
-    #     seller_cert_no="92330483MA2JGLRF7A",
-    #     country="CHN",
-    #     seller_name="自动测试sea-平台",
-    #     store_url="https://ozon.ru/seller/auto",
-    #     settle_currency="CNH",
-    #     config_filter="WB-CNH"  # 可改为 "OZON-CNH"、  WB-CNH
-    # )
+    insert_bind_and_request_records_auto_plat(
+        env='UAT',
+        user_no=5181240702000026848,
+        seller_id="SEA20250911AUTO-11",    #需要修改为唯一的，不然每次会变
+        seller_cert_no="92330483MA2JGLRF7A",
+        country="CHN",
+        seller_name="自动测试sea-平台",
+        store_url="https://ozon.ru/seller/auto",
+        settle_currency="CNH",
+        config_filter="WB-CNH"  # 可改为 "OZON-CNH"、  WB-CNH
+    )
 
-    # # 示例参数，请根据实际情况修改
+    # # # 示例参数，请根据实际情况修改
     # update_seller_cert_no_simple(
     #     env='UAT',  # 环境：FAT/UAT/PROD
     #     seller_id="SEA20250915AUTO",  # 卖家ID
@@ -291,17 +291,17 @@ if __name__ == "__main__":
     # )
 
     # 新增ozon或wb的绑定记录
-    insert_bind_and_request_records_auto_plat(
-        env='FAT',
-        user_no=5181240628000024148,    # 平台用户号5181240628000024148-桐乡
-        seller_id="SEA20251112AUTO-6",  # 需要修改为唯一的，不然每次会变
-        seller_cert_no="92330483MA2JGLRF7A",
-        country="CHN",
-        seller_name="autoTest-sea-ozon0001",
-        store_url="https://ozon.ru/seller/auto",
-        settle_currency="CNH",
-        config_filter="OZON-CNH"  # 可改为 "OZON-CNH"、  WB-CNH
-    )
+    # insert_bind_and_request_records_auto_plat(
+    #     env='FAT',
+    #     user_no=5181240628000024148,    # 平台用户号5181240628000024148-桐乡
+    #     seller_id="SEA20251112AUTO-10",  # 需要修改为唯一的，不然每次会变
+    #     seller_cert_no="92330483MA2JGLRF7A",
+    #     country="CHN",
+    #     seller_name="autoTest-sea-ozon0010",
+    #     store_url="https://ozon.ru/seller/auto",
+    #     settle_currency="CNH",
+    #     config_filter="OZON-CNH"  # 可改为 "OZON-CNH"、  WB-CNH
+    # )
     
     # 更新绑定状态示例
     # 请根据实际情况修改以下参数

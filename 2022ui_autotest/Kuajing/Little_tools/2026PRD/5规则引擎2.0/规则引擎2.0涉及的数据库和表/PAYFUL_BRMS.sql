@@ -1,0 +1,1206 @@
+/*
+ Navicat Premium Dump SQL
+
+ Source Server         : 跨境-Fat环境
+ Source Server Type    : MySQL
+ Source Server Version : 50721 (5.7.21-log)
+ Source Host           : 10.0.19.206:3306
+ Source Schema         : PAYFUL_BRMS
+
+ Target Server Type    : MySQL
+ Target Server Version : 50721 (5.7.21-log)
+ File Encoding         : 65001
+
+ Date: 02/06/2026 10:03:25
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for PAYFUL_BRMS.T_PARAMETER
+-- ----------------------------
+DROP TABLE IF EXISTS `PAYFUL_BRMS.T_PARAMETER`;
+CREATE TABLE `PAYFUL_BRMS.T_PARAMETER`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `PARAM_TYPE` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '参数类型 (入参、出参)',
+  `PARAM_CODE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '参数CODE (唯一编码)',
+  `PARAM_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '参数名称',
+  `PARAM_DESC` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数描述',
+  `DATA_TYPE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '数据类型',
+  `PARAM_SOURCE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '参数来源',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`ID`) USING BTREE,
+  UNIQUE INDEX `UK_PARAM_CODE`(`PARAM_CODE`) USING BTREE,
+  INDEX `IDX_DATA_TYPE`(`DATA_TYPE`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '参数表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_CONNECT_EDGE
+-- ----------------------------
+DROP TABLE IF EXISTS `T_CONNECT_EDGE`;
+CREATE TABLE `T_CONNECT_EDGE`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `BELONG_FLOW_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属流程',
+  `FROM_NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '来源节点CODE',
+  `TO_NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '目标节点CODE',
+  `CONNECTION_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '条件类型',
+  `CONDITION_EXPR` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表达式',
+  `NODE_STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点状态',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_FROM_TO_NODE`(`FROM_NODE_CODE`, `TO_NODE_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3486 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程节点连接表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_CONNECT_EDGE_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_CONNECT_EDGE_PUBLISH`;
+CREATE TABLE `T_CONNECT_EDGE_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `BELONG_FLOW_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属流程',
+  `FROM_NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '来源节点CODE',
+  `TO_NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '目标节点CODE',
+  `CONNECTION_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '条件类型',
+  `CONDITION_EXPR` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表达式',
+  `NODE_STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点状态',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_FROM_TO_NODE`(`FROM_NODE_CODE`, `TO_NODE_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1362 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程节点连接发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_DATA_ROLE
+-- ----------------------------
+DROP TABLE IF EXISTS `T_DATA_ROLE`;
+CREATE TABLE `T_DATA_ROLE`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `APPLY_SCENE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '适用场景',
+  `BIZ_DATA_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '业务数据项编码（唯一标识）',
+  `DATA_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '数据分类类型',
+  `BUSINESS_TABLE_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '业务数据表名',
+  `PRINCIPAL_TYPE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限主体类型 (用户、部门)',
+  `ROLE_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '关联指标编号（与指标关联表对应）',
+  `PERMISSION_LEVEL` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限级别可见、可编辑',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal-正常, delete-删除',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人账号',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人账号',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注信息',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_BIZ_DATA_CODE`(`BIZ_DATA_CODE`) USING BTREE,
+  INDEX `IDX_BUSINESS_TABLE_NAME`(`BUSINESS_TABLE_NAME`) USING BTREE,
+  INDEX `IDX_ROLE_ID`(`ROLE_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '数据权限表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_DECISION_CONNECT_EDGE_PREV_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_DECISION_CONNECT_EDGE_PREV_PUBLISH`;
+CREATE TABLE `T_DECISION_CONNECT_EDGE_PREV_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `BELONG_FLOW_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属流程',
+  `FROM_NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '来源节点CODE',
+  `TO_NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '目标节点CODE',
+  `CONNECTION_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '条件类型',
+  `CONDITION_EXPR` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表达式',
+  `NODE_STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点状态',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_BELONG_FLOW_CODE`(`BELONG_FLOW_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 574 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程灰度发布节点连接表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_DECISION_FLOW_DRAFT
+-- ----------------------------
+DROP TABLE IF EXISTS `T_DECISION_FLOW_DRAFT`;
+CREATE TABLE `T_DECISION_FLOW_DRAFT`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `DECISION_FLOW_ID` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '归属决策流ID',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '状态',
+  `CREATE_BY` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `DECISION_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策流名称',
+  `DECISION_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策类型 API-实时；JOB-跑批',
+  `DECISION_SCENE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策场景 TAGGING-打标签；CLOSING_USER-关闭商户',
+  `EXTEND` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展字段',
+  `ARRANGEMENT_METHOD` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'PAR' COMMENT '编排方式，PAR-并行；SER-串行',
+  `API_ADDRESS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '调用地址',
+  `API_METHOD` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '调用方法',
+  `API_METHOD_SUB` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '调用子方法',
+  `INPUT_PARAMS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '入参 JSON格式',
+  `DECISION_FLOW_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策CODE',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布状态',
+  `EL` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表达式',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `idx_draft_flow_id`(`DECISION_FLOW_ID`) USING BTREE,
+  INDEX `idx_draft_status`(`STATUS`) USING BTREE,
+  INDEX `idx_draft_update_at`(`UPDATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '决策流草稿表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_DECISION_FLOW_PREV_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_DECISION_FLOW_PREV_PUBLISH`;
+CREATE TABLE `T_DECISION_FLOW_PREV_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `DECISION_FLOW_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策流ID',
+  `DECISION_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策流名称',
+  `DECISION_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策类型 API-实时；JOB-跑批',
+  `DECISION_SCENE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策场景 TAGGING-打标签；CLOSING_USER-关闭商户',
+  `EXTEND` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展字段',
+  `ARRANGEMENT_METHOD` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'PAR' COMMENT '编排方式，PAR-并行；SER-串行',
+  `API_ADDRESS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '调用地址',
+  `API_METHOD` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '调用方法',
+  `API_METHOD_SUB` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '调用子方法',
+  `INPUT_PARAMS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '入参 JSON格式',
+  `DECISION_FLOW_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策CODE',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `EL` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表达式',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '发布状态: preview-预发布， cancel_preview-取消预发布',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_DECISION_FLOW_ID`(`DECISION_FLOW_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 66 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '决策流灰度发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_DECISION_FLOW_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_DECISION_FLOW_PUBLISH`;
+CREATE TABLE `T_DECISION_FLOW_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `DECISION_FLOW_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策流ID',
+  `DECISION_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策流名称',
+  `DECISION_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策类型 API-实时；JOB-跑批',
+  `DECISION_SCENE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策场景 TAGGING-打标签；CLOSING_USER-关闭商户',
+  `EXTEND` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展字段',
+  `ARRANGEMENT_METHOD` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'PAR' COMMENT '编排方式，PAR-并行；SER-串行',
+  `API_ADDRESS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '调用地址',
+  `API_METHOD` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '调用方法',
+  `API_METHOD_SUB` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '调用子方法',
+  `INPUT_PARAMS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '入参 JSON格式',
+  `DECISION_FLOW_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策CODE',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `EL` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表达式',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布状态',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_DECISION_FLOW_ID`(`DECISION_FLOW_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '决策流发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_DECISION_FLOW_VERSION
+-- ----------------------------
+DROP TABLE IF EXISTS `T_DECISION_FLOW_VERSION`;
+CREATE TABLE `T_DECISION_FLOW_VERSION`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `DECISION_FLOW_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策流ID',
+  `DECISION_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策流名称',
+  `DECISION_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策类型 API-实时；JOB-跑批',
+  `DECISION_SCENE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策场景 TAGGING-打标签；CLOSING_USER-关闭商户',
+  `ARRANGEMENT_METHOD` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'PAR' COMMENT '编排方式，PAR-并行；SER-串行',
+  `API_ADDRESS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '调用地址',
+  `API_METHOD` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '调用方法',
+  `API_METHOD_SUB` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '调用子方法',
+  `INPUT_PARAMS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '入参 JSON格式',
+  `CRON_EXPRESSION` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'CRON表达式',
+  `CRON_EXPRESSION_DESC` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'CRON表达式描述',
+  `RELATION_JOB_ID` bigint(20) NULL DEFAULT NULL COMMENT '关联的定时任务ID，决策流为跑批时必填',
+  `PUBLISH_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布版本',
+  `DECISION_FLOW_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '决策CODE',
+  `FLOW_OWNER` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布者',
+  `FLOW_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '决策流版本号',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `EL` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表达式',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'unpublished' COMMENT '发布状态',
+  `PREV_PUBLISH_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '预发布版本',
+  `EXTEND` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展字段',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_DECISION_FLOW_ID`(`DECISION_FLOW_ID`) USING BTREE,
+  INDEX `IDX_DECISION_NAME`(`DECISION_NAME`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 328 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '决策流版本变动表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_DECISION_NODE
+-- ----------------------------
+DROP TABLE IF EXISTS `T_DECISION_NODE`;
+CREATE TABLE `T_DECISION_NODE`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点CODE',
+  `BELONG_FLOW_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属流程CODE',
+  `NODE_NAME` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点名称',
+  `NODE_SEQ` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点顺序(start,end,rule)',
+  `NODE_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点类型(reject、pass、manual等)',
+  `COMPONENT_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '组件类型(start，end,switch等)',
+  `COMPONENT_INPUT_PARAMS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '组件入参信息',
+  `COMPONENT_OUTPUT_PARAMS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '组件出参信息',
+  `COMPONENT_SUPER_CLASS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件类',
+  `COMPONENT_CONFIG` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '组件配置信息',
+  `ORDER_FIELD` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '排序字段',
+  `TRIGGER_CONDITION` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '触发条件表达式',
+  `TRIGGER_FIELD` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '触发条件字段',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `STYLE_CONFIG` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '节点样式配置信息',
+  `IS_CALC` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'no' COMMENT '是否参与运算：yes-是，no-否',
+  `IS_PUBLISH` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'no' COMMENT '是否发布',
+  `PUBLISH_VERSION` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'v1' COMMENT '发布版本',
+  `TF_FOLLOW` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'T/F跟随判断：true-有三个点(直入、TRUE、FALSE)，false-有两个点(直入、直出)',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_NODE_CODE`(`NODE_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3517 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程节点信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_DECISION_NODE_PREV_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_DECISION_NODE_PREV_PUBLISH`;
+CREATE TABLE `T_DECISION_NODE_PREV_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点CODE',
+  `BELONG_FLOW_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属流程CODE',
+  `NODE_NAME` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点名称',
+  `NODE_SEQ` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点顺序(start,end,rule)',
+  `NODE_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点类型(reject、pass、manual等)',
+  `COMPONENT_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '组件类型(normal,if,switch等)',
+  `COMPONENT_INPUT_PARAMS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '组件入参信息',
+  `COMPONENT_OUTPUT_PARAMS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '组件出参信息',
+  `COMPONENT_SUPER_CLASS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件类',
+  `COMPONENT_CONFIG` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '组件配置信息',
+  `STYLE_CONFIG` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '节点样式配置信息',
+  `IS_PUBLISH` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'no' COMMENT '是否发布：yes-是，no-否',
+  `PUBLISH_VERSION` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'v1' COMMENT '发布版本',
+  `IS_CALC` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'no' COMMENT '是否参与运算：yes-是，no-否',
+  `ORDER_FIELD` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '排序字段',
+  `TRIGGER_CONDITION` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '触发条件表达式',
+  `TRIGGER_FIELD` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '触发条件字段',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '发布状态: preview-预发布， cancel_preview-取消预发布',
+  `TF_FOLLOW` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'T/F跟随判断：true-有三个点(直入、TRUE、FALSE)，false-有两个点(直入、直出)',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_BELONG_FLOW_CODE`(`BELONG_FLOW_CODE`) USING BTREE,
+  INDEX `IDX_NODE_CODE`(`NODE_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 576 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程节点信息灰度发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_DECISION_NODE_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_DECISION_NODE_PUBLISH`;
+CREATE TABLE `T_DECISION_NODE_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点CODE',
+  `BELONG_FLOW_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属流程CODE',
+  `NODE_NAME` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点名称',
+  `NODE_SEQ` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点顺序(start,end,rule)',
+  `NODE_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点类型(reject、pass、manual等)',
+  `COMPONENT_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '组件类型(normal,if,switch等)',
+  `COMPONENT_INPUT_PARAMS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '组件入参信息',
+  `COMPONENT_OUTPUT_PARAMS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '组件出参信息',
+  `COMPONENT_SUPER_CLASS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件类',
+  `COMPONENT_CONFIG` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '组件配置信息',
+  `STYLE_CONFIG` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '节点样式配置信息',
+  `IS_PUBLISH` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'no' COMMENT '是否发布：yes-是，no-否',
+  `PUBLISH_VERSION` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'v1' COMMENT '发布版本',
+  `IS_CALC` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'no' COMMENT '是否参与运算：yes-是，no-否',
+  `ORDER_FIELD` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '排序字段',
+  `TRIGGER_CONDITION` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '触发条件表达式',
+  `TRIGGER_FIELD` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '触发条件字段',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布状态: publish-发布， offline-下线',
+  `TF_FOLLOW` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'T/F跟随判断：true-有三个点(直入、TRUE、FALSE)，false-有两个点(直入、直出)',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_NODE_CODE`(`NODE_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1415 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '流程节点信息发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_EXEC_DECISION_FLOW_HISTORY
+-- ----------------------------
+DROP TABLE IF EXISTS `T_EXEC_DECISION_FLOW_HISTORY`;
+CREATE TABLE `T_EXEC_DECISION_FLOW_HISTORY`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `REQUEST_SERIAL_NO` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '请求流水号',
+  `DECISION_FLOW_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '决策流ID',
+  `INPUT_PARAMS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '入参 JSON格式',
+  `INITIATING_PARTY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '发起方（哪个服务发起的）',
+  `OUTPUT_PARAMS` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '出参 JSON格式',
+  `DECISION_FLOW_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '决策流版本号',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '执行状态：SUCCESS、FAIL',
+  `ERROR_CODE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '错误码',
+  `ERROR_MSG` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '错误描述',
+  `COST_TIME` int(11) NULL DEFAULT NULL COMMENT '执行耗时，单位：ms',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` int(10) UNSIGNED NOT NULL COMMENT '版本号',
+  `EXECUTE_AT` timestamp NOT NULL COMMENT '执行时间',
+  `SCENE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '执行场景',
+  `EXECUTE_RESULT` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '执行结果',
+  `CALL_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '调用编号',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_REQUEST_SERIAL_NO`(`REQUEST_SERIAL_NO`) USING BTREE,
+  INDEX `IDX_DECISION_FLOW_ID`(`DECISION_FLOW_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 85727 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '决策流执行记录表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_PARAMETER
+-- ----------------------------
+DROP TABLE IF EXISTS `T_PARAMETER`;
+CREATE TABLE `T_PARAMETER`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `PARAM_TYPE` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '参数类型 (入参、出参)',
+  `PARAM_CODE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '参数CODE (唯一编码)',
+  `PARAM_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '参数名称',
+  `PARAM_DESC` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数描述',
+  `DATA_TYPE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '数据类型',
+  `PARAM_SOURCE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '参数来源',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `REFERENCE_VALUE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参考值',
+  PRIMARY KEY (`ID`) USING BTREE,
+  UNIQUE INDEX `UK_PARAM_CODE`(`PARAM_CODE`, `VERSION`) USING BTREE,
+  INDEX `IDX_DATA_TYPE`(`DATA_TYPE`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '参数表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_PARAM_RELATION
+-- ----------------------------
+DROP TABLE IF EXISTS `T_PARAM_RELATION`;
+CREATE TABLE `T_PARAM_RELATION`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '指标CODE',
+  `SCENE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '场景',
+  `BIZ_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '关联业务ID',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `TARGET_SOURCE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '参数来源',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'publish' COMMENT '发布状态: preview-预发布 publish-发布 offline-下线 cancel_preview-取消预发布',
+  `RULE_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则版本',
+  `DECISION_FLOW_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则集版本',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_CODE_AND_BIZ_ID`(`CODE`, `BIZ_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1966 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '参数关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_CALL_LOG
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_CALL_LOG`;
+CREATE TABLE `T_RULE_CALL_LOG`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `RULE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '被调用规则编号',
+  `RULE_DESC` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '被调用规则描述',
+  `CALL_TIME` datetime NOT NULL COMMENT '调用时间',
+  `CALLER` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '调用方',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '调用时的规则版本号',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal-正常, delete-删除',
+  `STATUS_CODE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '调用状态码（如SUCCESS、FAIL）',
+  `STATUS_DESC` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '状态描述（如失败原因）',
+  `INPUT_PARAM` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '入参列表',
+  `OUTPUT_PARAM` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '出参列表',
+  `CALL_RESULT` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '调用结果（SUCCESS、FAIL）',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人账号',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注信息',
+  `CALL_LOG_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_CODE`(`RULE_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_TIME`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 241028 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则调用履历表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_CONNECT_EDGE
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_CONNECT_EDGE`;
+CREATE TABLE `T_RULE_CONNECT_EDGE`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `RULE_SET_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属规则集',
+  `FROM_NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '来源节点CODE',
+  `TO_NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '目标节点CODE',
+  `CONNECTION_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '条件类型',
+  `CONDITION_EXPR` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表达式',
+  `NODE_STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点状态',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_SET_CODE`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1229 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则集节点连接表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_CONNECT_EDGE_PREV_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_CONNECT_EDGE_PREV_PUBLISH`;
+CREATE TABLE `T_RULE_CONNECT_EDGE_PREV_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `RULE_SET_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属规则集',
+  `FROM_NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '来源节点CODE',
+  `TO_NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '目标节点CODE',
+  `CONNECTION_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '条件类型',
+  `CONDITION_EXPR` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表达式',
+  `NODE_STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点状态',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_SET_CODE`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 424 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则集节点连接灰度发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_CONNECT_EDGE_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_CONNECT_EDGE_PUBLISH`;
+CREATE TABLE `T_RULE_CONNECT_EDGE_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `RULE_SET_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属规则集',
+  `FROM_NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '来源节点CODE',
+  `TO_NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '目标节点CODE',
+  `CONNECTION_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '条件类型',
+  `CONDITION_EXPR` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '表达式',
+  `NODE_STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点状态',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `EDGE_DESC` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '边描述',
+  `EXTRA` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '额外属性(JSON格式)',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_SET_CODE`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 149 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则集节点连接发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_DECISION_RELATION
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_DECISION_RELATION`;
+CREATE TABLE `T_RULE_DECISION_RELATION`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `RULE_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '指标CODE',
+  `SCENE_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '场景',
+  `DECISION_FLOW_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '决策流ID',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT 'unpublished' COMMENT '发布状态',
+  `RULE_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '发布状态',
+  `DECISION_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '发布状态',
+  `DECISION_FLOW_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '决策流版本',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_ID_AND_DECISION_FLOW_ID`(`RULE_ID`, `DECISION_FLOW_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 903 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '规则策略关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_ENGINE_DRAFT
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_ENGINE_DRAFT`;
+CREATE TABLE `T_RULE_ENGINE_DRAFT`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `RULE_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则ID 例如：RULE_000001',
+  `RULE_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'script' COMMENT '规则类型',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布状态: publish-发布， offline-下线',
+  `RULE_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则名称',
+  `RULE_DESC` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则描述',
+  `STRATEGY_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '策略分类',
+  `EL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'EL表达式',
+  `INPUT_PARAMS_TYPE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '输入参数格式定义， JSON格式',
+  `OUTPUT_PARAMS_TYPE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '输出参数格式定义， JSON格式',
+  `SCRIPT_CONFIG` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '配置字段',
+  `ENABLE` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否启用（1-启用，0-禁用）',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `SCRIPT_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本编号',
+  `SCRIPT_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本名称',
+  `SCRIPT_CONTENT` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本内容',
+  `SCRIPT_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本类型',
+  `SCRIPT_LANGUAGE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本语言 java、javascript、 groovy',
+  `PREV_PUBLISH_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '预发布版本',
+  `PUBLISH_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布版本',
+  `RISK_FLAG_HIT` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'no' COMMENT '命中风险标识 no=无风险 yes=有风险',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_ID`(`RULE_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 174 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则引擎草稿表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_ENGINE_PREV_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_ENGINE_PREV_PUBLISH`;
+CREATE TABLE `T_RULE_ENGINE_PREV_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `RULE_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则ID 例如：RULE_000001',
+  `RULE_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'script' COMMENT '规则类型',
+  `RULE_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则名称',
+  `RULE_DESC` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则描述',
+  `EL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'EL表达式',
+  `INPUT_PARAMS_TYPE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '输入参数格式定义， JSON格式',
+  `OUTPUT_PARAMS_TYPE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '输出参数格式定义， JSON格式',
+  `SCRIPT_CONFIG` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '配置字段',
+  `ENABLE` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否启用（1-启用，0-禁用）',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `STRATEGY_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '策略分类',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '预发布状态: preview-预发，cancel_preview-取消预发布',
+  `RISK_FLAG_HIT` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'no' COMMENT '命中风险标识 no=无风险 yes=有风险',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_ID`(`RULE_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 175 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则引擎灰度发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_ENGINE_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_ENGINE_PUBLISH`;
+CREATE TABLE `T_RULE_ENGINE_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `RULE_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则ID 例如：RULE_000001',
+  `RULE_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'script' COMMENT '规则类型',
+  `RULE_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则名称',
+  `RULE_DESC` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则描述',
+  `EL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'EL表达式',
+  `INPUT_PARAMS_TYPE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '输入参数格式定义， JSON格式',
+  `OUTPUT_PARAMS_TYPE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '输出参数格式定义， JSON格式',
+  `SCRIPT_CONFIG` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '配置字段',
+  `ENABLE` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否启用（1-启用，0-禁用）',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `STRATEGY_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '策略分类',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布状态: publish-发布， offline-下线',
+  `RISK_FLAG_HIT` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'no' COMMENT '命中风险标识 no=无风险 yes=有风险',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_ID`(`RULE_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 129 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则引擎发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_PUBLISH_HISTORY
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_PUBLISH_HISTORY`;
+CREATE TABLE `T_RULE_PUBLISH_HISTORY`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `RULE_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则ID',
+  `RULE_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则名称',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '发布状态: preview-预发布 publish-发布 offline-下线 cancel_preview-取消预发布',
+  `CURRENT_DECISION_FLOWS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '当前关联决策流列表',
+  `CURRENT_RULE_SETS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '当前关联规则集列表',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '数据状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_ID`(`RULE_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则发布履历表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_RULE_SET_PRVE_RELATION
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_RULE_SET_PRVE_RELATION`;
+CREATE TABLE `T_RULE_RULE_SET_PRVE_RELATION`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `RULE_SET_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集编码',
+  `RULE_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则ID',
+  `NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点编号',
+  `NODE_DESC` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点描述',
+  `NODE_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点类型',
+  `NODE_SUB_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点子类型',
+  `IS_CALC` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'no' COMMENT '是否参与运算：yes-是，no-否',
+  `CANVAS_CONFIG` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '渲染配置',
+  `TRIGGER_CONDITION` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '触发条件表达式',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '发布状态: preview-预发布 publish-发布 offline-下线 cancel_preview-取消预发布',
+  `CUSTOM_CONFIG` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '自定义信息配置',
+  `TF_FOLLOW` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'false' COMMENT 'T/F跟随判断：true-有三个点(直入、TRUE、FALSE)，false-有两个点(直入、直出)',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `RULE_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则版本号',
+  `RULE_SET_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则版本号',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_SET`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_RULE_ID`(`RULE_ID`) USING BTREE,
+  INDEX `IDX_RULE_SET_ID`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 413 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则-规则集预发布关联关系表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_RULE_SET_PUBLISH_RELATION
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_RULE_SET_PUBLISH_RELATION`;
+CREATE TABLE `T_RULE_RULE_SET_PUBLISH_RELATION`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `RULE_SET_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集编码',
+  `RULE_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则ID',
+  `NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点编号',
+  `NODE_DESC` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点描述',
+  `NODE_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点类型',
+  `NODE_SUB_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点子类型',
+  `IS_CALC` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'no' COMMENT '是否参与运算：yes-是，no-否',
+  `CANVAS_CONFIG` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '渲染配置',
+  `TRIGGER_CONDITION` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '触发条件表达式',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '发布状态: preview-预发布 publish-发布 offline-下线 cancel_preview-取消预发布',
+  `CUSTOM_CONFIG` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '自定义信息配置',
+  `TF_FOLLOW` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'false' COMMENT 'T/F跟随判断：true-有三个点(直入、TRUE、FALSE)，false-有两个点(直入、直出)',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `RULE_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则版本号',
+  `RULE_SET_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则版本号',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_SET`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_RULE_ID`(`RULE_ID`) USING BTREE,
+  INDEX `IDX_RULE_SET_ID`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 143 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则-规则集发布关联关系表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_RULE_SET_RELATION
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_RULE_SET_RELATION`;
+CREATE TABLE `T_RULE_RULE_SET_RELATION`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '关联ID',
+  `RULE_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则ID',
+  `NODE_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点编号',
+  `RULE_SET_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集编码',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `NODE_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '节点类型',
+  `IS_CALC` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'no' COMMENT '是否参与运算：yes-是，no-否',
+  `CANVAS_CONFIG` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '渲染配置',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '发布状态: preview-预发布 publish-发布 offline-下线 cancel_preview-取消预发布',
+  `NODE_SUB_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点子类型',
+  `NODE_DESC` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '节点描述',
+  `CUSTOM_CONFIG` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '自定义信息配置',
+  `TRIGGER_CONDITION` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '触发条件表达式',
+  `TF_FOLLOW` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '1' COMMENT 'T/F跟随判断：true-有三个点(直入、TRUE、FALSE)，false-有两个点(直入、直出)',
+  `RULE_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则版本号',
+  `RULE_SET_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则版本号',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_VERSION_RULE_SET`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_RULE_ID`(`RULE_ID`) USING BTREE,
+  INDEX `IDX_RULE_SET_ID`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1479 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则-规则集关联关系表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_SCRIPT_PREV_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_SCRIPT_PREV_PUBLISH`;
+CREATE TABLE `T_RULE_SCRIPT_PREV_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `SCRIPT_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本ID',
+  `SCRIPT_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本名字',
+  `SCRIPT_CONTENT` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本内容',
+  `SCRIPT_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'script' COMMENT '脚本类型',
+  `SCRIPT_LANGUAGE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'groovy' COMMENT '脚本语言 java、javascript、\r\n            groovy',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_SCRIPT_ID`(`SCRIPT_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 177 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则引擎脚本灰度发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_SCRIPT_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_SCRIPT_PUBLISH`;
+CREATE TABLE `T_RULE_SCRIPT_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `SCRIPT_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本ID',
+  `SCRIPT_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本名字',
+  `SCRIPT_CONTENT` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本内容',
+  `SCRIPT_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'script' COMMENT '脚本类型',
+  `SCRIPT_LANGUAGE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'groovy' COMMENT '脚本语言 java、javascript、\r\n            groovy',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_SCRIPT_ID`(`SCRIPT_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 89 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则引擎脚本发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_SCRIPT_RELATION_PREV_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_SCRIPT_RELATION_PREV_PUBLISH`;
+CREATE TABLE `T_RULE_SCRIPT_RELATION_PREV_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `SCRIPT_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本ID',
+  `RULE_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '关联规则ID',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '状态',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_ID_SCRIPT_ID`(`RULE_ID`, `SCRIPT_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 166 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则-脚本灰度发布关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_SCRIPT_RELATION_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_SCRIPT_RELATION_PUBLISH`;
+CREATE TABLE `T_RULE_SCRIPT_RELATION_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `SCRIPT_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本ID',
+  `RULE_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '关联规则ID',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '状态',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_ID_SCRIPT_ID`(`RULE_ID`, `SCRIPT_ID`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 109 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则-脚本发布关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_SET
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_SET`;
+CREATE TABLE `T_RULE_SET`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '规则集ID',
+  `RULE_SET_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集编码',
+  `RULE_SET_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集名称',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布状态: preview-预发布 publish-发布 offline-下线 cancel_preview-取消预发布',
+  `INPUT_PARAM` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '入参列表',
+  `OUTPUT_PARAM` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '出参列表',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `PREV_PUBLISH_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '预发布版本',
+  `PUBLISH_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布版本',
+  `STRATEGY_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '策略分类',
+  `CANVAS_CONFIG` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '画布配置(JSON格式)',
+  `DAG_VALIDATION_STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'PENDING' COMMENT 'DAG校验状态：PENDING-待校验，VALID-有效，INVALID-无效',
+  `LAST_VALIDATE_TIME` timestamp NULL DEFAULT NULL COMMENT '最后校验时间',
+  `LAST_VALIDATE_BY` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '最后校验人',
+  `PREV_PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '预发布状态: preview-预发，cancel_preview-取消预发布',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  `RISK_FLAG_HIT` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '命中风险标识 no=无风险 yes=有风险',
+  PRIMARY KEY (`ID`) USING BTREE,
+  UNIQUE INDEX `RULE_SET_CODE`(`RULE_SET_CODE`, `CREATE_AT`) USING BTREE,
+  INDEX `IDX_RULE_SET_CODE`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_BY`(`CREATE_BY`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 180 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则集主表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_SET_DECISION_RELATION
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_SET_DECISION_RELATION`;
+CREATE TABLE `T_RULE_SET_DECISION_RELATION`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `RULE_SET_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '指标CODE',
+  `SCENE_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '场景',
+  `DECISION_FLOW_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '决策流ID',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布状态: unpublished-未发布 preview-预发布 published-已发布 offline-已下线',
+  `RULE_SET_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则集版本号',
+  `DECISION_FLOW_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`ID`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则集策略关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_SET_DRAFT
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_SET_DRAFT`;
+CREATE TABLE `T_RULE_SET_DRAFT`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '规则集ID',
+  `RULE_SET_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集编码',
+  `RULE_SET_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集名称',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布状态: publish-发布， offline-下线',
+  `PREV_PUBLISH_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '预发布版本',
+  `PUBLISH_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布版本',
+  `STRATEGY_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '策略分类',
+  `INPUT_PARAM` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '入参列表',
+  `OUTPUT_PARAM` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '出参列表',
+  `CANVAS_CONFIG` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '画布配置(JSON格式)',
+  `DAG_VALIDATION_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'PENDING' COMMENT 'DAG校验状态：PENDING-待校验，VALID-有效，INVALID-无效',
+  `LAST_VALIDATE_TIME` timestamp NULL DEFAULT NULL COMMENT '最后校验时间',
+  `LAST_VALIDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '最后校验人',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  `RISK_FLAG_HIT` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '命中风险标识 no=无风险 yes=有风险',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_SET_CODE`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_BY`(`CREATE_BY`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则集草稿表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_SET_PREV_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_SET_PREV_PUBLISH`;
+CREATE TABLE `T_RULE_SET_PREV_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '规则集ID',
+  `RULE_SET_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集编码',
+  `RULE_SET_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集名称',
+  `INPUT_PARAM` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '入参列表',
+  `OUTPUT_PARAM` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '出参列表',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `STRATEGY_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '策略分类',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布状态: publish-发布， offline-下线',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  `RISK_FLAG_HIT` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '命中风险标识 no=无风险 yes=有风险',
+  PRIMARY KEY (`ID`) USING BTREE,
+  UNIQUE INDEX `RULE_SET_CODE`(`RULE_SET_CODE`, `CREATE_AT`) USING BTREE,
+  INDEX `IDX_RULE_SET_CODE`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_BY`(`CREATE_BY`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 102 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则集灰度发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_SET_PUBLISH
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_SET_PUBLISH`;
+CREATE TABLE `T_RULE_SET_PUBLISH`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '规则集ID',
+  `RULE_SET_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集编码',
+  `RULE_SET_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集名称',
+  `INPUT_PARAM` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '入参列表',
+  `OUTPUT_PARAM` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '出参列表',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `STRATEGY_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '策略分类',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布状态: publish-发布， offline-下线',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  `RISK_FLAG_HIT` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '命中风险标识 no=无风险 yes=有风险',
+  PRIMARY KEY (`ID`) USING BTREE,
+  UNIQUE INDEX `RULE_SET_CODE`(`RULE_SET_CODE`, `CREATE_AT`) USING BTREE,
+  INDEX `IDX_RULE_SET_CODE`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_BY`(`CREATE_BY`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则集发布表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_SET_VERSION
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_SET_VERSION`;
+CREATE TABLE `T_RULE_SET_VERSION`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '版本ID',
+  `RULE_SET_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集编码',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布状态: preview-预发布 publish-发布 offline-下线 cancel_preview-取消预发布',
+  `CANVAS_CONFIG` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '画布配置JSON',
+  `SCRIPT_CONTENT` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '脚本内容',
+  `ACTION` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '动作: preview-预发布 publish-发布 offline-下线 cancel_preview-取消预发布',
+  `CURRENT_DECISION_FLOWS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '当前关联决策流',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `RULE_SET_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则集名称',
+  `RELATION_DECISIONS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '关联的决策流',
+  `STRATEGY_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '策略分类',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  `RISK_FLAG_HIT` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '命中风险标识 no=无风险 yes=有风险',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_SET_CODE`(`RULE_SET_CODE`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 137 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则集版本表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_RULE_VERSION_HIST
+-- ----------------------------
+DROP TABLE IF EXISTS `T_RULE_VERSION_HIST`;
+CREATE TABLE `T_RULE_VERSION_HIST`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `RULE_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则ID 例如：RULE_000001',
+  `RULE_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'script' COMMENT '规则类型',
+  `RULE_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '规则名称',
+  `RULE_DESC` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '规则描述',
+  `EL` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'EL表达式',
+  `INPUT_PARAMS_TYPE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '输入参数格式定义， JSON格式',
+  `OUTPUT_PARAMS_TYPE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '输出参数格式定义， JSON格式',
+  `ENABLE` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否启用（1-启用，0-禁用）',
+  `SCRIPT_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本ID',
+  `SCRIPT_CONFIG` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '配置字段',
+  `SCRIPT_NAME` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本名字',
+  `SCRIPT_CONTENT` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '脚本内容',
+  `SCRIPT_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'script' COMMENT '脚本类型',
+  `SCRIPT_LANGUAGE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'groovy' COMMENT '脚本语言 java、javascript、\r\ngroovy',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `PARAM_SCOPE` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '参数域',
+  `DECISION_FLOW_ID` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '决策流ID',
+  `PUBLISH_STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'unpublished' COMMENT '发布状态: unpublished-未发布 preview-预发布 published-已发布 offline-已下线',
+  `OPERATION_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '操作类型: preview-预发布 publish-发布 offline-下线 cancel_preview-取消预发布',
+  `PREV_PUBLISH_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '预发布版本',
+  `PUBLISH_VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '发布版本',
+  `RULE_SET` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '所属规则集列表',
+  `RULE_SET_LIST` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '关联规则集列表，JSON格式包含规则集ID和名称',
+  `DECISION_FLOW_LIST` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '关联决策流列表，JSON格式包含决策流ID和名称',
+  `STRATEGY_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '策略分类',
+  `RISK_FLAG_HIT` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT 'no' COMMENT '命中风险标识 no=无风险 yes=有风险',
+  `EXPANDS` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '扩展信息',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_RULE_ID_AND_VERSION`(`RULE_ID`, `VERSION`) USING BTREE,
+  INDEX `IDX_RULE_NAME`(`RULE_NAME`) USING BTREE,
+  INDEX `IDX_DECISION_FLOW_ID`(`DECISION_FLOW_ID`) USING BTREE,
+  INDEX `IDX_CREATE_TIME`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 775 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '规则版本变动表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_SYSTEM_FUNCTION
+-- ----------------------------
+DROP TABLE IF EXISTS `T_SYSTEM_FUNCTION`;
+CREATE TABLE `T_SYSTEM_FUNCTION`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `FUNCTION_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '函数ID（唯一标识）',
+  `FUNCTION_NAME` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '函数名',
+  `FUNCTION_DESC` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '函数描述',
+  `FUNCTION_SCRIPT` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '函数脚本内容',
+  `USAGE_EXAMPLE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用法示意（如Math.abs(100)）',
+  `FUNCTION_TYPE` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '函数类型：math-数学函数、string-字符串函数、date-日期函数、custom-自定义函数',
+  `RETURN_TYPE` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '返回类型（如INT、DOUBLE、STRING、DATE）',
+  `PARAM_TYPES` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '参数类型定义',
+  `PARAM_NAMES` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '参数名称列表',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal-正常, delete-删除',
+  `CACHE_KEY` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '缓存标识（用于Redis缓存key）',
+  `SCRIPT_LANGUAGE` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'groovy' COMMENT '脚本语言',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  PRIMARY KEY (`ID`) USING BTREE,
+  UNIQUE INDEX `UK_FUNCTION_CODE`(`FUNCTION_CODE`, `VERSION`) USING BTREE,
+  INDEX `IDX_FUNCTION_TYPE`(`FUNCTION_TYPE`) USING BTREE,
+  INDEX `IDX_CACHE_KEY`(`CACHE_KEY`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统函数表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_SYSTEM_PARAM
+-- ----------------------------
+DROP TABLE IF EXISTS `T_SYSTEM_PARAM`;
+CREATE TABLE `T_SYSTEM_PARAM`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `PARAM_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '参数CODE（唯一标识）',
+  `PARAM_NAME` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '参数名',
+  `PARAM_DESC` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参数说明',
+  `PARAM_TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '参数类型（String、Integer等）',
+  `STATUS` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态:normal-正常, delete-删除',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人账号',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人账号',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注信息',
+  `REFERENCE_VALUE` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '参考值',
+  `RISK_REMARKS` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '对风控备注',
+  `CUSTOMER_REMARKS` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '对客备注',
+  PRIMARY KEY (`ID`) USING BTREE,
+  UNIQUE INDEX `UDX_PARAM_CODE`(`PARAM_CODE`) USING BTREE COMMENT '参数码唯一'
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统参数表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for T_TEST_PASS_RECORD
+-- ----------------------------
+DROP TABLE IF EXISTS `T_TEST_PASS_RECORD`;
+CREATE TABLE `T_TEST_PASS_RECORD`  (
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `TYPE` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '类型: rule, rule_set, decision_flow',
+  `BIZ_CODE` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '业务编号: 规则ID/规则集Code/决策流Code',
+  `VERSION` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '版本号',
+  `TEST_RESULT` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'pass' COMMENT '测试结果: pass',
+  `STATUS` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'normal' COMMENT '状态: normal, delete',
+  `CREATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '创建人',
+  `CREATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `UPDATE_BY` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '更新人',
+  `UPDATE_AT` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `REMARKS` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`ID`) USING BTREE,
+  INDEX `IDX_TYPE_BIZ_VERSION`(`TYPE`, `BIZ_CODE`, `VERSION`) USING BTREE,
+  INDEX `IDX_CREATE_AT`(`CREATE_AT`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 403 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '测试通过记录表' ROW_FORMAT = Dynamic;
+
+SET FOREIGN_KEY_CHECKS = 1;

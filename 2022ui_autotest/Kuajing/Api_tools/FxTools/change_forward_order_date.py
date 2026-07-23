@@ -259,9 +259,9 @@ if __name__ == "__main__":
     # 示例：单个订单更新（UAT环境）
     try:
         process_forward_order(
-            exchange_id="2512302013000402734",
+            exchange_id="2605141101000564866",
             action="update",
-            new_date="2025-12-29",
+            new_date="2026-05-13",
             env="UAT"  # 可改为 "FAT"
         )
     except Exception as e:

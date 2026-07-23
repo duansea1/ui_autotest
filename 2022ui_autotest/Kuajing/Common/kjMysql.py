@@ -53,8 +53,61 @@ def get_db_config_topic(env: str) -> dict:
             'charset': 'utf8mb4',
             # 'cursorclass': DictCursor
         }
+        ,
+        'UAT': {
+            'host': '10.0.19.156',
+            'port': 9030,
+            'user': 'bf_hpt',
+            'password': 'bf_hpt',
+            'database': 'BAOFU_CGW',  # 
+            'charset': 'utf8mb4',
+            # 'cursorclass': DictCursor
+        }
     }
     return configs.get(env, configs['FAT'])
+
+
+def execute_db_topic(env, sql, database=None, params=None):
+    """数仓数据库操作方法（使用 get_db_config_topic，StarRocks/Doris）
+    Args:
+        env: 环境名称（FAT/UAT）
+        sql: SQL语句（必填）
+        database: 数据库名称（可选，默认使用配置中的database）
+        params: SQL参数（可选）
+    Returns:
+        查询结果或影响行数
+    """
+    conn = None
+    cursor = None
+    try:
+        db_config = get_db_config_topic(env)
+        if database:
+            db_config['database'] = database
+
+        conn = pymysql.connect(**db_config)
+        cursor = conn.cursor(pymysql.cursors.DictCursor)
+
+        if params:
+            cursor.execute(sql, params)
+        else:
+            cursor.execute(sql)
+
+        if sql.strip().upper().startswith('SELECT'):
+            result = cursor.fetchall()
+            return result
+        else:
+            conn.commit()
+            return cursor.rowcount
+    except Exception as e:
+        if conn:
+            conn.rollback()
+        print(f"数仓数据库操作失败：{str(e)}")
+        raise
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
 
 def execute_db(env, sql, database=None, params=None):

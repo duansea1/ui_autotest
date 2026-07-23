@@ -64,6 +64,6 @@ def create_user(env):
 
 
 if __name__ == '__main__':
-    # 海之蓝代理商用户新增
-    res = create_user(env='fat-sea-agent-hzl')
+    # 海之蓝代理商用户新增 uat-sea-agent-hzl  fat-sea-agent-hzl
+    res = create_user(env='uat-sea-agent-hzl')
     # print(res)
